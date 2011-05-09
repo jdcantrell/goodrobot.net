@@ -1,0 +1,44 @@
+---
+layout: base
+title: goodrobot.net
+---
+    {% include header.html %}
+    {% include nav.html %}
+    {% for post in site.posts limit:1 %}
+      <div id="container">
+        <div class="page-nav-top">
+          {% if post.previous %}
+            <span class="page-nav-item">
+              <a rel="prev" href="{{ post.previous.url }}/" 
+                  title="View {{ post.previous.title }}"
+              >&larr; View previous article</a>
+            </span>
+          {% endif %}
+          {% if post.next %}
+            <span class="page-nav-item">
+              <a rel="next" href="{{ post.next.url }}/" 
+                  title="View {{ post.next.title }}"
+              >View next article &rarr;</a>
+            </span>
+          {% endif %}
+        </div> <!-- /.page-nav-top -->
+        <div class="entry-content">
+          <h1 class="clear">
+            <a href="{{ post.url }}/" title="{{ post.title }}"> 
+              {{ post.title }}
+            </a>
+          </h1>
+         <span class="date" 
+              title="{{ post.date | date_to_xmlschema }}">
+            <span class="published">Published: </span>
+            <span class="day">{{ post.date | date: '%d' }}</span>
+            <span class="month">
+              <abbr>{{ post.date | date: '%b' }}</abbr>
+            </span>
+            <span class="year">{{ post.date | date: '%Y' }}</span>
+          </span>
+          {{ post.content }}
+        </div> <!-- /.entry-content -->
+      </div> <!-- /#container -->
+    {% endfor %}
+    {% include footer.html %}

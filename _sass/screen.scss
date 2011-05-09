@@ -1,0 +1,120 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+
+@mixin font-large {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 44px;
+	font-style: normal;
+	font-weight: normal;
+	text-transform: normal;
+	letter-spacing: -3px;
+	line-height: 1.2em;
+}
+
+@mixin font-medium {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	font-weight: normal;
+	text-transform: normal;
+	letter-spacing: -0.1;
+	line-height: 1.4em;
+}
+
+
+@mixin font-normal {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	font-style: normal;
+	font-weight: normal;
+	text-transform: normal;
+	letter-spacing: normal;
+	line-height: 1.45em;
+}
+
+@mixin font-small {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: normal;
+	text-transform: normal;
+	letter-spacing: normal;
+	line-height: 1.4em;
+}
+
+@mixin font-georgia {
+	font-family: Georgia, serif;
+	font-size: 20px;
+	font-style: italic;
+	font-weight: normal;
+	text-transform: normal;
+	letter-spacing: normal;
+	line-height: 1.4em;
+}
+
+@mixin links($color, $hover-color) {
+	a:link {
+		color:$color;
+		text-decoration: none;
+	}
+	a:visited {
+		color:$color;
+		text-decoration: none;
+	}
+	a:hover {
+		color:$hover-color;
+		text-decoration: underline;
+	}
+	a:active {
+		color:$color;
+		text-decoration: none;
+	}
+}
+
+/* colors */
+$dark-gray: #333;
+$white: #fff;
+$green: #2bbe17;
+
+body {
+	@include font-normal;
+}
+
+h1 {
+	@include font-large;
+}
+
+
+
+
+ul, ol {
+	margin-left:20px;
+}
+ul {list-style:disc}
+ol {list-style:decimal}
+p {
+	text-indent:20px;
+	margin-bottom:10px
+}
+
+.header-bar {
+	background-color: $dark-gray;
+	padding:15px;
+	margin:0;
+	height:2em;
+	list-style:none;
+	@include font-medium;
+	@include links($white, $white)
+}
+.header-bar li {float:left;padding:5px}
+.title-bar {
+	clear:both;
+	background-color:$green;
+	color: darken($green, 20%);
+	@include font-georgia;
+}
+
