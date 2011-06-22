@@ -3,13 +3,21 @@ layout: post
 title: Good Robot! Bad Human!
 date: 2011-05-07
 ---
+Things todo:
+* Normalize.css
+* CSS3 green gradient that looks awesome
+* Create the logo we want using either inkscape or something like it
+* Add enough graphical elements to the text and body of the page that it is still clean but
+looks elegant and well done
+
+## Here is the next section
 
 Okay this will be a test post, we need to test the various elements of
 markdown and make sure we create some output that looks nice for it. So
 here is my first paragraph, nothing great, but hopefully there will be 
 enough text that I can get my head around the different things
 
-# Let me tell you about this
+# Let me tell you about this cool thing known as the jekyll
 
 This is a major topic, and so it was giving a big important looking heading
 you need to be careful and read this completely. Sometimes it will rain
@@ -30,10 +38,11 @@ short paragraph, I hope this will do the trick!.
 * Three
 * Four
 
-1. Apples
-2. Bananas
-3. Cucumbers
-4. Dates
+1. js objects made dead simple
+2. sf vs kc
+3. how not to treat employees
+4. what I'm doing to rise above
+5. 5 coding project ideas
 
 Here is some code:
 	

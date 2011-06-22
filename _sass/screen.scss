@@ -1,13 +1,6 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-
-@import "compass/reset";
-
 @mixin font-large {
 	font-family: Helvetica, Arial, sans-serif;
-	font-size: 44px;
+	font-size: 34px;
 	font-style: normal;
 	font-weight: normal;
 	text-transform: normal;
@@ -28,7 +21,7 @@
 
 @mixin font-normal {
 	font-family: Helvetica, Arial, sans-serif;
-	font-size: 15px;
+	font-size: 18px;
 	font-style: normal;
 	font-weight: normal;
 	text-transform: normal;
@@ -78,43 +71,65 @@
 /* colors */
 $dark-gray: #333;
 $white: #fff;
-$green: #2bbe17;
+$green: #00c618;
+$green-dark: #008110;
+$green-light: #39e24d;
+$teal: #056d9f;
+$teal-dark: #025167;
 
 body {
 	@include font-normal;
+  margin: 0;
+  padding:0;
 }
 
 h1 {
 	@include font-large;
 }
 
-
-
-
-ul, ol {
-	margin-left:20px;
-}
-ul {list-style:disc}
-ol {list-style:decimal}
-p {
-	text-indent:20px;
-	margin-bottom:10px
+h2 {
+	@include font-medium;
 }
 
 .header-bar {
-	background-color: $dark-gray;
-	padding:15px;
+	background-color: $green;
+	padding:5px;
+  height:30px;
 	margin:0;
-	height:2em;
 	list-style:none;
 	@include font-medium;
 	@include links($white, $white)
 }
-.header-bar li {float:left;padding:5px}
+.header-bar li {float:right;padding:5px}
 .title-bar {
 	clear:both;
+  height:25px;
+  padding:5px;
 	background-color:$green;
-	color: darken($green, 20%);
+	color: $green-dark;
 	@include font-georgia;
 }
 
+.main-content {
+  padding:5px;
+  margin:auto;
+  width:70%;
+}
+
+.publish-info {
+  font-size:15px;
+  color: $teal-dark;
+}
+
+a {
+  text-decoration:none;
+  color: $teal;
+}
+
+a:visited {
+  color: $teal;
+}
+
+a:hover {
+  text-decoration: underline;
+}
