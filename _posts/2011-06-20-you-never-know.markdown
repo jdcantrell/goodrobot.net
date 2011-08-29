@@ -28,4 +28,6 @@ constantly strive and work towards being bigger than myself
 * Fancy bookmark page (possibly sync'ed off pinboard)
 * Breakout the RPG
 * Project pages for jekyll (not even sure what this means!)
-* Some sort of autowatcher/script run script
+
+Hrmm, that didn't seem to work right. I wonder what happened? Pancakes
+

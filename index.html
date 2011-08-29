@@ -3,7 +3,6 @@ layout: base
 title: goodrobot.net
 ---
     {% include header.html %}
-    {% include nav.html %}
     {% for post in site.posts limit:3 %}
       <div class="main-content">
         <div class="page-nav-top">
@@ -23,7 +22,7 @@ title: goodrobot.net
           {% endif %}
         </div> <!-- /.page-nav-top -->
         <div class="entry-content">
-          <h1 class="clear">
+          <h1 class="post-title">
             <a href="{{ post.url }}/" title="{{ post.title }}"> 
               {{ post.title }}
             </a>

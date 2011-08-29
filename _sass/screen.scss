@@ -1,15 +1,15 @@
 @mixin font-large {
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: Georgia, serif;
 	font-size: 34px;
 	font-style: normal;
 	font-weight: normal;
 	text-transform: normal;
-	letter-spacing: -3px;
+	letter-spacing: -1px;
 	line-height: 1.2em;
 }
 
 @mixin font-medium {
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: Georgia, serif;
 	font-size: 24px;
 	font-style: normal;
 	font-weight: normal;
@@ -20,7 +20,7 @@
 
 
 @mixin font-normal {
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: Georgia, serif;
 	font-size: 18px;
 	font-style: normal;
 	font-weight: normal;
@@ -30,7 +30,7 @@
 }
 
 @mixin font-small {
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: Georgia, serif;
 	font-size: 12px;
 	font-style: normal;
 	font-weight: normal;
@@ -69,30 +69,50 @@
 }
 
 /* colors */
+/* scheme: chrome-extension://ooadmojikggnipcnnpgmcngebfkcmncl/color-scheme-designer3.html#2p52rw0puw0w0 */
+$green-1: #77BC00;
+$green-2: #668D23;
+$green-3: #4D7A00;
+$green-4: #A0DE37;
+$green-5: #B1DE64;
+
+$teal-1: #055E7F;
+$teal-2: #1B4D60;
+$teal-3: #023C53;
+$teal-4: #3699BF;
+$teal-5: #5AA3BF;
+
+$gold-1: #CBA600;
+$gold-2: #988326;
+$gold-3: #846C00;
+$gold-4: #E5C639;
+$gold-5: #E5CE67;
+
 $dark-gray: #333;
+$text: #fff;
+$text-heading: #000;
 $white: #fff;
-$green: #00c618;
-$green-dark: #008110;
-$green-light: #39e24d;
-$teal: #056d9f;
-$teal-dark: #025167;
 
 body {
 	@include font-normal;
   margin: 0;
   padding:0;
+  color: $text;
+  background-color: $teal-1;
 }
 
 h1 {
+  color: $text-heading;
 	@include font-large;
 }
 
 h2 {
+  color: $text-heading;
 	@include font-medium;
 }
 
 .header-bar {
-	background-color: $green;
+	background-color: $teal-2;
 	padding:5px;
   height:30px;
 	margin:0;
@@ -103,11 +123,11 @@ h2 {
 .header-bar li {float:right;padding:5px}
 .title-bar {
 	clear:both;
-  height:25px;
   padding:5px;
-	background-color:$green;
-	color: $green-dark;
+  background-color: $teal-2;
+	color: $teal-4;
 	@include font-georgia;
+  font-size:30px;
 }
 
 .main-content {
@@ -118,18 +138,31 @@ h2 {
 
 .publish-info {
   font-size:15px;
-  color: $teal-dark;
+  color: $teal-3;
+  margin-bottom:10px;
+  line-height:18px;
+  padding-left:3px;
+}
+.post-title {
+  margin-bottom:0px;
+  line-height: 34px;
 }
 
 a {
   text-decoration:none;
-  color: $teal;
+  color: $teal-5;
 }
 
 a:visited {
-  color: $teal;
+  color: $teal-5;
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+hr {
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  border-color: $text;
 }

@@ -22,7 +22,7 @@ if [ "$CSS" -eq 1 ]; then
 fi
 if [ "$HTML" -eq 1 ]; then
 	echo "Generated static html..."
-	jekyll
+	jekyll 
 fi
 
 echo "Done!"
