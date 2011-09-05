@@ -73,23 +73,31 @@
 /* colors */
 /* scheme: chrome-extension://ooadmojikggnipcnnpgmcngebfkcmncl/color-scheme-designer3.html#2p52rw0puw0w0 */
 
-$background-color: #fafafa;
-$text-heading:#070;
-$text-color: #333;
-$link-color: #003;
+$background-color: #3465a4;
+$background-color-2: #204a87;
+$text-heading:#73d216;
+$text-color: #eeeeec;
+$link-color: #3465a4;
+$date-background: #ad7fa8;
+$date-text: #2e3436;
+$tag-background: #729fcf;
+$tag-text: #2e3436;
 
 
 body {
 	@include font-normal;
+	@include inner-shadow(300px, $background-color-2, $spread:100px);
   margin: 0;
   padding:0;
   color: $text-color;
   background-color: $background-color;
+  @include letterpress();
 }
 
 h1, h1 a {
   color: $text-heading;
 	@include font-large;
+  @include text-shadow(8px, #000);
 }
 
 h2 {
@@ -131,6 +139,7 @@ h2 {
 }
 
 a {
+  color: $link-color;
   text-decoration:none;
 }
 
@@ -146,3 +155,20 @@ hr {
   border-width: 0 0 1px 0;
   border-color: $text-color;
 }
+
+.post-date {
+  border: 1px solid $date-background;
+	@include border-radius(3px);
+  padding:0px 2px;
+  background-color:$date-background;
+  color: $date-text;
+}
+
+a.tag {
+  border: 1px solid $tag-background;
+	@include border-radius(3px);
+  padding:0px 2px;
+  background-color:$tag-background;
+  color: $tag-text;
+}
+
