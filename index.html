@@ -28,15 +28,14 @@ title: goodrobot.net
             </a>
           </h1>
           <div class="publish-info">
-           <span class="date" 
-                title="{{ post.date | date_to_xmlschema }}">
-              <span class="published">hPublished: </span>
-              <span class="day">{{ post.date | date: '%d' }}</span>
-              <span class="month">
+              <span class="post-date">
+                {{ post.date | date: '%d' }}
                 <abbr>{{ post.date | date: '%b' }}</abbr>
-              </span>
-              <span class="year">{{ post.date | date: '%Y' }}</span>
-              <span class="tags">{{ post.tags }}</span>
+                {{ post.date | date: '%Y' }}</span>
+              
+              {% for tag in post.tags %}
+              <a href="/tag/{{ tag }}" class="tag">{{ tag }}</a>
+              {% endfor %}
             </span>
           </div>
           {{ post.content }}

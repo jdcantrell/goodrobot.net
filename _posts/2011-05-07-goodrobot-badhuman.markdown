@@ -1,6 +1,9 @@
 --- 
 layout: post
 title: Good Robot! Bad Human!
+tags:
+- test
+- ideas
 date: 2011-05-07
 ---
 Things todo:
