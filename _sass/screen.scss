@@ -1,3 +1,5 @@
+@import "css3.scss";
+
 @mixin font-large {
 	font-family: Georgia, serif;
 	font-size: 34px;
@@ -70,38 +72,22 @@
 
 /* colors */
 /* scheme: chrome-extension://ooadmojikggnipcnnpgmcngebfkcmncl/color-scheme-designer3.html#2p52rw0puw0w0 */
-$green-1: #77BC00;
-$green-2: #668D23;
-$green-3: #4D7A00;
-$green-4: #A0DE37;
-$green-5: #B1DE64;
 
-$teal-1: #055E7F;
-$teal-2: #1B4D60;
-$teal-3: #023C53;
-$teal-4: #3699BF;
-$teal-5: #5AA3BF;
+$background-color: #fafafa;
+$text-heading:#070;
+$text-color: #333;
+$link-color: #003;
 
-$gold-1: #CBA600;
-$gold-2: #988326;
-$gold-3: #846C00;
-$gold-4: #E5C639;
-$gold-5: #E5CE67;
-
-$dark-gray: #333;
-$text: #fff;
-$text-heading: #000;
-$white: #fff;
 
 body {
 	@include font-normal;
   margin: 0;
   padding:0;
-  color: $text;
-  background-color: $teal-1;
+  color: $text-color;
+  background-color: $background-color;
 }
 
-h1 {
+h1, h1 a {
   color: $text-heading;
 	@include font-large;
 }
@@ -112,20 +98,17 @@ h2 {
 }
 
 .header-bar {
-	background-color: $teal-2;
 	padding:5px;
   height:30px;
 	margin:0;
 	list-style:none;
 	@include font-medium;
-	@include links($white, $white)
+	@include links($link-color, $link-color)
 }
 .header-bar li {float:right;padding:5px}
 .title-bar {
 	clear:both;
   padding:5px;
-  background-color: $teal-2;
-	color: $teal-4;
 	@include font-georgia;
   font-size:30px;
 }
@@ -138,7 +121,6 @@ h2 {
 
 .publish-info {
   font-size:15px;
-  color: $teal-3;
   margin-bottom:10px;
   line-height:18px;
   padding-left:3px;
@@ -150,11 +132,9 @@ h2 {
 
 a {
   text-decoration:none;
-  color: $teal-5;
 }
 
 a:visited {
-  color: $teal-5;
 }
 
 a:hover {
@@ -164,5 +144,5 @@ a:hover {
 hr {
   border-style: solid;
   border-width: 0 0 1px 0;
-  border-color: $text;
+  border-color: $text-color;
 }
