@@ -1,5 +1,6 @@
 @import "css3.scss";
 
+
 @mixin font-large {
 	font-family: Georgia, serif;
 	font-size: 34px;
@@ -128,6 +129,11 @@ h2 {
   background-color:$naviation-background;
   line-height:1.1em;
   @include letterpress($naviation-inset);
+}
+
+.header-bar li:last-child {
+  border-top-right-radius:4px;
+  border-bottom-right-radius:4px;
 }
 
 .header-bar li a {

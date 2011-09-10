@@ -2,25 +2,10 @@
 layout: base
 title: goodrobot.net
 ---
+
     {% include header.html %}
     {% for post in site.posts limit:3 %}
       <div class="main-content">
-        <div class="page-nav-top">
-          {% if post.previous %}
-            <span class="page-nav-item">
-              <a rel="prev" href="{{ post.previous.url }}/" 
-                  title="View {{ post.previous.title }}"
-              >&larr; View previous article</a>
-            </span>
-          {% endif %}
-          {% if post.next %}
-            <span class="page-nav-item">
-              <a rel="next" href="{{ post.next.url }}/" 
-                  title="View {{ post.next.title }}"
-              >View next article &rarr;</a>
-            </span>
-          {% endif %}
-        </div> <!-- /.page-nav-top -->
         <div class="entry-content">
           <h1 class="post-title">
             <a href="{{ post.url }}/" title="{{ post.title }}"> 
@@ -40,6 +25,25 @@ title: goodrobot.net
           </div>
           {{ post.content }}
         </div> <!-- /.entry-content -->
+
+        {% if forloop.last %}
+        <div class="page-nav">
+          {% if post.previous %}
+            <span class="page-nav-item">
+              <a rel="prev" href="{{ post.previous.url }}/" 
+                  title="View {{ post.previous.title }}"
+              >&larr; View previous article</a>
+            </span>
+          {% endif %}
+          {% if post.next %}
+            <span class="page-nav-item">
+              <a rel="next" href="{{ post.next.url }}/" 
+                  title="View {{ post.next.title }}"
+              >View next article &rarr;</a>
+            </span>
+          {% endif %}
+        </div> <!-- /.page-nav-top -->
+        {% endif %}
       </div> <!-- /#container -->
     {% endfor %}
     {% include footer.html %}
