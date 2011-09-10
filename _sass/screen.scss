@@ -78,10 +78,18 @@ $background-color-2: #204a87;
 $text-heading:#a6d1ff;
 $text-color: #eeeeec;
 $link-color: #a6d1ff;
-$date-background: #6cf065;
-$date-text: #555753;
-$tag-background: #fcaf3e;
-$tag-text: #2e3436;
+
+$naviation-background: #edd400;
+$navigation-text: #c4a000;
+$naviation-inset: #fce94f;
+
+$date-background: #73d216;
+$date-text: #4e9a06;
+$date-inset: #8ae234;
+
+$tag-background: #edd400;
+$tag-text: #c4a000;
+$tag-inset: #fce94f;
 
 
 body {
@@ -91,7 +99,6 @@ body {
   padding:0;
   color: $text-color;
   background-color: $background-color;
-  @include letterpress();
 }
 
 h1, h1 a {
@@ -106,14 +113,26 @@ h2 {
 }
 
 .header-bar {
-	padding:5px;
+	padding:0px;
   height:30px;
 	margin:0;
 	list-style:none;
+  text-shadow:none;
 	@include font-medium;
-	@include links($link-color, $link-color)
+	@include links($navigation-text, $navigation-text);
 }
-.header-bar li {float:right;padding:5px}
+
+.header-bar li {
+  float:left;
+  padding:5px;
+  background-color:$naviation-background;
+  line-height:1.1em;
+  @include letterpress($naviation-inset);
+}
+
+.header-bar li a {
+}
+
 .title-bar {
 	clear:both;
   padding:5px;
@@ -159,18 +178,20 @@ hr {
 .post-date {
   border: 1px solid $date-background;
   text-shadow: none;
-	@include border-radius(3px);
   padding:0px 2px;
   background-color:$date-background;
   color: $date-text;
+	@include border-radius(3px);
+  @include letterpress($date-inset);
 }
 
 a.tag {
   border: 1px solid $tag-background;
   text-shadow: none;
-	@include border-radius(3px);
   padding:0px 2px;
   background-color:$tag-background;
   color: $tag-text;
+	@include border-radius(3px);
+  @include letterpress($tag-inset);
 }
 

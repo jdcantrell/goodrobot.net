@@ -9,10 +9,15 @@
   -moz-box-shadow: inset $x $y $blur-radius $spread $color;
 }
 
+@mixin box-shadow($blur-radius, $color, $x:0px, $y:0px, $spread:0px) {
+  box-shadow: $x $y $blur-radius $spread $color;
+  -moz-box-shadow: $x $y $blur-radius $spread $color;
+}
+
 @mixin text-shadow ($blur-radius, $color, $x:0px, $y:0px) {
   text-shadow: $color $x $y $blur-radius;
 }
 
-@mixin letterpress ($color:#000) {
-  @include text-shadow(3px, $color, 0px, 2px);
+@mixin letterpress ($color:#fff) {
+  @include text-shadow(0px, $color, 0px, 1px);
 }
