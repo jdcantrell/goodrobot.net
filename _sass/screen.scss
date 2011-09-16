@@ -93,11 +93,15 @@ $tag-text: #c4a000;
 $tag-inset: #fce94f;
 
 
-body {
-	@include font-normal;
+html {
+  min-height:100%;
 	@include inner-shadow(400px, $background-color-2, $spread:100px);
+}
+
+body {
   margin: 0;
   padding:0;
+	@include font-normal;
   color: $text-color;
   background-color: $background-color;
 }
@@ -201,3 +205,7 @@ a.tag {
   @include letterpress($tag-inset);
 }
 
+#footer {
+  width:70%;
+  margin:auto;
+}
