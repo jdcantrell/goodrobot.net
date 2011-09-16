@@ -1,0 +1,14 @@
+---
+layout: base
+---
+{% include header.html %}
+<div class="main-content">
+  <div class="entry-content">
+    <h1 class="post-title">
+      <a href="{{ page.url }}/" title="{{ page.title }}"> 
+        {{ page.title }}
+      </a>
+    </h1>
+    {{ content }}
+  </div> <!-- /.entry-content -->
+</div>
