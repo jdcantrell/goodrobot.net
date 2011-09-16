@@ -10,4 +10,5 @@ guard 'shell' do
   watch( %r{^_includes/.*} ) {  `jekyll` }
   watch( %r{^_posts/.*} ) {  `jekyll` }
   watch( 'index.html') {  `jekyll` }
+  watch( '*.markdown') {  `jekyll` }
 end
