@@ -3,14 +3,26 @@
 <html>
   <head>
     <title>{{ page.title }}</title>
+    <meta charset="utf-8" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="content-language" content="en" />
-    <link rel="stylesheet" href="/stylesheets/normalize.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+    <!-- 1140px Grid styles for IE -->
+    <!--[if lte IE 9]><link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" /><![endif]-->
+
+    <!-- The 1140px Grid - http://cssgrid.net/ -->
+    <link rel="stylesheet" href="stylesheets/1140.css" type="text/css" media="screen" />
+
     <link rel="stylesheet" href="/stylesheets/screen.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/stylesheets/print.css" type="text/css" media="print" />
     <link rel="stylesheet" href="/stylesheets/external/pygments/default.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/stylesheets/external/pygments/python.css" type="text/css" media="screen" />
-    <link rel="icon" type="image/png" href="/images/favicon.png">
+
+    <!--css3-mediaqueries-js - http://code.google.com/p/css3-mediaqueries-js/ - Enables media queries in some unsupported browsers-->
+    <script type="text/javascript" src="js/css3-mediaqueries.js"></script>
   </head>
   <body>
     <div id="container">

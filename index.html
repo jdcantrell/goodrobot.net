@@ -3,8 +3,9 @@ layout: base
 title: goodrobot.net
 ---
 {% include header.html %}
+<div class="container">
 {% for post in site.posts limit:3 %}
-  <div class="main-content">
+  <div class="row">
     <div class="entry-content">
       <h1 class="post-title">
         <a href="{{ post.url }}/" title="{{ post.title }}"> 
@@ -45,4 +46,5 @@ title: goodrobot.net
     {% endif %}
   </div> <!-- /#container -->
 {% endfor %}
+</div>
 {% include footer.html %}
