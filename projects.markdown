@@ -19,7 +19,7 @@ feed data.
 
 ## Vimes
 I needed an easy to use and more beautiful todo list manager. So enter Vimes.
-Created with flask on the bakend and jquery on the front and leveraging
+Created with flask on the backend and jquery on the front and leveraging
 content editable it is a pretty straightforward to use system.
 
 ## Upcoming Projects
@@ -28,7 +28,8 @@ someone else will right so I don't have to ;)
 
 * A nice pinboard.in aggregator - should group by tags
 * A site generator that will take a directory of music and create:
-* * An easy to use interface to play music
-* * Easy links to fully download music in a folder
-* * Utilize HTML5 and potentially flash and look good on a TV
+ * An easy to use interface to play music
+ * Easy links to fully download music in a folder
+ * Utilize HTML5 and potentially flash and look good on a TV
+
 
