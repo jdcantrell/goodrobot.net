@@ -1,3 +1,5 @@
+@import "normalize.scss";
+@import "1140.scss";
 @import "css3.scss";
 
 @mixin font-large {
@@ -19,7 +21,6 @@
 	letter-spacing: -0.1;
 	line-height: 1.4em;
 }
-
 
 @mixin font-normal {
 	font-family: Georgia, serif;
@@ -106,7 +107,7 @@ body {
 }
 
 h1, h1 a {
-  color: $text-heading;
+  @include links($text-heading, $text-heading);
 	@include font-large;
   @include text-shadow(8px, #000);
 }
@@ -168,6 +169,7 @@ a {
 }
 
 a:visited {
+  color: $link-color;
 }
 
 a:hover {
@@ -198,5 +200,11 @@ a.tag {
   color: $tag-text;
 	@include border-radius(3px);
   @include letterpress($tag-inset);
+}
+
+/* stream styles */
+.links {
+  ul {padding:0; list-style: none;}
+  li {padding:0; margin:0; overflow: hidden; height:1.5em;}
 }
 
