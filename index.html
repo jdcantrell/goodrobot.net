@@ -27,16 +27,16 @@ title: goodrobot.net
     </div> <!-- /.entry-content -->
 
     {% if forloop.last %}
-    <div class="page-nav">
+    <div class="page-nav clearfix">
       {% if post.previous %}
-        <span class="page-nav-item">
+        <span class="previous-item">
           <a rel="prev" href="{{ post.previous.url }}/" 
               title="View {{ post.previous.title }}"
           >&larr; View previous article</a>
         </span>
       {% endif %}
       {% if post.next %}
-        <span class="page-nav-item">
+        <span class="next-item">
           <a rel="next" href="{{ post.next.url }}/" 
               title="View {{ post.next.title }}"
           >View next article &rarr;</a>
