@@ -21,20 +21,3 @@
 @mixin letterpress ($color:#fff) {
   @include text-shadow(0px, $color, 0px, 1px);
 }
-
-.clearfix:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0;
-}
-
-.clearfix {
-  display: inline-block
-}
-
-* html .clearfix {
-  height:1%;
-}

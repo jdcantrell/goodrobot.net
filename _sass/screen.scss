@@ -1,78 +1,7 @@
 @import "normalize.scss";
 @import "1140.scss";
 @import "css3.scss";
-
-@mixin font-large {
-	font-family: Georgia, serif;
-	font-size: 34px;
-	font-style: normal;
-	font-weight: normal;
-	text-transform: normal;
-	letter-spacing: -1px;
-	line-height: 1.2em;
-}
-
-@mixin font-medium {
-	font-family: Georgia, serif;
-	font-size: 24px;
-	font-style: normal;
-	font-weight: normal;
-	text-transform: normal;
-	letter-spacing: -0.1;
-	line-height: 1.4em;
-}
-
-@mixin font-normal {
-	font-family: Georgia, serif;
-	font-size: 18px;
-	font-style: normal;
-	font-weight: normal;
-	text-transform: normal;
-	letter-spacing: normal;
-	line-height: 1.45em;
-}
-
-@mixin font-small {
-	font-family: Georgia, serif;
-	font-size: 12px;
-	font-style: normal;
-	font-weight: normal;
-	text-transform: normal;
-	letter-spacing: normal;
-	line-height: 1.4em;
-}
-
-@mixin font-georgia {
-	font-family: Georgia, serif;
-	font-size: 20px;
-	font-style: italic;
-	font-weight: normal;
-	text-transform: normal;
-	letter-spacing: normal;
-	line-height: 1.4em;
-}
-
-@mixin links($color, $hover-color) {
-	a:link {
-		color:$color;
-		text-decoration: none;
-	}
-	a:visited {
-		color:$color;
-		text-decoration: none;
-	}
-	a:hover {
-		color:$hover-color;
-		text-decoration: underline;
-	}
-	a:active {
-		color:$color;
-		text-decoration: none;
-	}
-}
-
-/* colors */
-/* scheme: chrome-extension://ooadmojikggnipcnnpgmcngebfkcmncl/color-scheme-designer3.html#2p52rw0puw0w0 */
+@import "util.scss";
 
 $background-color: #3465a4;
 $background-color-2: #204a87;
@@ -145,7 +74,7 @@ h2 {
 .title-bar {
 	clear:both;
   padding:5px;
-	@include font-georgia;
+	@include font-medium;
   font-size:30px;
 }
 
@@ -182,24 +111,13 @@ hr {
   border-color: $text-color;
 }
 
+
 .post-date {
-  border: 1px solid $date-background;
-  text-shadow: none;
-  padding:0px 2px;
-  background-color:$date-background;
-  color: $date-text;
-	@include border-radius(3px);
-  @include letterpress($date-inset);
+  @include bubble($date-background, $date-text, $date-inset);
 }
 
 a.tag {
-  border: 1px solid $tag-background;
-  text-shadow: none;
-  padding:0px 2px;
-  background-color:$tag-background;
-  color: $tag-text;
-	@include border-radius(3px);
-  @include letterpress($tag-inset);
+  @include bubble($tag-background, $tag-text, $tag-inset);
 }
 
 /* stream styles */
@@ -208,3 +126,6 @@ a.tag {
   li {padding:0; margin:0; overflow: hidden; height:1.5em;}
 }
 
+.page-nav {width:100%}
+.next-item {float: right}
+.previous-item {float: left}
