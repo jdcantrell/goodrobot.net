@@ -120,12 +120,25 @@ a.tag {
   @include bubble($tag-background, $tag-text, $tag-inset);
 }
 
+.page-nav {width:100%}
+.next-item {float: right}
+.previous-item {float: left}
+
 /* stream styles */
 .links {
   ul {padding:0; list-style: none;}
   li {padding:0; margin:0; overflow: hidden; height:1.5em;}
 }
+.links .hover {
+  position: absolute;
+  height: auto;
+  overflow:visible;
+  @include bubble($tag-background, $tag-text, $tag-inset);
+  z-index:1000;
+  @include box-shadow(8px, rgba(0, 0, 0, .7)); 
+}
+.hover a, .hover a:visited {
+  color: $tag-text;
+}
 
-.page-nav {width:100%}
-.next-item {float: right}
-.previous-item {float: left}
+
