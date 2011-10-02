@@ -133,12 +133,28 @@ a.tag {
   position: absolute;
   height: auto;
   overflow:visible;
-  @include bubble($tag-background, $tag-text, $tag-inset);
+  @include bubble(#407dca, $link-color, #203E64);
   z-index:1000;
   @include box-shadow(8px, rgba(0, 0, 0, .7)); 
+  margin-top: -2px;
+  margin-left: -3px;
 }
-.hover a, .hover a:visited {
-  color: $tag-text;
+.hover a, .hover a:visited, .hover a:hover {
+  color: $link-color;
+  text-decoration: none;
 }
 
+.twitter-meta {
+  font-size: 11px;
+  line-height: 13px;
+  text-indent: 10px;
+}
+
+#pinboard, #twitter { 
+  list-style: none;
+  padding: 0;
+}
+#pinboard li, #twitter li {
+  margin: 10px 0;
+}
 
