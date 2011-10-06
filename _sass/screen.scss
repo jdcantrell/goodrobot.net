@@ -39,19 +39,23 @@ h1, h1 a {
   @include links($text-heading, $text-heading);
 	@include font-large;
   @include text-shadow(8px, #000);
+  margin-top: 5px;
 }
 
 h2 {
 	@include font-medium;
 }
 
+.site-logo {
+  text-align: center
+}
+
 .header-bar {
-	padding:0px;
-  height:30px;
+	padding:10px 0 0 0;
 	margin:0;
 	list-style:none;
   text-shadow:none;
-	@include font-medium;
+	@include font-normal;
 	@include links($navigation-text, $navigation-text);
 }
 
