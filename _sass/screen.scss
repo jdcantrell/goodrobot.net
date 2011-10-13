@@ -124,9 +124,66 @@ a.tag {
   @include bubble($tag-background, $tag-text, $tag-inset);
 }
 
+@mixin icon($icon, $size) {
+  display:inline-block;
+  padding-left:$size;
+  background-image:url($icon);
+  background-repeat: no-repeat;
+}
+
+@mixin icon-only($icon, $size) {
+  display:inline-block;
+  background-image:url($icon);
+  background-repeat: no-repeat;
+  overflow:hidden;
+  text-indent: -9999px;
+  width: $size;
+  height: $size;
+}
+.source {
+  @include icon('/images/site-icons/github-24x24.png', 24px);
+}
+.website {
+  @include icon('/images/site-icons/website-24x24.png', 24px);
+}
+
+.rdio-icon {
+  @include icon-only('/images/site-icons/rdio-24x24.png', 24px);
+}
+.twitter-icon {
+  @include icon-only('/images/site-icons/twitter-24x24.png', 24px);
+}
+.lastfm-icon {
+  @include icon-only('/images/site-icons/lastfm-24x24.png', 24px);
+}
+.github-icon {
+  @include icon-only('/images/site-icons/github-24x24.png', 24px);
+}
+.pinboard-icon {
+  @include icon-only('/images/site-icons/pinboard-24x24.png', 24px);
+}
+.google-plus-icon {
+  @include icon-only('/images/site-icons/google+-24x24.png', 24px);
+}
+
+
+  
+
 .page-nav {width:100%}
 .next-item {float: right}
 .previous-item {float: left}
+
+#footer {
+  margin-bottom:10px;
+}
+
+.footer-text {
+  float:left;
+}
+
+.footer-icons {
+  float:right;
+}
 
 /* stream styles */
 .links {
