@@ -21,23 +21,21 @@ title: goodrobot.net
           {% for tag in post.tags %}
           <a href="/tag/{{ tag }}" class="tag">{{ tag }}</a>
           {% endfor %}
-        </span>
       </div>
       {{ post.content }}
     </div> <!-- /.entry-content -->
-
     {% if forloop.last %}
     <div class="page-nav clearfix">
       {% if post.previous %}
         <span class="previous-item">
-          <a rel="prev" href="{{ post.previous.url }}/" 
+          <a rel="prev" href="{{ post.previous.url }}" 
               title="View {{ post.previous.title }}"
           >&larr; View previous article</a>
         </span>
       {% endif %}
       {% if post.next %}
         <span class="next-item">
-          <a rel="next" href="{{ post.next.url }}/" 
+          <a rel="next" href="{{ post.next.url }}" 
               title="View {{ post.next.title }}"
           >View next article &rarr;</a>
         </span>
