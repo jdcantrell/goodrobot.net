@@ -1,3 +1,4 @@
 pygments: true
 markdown: kramdown
+permalink: "/:year/:month/:title"
 
