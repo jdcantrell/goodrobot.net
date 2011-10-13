@@ -31,13 +31,13 @@
 }
 
 @mixin font-small {
-	font-family: Georgia, serif;
-	font-size: 12px;
-	font-style: normal;
-	font-weight: normal;
-	text-transform: normal;
-	letter-spacing: normal;
-	line-height: 1.4em;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: normal;
+  text-transform: normal;
+  letter-spacing: normal;
+  line-height: 1.45em;
 }
 
 /* useful mixins */
@@ -71,6 +71,23 @@
   @include letterpress($inset);
 }
 
+@mixin icon($icon, $size) {
+  display:inline-block;
+  padding-left:$size;
+  background-image:url($icon);
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+}
+
+@mixin icon-only($icon, $size) {
+  display:inline-block;
+  background-image:url($icon);
+  background-repeat: no-repeat;
+  overflow:hidden;
+  text-indent: -9999px;
+  width: $size;
+  height: $size;
+}
 /* utility class defs */
 .clearfix:after {
   content: ".";

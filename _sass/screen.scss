@@ -35,6 +35,11 @@ body {
   background-color: $background-color;
 }
 
+p {
+  text-indent:3em;
+  margin-top: 5px;
+}
+
 h1, h1 a {
   @include links($text-heading, $text-heading);
 	@include font-large;
@@ -44,6 +49,7 @@ h1, h1 a {
 
 h2 {
 	@include font-medium;
+  margin-bottom:8px;
 }
 
 .site-logo {
@@ -96,6 +102,19 @@ h2 {
   line-height: 34px;
 }
 
+.project-links {
+  @include font-small;
+  list-style: none;
+  padding:2px 0 0 0;
+  border:1px solid #789acd;
+  border-width:0 0 1px 0;
+  margin:5px 0;
+}
+.project-links li {
+  display: inline-block;
+  padding-left: 10px;
+}
+
 a {
   color: $link-color;
   text-decoration:none;
@@ -115,7 +134,6 @@ hr {
   border-color: $text-color;
 }
 
-
 .post-date {
   @include bubble($date-background, $date-text, $date-inset);
 }
@@ -124,27 +142,11 @@ a.tag {
   @include bubble($tag-background, $tag-text, $tag-inset);
 }
 
-@mixin icon($icon, $size) {
-  display:inline-block;
-  padding-left:$size;
-  background-image:url($icon);
-  background-repeat: no-repeat;
-}
-
-@mixin icon-only($icon, $size) {
-  display:inline-block;
-  background-image:url($icon);
-  background-repeat: no-repeat;
-  overflow:hidden;
-  text-indent: -9999px;
-  width: $size;
-  height: $size;
-}
 .source {
-  @include icon('/images/site-icons/github-24x24.png', 24px);
+  @include icon('/images/site-icons/github-16x16.png', 18px);
 }
 .website {
-  @include icon('/images/site-icons/website-24x24.png', 24px);
+  @include icon('/images/site-icons/website-16x16.png', 18px);
 }
 
 .rdio-icon {
