@@ -10,8 +10,11 @@ of helping me keep up to date with new band releases. It allows users to
 keep a list of bands they are interested in and then view either a nicely
 formatted (imho) web page or RSS feed to see if there are any upcoming
 releases they might be interested in. 
-* Code: [http://github.com/jdcantrell/intones](http://github.com/jdcantrell/intones)
-* Website: [http://intones.notsoevil.net](http://intones.notsoevil.net)
+
+<ul>
+  <li><a class="source" href="http://github.com/jdcantrell/intones">Source</a></li>
+  <li><a class="website" href="http://intones.notsoevil.net">Website</a></li>
+</ul>
 
 ## Ankh
 Initially written to replace a lifestream plugin that wasn't living up to my
@@ -32,8 +35,9 @@ content editable it is a pretty straightforward to use system.
 Here are a few ideas/back burner things that I'm thinking about or hoping
 someone else will right so I don't have to ;)
 
-* A nice pinboard.in aggregator - should group by tags
-* A site generator that will take a directory of music and create:
- * An easy to use interface to play music
- * Easy links to fully download music in a folder
- * Utilize HTML5 and potentially flash and look good on a TV
+- A nice pinboard.in aggregator - should group by tags
+- A site generator that will take a directory of music and create:
+     - An easy to use interface to play music
+     - Easy links to fully download music in a folder
+     - Utilize HTML5 and potentially flash and look good on a TV
+
