@@ -3,6 +3,7 @@
 @import "css3.scss";
 @import "util.scss";
 
+//base color definitions
 $background-color: #3465a4;
 $background-color-2: #204a87;
 $text-heading:#a6d1ff;
@@ -21,6 +22,10 @@ $tag-background: #edd400;
 $tag-text: #c4a000;
 $tag-inset: #fce94f;
 
+$link-bubble-background: #407dca;
+$link-bubble-inset: #203e64;
+$soft-border-color:#789acd;
+
 
 html {
   min-height:100%;
@@ -28,15 +33,15 @@ html {
 }
 
 body {
-  margin: 0;
-  padding:0;
 	@include font-normal;
   color: $text-color;
   background-color: $background-color;
+  margin: 0;
+  padding: 0;
 }
 
 p {
-  text-indent:3em;
+  text-indent: 1em;
   margin-top: 5px;
 }
 
@@ -57,58 +62,52 @@ h2 {
 }
 
 .header-bar {
-	padding:10px 0 0 0;
-	margin:0;
-	list-style:none;
-  text-shadow:none;
 	@include font-normal;
 	@include links($navigation-text, $navigation-text);
+	padding: 10px 0 0 0;
+	margin: 0;
+	list-style: none;
+  text-shadow: none;
 }
 
 .header-bar li {
-  float:left;
-  padding:5px;
-  background-color:$naviation-background;
-  line-height:1.1em;
   @include letterpress($naviation-inset);
+  float: left;
+  padding: 5px;
+  background-color: $naviation-background;
+  line-height: 1.1em;
 }
 
 .header-bar li:last-child {
-  border-top-right-radius:4px;
-  border-bottom-right-radius:4px;
-}
-
-.header-bar li a {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .title-bar {
-	clear:both;
-  padding:5px;
 	@include font-medium;
-  font-size:30px;
-}
-
-.main-content {
+	clear: both;
+  padding: 5px;
+  font-size: 30px;
 }
 
 .publish-info {
-  font-size:15px;
-  margin-bottom:10px;
-  line-height:18px;
-  padding-left:3px;
+  font-size: 15px;
+  margin-bottom: 10px;
+  line-height: 18px;
+  padding-left: 3px;
 }
 .post-title {
-  margin-bottom:0px;
+  margin-bottom: 0px;
   line-height: 34px;
 }
 
 .project-links {
   @include font-small;
   list-style: none;
-  padding:2px 0 0 0;
-  border:1px solid #789acd;
-  border-width:0 0 1px 0;
-  margin:5px 0;
+  padding: 2px 0 0 0;
+  border: 1px solid $soft-border-color;
+  border-width: 0 0 1px 0;
+  margin: 5px 0;
 }
 .project-links li {
   display: inline-block;
@@ -117,7 +116,7 @@ h2 {
 
 a {
   color: $link-color;
-  text-decoration:none;
+  text-decoration: none;
 }
 
 a:visited {
@@ -134,6 +133,7 @@ hr {
   border-color: $text-color;
 }
 
+//little tag bubbles
 .post-date {
   @include bubble($date-background, $date-text, $date-inset);
 }
@@ -142,6 +142,7 @@ a.tag {
   @include bubble($tag-background, $tag-text, $tag-inset);
 }
 
+//icon links
 .source {
   @include icon('/images/site-icons/github-16x16.png', 18px);
 }
@@ -168,37 +169,51 @@ a.tag {
   @include icon-only('/images/site-icons/google+-24x24.png', 24px);
 }
 
+//page navigation
+.page-nav {
+  width: 100%;
+}
 
-  
+.next-item {
+  float: right;
+}
 
-.page-nav {width:100%}
-.next-item {float: right}
-.previous-item {float: left}
+.previous-item {
+  float: left;
+}
 
 #footer {
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
 .footer-text {
-  float:left;
+  float: left;
 }
 
 .footer-icons {
-  float:right;
+  float: right;
 }
 
 /* stream styles */
 .links {
-  ul {padding:0; list-style: none;}
-  li {padding:0; margin:0; overflow: hidden; height:1.5em;}
+  ul {
+    padding:0; 
+    list-style: none;
+  }
+  li {
+    padding: 0; 
+    margin: 0;
+    overflow: hidden; 
+    height: 1.5em;
+  }
 }
 .links .hover {
+  @include bubble($link-bubble-background, $link-color, $link-bubble-inset);
+  @include box-shadow(8px, rgba(0, 0, 0, .7)); 
   position: absolute;
   height: auto;
-  overflow:visible;
-  @include bubble(#407dca, $link-color, #203E64);
+  overflow: visible;
   z-index:1000;
-  @include box-shadow(8px, rgba(0, 0, 0, .7)); 
   margin-top: -2px;
   margin-left: -3px;
 }
@@ -222,16 +237,22 @@ a.tag {
 }
 
 .time-ago {
-  display:inline-block;
-  text-align:right;
-  width:50px
+  display: inline-block;
+  text-align: right;
+  width: 50px
 }
 .link-list {
   list-style:none;
   padding: 0;
   margin: 0;
-  li {padding:0; margin:0; overflow: hidden; height:1.5em;}
+  li {
+    padding: 0; 
+    margin: 0;
+    overflow: hidden;
+    height: 1.5em;
+  }
 }
+
 .ankh h2 {
-  margin-bottom:5px;
+  margin-bottom: 5px;
 }
