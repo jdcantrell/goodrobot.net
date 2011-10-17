@@ -4,23 +4,22 @@
 @import "util.scss";
 
 //base color definitions
-$background-color: #3465a4;
-$background-color-2: #204a87;
-$text-heading:#a6d1ff;
-$text-color: #eeeeec;
-$link-color: #a6d1ff;
+$background-color: #0b486b;
+$text-heading:#a8dba8;
+$text-color: #fff;
+$link-color: #79bd9a;
 
-$naviation-background: #edd400;
-$navigation-text: #c4a000;
-$naviation-inset: #fce94f;
+$naviation-background: #3b8686;
+$navigation-text: #cff09e;
+$naviation-inset: #0b486b;
 
-$date-background: #73d216;
-$date-text: #4e9a06;
-$date-inset: #8ae234;
+$date-background: #79bd9a;
+$date-text: #3b8686;
+$date-inset: #a8dba8;
 
-$tag-background: #edd400;
-$tag-text: #c4a000;
-$tag-inset: #fce94f;
+$tag-background: #3b8686;
+$tag-text: #79bd9a;
+$tag-inset: #0b486b;
 
 $link-bubble-background: #407dca;
 $link-bubble-inset: #203e64;
@@ -29,13 +28,14 @@ $soft-border-color:#789acd;
 
 html {
   min-height:100%;
-	@include inner-shadow(400px, $background-color-2, $spread:100px);
+	//@include inner-shadow(400px, $background-color-2, $spread:100px);
 }
 
 body {
 	@include font-normal;
   color: $text-color;
-  background-color: $background-color;
+  //background: url(/images/square_bg.png) repeat $background-color;
+  background: url(/images/square_bg.png) repeat, url(/images/bg-pattern6.png) repeat-x $background-color;
   margin: 0;
   padding: 0;
 }
@@ -58,7 +58,7 @@ h2 {
 }
 
 .site-logo {
-  text-align: center
+  text-align: center;
 }
 
 .header-bar {
