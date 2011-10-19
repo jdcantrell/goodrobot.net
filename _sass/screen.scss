@@ -6,7 +6,7 @@
 //base color definitions
 $background-color: #0b486b;
 $text-heading:#a8dba8;
-$text-color: #fff;
+$text-color: #eef7dd;
 $link-color: #79bd9a;
 
 $naviation-background: #3b8686;
@@ -35,7 +35,7 @@ body {
 	@include font-normal;
   color: $text-color;
   //background: url(/images/square_bg.png) repeat $background-color;
-  background: url(/images/square_bg.png) repeat, url(/images/bg-pattern6.png) repeat-x $background-color;
+  background: url(/images/square_bg.png) repeat, url(/images/bg-pattern.png) repeat-x $background-color;
   margin: 0;
   padding: 0;
 }
@@ -49,7 +49,7 @@ h1, h1 a {
   @include links($text-heading, $text-heading);
 	@include font-large;
   @include text-shadow(8px, #000);
-  margin-top: 5px;
+  margin: 5px 0px 0px 3px;
 }
 
 h2 {
@@ -93,6 +93,7 @@ h2 {
 .publish-info {
   font-size: 15px;
   margin-bottom: 10px;
+  margin-left: 3px;
   line-height: 18px;
   padding-left: 3px;
 }
@@ -255,4 +256,24 @@ a.tag {
 
 .ankh h2 {
   margin-bottom: 5px;
+}
+
+$new: #ce1836;
+$hours: #f85931; 
+$days: #edb92e; 
+$months: #009989;
+.ago_new {
+  @include bubble($new, darken($new, 13%), lighten($new, 10%));
+}
+
+.ago_hours {
+  @include bubble($hours, darken($hours, 13%), lighten($hours, 10%));
+}
+
+.ago_days {
+  @include bubble($days, darken($days, 13%), lighten($days, 10%));
+}
+
+.ago_months {
+  @include bubble($months, darken($months, 13%), lighten($months, 10%));
 }
