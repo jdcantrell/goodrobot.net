@@ -7,11 +7,11 @@
 $background-color: #0b486b;
 $text-heading:#a8dba8;
 $text-color: #eef7dd;
-$link-color: #79bd9a;
+$link-color: #a8dba8;
 
-$naviation-background: #3b8686;
+$navigation-background: #3b8686;
 $navigation-text: #cff09e;
-$naviation-inset: #0b486b;
+$navigation-inset: #0b486b;
 
 $date-background: #79bd9a;
 $date-text: #3b8686;
@@ -23,7 +23,6 @@ $tag-inset: #0b486b;
 
 $link-bubble-background: #407dca;
 $link-bubble-inset: #203e64;
-$soft-border-color:#789acd;
 
 
 html {
@@ -71,10 +70,10 @@ h2 {
 }
 
 .header-bar li {
-  @include letterpress($naviation-inset);
+  @include letterpress($navigation-inset);
   float: left;
   padding: 5px;
-  background-color: $naviation-background;
+  background-color: $navigation-background;
   line-height: 1.1em;
 }
 
@@ -105,8 +104,8 @@ h2 {
 .project-links {
   @include font-small;
   list-style: none;
-  padding: 2px 0 0 0;
-  border: 1px solid $soft-border-color;
+  padding: 2px 0 1px 0;
+  border: 0px solid lighten($background-color, 10%);
   border-width: 0 0 1px 0;
   margin: 5px 0;
 }
@@ -130,8 +129,10 @@ a:hover {
 
 hr {
   border-style: solid;
-  border-width: 0 0 1px 0;
-  border-color: $text-color;
+  border-width: 0 0 2px 0;
+  border-color: lighten($background-color, 10%);
+
+  //border-color: $text-color;
 }
 
 //little tag bubbles
@@ -209,7 +210,7 @@ a.tag {
   }
 }
 .links .hover {
-  @include bubble($link-bubble-background, $link-color, $link-bubble-inset);
+  @include bubble(rgba(0, 0, 0, .7), $navigation-text, $navigation-inset);
   @include box-shadow(8px, rgba(0, 0, 0, .7)); 
   position: absolute;
   height: auto;
@@ -219,8 +220,11 @@ a.tag {
   margin-left: -3px;
 }
 .hover a, .hover a:visited, .hover a:hover {
-  color: $link-color;
+  color: $navigation-text;
   text-decoration: none;
+}
+.hover a:hover {
+  text-decoration: underline;
 }
 
 .twitter-meta {
@@ -258,10 +262,11 @@ a.tag {
   margin-bottom: 5px;
 }
 
-$new: #ce1836;
-$hours: #f85931; 
-$days: #edb92e; 
-$months: #009989;
+$months: #694d7c;
+$days: #f29108; 
+$hours: #dd4702; 
+$new: #599905;
+
 .ago_new {
   @include bubble($new, darken($new, 13%), lighten($new, 10%));
 }
