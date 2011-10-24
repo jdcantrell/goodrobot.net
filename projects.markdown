@@ -25,6 +25,17 @@ expectations, Ankh, in essence, is an RSS feed reader and parser. With Ankh
 you create an HTML template and then have Ankh parse and fill in the latest
 feed data. 
 
+## triggerFinger.js
+<ul class="project-links">
+  <li><a class="source" href="http://github.com/jdcantrell/triggerfinger.js">Source</a></li>
+</ul>
+This tool was created, with my buddy <a href="http://whatupderek.com">Derek</a>, to help us get a better picture of
+how we are using jQuery to bind objects. It generates a report for any time
+.bind() or .once() is called. It also keeps track of the handlers, and records
+the number of times they were fired and the run time for the entire event to
+process all associated handlers. We still has some cleanup and features to add
+to it, but it is more or less usable in its current state.
+
 ## Vimes
 <ul class="project-links">
   <li><a class="source" href="http://github.com/jdcantrell/vimes.git">Source</a></li>
