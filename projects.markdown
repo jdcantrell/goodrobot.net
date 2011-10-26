@@ -6,7 +6,6 @@ date: 2011-09-16
 
 ## Intones
 <ul class="project-links">
-  <li><a class="source" href="http://github.com/jdcantrell/intones">Source</a></li>
   <li><a class="website" href="http://intones.notsoevil.net">Website</a></li>
 </ul>
 Intones is a simple website built off Django and Amazon AWS with the goal
