@@ -1,36 +1,24 @@
 --- 
 layout: post
-title: You Never Know
+title: Let's get this party started!
 tags:
-- ideas
-- stuff
-date: 2011-05-07
+- update
+date: 2011-10-30
 ---
 
-I really feel like writing some thoughts down. Here are some post ideas to work on:
+So, here we are. Starting fresh. A while ago I was goofing off and ended up
+purchasing goodrobot.net. My plan was to migrate my notsoevil.net sites to the
+new domain, but that got put on hold while I changed jobs, moved across the
+country and then got my family out here and settled as well. 
 
-3 Coding Ideas a week - this should be three ideas of quick and easy code ideas that might
-take up to half a week to complete. The idea would be that I'd try to pump out these ideas
-often enough and quickly enough that if I do not write it someone else will possibly take
-it and run. This would force me to be creative and to spend more than the 5 minutes it takes
-me to decide that I'm not creative enough to come up with any ideas. 
+And then came the monthly urge to re-write my blog theme, followed by the
+inevitable putting that off, followed up yet once more by a "oh hey people like
+[jekyll](https://github.com/mojombo/jekyll) I should play with that and see how it goes"...this continues on for
+several months. Until, just now, where I am actually writing a goddamn post for
+my new webpage. 
 
-Not really sure if I want to talk much about my old job. There were some terrible things about
-it, and working at my new job definitely makes me think there is no reason for anyone to 
-tolerate the sort of disregard to employee hapiness that was going on there. On the other hand
-I hate to disparage my own work and the work of the friends that I still have there. Not even 
-sure what I want to say besides....see everything did not just end, but became AWESOME after I
-switched jobs. They looked at it like I was the problem, and then got upset when I tried to remove
-said problem from them. Well here my "issues" are non-issues. Which is nice cause I have to worry
-less about them and can focus on my strengths and improving my real weaknesses. What it really
-comes down to is this. I want to be awesome at my job. I want people to recognize that I am more
-than some guy who sits down and writes out feature after feature. Most importantly, I want to
-constantly strive and work towards being bigger than myself
-
-* Mobile home page thingamajig
-* Fancy bookmark page (possibly sync'ed off pinboard)
-* Breakout the RPG
-* Project pages for jekyll (not even sure what this means!)
-
-Hrmm, that didn't seem to work right. I wonder what happened? Pancakes
-
+Anyhow, life's good and I'm hoping to keep this place from collecting so many
+cobwebs. As I mentioned this site is now built off jekyll (if you're so inclined
+you may fork it from here). I'm not really interested in doing an expanded post
+about the tech behind it(see here, here and here), except that I will say this: It was fun, and I really
+like [sass](http://sass-lang.com). 
