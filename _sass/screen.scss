@@ -122,6 +122,9 @@ h3 {
 a {
   color: $link-color;
   text-decoration: none;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  user-select:none;
 }
 
 a:visited {
@@ -210,8 +213,8 @@ a.tag {
   li {
     padding: 0; 
     margin: 0;
+    height: 27px;
     overflow: hidden; 
-    height: 1.5em;
   }
 }
 .links .hover {
@@ -227,6 +230,9 @@ a.tag {
 .hover a, .hover a:visited, .hover a:hover {
   color: $navigation-text;
   text-decoration: none;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  user-select:none;
 }
 .hover a:hover {
   text-decoration: underline;
@@ -258,8 +264,8 @@ a.tag {
   li {
     padding: 0; 
     margin: 0;
+    height:27px;
     overflow: hidden;
-    height: 1.5em;
   }
 }
 
