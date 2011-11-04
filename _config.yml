@@ -1,4 +1,5 @@
 pygments: true
 markdown: kramdown
 permalink: "/:year/:month/:title"
+exclude: Guardfile, config.rb
 
