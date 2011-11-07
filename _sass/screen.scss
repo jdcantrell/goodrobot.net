@@ -217,16 +217,45 @@ a.tag {
     overflow: hidden; 
   }
 }
+
+@keyframes fading {
+  0%{
+    @include bubble(rgba(0, 0, 0, .0), $navigation-text, $navigation-inset);
+  }
+  100%{
+    @include bubble(rgba(0, 0, 0, .7), $navigation-text, $navigation-inset);
+  }
+}
+
+@-moz-keyframes fading {
+  0%{
+    @include bubble(rgba(0, 0, 0, .0), $navigation-text, $navigation-inset);
+  }
+  100%{
+    @include bubble(rgba(0, 0, 0, .7), $navigation-text, $navigation-inset);
+  }
+}
+
+@-webkit-keyframes fading {
+  0%{
+    @include bubble(rgba(0, 0, 0, .0), $navigation-text, $navigation-inset);
+  }
+  100%{
+    @include bubble(rgba(0, 0, 0, .7), $navigation-text, $navigation-inset);
+  }
+}
+
 .links .hover {
   @include bubble(rgba(0, 0, 0, .7), $navigation-text, $navigation-inset);
-  @include box-shadow(8px, rgba(0, 0, 0, .7)); 
   position: absolute;
   height: auto;
   overflow: visible;
   z-index:1000;
   margin-top: -2px;
   margin-left: -3px;
+  @include animation (fading 150ms linear)
 }
+
 .hover a, .hover a:visited, .hover a:hover {
   color: $navigation-text;
   text-decoration: none;

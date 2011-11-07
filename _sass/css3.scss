@@ -21,3 +21,9 @@
 @mixin letterpress ($color:#fff) {
   @include text-shadow(0px, $color, 0px, 1px);
 }
+
+@mixin animation ($params) {
+  -webkit-animation: $params;
+  -moz-animation: $params;
+  animation: $params;
+}
