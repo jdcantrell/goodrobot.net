@@ -61,6 +61,19 @@ h3 {
   margin-bottom:8px;
 }
 
+.highlight {
+  font-size: 14px;
+  line-height: 17px;
+  padding:0px;
+  border:1px solid #106799;
+  border-width: 1px 0 1px 0;
+  background-color:rgba(0, 0, 0, .15);
+}
+
+.highlight pre {
+  margin:5px 5px
+}
+
 .site-logo {
   text-align: center;
 }
@@ -158,6 +171,15 @@ a.tag {
 }
 .website {
   @include icon('/images/site-icons/website-16x16.png', 18px);
+}
+
+.rss-icon {
+  @include icon-only('/images/site-icons/feed-24x24.png', 24px);
+}
+
+.creative-commons-icon {
+  @include icon-only('/images/creative-commons.png', 24px);
+  padding-left:53px;
 }
 
 .rdio-icon {
