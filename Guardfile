@@ -10,8 +10,8 @@ def build
 end
 
 guard 'shell' do
-  watch( %r{^_includes/.*} ) { `jekyll` }
-  watch( %r{^_layouts/.*} ) { `jekyll` }
-  watch( %r{.markdown$} ) { `jekyll` }
-  watch( %r{^_sass/.*} ) { `compass compile ./; jekyll` }
+  watch( %r{^_includes/.*} ) { `jekyll --pygments` }
+  watch( %r{^_layouts/.*} ) { `jekyll --pygments` }
+  watch( %r{markdown$} ) { `jekyll --pygments` }
+  watch( %r{^_sass/.*} ) { `compass compile ./; jekyll --pygments` }
 end
