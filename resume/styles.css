@@ -1,0 +1,22 @@
+body {
+
+}
+
+#skills {display:none}
+#education {display:none}
+#experience {display:none}
+
+.sections {
+	text-align:center;
+	width: 100%
+}
+.sections li {
+	margin:0;
+	width:620px;
+	float:left;
+	list-style:none
+}
+#scroller {
+	width:620px;
+	overflow:hidden;
+}

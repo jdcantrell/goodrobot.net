@@ -1,0 +1,30 @@
+/* Change font sizes */
+body {font-size:14px;}
+h4,#education li{font-size:14px;}
+.contact-info {font-size:17px;}
+.name {font-size:34px;}
+
+/* Display our print items */
+hr {display:block;clear:both;margin:5px 0px;border:1px solid #eee}
+#print-about {display:block}
+.print-header {float:left; width:35%;display:block}
+.section-container {display:block}
+
+/* Make our sections act normal, lets also create a nice two column layout */
+#sections > div {
+	margin:0;
+	margin-right:0px;
+	width:65%;
+	float:right;
+}
+#sections {width:100%}
+#experience, #skills, #education {float:right; width: 65%}
+#experience ul {margin-bottom:0px}
+#about-header {float:none; width:auto;border:none}
+
+/* Hide some items we do not want printed */
+#scroller {display:none}
+#section-headings {display:none}
+.extended {display:none}
+.year {display:none}
+#about {display:none}
