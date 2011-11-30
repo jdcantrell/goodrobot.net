@@ -15,7 +15,7 @@ engines (the latest being jekyll as it is all the rage these days).
 Anyhow, I am currently located in San Francisco, CA and would be more than
 happy to meetup/drink beer/talk tech with any other like minded individuals.
 
-If you'd like you may view my resume [here](http://goodorobot.net/resume).
+If you'd like you may view my resume [here](http://goodrobot.net/resume).
 
 
 
