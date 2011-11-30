@@ -10,7 +10,7 @@ any recent framework, you might have come across function decorators. The first
 time I ran into these, I was slightly confused, but it worked as I needed so I 
 didn't look into them any deeper other than to say to myself "Oh that's neat."
 
-I was recently working on [Ankh](http://github.com/jdcantrell/ankh.git) and ran
+I was recently working on [Ankh](http://github.com/jdcantrell/ankh) and ran
 into the prospect of modifying a bunch of a functions with exact same set of
 code. Ankh has a set of display functions, each function takes an entry from 
 an RSS feed and returns the output. We have different functions so that an entry
