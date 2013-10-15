@@ -1,32 +1,36 @@
-from __future__ import with_statement
-from fabric.api import local, run, cd
-from fabric.decorators import hosts
-from fabric.colors import blue, green
+from fabric.api import *
+import fabric.contrib.project as project
+import os
 
-#TODO: Re-organize site so that the main blog is not in the base directory
-#this will prevent the stream pages (and anything else that is evntually added
-#from getting destroyed on deploy
+# Local path configuration (can be absolute or relative to fabfile)
+env.deploy_path = 'output'
+DEPLOY_PATH = env.deploy_path
+
+# Remote server configuration
+production = 'jd@goodrobot.net:22'
+dest_path = '/srv/http/goodrobot'
+
+def clean():
+    if os.path.isdir(DEPLOY_PATH):
+        local('rm -rf {deploy_path}'.format(**env))
+        local('mkdir {deploy_path}'.format(**env))
 
 def build():
-  local("compass compile ./")
-  local("jekyll")
+    local('pelican -s pelicanconf.py')
 
-@hosts('jdcantrell@goodrobot.net')
-def deploy():
-  code_dir = "~/goodrobot.net"
-  stream_dir = "~/ankh"
-  
-  #actually generate the site
-  with cd(code_dir):
-    print(blue("Updating site and building..."))
-    run("git pull")
-    run("compass compile ./")
-    run("jekyll")
+def rebuild():
+    clean()
+    build()
 
-  #re-gen the stream page on deploy
-  with cd(stream_dir):
-    print(blue("Updating ankh and regenerating..."))
-    run("git pull")
-    run("mkdir -p %s/_site/stream" % code_dir)
-    run("python ankh.py -t goodrobot.template.html -o %s/_site/stream/index.html -v" % code_dir)
-  print(green("Site has been successfully deployed: http://goodrobot.net"))
+def regenerate():
+    local('pelican -r -s pelicanconf.py')
+
+@hosts(production)
+def publish():
+    local('pelican -s publishconf.py')
+    project.rsync_project(
+        remote_dir=dest_path,
+        exclude=".DS_Store",
+        local_dir=DEPLOY_PATH.rstrip('/') + '/',
+        delete=True
+    )

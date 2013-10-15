@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="content">
+{% block content_title %}
+<h2>All articles</h2>
+{% endblock %}
+
+<ol id="post-list">
+{% for article in articles_page.object_list %}
+  <li>
+    <article class="hentry">
+      <header> 
+        <h1>
+          <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a>
+        </h1>
+        <div class="details">
+          <span>
+            {% if article.tags %}
+              A few words about
+              {% for tag in article.tags %}
+                {% if not loop.first %},
+                  {% if loop.last %}and {% endif %}
+                {% endif %}
+                <a class="tag-{{ tag.name }}" href="#">{{ tag.name }}</a>
+              {% endfor %}
+            {% endif %}
+          <br>
+          <span>
+            <abbr class="published" title="{{ article.date.strftime("%B %d, %Y") }}"> {{ article.locale_date }} </abbr>
+          </span>
+        </div>
+      </header>
+      <p> {{ article.summary }} </p><!-- /.entry-content -->
+    </article>
+  </li>
+{% endfor %}
+</ol><!-- /#posts-list -->
+{% include 'pagination.html' %}
+</section><!-- /#content -->
+{% endblock content %}
