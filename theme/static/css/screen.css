@@ -15,7 +15,7 @@ article .details {
   color: #444444;
 }
 
-/* line 80, ../sass/_markdown.sass */
+/* line 106, ../sass/_markdown.sass */
 body {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 18px;
@@ -26,54 +26,54 @@ body {
   line-height: 1.45em;
 }
 
-/* line 89, ../sass/_markdown.sass */
+/* line 115, ../sass/_markdown.sass */
 h1, h2, h3, .article-details {
   font-family: "Gentium Basic", serif;
   font-weight: normal;
 }
 
-/* line 93, ../sass/_markdown.sass */
+/* line 119, ../sass/_markdown.sass */
 h1 {
   font-size: 2.3em;
 }
 
-/* line 96, ../sass/_markdown.sass */
+/* line 122, ../sass/_markdown.sass */
 h2 {
   font-size: 1.8em;
   margin-bottom: 0.4em;
 }
 
-/* line 100, ../sass/_markdown.sass */
+/* line 126, ../sass/_markdown.sass */
 h3 {
   font-size: 1.2em;
 }
 
-/* line 105, ../sass/_markdown.sass */
+/* line 131, ../sass/_markdown.sass */
 a {
   text-decoration: none;
   color: #0a476a;
   font-weight: normal;
 }
-/* line 110, ../sass/_markdown.sass */
+/* line 136, ../sass/_markdown.sass */
 a:hover {
   text-decoration: underline;
 }
-/* line 113, ../sass/_markdown.sass */
+/* line 139, ../sass/_markdown.sass */
 a:active {
   outline: 0;
 }
 
-/* line 117, ../sass/_markdown.sass */
+/* line 143, ../sass/_markdown.sass */
 b, .emphasize {
   font-weight: bold;
 }
 
-/* line 120, ../sass/_markdown.sass */
+/* line 146, ../sass/_markdown.sass */
 i, .italic {
   font-style: italic;
 }
 
-/* line 124, ../sass/_markdown.sass */
+/* line 150, ../sass/_markdown.sass */
 pre, code {
   background-color: #f0f0e7;
   border: 1px solid #c9c9a9;
@@ -83,35 +83,29 @@ pre, code {
   overflow: auto;
 }
 
-/* line 132, ../sass/_markdown.sass */
+/* line 158, ../sass/_markdown.sass */
 pre > code {
   border: none;
   background-color: none;
   font-size: 0.9em;
 }
 
-/* line 138, ../sass/_markdown.sass */
+/* line 164, ../sass/_markdown.sass */
 p {
-  text-indent: 2em;
-  margin: 0;
-}
-/* line 142, ../sass/_markdown.sass */
-p:first-of-type {
   margin-top: 1em;
-  text-indent: 0;
 }
-/* line 145, ../sass/_markdown.sass */
+/* line 167, ../sass/_markdown.sass */
 p:last-of-type {
   margin-bottom: 1em;
 }
 
-/* line 148, ../sass/_markdown.sass */
+/* line 170, ../sass/_markdown.sass */
 blockquote {
   background-color: #f0f0e7;
   padding: 0.2em;
 }
 
-/* line 152, ../sass/_markdown.sass */
+/* line 174, ../sass/_markdown.sass */
 hr {
   border: none;
   border-top: 1px solid #c9c9a9;
@@ -119,7 +113,7 @@ hr {
   margin: auto;
 }
 
-/* line 158, ../sass/_markdown.sass */
+/* line 180, ../sass/_markdown.sass */
 article img {
   border: 1px solid #c9c9a9;
   padding: 3px;
