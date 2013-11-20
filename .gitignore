@@ -3,3 +3,4 @@ stylesheets
 .sass-cache
 .DS_Store
 *.pyc
+output
