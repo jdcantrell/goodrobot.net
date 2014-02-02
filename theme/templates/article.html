@@ -25,9 +25,12 @@
    <div class="article-details">
      <span>
        A few words about
-        {% for tag in article.tags %}
-        <a href="/tag/{{tag}}.html" class="tag-{{tag}}">{{ tag }}</a>
-        {% endfor %}
+        {% for tag in article.tags -%}
+          {% if loop.last and not loop.first -%}
+          {% if loop.length != 2 %},{% endif %} and
+          {%- endif %}
+          <a href="/tag/{{tag}}.html" class="tag-{{tag}}">{{ tag }}</a>
+        {%- endfor %}.
 
      </span><br>
      <span> {{ article.locale_date }} </span>

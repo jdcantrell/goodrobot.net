@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ DEFAULT_LANG }}">
 <head>
-  <link rel="stylesheet" href="/theme/css/screen.css">
+  <!-- <link rel="stylesheet" href="http://static.goodrobot.net/gxl/gxl.min.css"> -->
+  <link rel="stylesheet" href="http://gxl.dev/build/gxl.css">
+
   <link href='http://fonts.googleapis.com/css?family=Gentium+Basic' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+  <link rel="icon" type="image/png" href="http://static.goodrobot.net/cdn/favicon.png">
 
   {% block head %}
   <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
@@ -49,7 +52,7 @@
       </a>
     </header>
 
-    <div class="content">
+    <div class="content readable-content">
       {% block content %}
       {% endblock %}
     </div>
