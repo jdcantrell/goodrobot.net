@@ -12,12 +12,16 @@ css/sass/js. You can see the the one I made from styles I used for this
 site [here](http://goodrobot.net/gxl). More information can be found at
 the [hologram github page](http://github.com/trulia/hologram).
 
+---
+
 ##Ankh
 Ankh is a python script that generates html from RSS feeds. You feed it
 a jinja2 template and use some of the built in template tags and it
 creates your very own custom feed reader. I use this for my
 [links page](http://goodrobot.net/stream). Free source codes at
 [github](http://github.com/jdcantrell/ankh)
+
+---
 
 ##Luggage
 Luggage is a ruby based site that serves as a file dump. This was
@@ -27,6 +31,7 @@ differently depending on file types (markdown, source code, images,
 etc), but honestly I only use it to share pictures. Source code at
 [github](http://github.com/jdcantrell/luggage).
 
+---
 
 ##Others
 My github has various other projects that I have completed or left
