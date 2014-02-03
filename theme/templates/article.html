@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block head %}
+  <title>{{ article.title }}</title>
   {% for keyword in article.keywords %}
     <meta name="keywords" contents="{{keyword}}" />
   {% endfor %}
@@ -13,6 +14,7 @@
   {% endfor %}
 
 {% endblock %}
+
 
 {% block content %}
 <article id="content" class="body">
