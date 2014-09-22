@@ -4,3 +4,5 @@ stylesheets
 .DS_Store
 *.pyc
 output
+ankh_cache
+build
