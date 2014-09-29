@@ -70,6 +70,7 @@
       a:active {
         text-decoration: none;
         color: #6684e1;
+        color:rgba(57, 96, 172, .8);
         font-weight: 400;
       }
 
@@ -79,14 +80,13 @@
 
 
       body > header {
-        text-align: center;
         width: 100%;
         top: 0;
       }
 
       [class*='col-'] {
         float: left;
-        padding-right: 20px;
+        padding-right: 40px;
       }
 
       [class*='col-']:last-of-type {
@@ -108,7 +108,7 @@
       }
 
       .content {
-        width: 700px;
+        width: 800px;
         margin: auto;
       }
 
@@ -130,34 +130,67 @@
 
       }
 
+
+      header {
+        padding-left: 30px;
+        height: 30px;
+        background-image: linear-gradient(to bottom,
+        rgba(96, 172, 57, 1) 0%,
+        rgba(96, 172, 57, 1) 20%,
+        rgba(96, 172, 57, .80) 20.1%,
+        rgba(96, 172, 57, .80) 40%,
+        rgba(96, 172, 57, .60) 40.1%,
+        rgba(96, 172, 57, .60) 60%,
+        rgba(96, 172, 57, .40) 60.1%,
+        rgba(96, 172, 57, .40) 80%,
+        rgba(96, 172, 57, .20) 80.1%,
+        rgba(96, 172, 57, .20) 100%)
+      }
+
     </style>
     <link href='http://fonts.googleapis.com/css?family=Gentium+Basic:400' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <header>
        <a title="goodrobot.net" href="http://goodrobot.net">
-        <img height="80" src='http://goodrobot.net/theme/images/goodrobot.png'>
+        <img src='http://goodrobot.net/theme/images/goodrobot.png'>
       </a>
     </header>
     <div class="grid content">
       <div class="col-1-3">
-        <h1>projects</h1>
+        <h1>codes</h1>
+
         <h2>hologram</h2>
-        <img class="preview"  src="src/images/hologram.png">
-        <p>Living style guide generator</p>
+        <a href="https://github.com/trulia/hologram">
+          <img class="preview"  src="images/hologram.png">
+        </a>
+        <p>Living style guide generator. <a href="https://github.com/trulia/hologram">code</a></p>
+
         <h2>spice</h2>
-        <img class="preview" src="src/images/spice.png">
-        <p>Personal file sharing</p>
+        <a href="https://github.com/jdcantrell/spice">
+          <img class="preview" src="images/spice.png">
+        </a>
+        <p>
+          Self&ndash;hosted file sharing.<br>
+          <a href="https://github.com/jdcantrell/spice">code</a>
+          <a href="http://share.goodrobot.net">demo</a>
+          </p>
         <h2>ankh</h2>
-        <p>Simple feed/lifestream generator</p>
+        <a href="https://github.com/jdcantrell/ankh">
+          <img class="preview" src="images/ankh.png">
+        </a>
+        <p>Simple feed/lifestream generator
+          <a href="https://github.com/jdcantrell/ankh">code</a>
+          <a href="/stream">demo</a>
+        </p>
       </div>
       <div class="col-2-3">
         <h1>about</h1>
         <p>
           JD is a Senior Front-end Engineer at Trulia. He is always on the
-        look out for the next best lego set.
+        look out for the next best lego set. Here you can find various bits and zeros I've created or played around with.
         </p>
-        <h1>posts</h1>
+        <h1>words</h1>
         <ul>
           <li>
           <a href="/blah">How to setup up local .dev domains</a>
