@@ -1,2 +1,168 @@
-{% include '_tpls/header.html' %}
-hello friend
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>hello, goodrobot.net</title>
+    <style>
+      *, *:after, *:before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+
+.base00-background { background-color: #20201d; }
+.base01-background { background-color: #292824; }
+.base02-background { background-color: #6e6b5e; }
+.base03-background { background-color: #7d7a68; }
+.base04-background { background-color: #999580; }
+.base05-background { background-color: #a6a28c; }
+.base06-background { background-color: #e8e4cf; }
+.base07-background { background-color: #fefbec; }
+.base08-background { background-color: #d73737; }
+.base09-background { background-color: #b65611; }
+.base0A-background { background-color: #cfb017; }
+.base0B-background { background-color: #60ac39; }
+.base0C-background { background-color: #1fad83; }
+.base0D-background { background-color: #6684e1; }
+.base0E-background { background-color: #b854d4; }
+.base0F-background { background-color: #d43552; }
+
+.base00 { color: #20201d; }
+.base01 { color: #292824; }
+.base02 { color: #6e6b5e; }
+.base03 { color: #7d7a68; }
+.base04 { color: #999580; }
+.base05 { color: #a6a28c; }
+.base06 { color: #e8e4cf; }
+.base07 { color: #fefbec; }
+.base08 { color: #d73737; }
+.base09 { color: #b65611; }
+.base0A { color: #cfb017; }
+.base0B { color: #60ac39; }
+.base0C { color: #1fad83; }
+.base0D { color: #6684e1; }
+.base0E { color: #b854d4; }
+.base0F { color: #d43552; }
+
+      html, body {
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        background-color: #fefbec;
+        color: #6e6b5e;
+        font-family: 'Helvetica', sans-serif;
+        font-weight: 400;
+      }
+
+      h1, h2 {
+        color: #60ac39;
+        font-family: "Gentium Basic", serif;
+        font-weight: 400;
+      }
+
+      h2 {
+        color: #1fad83;
+      }
+
+      a,
+      a:link
+      a:active {
+        text-decoration: none;
+        color: #6684e1;
+        font-weight: 400;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+
+      body > header {
+        text-align: center;
+        width: 100%;
+        top: 0;
+      }
+
+      [class*='col-'] {
+        float: left;
+        padding-right: 20px;
+      }
+
+      [class*='col-']:last-of-type {
+        padding-right: 0;
+      }
+
+      .col-2-3 {
+        width: 66.66%;
+      }
+
+      .col-1-3 {
+        width: 33.33%;
+      }
+
+      .grid:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      .content {
+        width: 700px;
+        margin: auto;
+      }
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      li {
+        margin: 0;
+      }
+
+      .preview {
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+        border-radius: 2px;
+        width: 210px;
+        display: inline-block;
+
+      }
+
+    </style>
+    <link href='http://fonts.googleapis.com/css?family=Gentium+Basic:400' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <header>
+       <a title="goodrobot.net" href="http://goodrobot.net">
+        <img height="80" src='http://goodrobot.net/theme/images/goodrobot.png'>
+      </a>
+    </header>
+    <div class="grid content">
+      <div class="col-1-3">
+        <h1>projects</h1>
+        <h2>hologram</h2>
+        <img class="preview"  src="src/images/hologram.png">
+        <p>Living style guide generator</p>
+        <h2>spice</h2>
+        <img class="preview" src="src/images/spice.png">
+        <p>Personal file sharing</p>
+        <h2>ankh</h2>
+        <p>Simple feed/lifestream generator</p>
+      </div>
+      <div class="col-2-3">
+        <h1>about</h1>
+        <p>
+          JD is a Senior Front-end Engineer at Trulia. He is always on the
+        look out for the next best lego set.
+        </p>
+        <h1>posts</h1>
+        <ul>
+          <li>
+          <a href="/blah">How to setup up local .dev domains</a>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
