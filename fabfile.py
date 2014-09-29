@@ -1,9 +1,10 @@
 import os
 import codecs
 import re
+import shutil
 
 from fabric.api import task, local
-from fabric.colors import blue
+from fabric.colors import blue, green
 
 from jinja2 import Environment, FileSystemLoader
 from jinja2.exceptions import TemplateNotFound
@@ -16,7 +17,24 @@ from pygments.formatters import HtmlFormatter
 
 import ankh
 
+
 #build css
+@task
+def generate_all():
+    print blue('Building folder structure')
+    local('rm -rf ./build')
+    build_dirs()
+    print blue('Parsing templates')
+    tpls()
+    print blue('Parsing markdown')
+    md()
+    print blue('Generating stream')
+    stream()
+
+@task
+def watch():
+    print green('Watching ./src for changes')
+    local('watchmedo shell-command -p "./src/*" -R -c "fab generate"')
 
 @task
 def generate():
@@ -27,8 +45,7 @@ def generate():
     tpls()
     print blue('Parsing markdown')
     md()
-    print blue('Generating stream')
-    stream()
+
 
 @task
 def dev_build():
@@ -42,9 +59,11 @@ def dev_build():
     print blue('Generating stream')
     stream_cache()
 
+
 @task
 def stream_cache():
     local('ankh src/stream/_stream.html build/stream/index.html --cache')
+
 
 @task
 def stream():
@@ -54,18 +73,31 @@ def stream():
 @task
 def build_dirs():
     dir_list = ['build']
+    file_list = []
     for subdir, dirs, files in os.walk('src'):
         if subdir.find(os.path.join('', '_')) == -1:
             build_dir = subdir.replace('src', 'build', 1)
             for dir in dirs:
                 if dir.find('_') != 0:
                     dir_list.append(os.path.join(build_dir, dir))
+            for file in files:
+                if file.find('_') != 0:
+                    file_list.append((
+                        os.path.join(subdir, file),
+                        os.path.join(build_dir, file)
+                    ))
 
     for dir in dir_list:
         try:
             print "Creating %s" % dir
             os.mkdir(dir)
         except OSError:
+            pass
+
+    for src, dest in file_list:
+        try:
+            shutil.copyfile(src, dest)
+        except:
             pass
 
 
@@ -93,6 +125,7 @@ def tpls():
         destfile = codecs.open(dest, "w", "utf-8")
         destfile.write(html)
         destfile.close()
+
 
 def strip_yaml(file_content):
     regex = re.compile('^---\n', re.MULTILINE)
