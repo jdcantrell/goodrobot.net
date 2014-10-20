@@ -3,12 +3,6 @@
   <head>
     <title>hello, goodrobot.net</title>
     <style>
-      *, *:after, *:before {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-      }
-
 .base00-background { background-color: #20201d; }
 .base01-background { background-color: #292824; }
 .base02-background { background-color: #6e6b5e; }
@@ -43,117 +37,17 @@
 .base0E { color: #b854d4; }
 .base0F { color: #d43552; }
 
-      html, body {
-        padding: 0;
-        margin: 0;
-      }
-
-      body {
-        background-color: #fefbec;
-        color: #6e6b5e;
-        font-family: 'Helvetica', sans-serif;
-        font-weight: 400;
-      }
-
-      h1, h2 {
-        color: #60ac39;
-        font-family: "Gentium Basic", serif;
-        font-weight: 400;
-      }
-
-      h2 {
-        color: #1fad83;
-      }
-
-      a,
-      a:link
-      a:active {
-        text-decoration: none;
-        color: #6684e1;
-        color:rgba(57, 96, 172, .8);
-        font-weight: 400;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
 
 
-      body > header {
-        width: 100%;
-        top: 0;
-      }
-
-      [class*='col-'] {
-        float: left;
-        padding-right: 40px;
-      }
-
-      [class*='col-']:last-of-type {
-        padding-right: 0;
-      }
-
-      .col-2-3 {
-        width: 66.66%;
-      }
-
-      .col-1-3 {
-        width: 33.33%;
-      }
-
-      .grid:after {
-        content: "";
-        display: table;
-        clear: both;
-      }
-
-      .content {
-        width: 800px;
-        margin: auto;
-      }
-
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      li {
-        margin: 0;
-      }
-
-      .preview {
-        box-shadow: 0 1px 2px rgba(0, 0, 0, .6);
-        border-radius: 2px;
-        width: 210px;
-        display: inline-block;
-
-      }
-
-
-      header {
-        padding-left: 30px;
-        height: 30px;
-        background-image: linear-gradient(to bottom,
-        rgba(96, 172, 57, 1) 0%,
-        rgba(96, 172, 57, 1) 20%,
-        rgba(96, 172, 57, .80) 20.1%,
-        rgba(96, 172, 57, .80) 40%,
-        rgba(96, 172, 57, .60) 40.1%,
-        rgba(96, 172, 57, .60) 60%,
-        rgba(96, 172, 57, .40) 60.1%,
-        rgba(96, 172, 57, .40) 80%,
-        rgba(96, 172, 57, .20) 80.1%,
-        rgba(96, 172, 57, .20) 100%)
-      }
 
     </style>
-    <link href='http://fonts.googleapis.com/css?family=Gentium+Basic:400' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Gentium+Basic:400' rel='stylesheet' type='text/css'>
+    <link href='css/gxl.css' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <header>
-       <a title="goodrobot.net" href="http://goodrobot.net">
-        <img src='http://goodrobot.net/theme/images/goodrobot.png'>
+    <header id="header">
+       <a title="goodrobot.net" href="//goodrobot.net">
+        <img src='images/goodrobot.png'>
       </a>
     </header>
     <div class="grid content">
@@ -162,25 +56,33 @@
 
         <h2>hologram</h2>
         <a href="https://github.com/trulia/hologram">
-          <img class="preview"  src="images/hologram.png">
+          <img class="thumbnail"  src="images/hologram.png">
         </a>
-        <p>Living style guide generator. <a href="https://github.com/trulia/hologram">code</a></p>
+        <p>Living style guide generator.
+          <span class="icon-github"></span>
+          <a href="https://github.com/trulia/hologram">code</a>
+        </p>
 
         <h2>spice</h2>
         <a href="https://github.com/jdcantrell/spice">
-          <img class="preview" src="images/spice.png">
+          <img class="thumbnail" src="images/spice.png">
         </a>
         <p>
           Self&ndash;hosted file sharing.<br>
+          <span class="icon-github"></span>
           <a href="https://github.com/jdcantrell/spice">code</a>
+
+          <span class="icon-flask"></span>
           <a href="http://share.goodrobot.net">demo</a>
           </p>
         <h2>ankh</h2>
         <a href="https://github.com/jdcantrell/ankh">
-          <img class="preview" src="images/ankh.png">
+          <img class="thumbnail" src="images/ankh.png">
         </a>
-        <p>Simple feed/lifestream generator
+        <p>Feed/stream generator.<br>
+          <span class="icon-github"></span>
           <a href="https://github.com/jdcantrell/ankh">code</a>
+          <span class="icon-flask"></span>
           <a href="/stream">demo</a>
         </p>
       </div>

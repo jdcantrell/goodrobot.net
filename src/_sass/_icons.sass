@@ -1,0 +1,23 @@
+$fa-font-path: '../images/fonts'
+$fa-css-prefix: 'icon'
+
+@import "font-awesome/variables"
+@import "font-awesome/mixins"
+@import "font-awesome/path"
+
+[class*='icon-']
+  display: inline-block
+  // shortening font declaration
+  font: normal normal normal 14px/1 FontAwesome;
+  // can't have font-size inherit on line above, so need to override
+  font-size: inherit
+  // optimizelegibility throws things off #1094
+  text-rendering: auto
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+
+@import "font-awesome/larger"
+@import "font-awesome/fixed-width"
+@import "font-awesome/spinning"
+@import "font-awesome/icons"

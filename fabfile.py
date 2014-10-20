@@ -15,26 +15,19 @@ from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
 
-import ankh
-
-
-#build css
-@task
-def generate_all():
-    print blue('Building folder structure')
-    local('rm -rf ./build')
-    build_dirs()
-    print blue('Parsing templates')
-    tpls()
-    print blue('Parsing markdown')
-    md()
-    print blue('Generating stream')
-    stream()
 
 @task
 def watch():
     print green('Watching ./src for changes')
     local('watchmedo shell-command -p "./src/*" -R -c "fab generate"')
+
+
+@task
+def generate_all():
+    generate()
+    print blue('Generating stream')
+    stream()
+
 
 @task
 def generate():
@@ -45,6 +38,14 @@ def generate():
     tpls()
     print blue('Parsing markdown')
     md()
+    print blue('Generating css')
+    css()
+
+
+@task
+def css():
+    local('mkdir -p ./build/css')
+    local('sassc ./src/_sass/gxl.sass ./build/css/gxl.css')
 
 
 @task
