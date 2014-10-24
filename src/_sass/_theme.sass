@@ -5,6 +5,7 @@ body
   font-family: $sanSerif
   font-weight: 400
   font-size: 18px;
+  line-height: 1.4em;
 
 #header
   width: 100%
@@ -23,3 +24,18 @@ body
 body::selection , body::-moz-selection
   background-color: $linkColor
 
+pre
+  @extend .box
+  padding: 5px
+  margin: 0
+  background-color: #fdf6e3
+  overflow: auto
+  max-width: 800px
+
+code
+  @extend .box
+  background-color: #fdf6e3
+
+pre > code
+  border: none
+  box-shadow: none

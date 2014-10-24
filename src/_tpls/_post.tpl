@@ -1,7 +1,6 @@
 {% include '_tpls/header.html' %}
 
-hello here is the markdown:
+<div class="content">
+  {{ markdown }}
+</div>
 
-{{ markdown }}
-
-there it was
