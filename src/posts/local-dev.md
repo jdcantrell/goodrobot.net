@@ -1,3 +1,10 @@
+---
+title: Local .dev domains
+date: 2014-11-24
+tags:
+  - linux
+---
+
 #Local .dev domains
 
 One of my favorite apps on OSX is Anvil. It easily creates local .dev
