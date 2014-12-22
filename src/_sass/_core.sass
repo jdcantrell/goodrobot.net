@@ -9,12 +9,18 @@ html, body
   margin: 0
 
 ul
-  list-style: none
   margin: 0
   padding: 0
 
 li
   margin: 0
+
+.list-no-bullets
+  list-style: none
+
+.list-inline
+  li
+    display: inline
 
 // Typography
 h1, h2
@@ -64,3 +70,41 @@ a:hover
 .box-thumbnail
   width: 210px
   display: inline-block
+
+
+// touchy lists
+.touch
+  padding: 0
+  margin: 0
+  list-style: none
+  width: 100%
+
+  a
+    font-weight: 300
+    padding: .5em 0
+
+
+    span
+      font-size: 12px
+      display: block
+      color: $fontColor
+      line-height: 1.2em
+
+.touch-table
+  display: table
+
+  li
+    display: table-row
+
+    & > span
+      display: table-cell
+      vertical-align: middle
+
+  a
+    display: table-cell
+    vertical-align: middle
+
+.touch-list
+  a
+    display: block
+    width: 100%

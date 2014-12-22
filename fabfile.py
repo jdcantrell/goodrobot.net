@@ -63,12 +63,12 @@ def dev_build():
 
 @task
 def stream_cache():
-    local('ankh src/stream/_stream.html build/stream/index.html --cache')
+    local('ankh src/stream/_stream.html build/stream/index.html --template-paths ./src --cache')
 
 
 @task
 def stream():
-    local('ankh src/stream/_stream.html build/stream/index.html')
+    local('ankh src/stream/_stream.html build/stream/index.html --template-paths ./src')
 
 
 @task
@@ -177,9 +177,9 @@ def md():
     env = Environment(loader=FileSystemLoader(os.path.abspath('src')))
 
     try:
-        template = env.get_template('_tpls/_post.tpl')
+        template = env.get_template('_tpls/post.tpl')
     except TemplateNotFound:
-        print "Could not find src/_tpls/_post.tpl, has it been created?"
+        print "Could not find src/_tpls/post.tpl, has it been created?"
         return
 
     for src, dest in tpls:

@@ -19,6 +19,8 @@ commands below are for Ubuntu, but replace them with the appropriate
 Fedora commands when needed. So here we go:
 
 First install nginx and dnsmasq:
+* Fedora users probably already have dnsmasq installed
+
 
 ```
 sudo apt-get nginx dnsmasq
@@ -28,7 +30,7 @@ sudo apt-get nginx dnsmasq
 Next setup dnsmasq. If you want to make it behave as a
 local dns cache you can follow
 [this guide.](https://help.ubuntu.com/community/Dnsmasq) Either way create a
-file called `dev_domains` in `/etc/dnsmasq.d/` and put this content in:
+file called `devtld.conf` in `/etc/dnsmasq.d/` and put this content in:
 
 ```
 address=/dev/127.0.0.1
@@ -38,10 +40,16 @@ Now start (or restart) dnsmasq and if you ping any domain that ends in
 .dev you should see `127.0.0.1` as the response IP.
 
 ```
-~ ping pancakes.dev PING pancakes.dev (127.0.0.1) 56(84) bytes of
+~ ping pancakes.dev
+PING pancakes.dev (127.0.0.1) 56(84) bytes of
 data.  64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.014
 ms
 ```
+
+If you get `unknown host pancakes.dev` then you most likely need to
+update your network settings. In GNOME you can use the network manager
+to add 127.0.0.1 and your router's dns (or any other dns). Make sure
+127.0.0.1 is first in order.
 
 ##Setup Nginx
 
@@ -104,9 +112,6 @@ Put this in
 /etc/nginx/sites-available/local_dev
 /etc/nginx/sites-enabled/local_dev`. **Be sure to update `$username` in
 the config file!** Finally, restart nginx and then you're nearly done.
-(Note: SELinux will prevent nginx from accessing user directories by
-default. On Fedora the easiest way to fix this is to check the selinux
-notifcations and follow the instructions it gives for allowing access).
 
 ##Setup your ~/.sites folder
 
@@ -183,6 +188,22 @@ ln -s ./ ~/.sites/pancakes
 Now [http://pancakes.dev](http://pancakes.dev) should give you actual
 content. If you want to use this to develop a non-static site, just fire
 up your dev server on 127.0.0.1:8080 and then visit your domain.
+
+Note: SELinux will prevent nginx from accessing user directories by
+default. On Fedora the easiest way to fix this is to check the selinux
+notifcations and follow the instructions it gives for allowing access.
+
+The commands you'll want will be along these lines:
+
+```
+setsebool -P httpd_enable_homedirs 1
+setsebool -P httpd_read_user_content 1
+setsebool -P httpd_can_network_connect 1
+setsebool -P httpd_can_network_relay 1
+```
+
+You may need to change permissions on your /home/user folder to allow
+others to read from it.
 
 Additionally, I use a few bash functions make setting up and using dev domains easier:
 [](https://gist.github.com/jdcantrell/8036482)

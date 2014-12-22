@@ -1,6 +1,3 @@
-Title: About
-Date: 2011-09-16
-
 Hello. You're on this page cause something about this site interests
 you, and you want to learn a little bit about the person who runs it.
 That person is me. JD. Hi! I don't really know what you're looking for
@@ -12,11 +9,11 @@ me.
 * I work at [Trulia](http://trulia.com). If you do anything on the site
   related to looking for a house/apartment, then I most likely had a hand
   in it.
-* I live in the San Francisco Bay area, California. It still feels weird
-  to me after living most my life in Kansas. And I miss thunderstorms.
+* I live in the San Francisco Bay area. It still feels weird
+  to me after living most my life in Kansas, and I miss thunderstorms.
 * I am still looking for that one project that I can really put some
   soul and heart into.
-* I've been a professional developer for 9 years, or rather I've been
+* I've been a professional developer for 10 years, or rather I've been
   getting paid to write code for that long. I've learned a thing or two
   about writing good code, but still have a long road to go.
 * HTML, CSS, JS, PHP, MySQL, Python, Ruby, C, QBasic (these
@@ -41,14 +38,9 @@ If you think I can help you build something neat, then take a look at my
 
 ##About goodrobot.net
 This is just a playground. It is a collection of random bits of web,
-images, noise, hair, etc that has been rolled into a small corner of the
+images, noise, and paper that has been rolled into a small corner of the
 Internet.
 
-```php
-<?php
-
-echo 'hello friend';
-$a = $a + ;
-
-var_dump($a);
-```
+This site was created by a fabric file collecting random python packages
+that somehow convert text into html. You can see the details at
+http://github.com/jdcantrell/goodrobot.net.

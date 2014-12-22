@@ -1,61 +1,68 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Links and Things</title>
-    <meta name="viewport" content="width=device-width">
-    <link type="text/css" rel="stylesheet" href="http://static.goodrobot.net/gxl/gxl.min.css">
-    <link href='http://fonts.googleapis.com/css?family=Gentium+Basic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+{% extends "_tpls/page.html" %}
+{% block title %}Links and Things{% endblock %}
 
+{% block head %}
+<meta name="viewport" content="width=device-width">
+<style type="text/css">
 
-    <link rel="icon" type="image/png" href="http://static.goodrobot.net/cdn/favicon.png">
+  /* custom stuff */
+  a.comment {
+    width: 70px;
+    text-align: center;
+    font-size: 30px;
+    vertical-align: middle;
+  }
 
-    <meta charset="utf-8" />
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="content-language" content="en" />
-    <style type="text/css">
+  .time-ago {
+    padding: .5em 0;
+    width: 64px;
+    display: table-cell;
+    text-align: center;
+  }
+  .time-ago i{
+    font-size: 35px;
+    display: block;
+  }
 
-      /* custom stuff */
-      a.comment {
-        width: 70px;
-        text-align: center;
-        font-size: 30px;
-        vertical-align: middle;
-      }
+  /* overrides and tweaks */
+  .touch {
+    margin-bottom: 35px;
+  }
+  .touch-list li a:first-child, .touch-table li a:first-child {
+    padding-left: .5em;
+  }
 
-      .time-ago {
-        padding: .5em 0;
-        width: 64px;
-        display: table-cell;
-        text-align: center;
-      }
-      .time-ago i{
-        font-size: 35px;
-        display: block;
-      }
+  .touch::last-child {
+    margin-bottom: 0
+  }
 
-      /* overrides and tweaks */
-      .touch {
-        margin-bottom: 35px;
-      }
-      .touch-list li a:first-child, .touch-table li a:first-child {
-        padding-left: .5em;
-      }
+  .friend-link {
+    font-size: 12px;
+    text-align: right;
+    margin: 0 25px;
+  }
 
-      .touch::last-child {
-        margin-bottom: 0
-      }
+  #footer {
+    margin-top: 00px;
+  }
 
-      .friend-link {
-        font-size: 12px;
-        text-align: right;
-      }
+  .no-icon { display: none }
 
-      .no-icon { display: none }
+  .content {
+    width: 600px;
+  }
+  @media(max-width: 600px) {
+    .content {
+      width: 100%;
+      padding: 10px 5px 10px 5px;
+    }
+    .hide-narrow {
+      display: none;
+    }
+  }
 
-    </style>
-  </head>
-  <body>
+</style>
+{% endblock %}
 
 {% macro time_entry(entry) -%}
 <li>
@@ -78,24 +85,14 @@
   {% if text == 'NA' %}no-icon{% endif %}
   {% if text == 'Fair' %}icon-sun{% endif %}
   {% if text == 'A Few Clouds' %}icon-cloud-sun{% endif %}
-  {% if text == 'Overcast' %}icon-cloud{% endif %}
-  {% if text == 'Mostly Cloudy' %}icon-cloud{% endif %}
+  {% if text == 'Overcast' %}icon-cloud-sun{% endif %}
+  {% if text == 'Mostly Cloudy' %}icon-cloud-sun{% endif %}
   {% if text == 'Partly Cloudy' %}icon-cloud-sun{% endif %}
+  {% if text == 'Lt Rain' %}icon-rain{% endif %}
 {% endmacro %}
 
 
-    <header class="goodrobot-header">
-      <ul class="list-inline">
-        <li><a href="/pages/about">About</a>
-        <li><a href="/">Blog</a>
-        <li><a href="/stream">Links</a>
-        <li><a href="/pages/projects">Projects</a>
-      </ul>
-      <a href="http://goodrobot.net">
-        <img src="http://static.goodrobot.net/gxl/images/goodrobot.png" alt="goodrobot.net">
-      </a>
-    </header>
-
+{% block content %}
     <div class="readable-content content">
       <h2 class="hr-fancy">Lobste.rs</h2>
       <ul class="touch touch-table">
@@ -208,32 +205,38 @@
         </li>
         {% endfor %}
       </ul>
-      <div class="friend-link">
-        <ul class="list-inline" style="float:left">
-          {% for weather in get_weather([
-            (37.91583, -122.03583),
-            (45.52, -122.6819),
-            (43.6167, -116.2),
-            (38.7453, -94.8292)
-          ]) %}
-          <li title="{{ weather.condition() }}"><i class="{{ weather_icon(weather.condition()) }}"></i>{{ weather.temp() }}&deg; in {{ weather.forecast_location() }}
-          {% endfor %}
-        </ul>
-
-        <div style="float:right">
-          Need to monitor some crons? Use <a href="https://cronitor.io/">Cronitor.io</a>
-        </div>
-        <br>
-      </div>
     </div>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-52799217-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-  </body>
-</html>
+    <div class="friend-link">
+      <ul class="list-inline" style="float:left">
+        {% for weather in get_weather([
+          (37.91583, -122.03583),
+          (45.52, -122.6819),
+          (43.6167, -116.2),
+          (38.7453, -94.8292)
+        ]) %}
+        <li title="{{ weather.condition() }}">
+          <i class="{{ weather_icon(weather.condition()) }}"></i>
+          {{ weather.temp() }}&deg; in {{ weather.forecast_location() }}
+        {% endfor %}
+      </ul>
+
+      <div class="hide-narrow" style="float:right">
+         Try <a href="https://cronitor.io/">Cronitor.io</a>
+      </div>
+      <br>
+    </div>
+{% endblock %}
+
+
+{% block javascript %}
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-52799217-1', 'auto');
+  ga('send', 'pageview');
+</script>
+{% endblock %}

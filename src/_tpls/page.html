@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}hello, goodrobot.net{% endblock %}</title>
+    <link href='//fonts.googleapis.com/css?family=Gentium+Basic:400' rel='stylesheet' type='text/css'>
+    <link href='/css/gxl.css' rel='stylesheet' type='text/css'>
+    <link href='/css/code.css' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" type="image/png" href="http://static.goodrobot.net/cdn/favicon.png">
+
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="content-language" content="en" />
+
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <header id="header">
+       <a title="goodrobot.net" href="/">
+        <img alt="goodrobot" src='/images/goodrobot.png'>
+      </a>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer id="footer">
+      <ul class='list-inline'>
+        <li><a href="/">home</a>
+        <li><a href="/stream">links</a>
+        <li><a href="/about.html">about</a>
+    </footer>
+    {% block javascript %}{% endblock %}
+  </body>
+</html>
