@@ -18,6 +18,13 @@ li
 .list-no-bullets
   list-style: none
 
+.list-links
+  padding: 0 6px
+  a, a:link, a:active
+    font-weight: 300
+  li
+    padding: 4px 0
+
 .list-inline
   li
     display: inline
@@ -61,50 +68,79 @@ a:hover
   display: table
   clear: both
 
+.background-basic
+  background-color: #fff
+
+.background-highlight
+  background-color: #389dff
+
+.type-inverse
+  color: #ffd
 
 // boxes
 .box
   box-shadow: 0 1px 2px rgba(0, 0, 0, .3)
   border-radius: 2px
 
+.box-header
+  padding: 4px 6px
+  margin-bottom: 4px
+
+.box-header-technical
+  font-family: 'Menlo', monospace
+  font-size: 1em
+  border-radius: 2px 2px 0px 0px
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .55)
+
+.box-header-actions
+  float: right
+
 .box-thumbnail
   width: 210px
   display: inline-block
 
+.link-alt
+  font-size: 12px
+  display: block
+  color: $fontColor
+  line-height: 1.2em
 
-// touchy lists
-.touch
-  padding: 0
-  margin: 0
-  list-style: none
-  width: 100%
+.link-alt:hover
+  text-decoration: none
 
-  a
-    font-weight: 300
-    padding: .5em 0
+@media(-moz-touch-enabled)
+  .touch
+    padding: 0
+    margin: 0
+    list-style: none
+    width: 100%
+
+    a
+      font-weight: 300
+      padding: .5em 0
 
 
-    span
-      font-size: 12px
-      display: block
-      color: $fontColor
-      line-height: 1.2em
+      span
+        font-size: 12px
+        display: block
+        color: $fontColor
+        line-height: 1.2em
 
-.touch-table
-  display: table
+  .touch-table
+    display: table
 
-  li
-    display: table-row
+    li
+      display: table-row
 
-    & > span
+      & > span
+        display: table-cell
+        vertical-align: middle
+
+    a
       display: table-cell
       vertical-align: middle
 
-  a
-    display: table-cell
-    vertical-align: middle
-
-.touch-list
-  a
-    display: block
-    width: 100%
+  .touch-list
+    a
+      display: block
+      width: 100%
