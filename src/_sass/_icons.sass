@@ -17,7 +17,8 @@ $fa-css-prefix: 'icon'
   -moz-osx-font-smoothing: grayscale;
 
 
-@import "font-awesome/larger"
-@import "font-awesome/fixed-width"
-@import "font-awesome/spinning"
-@import "font-awesome/icons"
+// @import "font-awesome/icons"
+.#{$fa-css-prefix}-github:before { content: $fa-var-github; }
+.#{$fa-css-prefix}-flask:before { content: $fa-var-flask; }
+.#{$fa-css-prefix}-comment:before { content: $fa-var-comment; }
+.#{$fa-css-prefix}-link:before { content: $fa-var-link; }

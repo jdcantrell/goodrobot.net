@@ -59,7 +59,7 @@
     }
   }
 
-  @media(-moz-touch-enabled) {
+  @media(-moz-touch-enabled), (pointer:coarse) {
     .js-link-toggle {
       display: none;
     }
@@ -299,7 +299,6 @@
           (38.7453, -94.8292)
         ]) %}
         <li title="{{ weather.condition() }}">
-          <i class="{{ weather_icon(weather.condition()) }}"></i>
           {{ weather.temp() }}&deg; in {{ weather.forecast_location() }}
         {% endfor %}
       </ul>
