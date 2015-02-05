@@ -64,7 +64,7 @@
   }
 
   @media(-moz-touch-enabled), (pointer:coarse) {
-    .js-link-toggle {
+    .js-link-toggle i {
       display: none;
     }
     a.comment {
@@ -210,8 +210,7 @@
               'http://eli.thegreenplace.net/feed/',
               'http://nedbatchelder.com/blog/rss.xml',
               'http://meyerweb.com/index.php?feed=rss2&scope=summary',
-              'http://www.codeofhonor.com/blog/feed',
-              'http://feeds.feedburner.com/alistapart/main'
+              'http://www.codeofhonor.com/blog/feed'
             ]) %}
             {{ time_entry(entry) }}
           {% endfor %}
@@ -225,7 +224,6 @@
         <ul class="box-body list-links list-no-bullets touch touch-table">
           {% for entry in time_sort([
             'http://feeds.feedburner.com/RockPaperShotgun',
-            'http://gamestorm.tumblr.com/rss',
             'http://feeds.feedburner.com/VenusPatrol',
             'http://feeds.wolfire.com/WolfireGames',
             'http://feeds.feedburner.com/ARandomGnomesRandomLair',
@@ -252,8 +250,7 @@
             'http://magicalgametime.com/rss',
             'http://feeds.feedburner.com/blowatlife',
             'http://simoncottee.blogspot.com/feeds/posts/default',
-            'http://oktotally.tumblr.com/rss',
-            'http://priceonomics.com/latest.rss'
+            'http://oktotally.tumblr.com/rss'
           ]) %}
             {{ time_entry(entry) }}
           {% endfor %}
