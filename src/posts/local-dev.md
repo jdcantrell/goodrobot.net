@@ -6,7 +6,6 @@ tags:
 ---
 
 #Local .dev domains
-
 One of my favorite apps on OSX is Anvil. It easily creates local .dev
 domains for you to serve static content/sites. It also can serve up Rack
 apps if you happen to be developing with ruby and Rack. This comes in
@@ -14,23 +13,17 @@ pretty handy and I wanted something similar in Linux.
 
 Fortunately Linux is more than capable of doing what Anvil does, and
 depending on how you set things up, you're not limited to only ruby as a
-server side language. I've done this both on Fedora and Ubuntu. The
-commands below are for Ubuntu, but replace them with the appropriate
-Fedora commands when needed. So here we go:
+server side language.
 
-First install nginx and dnsmasq:
-* Fedora users probably already have dnsmasq installed
+##Install dependencies
+Install `nginx` and `dnsmasq`. Fedora users may already have dnsmasq
+installed, and both of these you will want to have started on system
+boot.
 
+##Setup dnsmasq
+Create a file called `devtld.conf` in `/etc/dnsmasq.d/` and put this content in:
 
-```
-sudo apt-get nginx dnsmasq
-```
-
-
-Next setup dnsmasq. If you want to make it behave as a
-local dns cache you can follow
-[this guide.](https://help.ubuntu.com/community/Dnsmasq) Either way create a
-file called `devtld.conf` in `/etc/dnsmasq.d/` and put this content in:
+<div class="box code-header">/etc/dnsmasq.d/devtld.conf</div>
 
 ```
 address=/dev/127.0.0.1
@@ -48,24 +41,22 @@ ms
 
 If you get `unknown host pancakes.dev` then you most likely need to
 update your network settings. In GNOME you can use the network manager
-to add 127.0.0.1 and your router's dns (or any other dns). Make sure
-127.0.0.1 is first in order.
+to add 127.0.0.1 and your router's dns (or any other dns).
 
 ##Setup Nginx
-
-Now let's setup nginx. Here's what we want nginx to do for
-us anytime we send a request for a .dev domain:
+We need an vhost config for nginx that will do the following:
 
 1. Extract the first part of the domain and use that to determine what
-   folder to serve content out of
+   folder to serve content out of.
 2. Check if the URI is a file or a directory with an index.html
 3. Otherwise attempt to proxy to a server running on 127.0.0.1:8080
 4. Finally, if the proxy server fails serve a friendly error page
    reminding us to check a few things before we start cursing the
    infernal machines involved in this process.
 
-[rework] So with those goals in mind I came up with this [config
-file](https://gist.github.com/jdcantrell/8028709).
+<div class="box code-header">
+  local_dev.conf <a href="https://gist.github.com/jdcantrell/8028709">gist</a>
+</div>
 
 ```nginx
 upstream app_server {
@@ -107,24 +98,31 @@ server {
 }
 ```
 
-Put this in
-`/etc/nginx/sites-available/local_dev` and then run `sudo ln -s
-/etc/nginx/sites-available/local_dev
-/etc/nginx/sites-enabled/local_dev`. **Be sure to update `$username` in
-the config file!** Finally, restart nginx and then you're nearly done.
+Depending on your linux system you may need to put the above config into
+`/etc/nginx/sites-available` and then sym-link it to
+`/etc/nginx/sites-enabled`. Or it may go in `/etc/nginx/conf.d`. Your
+distribution should have some information on this, but you should be
+able to use what folders exist in `/etc/nginx` as a guide.
+**Be sure to update `$username` in the config file!** Finally, restart
+nginx and then you're nearly done.
 
 ##Setup your ~/.sites folder
 
-Create the follow directories in your home folder:
+The nginx config above reads out the defined user's home directory
+in the .sites directory.
 
 ```
-mkdir ~/.sites mkdir ~/.sites/errors/
+mkdir ~/.sites
+mkdir ~/.sites/errors/
 ```
 
 You can use different directories if you'd like, just be sure to update
 the nginx local_dev config to match. In the `~/.sites/errors/` directory
-copy [this html file](https://gist.github.com/jdcantrell/9320869) into
-it:
+add a simple `502.html` page:
+
+<div class="box code-header">
+  ~/.sites/errors/502.html <a href="https://gist.github.com/jdcantrell/9320869">gist</a>
+</div>
 
 ```html
 <!DOCTYPE html>
@@ -173,10 +171,12 @@ it:
 </html>
 ```
 
-This is the page that lets you know your dev domains are working,
+This is the page that lets you know your .dev domains are working,
 but for whatever reason the particular domain you visited is not.
 
-Now if you visit [http://pancakes.dev](http://pancakes.dev) or any other
+
+##Sym link your project folders
+If you visit [http://pancakes.dev](http://pancakes.dev) or any other
 .dev domain you should see the error page. Here's the final step to
 using this with a project:
 
@@ -189,7 +189,8 @@ Now [http://pancakes.dev](http://pancakes.dev) should give you actual
 content. If you want to use this to develop a non-static site, just fire
 up your dev server on 127.0.0.1:8080 and then visit your domain.
 
-Note: SELinux will prevent nginx from accessing user directories by
+##SELinux settings
+SELinux will prevent nginx from accessing user directories by
 default. On Fedora the easiest way to fix this is to check the selinux
 notifcations and follow the instructions it gives for allowing access.
 
@@ -205,8 +206,59 @@ setsebool -P httpd_can_network_relay 1
 You may need to change permissions on your /home/user folder to allow
 others to read from it.
 
+##Sharing with xip.io
+It is handy to be able to share your local .dev from time to time. An
+easy way to do this is to use a xip.io domain. This domain will echo
+whatever IP address is prepended to it:
+
+```
+pancakes.127.0.0.1.xip.io
+```
+
+will have a DNS response of 127.0.0.1. You can use this to share only on
+your local network or with people external to your network depending on
+which IP you use in the xip.io domain. You will need to setup an
+additional nginx config:
+
+<div class="box code-header">
+  xipio.conf <a href="https://gist.github.com/jdcantrell/8028720">gist</a>
+</div>
+
+```nginx
+upstream xip_app_server {
+  server localhost:8080 fail_timeout=0;
+}
+
+server {
+  listen   80;
+  server_name  "~^(?<base_dir>.+)\.([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)\.xip.io$";
+
+  access_log  /var/log/nginx/xip.access.log  main;
+  error_log  /var/log/nginx/xip.error.log;
+
+  set $username "jd";
+
+  location / {
+    root /home/$username/.sites/$base_dir/;
+    index index.html index.htm;
+    try_files $uri/index.html $uri @app;
+  }
+
+  location @app {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+    proxy_pass http://app_server;
+  }
+}
+```
+
+##Bash Aliases
 Additionally, I use a few bash functions make setting up and using dev domains easier:
-[](https://gist.github.com/jdcantrell/8036482)
+
+<div class="box code-header">
+  .bashrc <a href="https://gist.github.com/jdcantrell/8036482">gist</a>
+</div>
 
 ```bash
 #Local dev site functions

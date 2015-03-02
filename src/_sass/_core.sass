@@ -37,6 +37,25 @@ h1, h2
 
 code, pre
   font-family: $monospace
+  font-size: 15px;
+
+.code-header
+  font-family: $monospace
+  font-size: 15px;
+  background-color: #EEE8D5
+  color: #839496
+  padding-left: 5px
+
+  border-bottom-left-radius: 0 !important
+  border-bottom-right-radius: 0 !important
+
+  a, a:link, a:active, a:visited
+    color: #268BD2
+
+.code-header + .highlight pre, .code-header + pre
+  border-top-left-radius: 0 !important
+  border-top-right-radius: 0 !important
+
 
 
 // Links
@@ -78,7 +97,7 @@ a:hover
   background-color: #389dff
 
 .type-inverse
-  color: #ffd
+  color: #fff
 
 // boxes
 .box
