@@ -3,7 +3,7 @@ import codecs
 import re
 import shutil
 
-from fabric.api import task, local
+from fabric.api import task, local, run, cd
 from fabric.colors import blue, green
 
 from jinja2 import Environment, FileSystemLoader
@@ -14,6 +14,13 @@ import mistune
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
+
+
+@task
+def publish():
+    with cd('./goodrobot.net'):
+        run('git pull origin master')
+        run('fab generate_all')
 
 
 @task
