@@ -34,6 +34,8 @@ def generate_all():
     generate()
     print blue('Generating stream')
     stream()
+    print blue('Generating pic stream')
+    pic()
 
 
 @task
@@ -66,6 +68,8 @@ def dev_build():
     md()
     print blue('Generating stream')
     stream_cache()
+    print blue('Generating pic stream')
+    pic()
 
 
 @task
@@ -76,6 +80,11 @@ def stream_cache():
 @task
 def stream():
     local('ankh src/stream/_stream.html build/stream/index.html --template-paths ./src')
+
+
+@task
+def pic():
+    local('ankh src/stream/_pic.html build/stream/pics.html --template-paths ./src')
 
 
 @task

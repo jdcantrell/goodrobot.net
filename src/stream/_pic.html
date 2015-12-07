@@ -1,0 +1,69 @@
+{% extends "_tpls/page.html" %}
+{% block title %}Things from tumblr{% endblock %}
+
+{% block head %}
+<meta name="viewport" content="width=device-width">
+<style type="text/css">
+
+.content {
+  width: 90%;
+  max-width: 2015px;
+}
+
+.tiles-body {
+  list-style: none;
+}
+
+.tiles li {
+  display: inline-block;
+  width: 24%;
+  max-width:500px;
+  margin-top: 5px;
+}
+
+.tiles img {
+  width: 100%;
+  max-width:500px;
+  vertical-align: middle;
+}
+
+
+
+
+</style>
+{% endblock %}
+
+{% macro pic(entry) -%}
+  {% set entry_images = images(entry.description)|first %}
+  {% if entry_images %}
+    <li>
+      <a href="{{entry.link}}">
+        <img src="{{entry_images}}">
+      </a>
+    </li>
+  {% endif %}
+{% endmacro %}
+
+
+
+{% block content %}
+
+  <div class="readable-content content">
+    <ul class="tiles">
+      {% for entry in time_sort([
+          'http://kidmograph.tumblr.com/rss',
+          'http://1041uuu.tumblr.com/rss',
+          'http://awfulland.tumblr.com/rss',
+          'http://text-mode.tumblr.com/rss',
+          'http://beesandbombs.tumblr.com/rss',
+          ], 5) %}
+        {{ pic(entry) }}
+      {% endfor %}
+    </ul>
+  </div>
+
+{% endblock %}
+
+
+{% block javascript %}
+{% endblock %}
