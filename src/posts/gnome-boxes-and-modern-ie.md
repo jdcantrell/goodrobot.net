@@ -6,6 +6,8 @@ tags:
   - vm
 ---
 
+#Gnome Boxes and Modern.ie
+
 If you need to test Internet Explorer and all you have is a linux
 machine you might be disappointed when you see that
 [modern.ie](http://modern.ie) only offers VirtualBox images for linux.
@@ -25,6 +27,6 @@ you so desire.
 
 Gnome Boxes does not give you a lot of detailed settings to fiddle with.
 For the most part this is fine, but if you find yourself wanting to
-install more Virt-IO drivers such as those found
-[here](https://fedoraproject.org/wiki/Windows_Virtio_Drivers) you will
+install more Virt-IO drivers (such as those found
+[here](https://fedoraproject.org/wiki/Windows_Virtio_Drivers)) you will
 need to install Virtual Machine Manager to actually select the devices.
