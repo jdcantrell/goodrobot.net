@@ -1,9 +1,10 @@
 ---
-title: Local .dev domains
+title: Simple project domains
 date: 2014-11-24
 tags:
   - linux
 ---
+
 
 #Local .dev domains
 One of my favorite apps on OSX is Anvil. It easily creates local .dev
@@ -15,44 +16,40 @@ Fortunately Linux is more than capable of doing what Anvil does, and
 depending on how you set things up, you're not limited to only ruby as a
 server side language.
 
-##Install dependencies
-Install `nginx` and `dnsmasq`. Fedora users may already have dnsmasq
-installed, and both of these you will want to have started on system
-boot.
+This guide will show you how to setup `nginx` to serve static content
+and/or fall back to an app server with custom project domains.
+Originally, this guide described how to actually get local .dev domains
+working, but I've had enough fiddling around dnsmasq every time my linux
+distribution upgrades that I have now settled on the much simpler
+solution relying on a wildcard domain pointing back to 127.0.0.1.
 
-##Setup dnsmasq
-Create a file called `devtld.conf` in `/etc/dnsmasq.d/` and put this content in:
-
-<div class="box code-header">/etc/dnsmasq.d/devtld.conf</div>
-
-```
-address=/dev/127.0.0.1
-```
-
-Now start (or restart) dnsmasq and if you ping any domain that ends in
-.dev you should see `127.0.0.1` as the response IP.
+##Install and enable nginx
+Install `nginx` and start it up on boot. If you have a systemd system,
+you enable it on boot like so:
 
 ```
-~ ping pancakes.dev
-PING pancakes.dev (127.0.0.1) 56(84) bytes of
-data.  64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.014
-ms
+sudo systemctl enable nginx
 ```
 
-If you get `unknown host pancakes.dev` then you most likely need to
-update your network settings. In GNOME you can use the network manager
-to add 127.0.0.1 and your router's dns (or any other dns).
+##Setup nginx
+Now let's setup nginx to figure out what project to serve by our
+incoming url. You have a few choices on domains to use: `lvh.me`,
+`127.0.0.1.xip.io`, `vcap.me`, `sim.bz`
 
-##Setup Nginx
-We need an vhost config for nginx that will do the following:
+The key with all these domains is that when you ask what the IP is for
+any subdomain, it will respond with 127.0.0.1. You could even setup your
+own domain (or a sub-domain) to do the same thing. These examples will
+use `sim.bz`.
+
+Our nginx config will need to do a few things:
 
 1. Extract the first part of the domain and use that to determine what
    folder to serve content out of.
-2. Check if the URI is a file or a directory with an index.html
+2. Check if the URI is a directory with an index.html or a file.
 3. Otherwise attempt to proxy to a server running on 127.0.0.1:8080
 4. Finally, if the proxy server fails serve a friendly error page
-   reminding us to check a few things before we start cursing the
-   infernal machines involved in this process.
+   reminding us to check a few things before we start cursing all the
+   duct tape involved in this process.
 
 <div class="box code-header">
   local_dev.conf <a href="https://gist.github.com/jdcantrell/8028709">gist</a>
@@ -65,7 +62,7 @@ upstream app_server {
 
 server {
   listen 80;
-  server_name "~^(?<base_dir>.+)\.dev$";
+  server_name "~^(?<base_dir>.+)\.sim\.bz$";
   if ($base_dir = "") {
     set $base_dir ".";
   }
@@ -105,6 +102,27 @@ distribution should have some information on this, but you should be
 able to use what folders exist in `/etc/nginx` as a guide.
 **Be sure to update `$username` in the config file!** Finally, restart
 nginx and then you're nearly done.
+
+##SELinux settings
+SELinux will prevent nginx from accessing user directories by
+default. On Fedora the easiest way to fix this is to check the selinux
+notifications and follow the instructions it gives for allowing access.
+
+The commands you'll want will be along these lines:
+
+```
+setsebool -P httpd_enable_homedirs 1
+setsebool -P httpd_read_user_content 1
+setsebool -P httpd_can_network_connect 1
+setsebool -P httpd_can_network_relay 1
+```
+
+You may need to change permissions on your /home/user folder to allow
+nginx to read from it.
+
+```
+chmod 755 ~
+```
 
 ##Setup your ~/.sites folder
 
@@ -171,12 +189,12 @@ add a simple `502.html` page:
 </html>
 ```
 
-This is the page that lets you know your .dev domains are working,
-but for whatever reason the particular domain you visited is not.
+This is the page that lets you know your local server is working, but
+for whatever reason the particular project domain you visited is not.
 
 
 ##Sym link your project folders
-If you visit [http://pancakes.dev](http://pancakes.dev) or any other
+If you visit [http://pancakes.sim.bz](http://pancakes.sim.bz) or any other
 .dev domain you should see the error page. Here's the final step to
 using this with a project:
 
@@ -185,26 +203,14 @@ cd /path/to/project/great/pancakes echo "haay friend" >> index.html
 ln -s ./ ~/.sites/pancakes
 ```
 
-Now [http://pancakes.dev](http://pancakes.dev) should give you actual
+Now [http://pancakes.sim.bz](http://pancakes.sim.bz) should give you actual
 content. If you want to use this to develop a non-static site, just fire
 up your dev server on 127.0.0.1:8080 and then visit your domain.
 
-##SELinux settings
-SELinux will prevent nginx from accessing user directories by
-default. On Fedora the easiest way to fix this is to check the selinux
-notifcations and follow the instructions it gives for allowing access.
-
-The commands you'll want will be along these lines:
-
-```
-setsebool -P httpd_enable_homedirs 1
-setsebool -P httpd_read_user_content 1
-setsebool -P httpd_can_network_connect 1
-setsebool -P httpd_can_network_relay 1
-```
-
-You may need to change permissions on your /home/user folder to allow
-others to read from it.
+Whatever you name the sym link will be the sub-domain you use to access
+your project. In the above case the sym link is the same as the actual
+directory, you could sym link the directory to ~/.sites/waffles and then
+the sub-domain `waffles.sim.bz` would work.
 
 ##Sharing with xip.io
 It is handy to be able to share your local .dev from time to time. An
@@ -212,13 +218,13 @@ easy way to do this is to use a xip.io domain. This domain will echo
 whatever IP address is prepended to it:
 
 ```
-pancakes.127.0.0.1.xip.io
+pancakes.192.168.0.100.xip.io
 ```
 
-will have a DNS response of 127.0.0.1. You can use this to share only on
-your local network or with people external to your network depending on
-which IP you use in the xip.io domain. You will need to setup an
-additional nginx config:
+will have a DNS response of 192.168.0.100. You can use your local IP to
+share only on your local network or with people external to your network
+depending on which IP you use in the xip.io domain. You will need to
+setup an additional nginx config:
 
 <div class="box code-header">
   xipio.conf <a href="https://gist.github.com/jdcantrell/8028720">gist</a>
@@ -253,7 +259,11 @@ server {
 }
 ```
 
-##Bash Aliases
+You will likely need to modify your firewall rules and/or router
+settings to allow outside connections to your machine. Typically, I
+will only enable them when needed.
+
+##Bash aliases
 Additionally, I use a few bash functions make setting up and using dev domains easier:
 
 <div class="box code-header">
@@ -285,9 +295,9 @@ Additionally, I use a few bash functions make setting up and using dev domains e
       if [! -f ~/.sites/$name ]; then
         ln -s $(pwd) ~/.sites/$name
       fi
-      echo "http://$name.dev"
+      echo "http://$name.sim.bz"
     else
-      echo "http://$link.dev"
+      echo "http://$link.sim.bz"
     fi
   }
 
