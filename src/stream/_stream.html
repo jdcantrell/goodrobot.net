@@ -205,6 +205,7 @@
         <ul class="box-body list-links list-no-bullets touch touch-table">
           {% for entry in time_sort([
               'http://lambda-the-ultimate.org/rss.xml',
+              'http://www.littlehart.net/atthekeyboard/feed/',
               'http://feeds.feedburner.com/theendeavour',
               'http://eli.thegreenplace.net/feed/',
               'http://nedbatchelder.com/blog/rss.xml',
@@ -291,7 +292,9 @@
           {% endfor %}
         </ul>
       </div>
+
     </div>
+
 
     <div class="friend-link">
       <ul class="list-inline" style="float:left">
@@ -308,10 +311,25 @@
       <div class="hide-narrow" style="float:right">
          Try <a href="https://cronitor.io/">Cronitor.io</a>
       </div>
-      <br>
-    </div>
-{% endblock %}
 
+      {% set logs = log() %}
+      {% if logs %}
+        <div style="margin:auto;color:rgb(203,77,40);width:100px">&nbsp;Check console :-(</div>
+        <script>
+          console.log('Begin ankh log');
+          console.group();
+        {% for log in logs.split("\n") %}
+          console.log('{{ log|replace("'", "\\'")|safe }}')
+        {% endfor %}
+          console.groupEnd();
+        </script>
+      {% else %}
+         <br>
+      {% endif %}
+    </div>
+
+
+{% endblock %}
 
 {% block javascript %}
 <script>
