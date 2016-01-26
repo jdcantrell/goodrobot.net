@@ -27,22 +27,24 @@
   vertical-align: middle;
 }
 
-
+.offscreen {
+  visibility: hidden;
+}
 
 
 </style>
 {% endblock %}
 
 {% macro pic(entry) -%}
-  {% set entry_images = images(entry.description)|first %}
-  {% if entry_images %}
-    <li>
+  {% set entry_images = images(entry.description)|first -%}
+  {% if entry_images -%}
+    <li class="offscreen">
       <a href="{{entry.link}}">
         <img src="{{entry_images}}">
       </a>
     </li>
-  {% endif %}
-{% endmacro %}
+  {%- endif %}
+{%- endmacro %}
 
 
 
@@ -61,7 +63,10 @@
           'http://pixelartus.com/rss',
           'http://sketch.bysusanlin.com/rss',
           'http://oktotally.tumblr.com/rss',
-          ], 5) %}
+          'http://those-visions-have-no-end.tumblr.com/rss',
+          'http://dvdp.tumblr.com/rss',
+          'http://www.89a.co.uk/rss',
+          ], 10) %}
         {{ pic(entry) }}
       {% endfor %}
     </ul>
@@ -71,4 +76,5 @@
 
 
 {% block javascript %}
+<script src="/static/gifwindow/gifwindow.js" type="text/javascript"></script>
 {% endblock %}
