@@ -36,11 +36,11 @@
 {% endblock %}
 
 {% macro pic(entry) -%}
-  {% set entry_images = images(entry.description)|first -%}
-  {% if entry_images -%}
+  {% set entry_image = images(entry.description)|first -%}
+  {% if entry_image -%}
     <li class="offscreen">
       <a href="{{entry.link}}">
-        <img src="{{entry_images}}">
+        <img data-src="{{entry_image}}">
       </a>
     </li>
   {%- endif %}
