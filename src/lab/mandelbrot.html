@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mandelbrots</title>
+    <link href='//goodrobot.net/css/gxl.css' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="content-language" content="en" />
+
+
+  <link href='//goodrobot.net/css/code.css' rel='stylesheet' type='text/css'>
+
+  </head>
+  <body>
+    <header id="header">
+       <a title="goodrobot.net" href="/">
+        <img alt="goodrobot" src='//goodrobot.net/images/goodrobot.png'>
+      </a>
+    </header>
+
+
+    <div class="content">
+      <h1>Fractal Fun</h1>
+
+      <div>
+        Click and drag to zoom into an area. Right click to reset.
+        <canvas id="canvas" width="750" height="562"></canvas>
+      </div>
+      <div>
+        Iterations:
+        <input checked type="radio" name="iterations" value="200">200</input>
+        <input type="radio" name="iterations" value="500">500</input>
+        <input type="radio" name="iterations" value="1000">1000</input>
+      </div>
+      Real Range: [<span id="real_range">-2.5, 1</span>]
+      <br>Imag Range: [<span id="imaginary_range">-1.25, 1.25</span>]
+      <div>
+        <div>Colors:</div>
+      <input id="colorEnable0" type="checkbox" checked><input id="colorPicker0" type="color" value="#330044">
+      <input id="colorEnable1" type="checkbox" checked><input id="colorPicker1" type="color" value="#220066">
+      <input id="colorEnable2" type="checkbox" checked><input id="colorPicker2" type="color" value="#1133cc">
+      <input id="colorEnable3" type="checkbox" checked><input id="colorPicker3" type="color" value="#33dd00">
+      <input id="colorEnable4" type="checkbox" checked><input id="colorPicker4" type="color" value="#ffda21">
+      <input id="colorEnable5" type="checkbox" checked><input id="colorPicker5" type="color" value="#ff6622">
+      <input id="colorEnable6" type="checkbox" checked><input id="colorPicker6" type="color" value="#d10000">
+      <ul class="list-inline">
+        <li><a href="#vibgyor">VIBGYOR</a>
+        <li><a href="#midnight">Midnight</a>
+      </ul>
+
+
+      <h2>Settings</h2>
+      <p>
+      The number of iterations becomes more important as you zoom in to
+      various areas of the fractal. Increasing the number of iterations
+      can reveal extremely complex structures and show just how
+      intricate the boundaries of the Mandelbrot set are. It of course
+      increases the time it takes to render the mandelbrot.
+      </p>
+
+      <div>
+        <canvas id="low_iteration" width="250" height="185"></canvas><canvas id="med_iteration" width="250" height="185"></canvas><canvas id="high_iteration" width="250" height="185"></canvas>
+      </div>
+
+
+    </div>
+
+    <footer id="footer">
+      <ul class='list-inline'>
+        <li><a href="/">home</a>
+        <li><a href="/log">log</a>
+        <li><a href="/stream">links</a>
+      </ul>
+    </footer>
+
+    <script src='mandelbrot/build/mandelbrot.js'></script>
+  </body>
+</html>
