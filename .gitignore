@@ -5,5 +5,5 @@ stylesheets
 *.pyc
 output
 ankh_cache
-build
+/build
 node_modules
