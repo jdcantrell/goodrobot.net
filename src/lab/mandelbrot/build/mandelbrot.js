@@ -50,7 +50,11 @@
 
 	var _MandelbrotRenderer2 = _interopRequireDefault(_MandelbrotRenderer);
 
-	var _Canvas = __webpack_require__(2);
+	var _RenderWorker = __webpack_require__(4);
+
+	var _RenderWorker2 = _interopRequireDefault(_RenderWorker);
+
+	var _Canvas = __webpack_require__(3);
 
 	var _Canvas2 = _interopRequireDefault(_Canvas);
 
@@ -72,10 +76,8 @@
 	  }).filter(function (rgb) {
 	    return rgb !== null;
 	  });
-	  console.log(rgbs);
-
-	  mandelbrot.setColors.apply(mandelbrot, _toConsumableArray(rgbs));
-	  canvas.setImageData(mandelbrot.render());
+	  mandelbrotWorker.setColors.apply(mandelbrotWorker, _toConsumableArray(rgbs));
+	  render();
 	};
 
 	var setColorSelectors = function setColorSelectors(colors) {
@@ -123,21 +125,45 @@
 	var med = new _Canvas2.default('med_iteration');
 	var high = new _Canvas2.default('high_iteration');
 	var size = low.size();
-	var mbIterations = new _MandelbrotRenderer2.default(size.width, size.height);
-	mbIterations.setColors.apply(mbIterations, roygbiv);
-	mbIterations.setRange({ min: -0.7514434440067275, max: -0.7511886455000608 }, { min: 0.030444671455519778, max: 0.030590555322608327 });
-	low.setImageData(mbIterations.render());
-	mbIterations.setMaxIterations(255);
-	med.setImageData(mbIterations.render());
-	mbIterations.setMaxIterations(1000);
-	high.setImageData(mbIterations.render());
+
+	var lowWorker = new _RenderWorker2.default(size.width, size.height);
+	var medWorker = new _RenderWorker2.default(size.width, size.height);
+	var highWorker = new _RenderWorker2.default(size.width, size.height);
+	lowWorker.setColors.apply(lowWorker, roygbiv);
+	medWorker.setColors.apply(medWorker, roygbiv);
+	highWorker.setColors.apply(highWorker, roygbiv);
+	lowWorker.setRange({ min: -0.7514434440067275, max: -0.7511886455000608 }, { min: 0.030444671455519778, max: 0.030590555322608327 });
+	medWorker.setRange({ min: -0.7514434440067275, max: -0.7511886455000608 }, { min: 0.030444671455519778, max: 0.030590555322608327 });
+	highWorker.setRange({ min: -0.7514434440067275, max: -0.7511886455000608 }, { min: 0.030444671455519778, max: 0.030590555322608327 });
+
+	lowWorker.render().then(function (imageData) {
+	  return low.setImageData(imageData);
+	});
+
+	medWorker.setMaxIterations(255);
+	medWorker.render().then(function (imageData) {
+	  return med.setImageData(imageData);
+	});
+	highWorker.setMaxIterations(1000);
+	highWorker.render().then(function (imageData) {
+	  return high.setImageData(imageData);
+	});
 
 	// interactive
 	var canvas = new _Canvas2.default('canvas');
+	size = canvas.size();
+	var mandelbrotWorker = new _RenderWorker2.default(size.width, size.height);
+	mandelbrotWorker.setColors.apply(mandelbrotWorker, roygbiv);
 
-	var mandelbrot = new _MandelbrotRenderer2.default();
-	mandelbrot.setColors.apply(mandelbrot, roygbiv);
-	canvas.setImageData(mandelbrot.render());
+	function render() {
+	  document.getElementById('rendering').style.display = 'block';
+	  mandelbrotWorker.render().then(function (imageData) {
+	    document.getElementById('rendering').style.display = 'none';
+	    return canvas.setImageData(imageData);
+	  });
+	}
+
+	render();
 
 	var point1;
 	var point2;
@@ -154,25 +180,26 @@
 	canvasEl.addEventListener('mouseup', function (event) {
 	  if (event.button === 0) {
 	    point2 = canvas.getCoordinates(event);
-	    mandelbrot.setRangeFromCoordinates(point1, point2);
+	    mandelbrotWorker.setRangeFromCoordinates(point1, point2);
 	  }
 
 	  if (event.button >= 1) {
-	    mandelbrot.setRange({ min: -2.5, max: 1 }, { min: -1.25, max: 1.25 });
+	    mandelbrotWorker.setRange({ min: -2.5, max: 1 }, { min: -1.25, max: 1.25 });
 	  }
 
-	  document.getElementById('real_range').textContent = mandelbrot.realRange.min + ', ' + mandelbrot.realRange.max;
-	  document.getElementById('imaginary_range').textContent = mandelbrot.imaginaryRange.min + ', ' + mandelbrot.imaginaryRange.max;
+	  //document.getElementById('real_range').textContent = `${mandelbrot.realRange.min}, ${mandelbrot.realRange.max}`;
+	  //document.getElementById('imaginary_range').textContent = `${mandelbrot.imaginaryRange.min}, ${mandelbrot.imaginaryRange.max}`;
 
-	  canvas.setImageData(mandelbrot.render());
+	  render();
+	  ;
 	});
 
 	var radios = [].slice.call(document.querySelectorAll('input[name="iterations"]'));
 	radios.forEach(function (radioEl) {
 	  radioEl.addEventListener('change', function (event) {
 	    if (event.currentTarget.checked) {
-	      mandelbrot.setMaxIterations(event.currentTarget.value);
-	      canvas.setImageData(mandelbrot.render());
+	      mandelbrotWorker.setMaxIterations(event.currentTarget.value);
+	      render();
 	    }
 	  });
 	});
@@ -189,7 +216,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _CanvasBuffer = __webpack_require__(3);
+	var _CanvasBuffer = __webpack_require__(2);
 
 	var _CanvasBuffer2 = _interopRequireDefault(_CanvasBuffer);
 
@@ -309,59 +336,6 @@
 /* 2 */
 /***/ function(module, exports) {
 
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var Canvas = function () {
-	  function Canvas(id) {
-	    _classCallCheck(this, Canvas);
-
-	    this.canvas = document.getElementById(id);
-	    this.context = this.canvas.getContext('2d');
-	  }
-
-	  _createClass(Canvas, [{
-	    key: 'getCoordinates',
-	    value: function getCoordinates(event) {
-	      this.rect = this.canvas.getBoundingClientRect();
-	      var coordinates = {
-	        x: event.clientX - this.rect.left,
-	        y: event.clientY - this.rect.top
-	      };
-	      return coordinates;
-	    }
-	  }, {
-	    key: 'setImageData',
-	    value: function setImageData(data) {
-	      var imageData = new ImageData(data, this.canvas.width, this.canvas.height);
-	      this.context.putImageData(imageData, 0, 0);
-	    }
-	  }, {
-	    key: 'size',
-	    value: function size() {
-	      return {
-	        height: this.canvas.height,
-	        width: this.canvas.width
-	      };
-	    }
-	  }]);
-
-	  return Canvas;
-	}();
-
-	exports.default = Canvas;
-
-/***/ },
-/* 3 */
-/***/ function(module, exports) {
-
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -407,6 +381,146 @@
 	}();
 
 	exports.default = CanvasBuffer;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Canvas = function () {
+	  function Canvas(id) {
+	    _classCallCheck(this, Canvas);
+
+	    this.canvas = document.getElementById(id);
+
+	    this.canvas.style.width = this.canvas.width + 'px';
+	    this.canvas.style.height = this.canvas.height + 'px';
+	    if (window.devicePixelRatio !== 1) {
+	      this.canvas.width = this.canvas.width * window.devicePixelRatio;
+	      this.canvas.height = this.canvas.height * window.devicePixelRatio;
+	    }
+
+	    this.context = this.canvas.getContext('2d');
+	  }
+
+	  _createClass(Canvas, [{
+	    key: 'getCoordinates',
+	    value: function getCoordinates(event) {
+	      this.rect = this.canvas.getBoundingClientRect();
+	      var coordinates = {
+	        x: (event.clientX - this.rect.left) * window.devicePixelRatio,
+	        y: (event.clientY - this.rect.top) * window.devicePixelRatio
+	      };
+	      return coordinates;
+	    }
+	  }, {
+	    key: 'setImageData',
+	    value: function setImageData(data) {
+	      var imageData = new ImageData(data, this.canvas.width, this.canvas.height);
+	      this.context.putImageData(imageData, 0, 0);
+	    }
+	  }, {
+	    key: 'size',
+	    value: function size() {
+	      return {
+	        height: this.canvas.height,
+	        width: this.canvas.width
+	      };
+	    }
+	  }]);
+
+	  return Canvas;
+	}();
+
+	exports.default = Canvas;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var c = 0;
+
+	var RenderWorker = function () {
+	  function RenderWorker() {
+	    var width = arguments.length <= 0 || arguments[0] === undefined ? 750 : arguments[0];
+	    var height = arguments.length <= 1 || arguments[1] === undefined ? 562 : arguments[1];
+
+	    _classCallCheck(this, RenderWorker);
+
+	    this.promises = [];
+	    this.worker = new Worker('mandelbrot/build/mandelbrot_worker.js');
+	    this.worker.postMessage(['init', width, height]);
+
+	    this.maxIterations = 200;
+	    this.realRange = { min: -2.5, max: 1, span: 3.5 };
+	    this.imaginaryRange = { min: -1.25, max: 1.25, span: 2.5 };
+	    this.setColors([0, 5, 0], [0, 105, 255]);
+	  }
+
+	  _createClass(RenderWorker, [{
+	    key: 'setMaxIterations',
+	    value: function setMaxIterations(iterations) {
+	      this.worker.postMessage(['set', 'setMaxIterations', [iterations]]);
+	    }
+	  }, {
+	    key: 'setRangeFromCoordinates',
+	    value: function setRangeFromCoordinates(point1, point2) {
+	      this.worker.postMessage(['set', 'setRangeFromCoordinates', [point1, point2]]);
+	    }
+	  }, {
+	    key: 'setRange',
+	    value: function setRange(realRange, imaginaryRange) {
+	      this.worker.postMessage(['set', 'setRange', [realRange, imaginaryRange]]);
+	    }
+	  }, {
+	    key: 'setColors',
+	    value: function setColors() {
+	      for (var _len = arguments.length, colors = Array(_len), _key = 0; _key < _len; _key++) {
+	        colors[_key] = arguments[_key];
+	      }
+
+	      this.worker.postMessage(['set', 'setColors', colors]);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this = this;
+
+	      var promise = new Promise(function (resolve, reject) {
+	        _this.worker.addEventListener('message', function (e) {
+	          if (e.data[0] === 'render') {
+	            resolve(e.data[1]);
+	          }
+	        });
+	      });
+	      this.worker.postMessage(['render']);
+	      return promise;
+	    }
+	  }]);
+
+	  return RenderWorker;
+	}();
+
+	exports.default = RenderWorker;
 
 /***/ }
 /******/ ]);

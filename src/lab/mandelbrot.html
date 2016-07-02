@@ -10,6 +10,17 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="content-language" content="en" />
 
+    <style>
+      #rendering {
+        color:#fff;
+        text-shadow: 1px 1px 2px #000;
+        position: absolute;
+        margin-left: 5px;
+        z-index: 1;
+        display: none;
+      }
+    </style>
+
 
   <link href='//goodrobot.net/css/code.css' rel='stylesheet' type='text/css'>
 
@@ -27,7 +38,10 @@
 
       <div>
         Click and drag to zoom into an area. Right click to reset.
-        <canvas id="canvas" width="750" height="562"></canvas>
+        <div>
+          <div id="rendering" >Rendering...</div>
+          <canvas id="canvas" width="750" height="562"></canvas>
+        </div>
       </div>
       <div>
         Iterations:

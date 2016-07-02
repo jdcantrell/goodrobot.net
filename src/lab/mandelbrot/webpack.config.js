@@ -1,8 +1,11 @@
 module.exports = {
-  entry: "./src/mandelbrot.js",
+  entry: {
+    mandelbrot: "./src/mandelbrot.js",
+    mandelbrot_worker: "./src/mandelbrot_worker.js",
+  },
   output: {
     path: './build',
-    filename: 'mandelbrot.js',
+    filename: '[name].js',
   },
   module: {
     loaders: [

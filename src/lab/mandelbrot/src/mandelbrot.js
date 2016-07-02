@@ -1,4 +1,5 @@
 import MandelbrotRenderer from './MandelbrotRenderer';
+import RenderWorker from './RenderWorker';
 import Canvas from './Canvas';
 
 const hex2dec = (hex) => parseInt(hex, 16);
@@ -11,10 +12,8 @@ const parseHexColor = (string) => ([
 
 const updateColors = () => {
   const rgbs = colors.map(color => color.disabled ? null : parseHexColor(color.value)).filter(rgb => rgb !== null);
-  console.log(rgbs);
-
-  mandelbrot.setColors(...rgbs);
-  canvas.setImageData(mandelbrot.render());
+  mandelbrotWorker.setColors(...rgbs);
+  render();
 };
 
 const setColorSelectors = (colors) => {
@@ -77,25 +76,49 @@ document.querySelector('a[href="#midnight"]').addEventListener('click', setMidni
 var low = new Canvas('low_iteration');
 var med = new Canvas('med_iteration');
 var high = new Canvas('high_iteration');
-var size = low.size();
-var mbIterations = new MandelbrotRenderer(size.width, size.height);
-mbIterations.setColors(...roygbiv);
-mbIterations.setRange(
+let size = low.size();
+
+const lowWorker = new RenderWorker(size.width, size.height);
+const medWorker = new RenderWorker(size.width, size.height);
+const highWorker = new RenderWorker(size.width, size.height);
+lowWorker.setColors(...roygbiv)
+medWorker.setColors(...roygbiv)
+highWorker.setColors(...roygbiv)
+lowWorker.setRange(
   { min: -0.7514434440067275, max: -0.7511886455000608 },
   { min: 0.030444671455519778, max: 0.030590555322608327 }
 );
-low.setImageData(mbIterations.render());
-mbIterations.setMaxIterations(255);
-med.setImageData(mbIterations.render());
-mbIterations.setMaxIterations(1000);
-high.setImageData(mbIterations.render());
+medWorker.setRange(
+  { min: -0.7514434440067275, max: -0.7511886455000608 },
+  { min: 0.030444671455519778, max: 0.030590555322608327 }
+);
+highWorker.setRange(
+  { min: -0.7514434440067275, max: -0.7511886455000608 },
+  { min: 0.030444671455519778, max: 0.030590555322608327 }
+);
+
+lowWorker.render().then((imageData) => low.setImageData(imageData));
+
+medWorker.setMaxIterations(255);
+medWorker.render().then((imageData) => med.setImageData(imageData));
+highWorker.setMaxIterations(1000);
+highWorker.render().then((imageData) => high.setImageData(imageData));
 
 // interactive
 var canvas = new Canvas('canvas');
+size = canvas.size();
+const mandelbrotWorker = new RenderWorker(size.width, size.height);
+mandelbrotWorker.setColors(...roygbiv);
 
-var mandelbrot = new MandelbrotRenderer();
-mandelbrot.setColors(...roygbiv);
-canvas.setImageData(mandelbrot.render());
+function render() {
+  document.getElementById('rendering').style.display = 'block';
+  mandelbrotWorker.render().then((imageData) => {
+    document.getElementById('rendering').style.display = 'none';
+    return canvas.setImageData(imageData);
+  });
+}
+
+render();
 
 var point1;
 var point2;
@@ -110,28 +133,29 @@ canvasEl.addEventListener('contextmenu', (e) => e.preventDefault());
 canvasEl.addEventListener('mouseup', (event) => {
   if (event.button === 0) {
     point2 = canvas.getCoordinates(event);
-    mandelbrot.setRangeFromCoordinates(point1, point2);
+    mandelbrotWorker.setRangeFromCoordinates(point1, point2);
   }
 
   if (event.button >= 1) {
-    mandelbrot.setRange(
+    mandelbrotWorker.setRange(
       { min: -2.5, max: 1 },
       { min: -1.25, max: 1.25 }
     );
   }
 
-  document.getElementById('real_range').textContent = `${mandelbrot.realRange.min}, ${mandelbrot.realRange.max}`;
-  document.getElementById('imaginary_range').textContent = `${mandelbrot.imaginaryRange.min}, ${mandelbrot.imaginaryRange.max}`;
+  //document.getElementById('real_range').textContent = `${mandelbrot.realRange.min}, ${mandelbrot.realRange.max}`;
+  //document.getElementById('imaginary_range').textContent = `${mandelbrot.imaginaryRange.min}, ${mandelbrot.imaginaryRange.max}`;
 
-  canvas.setImageData(mandelbrot.render());
+  render();
+;
 });
 
 var radios = [].slice.call(document.querySelectorAll('input[name="iterations"]'));
 radios.forEach((radioEl) => {
   radioEl.addEventListener('change', (event) => {
     if (event.currentTarget.checked) {
-      mandelbrot.setMaxIterations(event.currentTarget.value);
-      canvas.setImageData(mandelbrot.render());
+      mandelbrotWorker.setMaxIterations(event.currentTarget.value);
+      render();
     }
   });
 });

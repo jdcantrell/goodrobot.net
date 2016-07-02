@@ -1,20 +1,31 @@
 class Canvas {
   constructor(id) {
     this.canvas = document.getElementById(id);
+
+    this.canvas.style.width = this.canvas.width + 'px';
+    this.canvas.style.height = this.canvas.height + 'px';
+    if (window.devicePixelRatio !== 1) {
+      this.canvas.width = this.canvas.width * window.devicePixelRatio;
+      this.canvas.height = this.canvas.height * window.devicePixelRatio;
+    }
+
+
     this.context = this.canvas.getContext('2d');
+
+
   }
 
   getCoordinates(event) {
     this.rect = this.canvas.getBoundingClientRect();
     var coordinates = {
-      x: event.clientX - this.rect.left,
-      y: event.clientY - this.rect.top
+      x: (event.clientX - this.rect.left) * window.devicePixelRatio,
+      y: (event.clientY - this.rect.top) * window.devicePixelRatio
     };
     return coordinates;
   }
 
   setImageData(data) {
-    var imageData = new ImageData(data, this.canvas.width, this.canvas.height);
+    var imageData = new ImageData(data, this.canvas.width , this.canvas.height);
     this.context.putImageData(imageData, 0, 0);
   }
 
