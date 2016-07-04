@@ -1,6 +1,5 @@
 class Canvas {
   constructor(id) {
-    console.log('what');
     this.canvas = document.getElementById(id);
 
     this.canvas.style.width = this.canvas.width + 'px';
@@ -14,25 +13,28 @@ class Canvas {
   }
 
   getCoordinates(event) {
-    this.rect = this.canvas.getBoundingClientRect();
+    this.boundingRect = this.canvas.getBoundingClientRect();
     var coordinates = {
-      x: (event.clientX - this.rect.left) * window.devicePixelRatio,
-      y: (event.clientY - this.rect.top) * window.devicePixelRatio
+      x: (event.clientX - this.boundingRect.left) * window.devicePixelRatio,
+      y: (event.clientY - this.boundingRect.top) * window.devicePixelRatio
     };
     return coordinates;
   }
 
   setImageData(data) {
     var imageData = new ImageData(data, this.canvas.width , this.canvas.height);
+    this.imageData = imageData;
     this.context.putImageData(imageData, 0, 0);
   }
 
   rect(x, y, width, height) {
-    console.log('uh');
-    this.context.putImageData(imageData, 0, 0);
-    this.context.rect(x, y, width, height);
-    ctx.strokeStyle="white";
-    this.context.stroke();
+    window.requestAnimationFrame(() => {
+      this.context.putImageData(this.imageData, 0, 0);
+      this.context.beginPath();
+      this.context.rect(x, y, width, height);
+      this.context.strokeStyle="white";
+      this.context.stroke();
+    });
   }
 
   size() {

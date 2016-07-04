@@ -57,9 +57,7 @@
 	var renderer = void 0;
 
 	self.addEventListener('message', function (message) {
-	  console.log(message);
 	  var action = message.data[0];
-	  console.log(action);
 
 	  (function () {
 	    switch (action) {

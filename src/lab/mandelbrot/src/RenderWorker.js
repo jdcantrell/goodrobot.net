@@ -1,4 +1,3 @@
-let c = 0;
 class RenderWorker {
 
   constructor(width = 750, height = 562) {
@@ -48,7 +47,6 @@ class RenderWorker {
     if (this.worker) {
       this.worker.terminate();
     }
-    console.log('settings', this.settings);
     this.worker = new Worker('mandelbrot/build/mandelbrot_worker.js');
     this.worker.postMessage(['init', this.width, this.height]);
     let promise = new Promise((resolve, reject) => {

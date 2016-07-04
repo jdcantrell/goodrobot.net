@@ -2,9 +2,7 @@ import MandelbrotRenderer from './MandelbrotRenderer';
 let renderer;
 
 self.addEventListener('message', function(message) {
-  console.log(message);
   const action = message.data[0];
-  console.log(action);
 
   switch (action) {
     case 'init':

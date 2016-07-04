@@ -62,6 +62,97 @@
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+	var roygbiv = [[51, 0, 68], [34, 0, 102], [17, 51, 204], [51, 221, 0], [255, 218, 33], [255, 102, 34], [209, 0, 0]];
+
+	// range examples
+	var range1 = new _Canvas2.default('range1');
+	var range2 = new _Canvas2.default('range2');
+	var range3 = new _Canvas2.default('range3');
+	var size = range1.size();
+	var worker = new _RenderWorker2.default(size.width, size.height);
+
+	worker.setColors.apply(worker, roygbiv);
+	worker.setRange({ min: 0.13096293834092881, max: 0.16214871611870657 }, { min: -0.6711807290350156, max: -0.6401923296986343 });
+
+	worker.render().then(function (imageData) {
+	  range1.setImageData(imageData);
+	}).then(function () {
+	  worker.setRange({ min: -0.7751481726752387, max: -0.7404592837863497 }, { min: -0.10915617500098689, max: -0.08216500214350032 });
+	  return worker.render();
+	}).then(function (imageData) {
+	  range2.setImageData(imageData);
+	}).then(function () {
+	  worker.setRange({ min: -1.4610506914469399, max: -1.4097173581136067 }, { min: -0.025164552047195587, max: 0.02489180488850684 });
+	  return worker.render();
+	}).then(function (imageData) {
+	  range3.setImageData(imageData);
+	});
+
+	// iteration examples
+	var low = new _Canvas2.default('low_iteration');
+	var med = new _Canvas2.default('med_iteration');
+	var high = new _Canvas2.default('high_iteration');
+	size = low.size();
+
+	var itWorker = new _RenderWorker2.default(size.width, size.height);
+	itWorker.setColors.apply(itWorker, roygbiv);
+	itWorker.setRange({ min: -0.7514434440067275, max: -0.7511886455000608 }, { min: 0.030444671455519778, max: 0.030590555322608327 });
+
+	itWorker.render().then(function (imageData) {
+	  low.setImageData(imageData);
+	}).then(function () {
+	  itWorker.setMaxIterations(255);
+	  return itWorker.render();
+	}).then(function (imageData) {
+	  med.setImageData(imageData);
+	}).then(function () {
+	  itWorker.setMaxIterations(1000);
+	  return itWorker.render();
+	}).then(function (imageData) {
+	  high.setImageData(imageData);
+	});
+
+	//color examples
+	var colors1 = new _Canvas2.default('colors1');
+	var colors2 = new _Canvas2.default('colors2');
+	var colors3 = new _Canvas2.default('colors3');
+	size = colors1.size();
+	var cWorker = new _RenderWorker2.default(size.width, size.height);
+
+	cWorker.setColors.apply(cWorker, roygbiv);
+	cWorker.setRange({ min: -1.0751111348470053, max: -0.8557778015136719 }, { min: -0.3913107631045304, max: -0.20002962431449478 });
+
+	cWorker.render().then(function (imageData) {
+	  colors1.setImageData(imageData);
+	}).then(function () {
+	  cWorker.setColors([0, 5, 0], [0, 255, 0], [18, 42, 69]);
+	  return cWorker.render();
+	}).then(function (imageData) {
+	  colors2.setImageData(imageData);
+	}).then(function () {
+	  cWorker.setColors([0, 0, 0], [255, 255, 255]);
+	  return cWorker.render();
+	}).then(function (imageData) {
+	  colors3.setImageData(imageData);
+	});
+
+	// interactive
+	var setVibgyor = function setVibgyor() {
+	  setColorSelectors(['#330044', '#220066', '#1133cc', '#33dd00', '#ffda21', '#ff6622', '#d10000']);
+	};
+
+	var setMidnight = function setMidnight() {
+	  setColorSelectors(['#360033', '#0b8793']);
+	};
+
+	var setFireZebra = function setFireZebra() {
+	  setColorSelectors(['#c21500', '#ffc500', '#c21500', '#ffc500', '#c21500', '#ffc500']);
+	};
+
+	document.querySelector('a[href="#vibgyor"]').addEventListener('click', setVibgyor);
+	document.querySelector('a[href="#midnight"]').addEventListener('click', setMidnight);
+	document.querySelector('a[href="#firezebra"]').addEventListener('click', setFireZebra);
+
 	var hex2dec = function hex2dec(hex) {
 	  return parseInt(hex, 16);
 	};
@@ -69,6 +160,8 @@
 	var parseHexColor = function parseHexColor(string) {
 	  return [hex2dec(string.substr(1, 2)), hex2dec(string.substr(3, 2)), hex2dec(string.substr(5, 2))];
 	};
+
+	var colors = Array.prototype.slice.call(document.querySelectorAll('input[type="color"]'));
 
 	var updateColors = function updateColors() {
 	  var rgbs = colors.map(function (color) {
@@ -79,6 +172,9 @@
 	  mandelbrotWorker.setColors.apply(mandelbrotWorker, _toConsumableArray(rgbs));
 	  render();
 	};
+	colors.forEach(function (input) {
+	  return input.addEventListener('change', updateColors);
+	});
 
 	var setColorSelectors = function setColorSelectors(colors) {
 	  for (var i = 0; i < 7; i += 1) {
@@ -96,60 +192,13 @@
 
 	var colorChecks = Array.prototype.slice.call(document.querySelectorAll('input[id^="colorEnable"]'));
 
-	var colors = Array.prototype.slice.call(document.querySelectorAll('input[type="color"]'));
-
 	var checkChange = function checkChange(event) {
 	  event.target.nextSibling.disabled = !event.target.checked;updateColors();
 	};
 	colorChecks.forEach(function (check) {
 	  return check.addEventListener('change', checkChange);
 	});
-	window.uc = updateColors;
 
-	// color
-	var roygbiv = [[51, 0, 68], [34, 0, 102], [17, 51, 204], [51, 221, 0], [255, 218, 33], [255, 102, 34], [209, 0, 0]];
-
-	var setVibgyor = function setVibgyor() {
-	  setColorSelectors(['#330044', '#220066', '#1133cc', '#33dd00', '#ffda21', '#ff6622', '#d10000']);
-	};
-
-	var setMidnight = function setMidnight() {
-	  setColorSelectors(['#360033', '#0b8793']);
-	};
-
-	document.querySelector('a[href="#vibgyor"]').addEventListener('click', setVibgyor);
-	document.querySelector('a[href="#midnight"]').addEventListener('click', setMidnight);
-
-	// iterations
-	var low = new _Canvas2.default('low_iteration');
-	var med = new _Canvas2.default('med_iteration');
-	var high = new _Canvas2.default('high_iteration');
-	var size = low.size();
-
-	var lowWorker = new _RenderWorker2.default(size.width, size.height);
-	var medWorker = new _RenderWorker2.default(size.width, size.height);
-	var highWorker = new _RenderWorker2.default(size.width, size.height);
-	lowWorker.setColors.apply(lowWorker, roygbiv);
-	medWorker.setColors.apply(medWorker, roygbiv);
-	highWorker.setColors.apply(highWorker, roygbiv);
-	lowWorker.setRange({ min: -0.7514434440067275, max: -0.7511886455000608 }, { min: 0.030444671455519778, max: 0.030590555322608327 });
-	medWorker.setRange({ min: -0.7514434440067275, max: -0.7511886455000608 }, { min: 0.030444671455519778, max: 0.030590555322608327 });
-	highWorker.setRange({ min: -0.7514434440067275, max: -0.7511886455000608 }, { min: 0.030444671455519778, max: 0.030590555322608327 });
-
-	lowWorker.render().then(function (imageData) {
-	  return low.setImageData(imageData);
-	});
-
-	medWorker.setMaxIterations(255);
-	medWorker.render().then(function (imageData) {
-	  return med.setImageData(imageData);
-	});
-	highWorker.setMaxIterations(1000);
-	highWorker.render().then(function (imageData) {
-	  return high.setImageData(imageData);
-	});
-
-	// interactive
 	var canvas = new _Canvas2.default('canvas');
 	size = canvas.size();
 	var mandelbrotWorker = new _RenderWorker2.default(size.width, size.height);
@@ -160,12 +209,11 @@
 	  mandelbrotWorker.render().then(function (imageData) {
 	    document.getElementById('rendering').style.display = 'none';
 
+	    canvas.setImageData(imageData);
+
 	    var realRange = mandelbrotWorker.settings.setRange[0];
 	    var imaginaryRange = mandelbrotWorker.settings.setRange[1];
-	    document.getElementById('real_range').textContent = realRange.min + ', ' + realRange.max;
-	    document.getElementById('imaginary_range').textContent = imaginaryRange.min + ', ' + imaginaryRange.max;
-
-	    return canvas.setImageData(imageData);
+	    document.getElementById('range').innerHTML = '(' + realRange.min + ' + ' + imaginaryRange.min + '<em>i</em>) to (' + realRange.max + ' + ' + imaginaryRange.max + '<em>i</em>)';
 	  });
 	}
 
@@ -184,7 +232,7 @@
 	});
 
 	canvasEl.addEventListener('mousemove', function (event) {
-	  if (event.button === 0 && point1) {
+	  if (event.buttons === 1 && point1) {
 	    var p = canvas.getCoordinates(event);
 
 	    canvas.rect(Math.min(point1.x, p.x), Math.min(point1.y, p.y), Math.max(point1.x, p.x) - Math.min(point1.x, p.x), Math.max(point1.y, p.y) - Math.min(point1.y, p.y));
@@ -393,8 +441,6 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var c = 0;
-
 	var RenderWorker = function () {
 	  function RenderWorker() {
 	    var width = arguments.length <= 0 || arguments[0] === undefined ? 750 : arguments[0];
@@ -454,7 +500,6 @@
 	      if (this.worker) {
 	        this.worker.terminate();
 	      }
-	      console.log('settings', this.settings);
 	      this.worker = new Worker('mandelbrot/build/mandelbrot_worker.js');
 	      this.worker.postMessage(['init', this.width, this.height]);
 	      var promise = new Promise(function (resolve, reject) {
@@ -499,7 +544,6 @@
 	  function Canvas(id) {
 	    _classCallCheck(this, Canvas);
 
-	    console.log('what');
 	    this.canvas = document.getElementById(id);
 
 	    this.canvas.style.width = this.canvas.width + 'px';
@@ -515,10 +559,10 @@
 	  _createClass(Canvas, [{
 	    key: 'getCoordinates',
 	    value: function getCoordinates(event) {
-	      this.rect = this.canvas.getBoundingClientRect();
+	      this.boundingRect = this.canvas.getBoundingClientRect();
 	      var coordinates = {
-	        x: (event.clientX - this.rect.left) * window.devicePixelRatio,
-	        y: (event.clientY - this.rect.top) * window.devicePixelRatio
+	        x: (event.clientX - this.boundingRect.left) * window.devicePixelRatio,
+	        y: (event.clientY - this.boundingRect.top) * window.devicePixelRatio
 	      };
 	      return coordinates;
 	    }
@@ -526,16 +570,21 @@
 	    key: 'setImageData',
 	    value: function setImageData(data) {
 	      var imageData = new ImageData(data, this.canvas.width, this.canvas.height);
+	      this.imageData = imageData;
 	      this.context.putImageData(imageData, 0, 0);
 	    }
 	  }, {
 	    key: 'rect',
 	    value: function rect(x, y, width, height) {
-	      console.log('uh');
-	      this.context.putImageData(imageData, 0, 0);
-	      this.context.rect(x, y, width, height);
-	      ctx.strokeStyle = "white";
-	      this.context.stroke();
+	      var _this = this;
+
+	      window.requestAnimationFrame(function () {
+	        _this.context.putImageData(_this.imageData, 0, 0);
+	        _this.context.beginPath();
+	        _this.context.rect(x, y, width, height);
+	        _this.context.strokeStyle = "white";
+	        _this.context.stroke();
+	      });
 	    }
 	  }, {
 	    key: 'size',
