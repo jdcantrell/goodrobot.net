@@ -22,7 +22,15 @@ class Canvas {
   }
 
   setImageData(data) {
-    var imageData = new ImageData(data, this.canvas.width , this.canvas.height);
+    let imageData;
+    if (ImageData) {
+      imageData = new ImageData(data, this.canvas.width , this.canvas.height);
+    } else { //ie support?
+      imageData = this.context.getImageData(0, 0, this.canvas.width, this.canvas.height);
+      for (var i = 0; i < imageData.length; i += 1) {
+        imageData.data[i] = data[i];
+      }
+    }
     this.imageData = imageData;
     this.context.putImageData(imageData, 0, 0);
   }
