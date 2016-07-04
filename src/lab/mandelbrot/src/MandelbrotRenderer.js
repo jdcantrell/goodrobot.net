@@ -15,22 +15,6 @@ class MandelbrotRenderer {
     this.setColors(...this.colors);
   }
 
-  setRangeFromCoordinates(point1, point2) {
-    if (point1.x === point2.x || point1.y === point2.y) {
-      return;
-    }
-    this.setRange(
-      {
-        min: Math.min(point1.x, point2.x) / this.buffer.width * this.realRange.span + this.realRange.min,
-        max: Math.max(point1.x, point2.x) / this.buffer.width * this.realRange.span + this.realRange.min
-      },
-      {
-        min: Math.min(point1.y, point2.y) / this.buffer.height * this.imaginaryRange.span + this.imaginaryRange.min,
-        max: Math.max(point1.y, point2.y) / this.buffer.height * this.imaginaryRange.span + this.imaginaryRange.min
-      }
-    );
-  }
-
   setRange(realRange, imaginaryRange) {
     this.realRange = realRange;
     this.imaginaryRange = imaginaryRange;

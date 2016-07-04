@@ -1,5 +1,6 @@
 class Canvas {
   constructor(id) {
+    console.log('what');
     this.canvas = document.getElementById(id);
 
     this.canvas.style.width = this.canvas.width + 'px';
@@ -9,10 +10,7 @@ class Canvas {
       this.canvas.height = this.canvas.height * window.devicePixelRatio;
     }
 
-
     this.context = this.canvas.getContext('2d');
-
-
   }
 
   getCoordinates(event) {
@@ -27,6 +25,14 @@ class Canvas {
   setImageData(data) {
     var imageData = new ImageData(data, this.canvas.width , this.canvas.height);
     this.context.putImageData(imageData, 0, 0);
+  }
+
+  rect(x, y, width, height) {
+    console.log('uh');
+    this.context.putImageData(imageData, 0, 0);
+    this.context.rect(x, y, width, height);
+    ctx.strokeStyle="white";
+    this.context.stroke();
   }
 
   size() {

@@ -14,6 +14,7 @@ const updateColors = () => {
   const rgbs = colors.map(color => color.disabled ? null : parseHexColor(color.value)).filter(rgb => rgb !== null);
   mandelbrotWorker.setColors(...rgbs);
   render();
+
 };
 
 const setColorSelectors = (colors) => {
@@ -114,6 +115,13 @@ function render() {
   document.getElementById('rendering').style.display = 'block';
   mandelbrotWorker.render().then((imageData) => {
     document.getElementById('rendering').style.display = 'none';
+
+
+    const realRange = mandelbrotWorker.settings.setRange[0];
+    const imaginaryRange = mandelbrotWorker.settings.setRange[1];
+    document.getElementById('real_range').textContent = `${realRange.min}, ${realRange.max}`;
+    document.getElementById('imaginary_range').textContent = `${imaginaryRange.min}, ${imaginaryRange.max}`;
+
     return canvas.setImageData(imageData);
   });
 }
@@ -130,6 +138,20 @@ canvasEl.addEventListener('mousedown', (event) => {
 });
 canvasEl.addEventListener('contextmenu', (e) => e.preventDefault());
 
+canvasEl.addEventListener('mousemove', (event) => {
+  if (event.button === 0 && point1) {
+    let p = canvas.getCoordinates(event);
+
+    canvas.rect(
+      Math.min(point1.x, p.x),
+      Math.min(point1.y, p.y),
+      Math.max(point1.x, p.x) - Math.min(point1.x, p.x),
+      Math.max(point1.y, p.y) - Math.min(point1.y, p.y)
+    );
+  }
+
+});
+
 canvasEl.addEventListener('mouseup', (event) => {
   if (event.button === 0) {
     point2 = canvas.getCoordinates(event);
@@ -142,9 +164,6 @@ canvasEl.addEventListener('mouseup', (event) => {
       { min: -1.25, max: 1.25 }
     );
   }
-
-  //document.getElementById('real_range').textContent = `${mandelbrot.realRange.min}, ${mandelbrot.realRange.max}`;
-  //document.getElementById('imaginary_range').textContent = `${mandelbrot.imaginaryRange.min}, ${mandelbrot.imaginaryRange.max}`;
 
   render();
 ;

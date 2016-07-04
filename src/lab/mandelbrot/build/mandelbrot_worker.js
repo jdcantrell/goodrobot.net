@@ -57,26 +57,30 @@
 	var renderer = void 0;
 
 	self.addEventListener('message', function (message) {
-	  var _renderer$method;
-
+	  console.log(message);
 	  var action = message.data[0];
+	  console.log(action);
 
-	  switch (action) {
-	    case 'init':
-	      renderer = new _MandelbrotRenderer2.default(message.data[1], message.data[2]);
-	      self.postMessage(['init']);
-	      break;
-	    case 'set':
-	      var method = message.data[1];
-	      var args = message.data[2];
-	      (_renderer$method = renderer[method]).call.apply(_renderer$method, [renderer].concat(_toConsumableArray(args)));
-	      self.postMessage(['set']);
-	      break;
-	    case 'render':
-	      var imageData = renderer.render();
-	      self.postMessage(['render', imageData]);
-	      break;
-	  }
+	  (function () {
+	    switch (action) {
+	      case 'init':
+	        renderer = new _MandelbrotRenderer2.default(message.data[1], message.data[2]);
+	        self.postMessage(['init']);
+	        break;
+	      case 'render':
+	        var settings = message.data[1];
+	        Object.keys(settings).forEach(function (method) {
+	          if (settings[method] !== null) {
+	            var _renderer$method;
+
+	            (_renderer$method = renderer[method]).call.apply(_renderer$method, [renderer].concat(_toConsumableArray(settings[method])));
+	          }
+	        });
+	        var imageData = renderer.render();
+	        self.postMessage(['render', imageData, [renderer.realRange, renderer.imaginaryRange]]);
+	        break;
+	    }
+	  })();
 	}, false);
 
 /***/ },
@@ -120,20 +124,6 @@
 	    value: function setMaxIterations(iterations) {
 	      this.maxIterations = iterations;
 	      this.setColors.apply(this, _toConsumableArray(this.colors));
-	    }
-	  }, {
-	    key: 'setRangeFromCoordinates',
-	    value: function setRangeFromCoordinates(point1, point2) {
-	      if (point1.x === point2.x || point1.y === point2.y) {
-	        return;
-	      }
-	      this.setRange({
-	        min: Math.min(point1.x, point2.x) / this.buffer.width * this.realRange.span + this.realRange.min,
-	        max: Math.max(point1.x, point2.x) / this.buffer.width * this.realRange.span + this.realRange.min
-	      }, {
-	        min: Math.min(point1.y, point2.y) / this.buffer.height * this.imaginaryRange.span + this.imaginaryRange.min,
-	        max: Math.max(point1.y, point2.y) / this.buffer.height * this.imaginaryRange.span + this.imaginaryRange.min
-	      });
 	    }
 	  }, {
 	    key: 'setRange',

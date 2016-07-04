@@ -50,11 +50,11 @@
 
 	var _MandelbrotRenderer2 = _interopRequireDefault(_MandelbrotRenderer);
 
-	var _RenderWorker = __webpack_require__(4);
+	var _RenderWorker = __webpack_require__(3);
 
 	var _RenderWorker2 = _interopRequireDefault(_RenderWorker);
 
-	var _Canvas = __webpack_require__(3);
+	var _Canvas = __webpack_require__(4);
 
 	var _Canvas2 = _interopRequireDefault(_Canvas);
 
@@ -159,6 +159,12 @@
 	  document.getElementById('rendering').style.display = 'block';
 	  mandelbrotWorker.render().then(function (imageData) {
 	    document.getElementById('rendering').style.display = 'none';
+
+	    var realRange = mandelbrotWorker.settings.setRange[0];
+	    var imaginaryRange = mandelbrotWorker.settings.setRange[1];
+	    document.getElementById('real_range').textContent = realRange.min + ', ' + realRange.max;
+	    document.getElementById('imaginary_range').textContent = imaginaryRange.min + ', ' + imaginaryRange.max;
+
 	    return canvas.setImageData(imageData);
 	  });
 	}
@@ -177,6 +183,14 @@
 	  return e.preventDefault();
 	});
 
+	canvasEl.addEventListener('mousemove', function (event) {
+	  if (event.button === 0 && point1) {
+	    var p = canvas.getCoordinates(event);
+
+	    canvas.rect(Math.min(point1.x, p.x), Math.min(point1.y, p.y), Math.max(point1.x, p.x) - Math.min(point1.x, p.x), Math.max(point1.y, p.y) - Math.min(point1.y, p.y));
+	  }
+	});
+
 	canvasEl.addEventListener('mouseup', function (event) {
 	  if (event.button === 0) {
 	    point2 = canvas.getCoordinates(event);
@@ -186,9 +200,6 @@
 	  if (event.button >= 1) {
 	    mandelbrotWorker.setRange({ min: -2.5, max: 1 }, { min: -1.25, max: 1.25 });
 	  }
-
-	  //document.getElementById('real_range').textContent = `${mandelbrot.realRange.min}, ${mandelbrot.realRange.max}`;
-	  //document.getElementById('imaginary_range').textContent = `${mandelbrot.imaginaryRange.min}, ${mandelbrot.imaginaryRange.max}`;
 
 	  render();
 	  ;
@@ -245,20 +256,6 @@
 	    value: function setMaxIterations(iterations) {
 	      this.maxIterations = iterations;
 	      this.setColors.apply(this, _toConsumableArray(this.colors));
-	    }
-	  }, {
-	    key: 'setRangeFromCoordinates',
-	    value: function setRangeFromCoordinates(point1, point2) {
-	      if (point1.x === point2.x || point1.y === point2.y) {
-	        return;
-	      }
-	      this.setRange({
-	        min: Math.min(point1.x, point2.x) / this.buffer.width * this.realRange.span + this.realRange.min,
-	        max: Math.max(point1.x, point2.x) / this.buffer.width * this.realRange.span + this.realRange.min
-	      }, {
-	        min: Math.min(point1.y, point2.y) / this.buffer.height * this.imaginaryRange.span + this.imaginaryRange.min,
-	        max: Math.max(point1.y, point2.y) / this.buffer.height * this.imaginaryRange.span + this.imaginaryRange.min
-	      });
 	    }
 	  }, {
 	    key: 'setRange',
@@ -396,10 +393,113 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+	var c = 0;
+
+	var RenderWorker = function () {
+	  function RenderWorker() {
+	    var width = arguments.length <= 0 || arguments[0] === undefined ? 750 : arguments[0];
+	    var height = arguments.length <= 1 || arguments[1] === undefined ? 562 : arguments[1];
+
+	    _classCallCheck(this, RenderWorker);
+
+	    this.width = width;
+	    this.height = height;
+	    this.settings = {
+	      setMaxIterations: [200],
+	      setRange: [{ min: -2.5, max: 1, span: 3.5 }, { min: -1.25, max: 1.25, span: 2.5 }],
+	      setColors: [[0, 5, 0], [0, 105, 255]]
+	    };
+	  }
+
+	  _createClass(RenderWorker, [{
+	    key: 'setMaxIterations',
+	    value: function setMaxIterations(iterations) {
+	      this.settings.setMaxIterations = [iterations];
+	    }
+	  }, {
+	    key: 'setRangeFromCoordinates',
+	    value: function setRangeFromCoordinates(point1, point2) {
+	      if (point1.x === point2.x || point1.y === point2.y) {
+	        return;
+	      }
+	      var realRange = this.settings.setRange[0];
+	      var imaginaryRange = this.settings.setRange[1];
+	      this.setRange({
+	        min: Math.min(point1.x, point2.x) / this.width * realRange.span + realRange.min,
+	        max: Math.max(point1.x, point2.x) / this.width * realRange.span + realRange.min
+	      }, {
+	        min: Math.min(point1.y, point2.y) / this.height * imaginaryRange.span + imaginaryRange.min,
+	        max: Math.max(point1.y, point2.y) / this.height * imaginaryRange.span + imaginaryRange.min
+	      });
+	    }
+	  }, {
+	    key: 'setRange',
+	    value: function setRange(realRange, imaginaryRange) {
+	      this.settings.setRange = [realRange, imaginaryRange];
+	    }
+	  }, {
+	    key: 'setColors',
+	    value: function setColors() {
+	      for (var _len = arguments.length, colors = Array(_len), _key = 0; _key < _len; _key++) {
+	        colors[_key] = arguments[_key];
+	      }
+
+	      this.settings.setColors = colors;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this = this;
+
+	      if (this.worker) {
+	        this.worker.terminate();
+	      }
+	      console.log('settings', this.settings);
+	      this.worker = new Worker('mandelbrot/build/mandelbrot_worker.js');
+	      this.worker.postMessage(['init', this.width, this.height]);
+	      var promise = new Promise(function (resolve, reject) {
+	        _this.worker.addEventListener('message', function (e) {
+	          if (e.data[0] === 'render') {
+	            if (e.data[1].length) {
+	              resolve(e.data[1]);
+	              _this.settings.setRange = e.data[2];
+	            } else {
+	              reject();
+	            }
+
+	            _this.worker.terminate();
+	          }
+	        });
+	      });
+	      this.worker.postMessage(['render', this.settings]);
+	      return promise;
+	    }
+	  }]);
+
+	  return RenderWorker;
+	}();
+
+	exports.default = RenderWorker;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 	var Canvas = function () {
 	  function Canvas(id) {
 	    _classCallCheck(this, Canvas);
 
+	    console.log('what');
 	    this.canvas = document.getElementById(id);
 
 	    this.canvas.style.width = this.canvas.width + 'px';
@@ -429,6 +529,15 @@
 	      this.context.putImageData(imageData, 0, 0);
 	    }
 	  }, {
+	    key: 'rect',
+	    value: function rect(x, y, width, height) {
+	      console.log('uh');
+	      this.context.putImageData(imageData, 0, 0);
+	      this.context.rect(x, y, width, height);
+	      ctx.strokeStyle = "white";
+	      this.context.stroke();
+	    }
+	  }, {
 	    key: 'size',
 	    value: function size() {
 	      return {
@@ -442,85 +551,6 @@
 	}();
 
 	exports.default = Canvas;
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var c = 0;
-
-	var RenderWorker = function () {
-	  function RenderWorker() {
-	    var width = arguments.length <= 0 || arguments[0] === undefined ? 750 : arguments[0];
-	    var height = arguments.length <= 1 || arguments[1] === undefined ? 562 : arguments[1];
-
-	    _classCallCheck(this, RenderWorker);
-
-	    this.promises = [];
-	    this.worker = new Worker('mandelbrot/build/mandelbrot_worker.js');
-	    this.worker.postMessage(['init', width, height]);
-
-	    this.maxIterations = 200;
-	    this.realRange = { min: -2.5, max: 1, span: 3.5 };
-	    this.imaginaryRange = { min: -1.25, max: 1.25, span: 2.5 };
-	    this.setColors([0, 5, 0], [0, 105, 255]);
-	  }
-
-	  _createClass(RenderWorker, [{
-	    key: 'setMaxIterations',
-	    value: function setMaxIterations(iterations) {
-	      this.worker.postMessage(['set', 'setMaxIterations', [iterations]]);
-	    }
-	  }, {
-	    key: 'setRangeFromCoordinates',
-	    value: function setRangeFromCoordinates(point1, point2) {
-	      this.worker.postMessage(['set', 'setRangeFromCoordinates', [point1, point2]]);
-	    }
-	  }, {
-	    key: 'setRange',
-	    value: function setRange(realRange, imaginaryRange) {
-	      this.worker.postMessage(['set', 'setRange', [realRange, imaginaryRange]]);
-	    }
-	  }, {
-	    key: 'setColors',
-	    value: function setColors() {
-	      for (var _len = arguments.length, colors = Array(_len), _key = 0; _key < _len; _key++) {
-	        colors[_key] = arguments[_key];
-	      }
-
-	      this.worker.postMessage(['set', 'setColors', colors]);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this = this;
-
-	      var promise = new Promise(function (resolve, reject) {
-	        _this.worker.addEventListener('message', function (e) {
-	          if (e.data[0] === 'render') {
-	            resolve(e.data[1]);
-	          }
-	        });
-	      });
-	      this.worker.postMessage(['render']);
-	      return promise;
-	    }
-	  }]);
-
-	  return RenderWorker;
-	}();
-
-	exports.default = RenderWorker;
 
 /***/ }
 /******/ ]);
