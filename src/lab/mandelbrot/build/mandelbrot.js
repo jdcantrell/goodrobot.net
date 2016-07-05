@@ -569,7 +569,8 @@
 	  }, {
 	    key: 'setImageData',
 	    value: function setImageData(data) {
-	      var imageData = new ImageData(data, this.canvas.width, this.canvas.height);
+	      var imageData = this.context.getImageData(0, 0, this.canvas.width, this.canvas.height);
+	      imageData.data.set(data);
 	      this.imageData = imageData;
 	      this.context.putImageData(imageData, 0, 0);
 	    }
