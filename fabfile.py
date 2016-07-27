@@ -3,7 +3,7 @@ import codecs
 import re
 import shutil
 
-from fabric.api import task, local, run, cd
+from fabric.api import task, local, run, cd, lcd
 from fabric.colors import blue, green
 
 from jinja2 import Environment, FileSystemLoader
@@ -85,6 +85,17 @@ def stream():
 @task
 def pic():
     local('ankh src/stream/_pic.html build/stream/pics.html --template-paths ./src')
+
+@task
+def link_site(destination='./test'):
+    local('rm %s/*' % destination)
+    local('mkdir -p %s' % destination)
+    local('ln -s ./build/* %s' % destination)
+    with lcd(destination):
+        local('ln -s ~/apps/gogs/public ./git')
+        local('ln -s ~/apps/miu ./miu')
+        local('ln -s ~/apps/goodrobot-ghost ./log')
+        local('ln -s /srv/http/static ./static')
 
 
 @task
