@@ -28,6 +28,10 @@ def watch():
     print green('Watching ./src for changes')
     local('watchmedo shell-command -p "./src/*" -R -c "fab generate"')
 
+@task
+def deploy():
+    generate_all()
+    link_site('/srv/http/goodrobot')
 
 @task
 def generate_all():
@@ -88,9 +92,9 @@ def pic():
 
 @task
 def link_site(destination='./test'):
-    local('rm -f %s/*' % destination)
     local('mkdir -p %s' % destination)
-    local('ln -s ./build/* %s' % destination)
+    local('rm -f %s/*' % destination)
+    local('ln -sr ./build/* %s' % destination)
     with lcd(destination):
         local('ln -s ~/apps/gogs/public ./git')
         local('ln -s ~/apps/miu ./miu')
