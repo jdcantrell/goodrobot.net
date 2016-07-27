@@ -88,7 +88,7 @@ def pic():
 
 @task
 def link_site(destination='./test'):
-    local('rm %s/*' % destination)
+    local('rm -f %s/*' % destination)
     local('mkdir -p %s' % destination)
     local('ln -s ./build/* %s' % destination)
     with lcd(destination):
