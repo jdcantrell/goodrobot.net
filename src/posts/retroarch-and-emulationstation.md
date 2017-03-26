@@ -50,7 +50,7 @@ EmulationStation is slightly more work since you currently need to patch
 the source. Anyhow, first install the dependencies:
 
 ```bash
-dnf install cmake freeimage-devel boost-devel eigen3-devel lubcurl-devel
+dnf install cmake freeimage-devel boost-devel eigen3-devel libcurl-devel
 ```
 
 Clone the source and patch:
