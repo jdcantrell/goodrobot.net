@@ -26,7 +26,7 @@ Install dependencies:
 
 
 ```bash
-dnf install make automake gcc gcc-c++ kernel-devel mesa-libEGL-devel libv4l-devel libxkbcommon-devel mesa-libgbm-devel zlib-devel freetype-devel libxml2-devel ffmpeg-devel SDL2-devel SDL-devel perl-X11-Protocol perl-Net-DBus pulseaudio-libs-devel openal-soft-devel libusb-devel
+dnf install make automake gcc gcc-c++ kernel-devel mesa-libEGL-devel libv4l-devel libxkbcommon-devel mesa-libgbm-devel zlib-devel freetype-devel libxml2-devel ffmpeg-devel SDL2-devel SDL-devel perl-X11-Protocol perl-Net-DBus pulseaudio-libs-devel openal-soft-devel libusb-devel libXinerama-devel
 ```
 
 The guide adds Cg and libCg but I was unable to find packages for those
