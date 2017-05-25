@@ -11,6 +11,43 @@
         margin: auto;
         display: block;
       }
+
+      .matrix {
+        display: inline-block;
+        border-width: 2px ;
+        border-style: solid;
+      }
+
+      .m2x2 {
+        border-image: linear-gradient(
+        to right,
+        black 10%,
+        white 10%,
+        white 90%,
+        black 90%
+        ) 10;
+      }
+      .m2x1 {
+        border-image: linear-gradient(
+        to right,
+        black 20%,
+        white 20%,
+        white 80%,
+        black 80%
+        ) 10;
+      }
+      .row {
+        display: flex;
+      }
+      input {
+        flex: 1;
+        max-width: 9em;
+        text-align: right;
+        margin: 5px;
+        border: none;
+        border-bottom: solid 2px rgba(0,0,0,.3);
+        background-color: transparent;
+      }
     </style>
 
   </head>
@@ -30,6 +67,7 @@
         <li><button id="tree">A Tree</button>
       </ul>
     </div>
+    <!--
     <p> This is still a work in progress. Here are a few things left to be done:</p>
     <ul>
       <li>Add text about what this is
@@ -38,136 +76,161 @@
       <li>Fix rendering issues
       <li>Play with color
     </ul>
+    -->
 
-      <!--
-      <table>
-        <thead>
-          <tr>
-            <th>Probability</th>
-            <th>Transform</th>
-            <th>Translate</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1%</td>
-            <td>0, 0<br>0, 0.16</td>
-            <td>0, 0</td>
-          </tr>
-          <tr>
-            <td>85%</td>
-            <td>0.85, 0.04<br>-0.04, 0.85</td>
-            <td>0, 1.6</td>
-          </tr>
-          <tr>
-            <td>7%</td>
-            <td>0.2, -0.26<br>0.23, 0.22</td>
-            <td>0, 1.6</td>
-          </tr>
-          <tr>
-            <td>7%</td>
-            <td>-0.15, 0.28<br>0.26, 0.24</td>
-            <td>0, 0.44</td>
-          </tr>
-        </tbody>
-      </table>
-      -->
-    </div>
-    <script src="barnsley.js"></script>
-    <script>
-
-      render({
-        viewport: { x1: -2.2, x2: 2.7, y1: 0, y2: 10 },
-        ifs: ifs([
-          { p: 1, transform: [ 0, 0, 0, 0.16 ], translate: [ 0, 0 ] },
+      <div id="functions">
+        <table>
+          <thead>
+            <tr>
+              <th>Probability</th>
+              <th>Transform</th>
+              <th>Translate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="f in ifs">
+              <td>
+                <input type="text" v-model="f.p" />%
+                </td>
+              <td>
+                <div class="matrix m2x2">
+                  <div class="row">
+                    <input type="text" v-model="f.transform[0]" />
+                    <input type="text" v-model="f.transform[1]" />
+                  </div>
+                  <div class="row">
+                    <input type="text" v-model="f.transform[2]" />
+                    <input type="text" v-model="f.transform[3]" />
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="matrix m2x1">
+                  <div class="row">
+                    <input type="text" v-model="f.translate[0]" />
+                  </div>
+                  <div class="row">
+                    <input type="text" v-model="f.translate[1]" />
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table> </div> </div> <script src="//unpkg.com/vue"></script> <script src="canvas.js"></script> <script src="ifs.js"></script> <script> var barnsley ={ viewport: { x1: -2.2, x2: 2.7, y1: 0, y2: 10 }, ifs: [ { p: 1, transform: [ 0, 0, 0, 0.16 ], translate: [ 0, 0 ] },
           { p: 85, transform: [ 0.85, 0.04, -0.04, 0.85 ], translate: [ 0, 1.6 ] },
           { p: 7, transform: [ 0.2, -0.26, 0.23, 0.22 ], translate: [ 0, 1.6 ] },
           { p: 7, transform: [ -0.15, 0.28, 0.26, 0.24 ], translate: [ 0, 0.44 ] }
-        ])
+        ]
+      };
+
+      var app = new Vue({
+        el: '#functions',
+        data: barnsley,
+        watch: {
+          viewport: function (viewport) {
+            this.render();
+          },
+          ifs: function (ifs) {
+          }
+        },
+        updated: function () {
+            this.render();
+        },
+        methods: {
+          render: function () {
+            console.log('render');
+            render({
+              viewport: this.viewport,
+              ifs: ifs(this.ifs)
+            });
+          }
+        }
       });
 
+      app.render()
+
       document.getElementById('barnsley').addEventListener('click', () => {
-        render({
+        Object.assign(app.$data, {
           viewport: { x1: -2.2, x2: 2.7, y1: 0, y2: 10 },
-          ifs: ifs([
+          ifs: [
             { p: 1, transform: [ 0, 0, 0, 0.16 ], translate: [ 0, 0 ] },
             { p: 85, transform: [ 0.85, 0.04, -0.04, 0.85 ], translate: [ 0, 1.6 ] },
             { p: 7, transform: [ 0.2, -0.26, 0.23, 0.22 ], translate: [ 0, 1.6 ] },
             { p: 7, transform: [ -0.15, 0.28, 0.26, 0.24 ], translate: [ 0, 0.44 ] }
-          ])
+          ]
         });
       });
 
       document.getElementById('sierpinski').addEventListener('click', () => {
-        render({
+        Object.assign(app.$data, {
           viewport: { x1: 0, x2: 1, y1: 0, y2: 1 },
-          ifs: ifs([
+          ifs: [
             { p: 33, transform: [ -0.25, 0.43301270189, -0.43301270189, -0.25 ], translate: [ 0.25, 0.43301270189 ] },
             { p: 34, transform: [ 0.5, 0, 0, 0.5 ], translate: [ 0.25, 0.43301270189 ] },
             { p: 33, transform: [ -0.25, -0.43301270189, 0.43301270189, -0.25 ], translate: [ 1, 0 ] },
-          ])
+          ]
         });
       });
 
       document.getElementById('pentigre').addEventListener('click', () => {
-        render({
+        Object.assign(app.$data, {
           viewport: { x1: -0.1, x2: 1.1, y1: -0.3, y2: 1 },
-          ifs: ifs([
+          ifs: [
             { p:16, transform: [ 0.309, -0.225, 0.225, 0.309 ], translate: [ 0, 0 ] },
             { p:16, transform: [ -0.118, -0.363, 0.363, -0.118 ], translate: [ 0.309, 0.225 ] },
             { p:16, transform: [ 0.309, 0.225, -0.225, 0.309 ], translate: [ 0.191, 0.588 ] },
             { p:16, transform: [ -0.118, 0.363, -0.363, -0.118 ], translate: [ 0.5, 0.363 ] },
             { p:16, transform: [ 0.309, 0.225, -0.225, 0.309 ], translate: [ 0.382, 0 ] },
             { p:16, transform: [ 0.309, -0.225, 0.225, 0.309 ], translate: [ 0.691, -0.225 ] },
-          ])
+          ]
         });
       });
 
       document.getElementById('christmas').addEventListener('click', () => {
-        render({
+        Object.assign(app.$data, {
           viewport: { x1: 0, x2: 1, y1: 0, y2: 1 },
-          ifs: ifs([
+          ifs: [
             { p: 33, transform: [ 0, -0.5, 0.5, 0 ], translate: [ 0.5, 0 ] },
             { p: 33, transform: [ 0, 0.5, -0.5, 0 ], translate: [ 0.5, 0.5 ] },
             { p: 34, transform: [ 0.5, 0, 0, 0.5 ], translate: [ 0.25, 0.5 ] },
-          ])
+          ]
         });
       });
 
       document.getElementById('dragon').addEventListener('click', () => {
-        render({
+        Object.assign(app.$data, {
           viewport: { x1: 0, x2: 1, y1: 0, y2: 1 },
-          ifs: ifs([
+          ifs: [
             { p: 33, transform: [0, 0.577, -0.577, 0 ], translate: [ 0.0951, 0.5893 ] },
             { p: 33, transform: [0, 0.577, -0.577, 0 ], translate: [ 0.4413, 0.7893 ] },
             { p: 34, transform: [0, 0.577, -0.577, 0 ], translate: [ 0.0952, 0.9893 ] },
-          ])
+          ]
         });
       });
 
       document.getElementById('crystal').addEventListener('click', () => {
-        render({
+        Object.assign(app.$data, {
           viewport: { x1: 0, x2: 1, y1: 0, y2: 1 },
-          ifs: ifs([
+          ifs: [
             { p: 20, transform: [ 0.383, 0, 0, 0.383 ], translate: [ 0.3072, 0.619 ] },
             { p: 20, transform: [ 0.383, 0, 0, 0.383 ], translate: [ 0.6033, 0.4044 ] },
             { p: 20, transform: [ 0.383, 0, 0, 0.383 ], translate: [ 0.0139, 0.4044 ] },
             { p: 20, transform: [ 0.383, 0, 0, 0.383 ], translate: [ 0.1253, 0.0595 ] },
             { p: 20, transform: [ 0.383, 0, 0, 0.383 ], translate: [ 0.492, 0.0595 ] },
-          ])
+          ]
         });
       });
 
       document.getElementById('tree').addEventListener('click', () => {
-        render({
+        Object.assign(app.$data, {
           viewport: { x1: 0, x2: 1, y1: 0, y2: 1 },
-          ifs: ifs([
+          ifs: [
             { p: 20, transform: [ 0.195, -0.488, 0.344, 0.443 ], translate: [ 0.4431, 0.2452 ] },
             { p: 20, transform: [ 0.462, 0.414, -0.252, 0.361 ], translate: [ 0.2511, 0.5692 ] },
             { p: 20, transform: [ -0.058, -0.07, 0.453, -0.111 ], translate: [ 0.5976, 0.0969 ] },
             { p: 20, transform: [ -0.035, 0.07, -0.469, -0.022 ], translate: [ 0.4884, 0.5069 ] },
             { p: 20, transform: [ -0.637, 0, 0, 0.501 ], translate: [ 0.8662, 0.2513 ] },
-          ])
+          ]
         });
       });
 
