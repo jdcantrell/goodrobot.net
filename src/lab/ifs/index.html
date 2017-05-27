@@ -4,9 +4,29 @@
     <title>Iterated Function Systems</title>
     <link rel="stylesheet" type="text/css" href="mono.css" />
     <style>
+      /* theme overrides */
       body {
-        background-color: #ffe;
+        background-color: #2e2a31;
+        color: #bcbabe;
       }
+
+      input {
+        color: #bcbabe;
+      }
+
+      h1 { font-weight: normal; }
+
+      button {
+        border-color: #bcbabe;
+        color: #bcbabe;
+        background-color: #342f38;
+      }
+      button:hover {
+        color: #bcbabe;
+        background-color: #3c3641;
+      }
+
+      /* custom */
       canvas {
         margin: auto;
         display: block;
@@ -21,19 +41,19 @@
       .m2x2 {
         border-image: linear-gradient(
         to right,
-        black 10%,
-        white 10%,
-        white 90%,
-        black 90%
+        #bcbabe 5%,
+        #2e2a31 5%,
+        #2e2a31 95%,
+        #bcbabe 95%
         ) 10;
       }
       .m2x1 {
         border-image: linear-gradient(
         to right,
-        black 20%,
-        white 20%,
-        white 80%,
-        black 80%
+        #bcbabe 10%,
+        #2e2a31 10%,
+        #2e2a31 90%,
+        #bcbabe 90%
         ) 10;
       }
       .row {
@@ -45,7 +65,7 @@
         text-align: right;
         margin: 5px;
         border: none;
-        border-bottom: solid 2px rgba(0,0,0,.3);
+        border-bottom: solid 2px rgba(188, 186, 190,.3);
         background-color: transparent;
       }
     </style>
@@ -56,27 +76,19 @@
       <h1>Iterated Function Systems</h1>
       <canvas id="canvas" width="700" height="700"></canvas>
       <br>
-      <div class="align-center">
-      <ul class="list-inline">
-        <li><button id="barnsley">Barnsley</button>
-        <li><button id="sierpinski">Sierpinski</button>
-        <li><button id="pentigre">Pentigre</button>
-        <li><button id="christmas">Twin Christmas Tree</button>
-        <li><button id="dragon">Dragon</button>
-        <li><button id="crystal">Crystal</button>
-        <li><button id="tree">A Tree</button>
-      </ul>
-    </div>
-    <!--
-    <p> This is still a work in progress. Here are a few things left to be done:</p>
-    <ul>
-      <li>Add text about what this is
-      <li>Add editable table showing list of affine functions
-      <li>Add viewport setting
-      <li>Fix rendering issues
-      <li>Play with color
-    </ul>
-    -->
+        <div class="align-center">
+        <ul class="list-inline">
+          <li><button id="barnsley">Barnsley</button>
+          <li><button id="sierpinski">Sierpinski</button>
+          <li><button id="pentigre">Pentigre</button>
+          <li><button id="christmas">Pine Tree</button>
+          <li><button id="dragon">Dragon</button>
+          <li><button id="crystal">Crystal</button>
+          <li><button id="tree">Tree</button>
+        </ul>
+      </div>
+      <br>
+      <br>
 
       <div id="functions">
         <table>
@@ -116,7 +128,17 @@
               </td>
             </tr>
           </tbody>
-        </table> </div> </div> <script src="//unpkg.com/vue"></script> <script src="canvas.js"></script> <script src="ifs.js"></script> <script> var barnsley ={ viewport: { x1: -2.2, x2: 2.7, y1: 0, y2: 10 }, ifs: [ { p: 1, transform: [ 0, 0, 0, 0.16 ], translate: [ 0, 0 ] },
+        </table>
+      </div>
+    </div>
+    <script src="//unpkg.com/vue"></script>
+    <script src="canvas.js"></script>
+    <script src="ifs.js"></script>
+    <script>
+      var barnsley = {
+        viewport: { x1: -2.2, x2: 2.7, y1: 0, y2: 10 },
+        ifs: [
+          { p: 1, transform: [ 0, 0, 0, 0.16 ], translate: [ 0, 0 ] },
           { p: 85, transform: [ 0.85, 0.04, -0.04, 0.85 ], translate: [ 0, 1.6 ] },
           { p: 7, transform: [ 0.2, -0.26, 0.23, 0.22 ], translate: [ 0, 1.6 ] },
           { p: 7, transform: [ -0.15, 0.28, 0.26, 0.24 ], translate: [ 0, 0.44 ] }
@@ -126,19 +148,11 @@
       var app = new Vue({
         el: '#functions',
         data: barnsley,
-        watch: {
-          viewport: function (viewport) {
-            this.render();
-          },
-          ifs: function (ifs) {
-          }
-        },
         updated: function () {
             this.render();
         },
         methods: {
           render: function () {
-            console.log('render');
             render({
               viewport: this.viewport,
               ifs: ifs(this.ifs)
@@ -146,7 +160,6 @@
           }
         }
       });
-
       app.render()
 
       document.getElementById('barnsley').addEventListener('click', () => {
