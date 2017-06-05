@@ -122,3 +122,32 @@ button, .button {
 
 .align-left {
   text-align: left; }
+
+.flex-container {
+  align-items: center;
+  justify-content: center;
+  display: flex; }
+  .flex-container.column {
+    flex-direction: column; }
+  .flex-container.row {
+    flex-direction: row; }
+  .flex-container > .start {
+    align-items: center;
+    justify-content: flex-start;
+    display: flex; }
+  .flex-container > .end {
+    align-items: center;
+    justify-content: flex-end;
+    display: flex; }
+  .flex-container > .flex-1 {
+    flex-basis: auto;
+    flex-shrink: 0;
+    flex-grow: 1; }
+  .flex-container > .flex-2 {
+    flex-basis: auto;
+    flex-shrink: 0;
+    flex-grow: 2; }
+  .flex-container > .flex-3 {
+    flex-basis: auto;
+    flex-shrink: 0;
+    flex-grow: 3; }
