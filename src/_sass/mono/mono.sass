@@ -1,0 +1,223 @@
+$font-family: Menlo, Consolas, monospace
+$font-color: #333
+$font-size: 16px
+$border-color: #ccc
+$border: 1px solid $border-color
+
+$background-color-active: #dff3ff
+$background-color-highlight: #a6dcfe
+
+$button-background-color: #f9f9f9
+$button-background-color-highlight: darken(#f9f9f9, 10%)
+$button-background-color-active: darken(#f9f9f9, 15%)
+
+$primary-background-color: #0087dd
+$primary-text-color: #fff
+
+
+$border-radius: 3px
+
+$paddings: ( l: 20px, m: 10px, s: 5px, n: 0 )
+
+// padding helpers
+@each $rule, $abbr in (padding: a, padding-bottom: b, padding-top: t, padding-left: l, padding-right: r)
+  @each $padding, $size in $paddings
+    .p#{$abbr}#{$padding}
+      #{$rule}: $size !important
+
+
+@each $padding, $size in $paddings
+  .pv#{$padding}
+    padding-top: $size !important
+    padding-bottom: $size !important
+
+  .ph#{$padding}
+    padding-left: $size !important
+    padding-right: $size !important
+
+
+html,
+body
+  font-size: $font-size
+  font-family: $font-family
+  color: $font-color
+  padding: 0
+  margin: 0
+
+input
+  font-size: $font-size
+  font-family: $font-family
+  color: $font-color
+
+
+// layout
+.content
+  width: 700px
+  margin: auto
+// content
+// grid
+// common html elements
+table
+  width: 100%
+  border-spacing: 0
+  border-collapse: separate
+
+  .collapsing
+    width: 1px
+    white-space: nowrap
+
+table.hover tbody>tr:hover
+  background-color: $background-color-active
+
+tr.row-highlight
+  background-color: $background-color-highlight
+
+td, th
+  padding: map-get($paddings, s)
+
+thead
+  text-align: left
+// list styles
+ul
+  list-style: none
+
+.list-bullets
+  list-style: disc
+
+.list-inline
+  padding: 0
+  margin: 0
+  display: flex
+
+  li
+    display: inline-block
+    margin-right: 5px
+
+// buttons
+button, .button
+  background-color: $button-background-color
+  border-radius: $border-radius
+  border: $border
+  font-family: $font-family
+  font-size: $font-size
+  padding: map-get($paddings, m)
+  cursor: pointer
+
+  &:hover
+    background-color: $button-background-color-highlight
+
+  &:active, &.active
+    background-color: $button-background-color-active
+
+  &.primary
+    background-color: $primary-background-color
+    border-radius: $border-radius
+    padding: map-get($paddings, m)
+    color: $primary-text-color
+    border: $border
+    border-color: darken($primary-background-color, 20%)
+
+    &:hover
+      background-color: darken($primary-background-color, 10%)
+
+    &:active, &.active
+      background-color: darken($primary-background-color, 15%)
+
+.button-group
+  font-size: 0
+  display: inline-block
+
+  button, .button
+    border-radius: 0
+    border-left-width: 0
+    border-right-width: 0
+
+    &:first-child
+      border-top-left-radius: $border-radius
+      border-bottom-left-radius: $border-radius
+      border-left-width: 1px !important
+
+    &:last-child
+      border-top-right-radius: $border-radius
+      border-bottom-right-radius: $border-radius
+      border-right-width: 1px !important
+
+// modals
+.box
+  border-radius: $border-radius
+  border: $border
+
+  header
+    border-bottom: $border
+    padding: map-get($paddings, l)
+
+  .box-content
+    padding: map-get($paddings, l)
+
+  footer
+    padding: map-get($paddings, l)
+    border-top: $border
+    text-align: right
+// forms (at least input=text)
+// toolbars
+.toolbar
+  display: flex
+  border-bottom: 3px solid $primary-background-color
+  padding: 8px
+  margin: 0 4px 15px
+  align-items: center
+  justify-content: space-between
+
+  .toolbar-header
+    display: inline-block
+    font-size: 20px
+    font-weight: bold
+
+//utils
+.align-center
+  text-align: center
+  justify-content: center
+
+.align-right
+  text-align: right
+  justify-content: right
+
+.align-left
+  text-align: left
+  justify-content: left
+
+//flex
+.flex-container
+  align-items: center
+  justify-content: center
+  display: flex
+  &.column
+    flex-direction: column
+  &.row
+    flex-direction: row
+
+
+  >.start
+    align-items: center
+    justify-content: flex-start
+    display: flex
+
+  >.end
+    align-items: center
+    justify-content: flex-end
+    display: flex
+
+  >.flex-1
+    flex-basis: auto
+    flex-shrink: 0
+    flex-grow: 1
+
+  >.flex-2
+    flex-basis: auto
+    flex-shrink: 0
+    flex-grow: 2
+
+  >.flex-3
+    flex-basis: auto
+    flex-shrink: 0
+    flex-grow: 3

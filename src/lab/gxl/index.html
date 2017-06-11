@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Styles</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/mono.css" />
+  </head>
+  <body class="readable-content">
+    <div class="content">
+      <div>
+        <label for="themeSelect">Theme:</label>
+        <select id="themeSelect">
+          <option value="/css/mono.css">Mono</option>
+          <option value="/css/gxl.css">Classic</option>
+        </select>
+      </div>
+      <h1>Welcome to my style guide</h1>
+      <p>
+        Here you will find all the things I generally use to build web
+        pages. This is probably the third or fourth personal style guide
+        I've attempted to make. So really what we're doing is seeing if I
+        can complete it and make it look good.
+      </p>
+
+      <h2>Here are some headings that seem important</h2>
+      <h1>&lt;h1&gt; Heading</h1>
+      <h2>&lt;h2&gt; Heading</h2>
+      <h3>&lt;h3&gt; Heading</h3>
+
+      <h2>Lists</h2>
+
+      <ul>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+      </ul>
+
+      <ul class="list-bullets">
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+      </ul>
+
+      <ul class="list-inline">
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+      </ul>
+
+      <h2>Buttons</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="collapsing">.button or &lt;button&gt;</td>
+            <td>
+              <button class="btn">Action</button>
+            </td>
+          </tr>
+          <tr>
+            <td>.primary</td>
+            <td>
+              <button class="primary btn btn-primary">No actually action</button>
+            </td>
+          </tr>
+          <tr>
+            <td>.warning</td>
+            <td>
+              <button class="warning">Watch out!</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Button groups</h3>
+      <div class="button-group">
+        <button class="btn" >Public</button>
+        <button class="btn" >Limited</button>
+        <button class="btn" >Private</button>
+      </div>
+      <div class="button-group">
+        <button class="btn">Public</button>
+        <button class="btn primary">Limited</button>
+        <button class="btn">Private</button>
+      </div>
+
+      <h2>Forms</h2>
+      <section class="box">
+        <header>
+          Please login
+        </header>
+
+        <form action="get">
+          <section class="box-content">
+            <label for="blammo">Username: </label>
+            <input type="text" placeholder="Type here!" id="blammo" name="blammo">
+
+            <label for="pw">Login: </label>
+            <input type="password" placeholder="Type here!" id="pw" name="pw">
+          </section>
+          <footer>
+            <input class="button primary" type="submit" value="Submit">
+          </footer>
+        </form>
+      </section>
+
+      <h2>Basics</h2>
+      <table class="hover">
+        <thead>
+          <tr><th colspan="3">
+              Git Repository
+            </th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="collapsing">
+              node_modules
+            </td>
+            <td>Initial commit</td>
+            <td class="align-right collapsing">10 hours ago</td>
+          </tr>
+          <tr>
+            <td>
+              test
+            </td>
+            <td>Initial commit</td>
+            <td class="align-right">10 hours ago</td>
+          </tr>
+          <tr>
+            <td>
+              build
+            </td>
+            <td>Initial commit</td>
+            <td class="align-right">10 hours ago</td>
+          </tr>
+          <tr class="row-highlight">
+            <td>
+              package.json
+            </td>
+            <td>Initial commit</td>
+            <td class="align-right">10 hours ago</td>
+          </tr>
+          <tr>
+            <td>
+              Gruntfile.js
+            </td>
+            <td>Initial commit</td>
+            <td class="align-right">10 hours ago</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Flex Layout</h2>
+
+        <h3>.flex-container .row</h3>
+        <div class="flex-container row">
+          <div class="flex-1" style="background-color: #a6dcfe">.flex-1</div>
+          <div class="flex-1" style="background-color: #dff3ff">.flex-1</div>
+        </div>
+        <br>
+
+        <div class="flex-container row">
+          <div style="background-color: #a6dcfe">start</div>
+          <div class="flex-1" style="background-color: #dff3ff">.flex-1</div>
+          <div style="background-color: #a6dcfe">end</div>
+        </div>
+        <br>
+
+        <div class="flex-container row">
+          <div class="flex-2" style="background-color: #a6dcfe">.flex-2</div>
+          <div class="flex-1" style="background-color: #dff3ff">.flex-1</div>
+        </div>
+
+        <h3>.flex-container .column</h3>
+
+        <div class="flex-container row">
+          <div class="flex-1">
+
+            <div class="flex-container column" style="height: 200px">
+              <div class="flex-1" style="background-color: #a6dcfe">.flex-1</div>
+              <div class="flex-1" style="background-color: #dff3ff">.flex-1</div>
+            </div>
+
+          </div>
+          <div class="flex-1">
+
+            <div class="flex-container column" style="height: 200px">
+              <div style="background-color: #a6dcfe">start</div>
+              <div class="flex-1" style="background-color: #dff3ff">.flex-1</div>
+              <div style="background-color: #a6dcfe">end</div>
+            </div>
+
+          </div>
+          <div class="flex-1">
+
+            <div class="flex-container column" style="height: 200px">
+              <div class="flex-2" style="background-color: #a6dcfe">.flex-2</div>
+              <div class="flex-1" style="background-color: #dff3ff">.flex-1</div>
+            </div>
+
+          </div>
+        </div>
+
+        <h3>Vertically center</h3>
+        <div class="flex-container column" style="background-color: #a6dcfe; height: 200px">
+          <div style="background-color: #dff2ff">vertically centered</div>
+        </div>
+        <br>
+
+    </div>
+    <script type="text/javascript">
+      document.getElementById('themeSelect').addEventListener('change', function (event) {
+        document.querySelector('link[rel="stylesheet"]').setAttribute('href', this.value);
+      });
+    </script>
+  </body>
+</html>

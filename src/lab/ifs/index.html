@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Iterated Function Systems</title>
-    <link rel="stylesheet" type="text/css" href="mono.css" />
+    <link rel="stylesheet" type="text/css" href="/css/mono.css" />
     <style>
       /* theme overrides */
       body {
@@ -25,6 +25,12 @@
       button:hover {
         color: #bcbabe;
         background-color: #3c3641;
+      }
+
+      button.active {
+        background-color: #342f38;
+        color: #796af5;
+        border-color: #796af5;
       }
 
       /* custom */
@@ -65,12 +71,16 @@
 
       input {
         flex: 1;
-        max-width: 9em;
+        max-width: 3em;
         text-align: right;
         margin: 5px;
         border: none;
         border-bottom: solid 2px rgba(188, 186, 190,.3);
         background-color: transparent;
+      }
+
+      .matrix input {
+        max-width: 9em;
       }
     </style>
 
@@ -78,19 +88,19 @@
   <body>
     <div class="content">
       <h1>Iterated Function Systems</h1>
+      <div class="align-center">
+        <ul class="list-inline pbm">
+          <li><button class="active" id="barnsley">Barnsley</button></li>
+          <li><button id="sierpinski">Sierpinski</button></li>
+          <li><button id="pentigre">Pentigre</button></li>
+          <li><button id="pine">Pine Tree</button></li>
+          <li><button id="dragon">Dragon</button></li>
+          <li><button id="crystal">Crystal</button></li>
+          <li><button id="tree">Tree</button></li>
+        </ul>
+      </div>
       <canvas id="canvas" width="700" height="700"></canvas>
       <div class="ifs-form">
-        <div class="align-center">
-          <ul class="list-inline">
-            <li><button id="barnsley">Barnsley</button></li>
-            <li><button id="sierpinski">Sierpinski</button></li>
-            <li><button id="pentigre">Pentigre</button></li>
-            <li><button id="christmas">Pine Tree</button></li>
-            <li><button id="dragon">Dragon</button></li>
-            <li><button id="crystal">Crystal</button></li>
-            <li><button id="tree">Tree</button></li>
-          </ul>
-        </div>
 
         <br>
         <br>
@@ -100,34 +110,34 @@
             <thead>
               <tr>
                 <th>Probability</th>
-                <th>Transform</th>
-                <th>Translate</th>
+                <th class="align-center">Transform</th>
+                <th class="align-center">Translate</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="f in ifs">
-                <td>
-                  <input type="text" v-model="f.p" />%
+                <td class="collapsing">
+                  <input type="text" v-model.number="f.p" />%
                   </td>
-                <td>
+                <td class="align-center">
                   <div class="matrix m2x2">
                     <div class="row">
-                      <input type="text" v-model="f.transform[0]" />
-                      <input type="text" v-model="f.transform[1]" />
+                      <input type="text" v-model.number="f.transform[0]" />
+                      <input type="text" v-model.number="f.transform[1]" />
                     </div>
                     <div class="row">
-                      <input type="text" v-model="f.transform[2]" />
-                      <input type="text" v-model="f.transform[3]" />
+                      <input type="text" v-model.number="f.transform[2]" />
+                      <input type="text" v-model.number="f.transform[3]" />
                     </div>
                   </div>
                 </td>
-                <td>
+                <td class="align-center">
                   <div class="matrix m2x1">
                     <div class="row">
-                      <input type="text" v-model="f.translate[0]" />
+                      <input type="text" v-model.number="f.translate[0]" />
                     </div>
                     <div class="row">
-                      <input type="text" v-model="f.translate[1]" />
+                      <input type="text" v-model.number="f.translate[1]" />
                     </div>
                   </div>
                 </td>
@@ -141,85 +151,82 @@
     <script src="canvas.js"></script>
     <script src="ifs.js"></script>
     <script>
-      var barnsley = {
-        viewport: { x1: -2.2, x2: 2.7, y1: 0, y2: 10 },
-        ifs: [
-          { p: 1, transform: [ 0, 0, 0, 0.16 ], translate: [ 0, 0 ] },
-          { p: 85, transform: [ 0.85, 0.04, -0.04, 0.85 ], translate: [ 0, 1.6 ] },
-          { p: 7, transform: [ 0.2, -0.26, 0.23, 0.22 ], translate: [ 0, 1.6 ] },
-          { p: 7, transform: [ -0.15, 0.28, 0.26, 0.24 ], translate: [ 0, 0.44 ] }
-        ]
-      };
-
-      var sierpinski = {
-        viewport: { x1: 0, x2: 1, y1: 0, y2: 1 },
-        ifs: [
-          { p: 33, transform: [ -0.25, 0.43301270189, -0.43301270189, -0.25 ], translate: [ 0.25, 0.43301270189 ] },
-          { p: 34, transform: [ 0.5, 0, 0, 0.5 ], translate: [ 0.25, 0.43301270189 ] },
-          { p: 33, transform: [ -0.25, -0.43301270189, 0.43301270189, -0.25 ], translate: [ 1, 0 ] },
-        ]
-      };
-
-      var pentigre = {
-        viewport: { x1: -0.1, x2: 1.1, y1: -0.3, y2: 1 },
-        ifs: [
-          { p:16, transform: [ 0.309, -0.225, 0.225, 0.309 ], translate: [ 0, 0 ] },
-          { p:16, transform: [ -0.118, -0.363, 0.363, -0.118 ], translate: [ 0.309, 0.225 ] },
-          { p:16, transform: [ 0.309, 0.225, -0.225, 0.309 ], translate: [ 0.191, 0.588 ] },
-          { p:16, transform: [ -0.118, 0.363, -0.363, -0.118 ], translate: [ 0.5, 0.363 ] },
-          { p:16, transform: [ 0.309, 0.225, -0.225, 0.309 ], translate: [ 0.382, 0 ] },
-          { p:16, transform: [ 0.309, -0.225, 0.225, 0.309 ], translate: [ 0.691, -0.225 ] },
-        ]
-      };
-
-      var pine = {
-        viewport: { x1: 0, x2: 1, y1: 0, y2: 1 },
-        ifs: [
-          { p: 33, transform: [ 0, -0.5, 0.5, 0 ], translate: [ 0.5, 0 ] },
-          { p: 33, transform: [ 0, 0.5, -0.5, 0 ], translate: [ 0.5, 0.5 ] },
-          { p: 34, transform: [ 0.5, 0, 0, 0.5 ], translate: [ 0.25, 0.5 ] },
-        ]
-      };
-
-      var dragon = {
-        viewport: { x1: 0, x2: 1, y1: 0, y2: 1 },
-        ifs: [
-          { p: 33, transform: [0, 0.577, -0.577, 0 ], translate: [ 0.0951, 0.5893 ] },
-          { p: 33, transform: [0, 0.577, -0.577, 0 ], translate: [ 0.4413, 0.7893 ] },
-          { p: 34, transform: [0, 0.577, -0.577, 0 ], translate: [ 0.0952, 0.9893 ] },
-        ]
-      };
-
-      var crystal = {
-        viewport: { x1: 0, x2: 1, y1: 0, y2: 1 },
-        ifs: [
-          { p: 20, transform: [ 0.383, 0, 0, 0.383 ], translate: [ 0.3072, 0.619 ] },
-          { p: 20, transform: [ 0.383, 0, 0, 0.383 ], translate: [ 0.6033, 0.4044 ] },
-          { p: 20, transform: [ 0.383, 0, 0, 0.383 ], translate: [ 0.0139, 0.4044 ] },
-          { p: 20, transform: [ 0.383, 0, 0, 0.383 ], translate: [ 0.1253, 0.0595 ] },
-          { p: 20, transform: [ 0.383, 0, 0, 0.383 ], translate: [ 0.492, 0.0595 ] },
-        ]
-      };
-
-      const tree = {
-        viewport: { x1: 0, x2: 1, y1: 0, y2: 1 },
-        ifs: [
-          { p: 20, transform: [ 0.195, -0.488, 0.344, 0.443 ], translate: [ 0.4431, 0.2452 ] },
-          { p: 20, transform: [ 0.462, 0.414, -0.252, 0.361 ], translate: [ 0.2511, 0.5692 ] },
-          { p: 20, transform: [ -0.058, -0.07, 0.453, -0.111 ], translate: [ 0.5976, 0.0969 ] },
-          { p: 20, transform: [ -0.035, 0.07, -0.469, -0.022 ], translate: [ 0.4884, 0.5069 ] },
-          { p: 20, transform: [ -0.637, 0, 0, 0.501 ], translate: [ 0.8662, 0.2513 ] },
-        ]
+      const systems = {
+        barnsley: {
+          viewport: { x1: -2.2, x2: 2.7, y1: 0.1, y2: 10 },
+          ifs: [
+            { p: 1, transform: [ 0, 0, 0, 0.16 ], translate: [ 0, 0 ] },
+            { p: 85, transform: [ 0.85, 0.04, -0.04, 0.85 ], translate: [ 0, 1.6 ] },
+            { p: 7, transform: [ 0.2, -0.26, 0.23, 0.22 ], translate: [ 0, 1.6 ] },
+            { p: 7, transform: [ -0.15, 0.28, 0.26, 0.24 ], translate: [ 0, 0.44 ] }
+          ]
+        },
+        sierpinski: {
+          viewport: { x1: 0, x2: 1, y1: 0, y2: .9 },
+          ifs: [
+            { p: 33, transform: [ -0.25, 0.43301270189, -0.43301270189, -0.25 ], translate: [ 0.25, 0.43301270189 ] },
+            { p: 34, transform: [ 0.5, 0, 0, 0.5 ], translate: [ 0.25, 0.43301270189 ] },
+            { p: 33, transform: [ -0.25, -0.43301270189, 0.43301270189, -0.25 ], translate: [ 1, 0 ] },
+          ]
+        },
+        pentigre: {
+          viewport: { x1: -0.1, x2: 1.1, y1: -0.3, y2: .8 },
+          ifs: [
+            { p:16, transform: [ 0.309, -0.225, 0.225, 0.309 ], translate: [ 0, 0 ] },
+            { p:16, transform: [ -0.118, -0.363, 0.363, -0.118 ], translate: [ 0.309, 0.225 ] },
+            { p:16, transform: [ 0.309, 0.225, -0.225, 0.309 ], translate: [ 0.191, 0.588 ] },
+            { p:16, transform: [ -0.118, 0.363, -0.363, -0.118 ], translate: [ 0.5, 0.363 ] },
+            { p:16, transform: [ 0.309, 0.225, -0.225, 0.309 ], translate: [ 0.382, 0 ] },
+            { p:16, transform: [ 0.309, -0.225, 0.225, 0.309 ], translate: [ 0.691, -0.225 ] },
+          ]
+        },
+        pine: {
+          viewport: { x1: 0, x2: 1, y1: 0, y2: 1 },
+          ifs: [
+            { p: 33, transform: [ 0, -0.5, 0.5, 0 ], translate: [ 0.5, 0 ] },
+            { p: 33, transform: [ 0, 0.5, -0.5, 0 ], translate: [ 0.5, 0.5 ] },
+            { p: 34, transform: [ 0.5, 0, 0, 0.5 ], translate: [ 0.25, 0.5 ] },
+          ]
+        },
+        dragon: {
+          viewport: { x1: 0, x2: 1, y1: 0, y2: 1 },
+          ifs: [
+            { p: 33, transform: [0, 0.577, -0.577, 0 ], translate: [ 0.0951, 0.5893 ] },
+            { p: 33, transform: [0, 0.577, -0.577, 0 ], translate: [ 0.4413, 0.7893 ] },
+            { p: 34, transform: [0, 0.577, -0.577, 0 ], translate: [ 0.0952, 0.9893 ] },
+          ]
+        },
+        crystal: {
+          viewport: { x1: 0, x2: 1, y1: 0, y2: 1.1 },
+          ifs: [
+            { p: 20, transform: [ 0.383, 0, 0, 0.383 ], translate: [ 0.3072, 0.619 ] },
+            { p: 20, transform: [ 0.383, 0, 0, 0.383 ], translate: [ 0.6033, 0.4044 ] },
+            { p: 20, transform: [ 0.383, 0, 0, 0.383 ], translate: [ 0.0139, 0.4044 ] },
+            { p: 20, transform: [ 0.383, 0, 0, 0.383 ], translate: [ 0.1253, 0.0595 ] },
+            { p: 20, transform: [ 0.383, 0, 0, 0.383 ], translate: [ 0.492, 0.0595 ] },
+          ]
+        },
+        tree: {
+          viewport: { x1: 0, x2: 1, y1: 0, y2: .9 },
+          ifs: [
+            { p: 20, transform: [ 0.195, -0.488, 0.344, 0.443 ], translate: [ 0.4431, 0.2452 ] },
+            { p: 20, transform: [ 0.462, 0.414, -0.252, 0.361 ], translate: [ 0.2511, 0.5692 ] },
+            { p: 20, transform: [ -0.058, -0.07, 0.453, -0.111 ], translate: [ 0.5976, 0.0969 ] },
+            { p: 20, transform: [ -0.035, 0.07, -0.469, -0.022 ], translate: [ 0.4884, 0.5069 ] },
+            { p: 20, transform: [ -0.637, 0, 0, 0.501 ], translate: [ 0.8662, 0.2513 ] },
+          ]
+        }
       };
 
       var app = new Vue({
         el: '#functions',
-        data: barnsley,
+        data: JSON.parse(JSON.stringify(systems.barnsley)),
         updated: function () {
             this.render();
         },
         methods: {
           render: function () {
+            console.log('render', this.ifs, this.viewport);
             render({
               viewport: this.viewport,
               ifs: ifs(this.ifs)
@@ -229,33 +236,19 @@
       });
       app.render()
 
-      document.getElementById('barnsley').addEventListener(
-        'click', () => Object.assign(app.$data, barnsley)
-      );
+      previousActive = document.getElementById('barnsley');
+      Object.keys(systems).forEach(name => {
+        document.getElementById(name).addEventListener(
+          'click', (event) => {
 
-      document.getElementById('sierpinski').addEventListener(
-        'click', () => Object.assign(app.$data, sierpinski)
-      );
+            Object.assign(app.$data, JSON.parse(JSON.stringify(systems[name])))
+            event.target.classList.toggle('active');
+            previousActive.classList.toggle('active');
+            previousActive = event.target;
+          }
+        );
+      })
 
-      document.getElementById('pentigre').addEventListener(
-        'click', () => Object.assign(app.$data, pentigre)
-      );
-
-      document.getElementById('christmas').addEventListener(
-        'click', () => Object.assign(app.$data, pine)
-      );
-
-      document.getElementById('dragon').addEventListener(
-        'click', () => Object.assign(app.$data, dragon)
-      );
-
-      document.getElementById('crystal').addEventListener(
-        'click', () => Object.assign(app.$data, crystal)
-      );
-
-      document.getElementById('tree').addEventListener(
-        'click', () => Object.assign(app.$data, tree)
-      );
 
     </script>
   </body>

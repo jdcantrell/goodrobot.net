@@ -61,7 +61,8 @@ def generate():
 @task
 def css():
     local('mkdir -p ./build/css')
-    local('sassc ./src/_sass/gxl.sass ./build/css/gxl.css')
+    local('sassc ./src/_sass/gxl/gxl.sass ./build/css/gxl.css')
+    local('sassc ./src/_sass/mono/mono.sass ./build/css/mono.css')
 
 
 @task
