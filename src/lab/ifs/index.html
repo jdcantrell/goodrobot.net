@@ -27,7 +27,7 @@
         background-color: #3c3641;
       }
 
-      button.active {
+      button.active, button:active {
         background-color: #342f38;
         color: #796af5;
         border-color: #796af5;
@@ -225,7 +225,7 @@
               </tr>
             </tbody>
           </table>
-          <div class="align-center">
+          <div class="align-center pvl">
             <button v-on:click="addTransform">Add Transformation</button>
             <button v-on:click="removeTransform">Remove Last Transformation</button>
 
