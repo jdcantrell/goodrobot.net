@@ -101,10 +101,10 @@ const render = ({ viewport, ifs }) => {
   let x = 0;
   let y = 0;
   let points = [];
-  let iterations = 50000;
+  let iterations = 500000;
 
   runner.onTick(() => {
-    if (iterations == 50000) {
+    if (iterations == 500000) {
       // starting a new ifs system, so clear screen
       canvas.setViewport(viewport);
       canvas.clear();
