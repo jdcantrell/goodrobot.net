@@ -2,13 +2,7 @@ class Canvas {
 
   constructor(id='canvas', clearColor=[255, 255, 255, 255]) {
     this.canvas = document.getElementById(id);
-    this.canvas.style.width = this.canvas.width + 'px';
-    this.canvas.style.height = this.canvas.height + 'px';
-
-    if (window.devicePixelRatio !== 1) {
-      this.canvas.width = this.canvas.width * window.devicePixelRatio;
-      this.canvas.height = this.canvas.height * window.devicePixelRatio;
-    }
+    this.calculateSize();
 
     this.context = this.canvas.getContext('2d');
     this.buffer = this.context.getImageData(0, 0, this.canvas.width, this.canvas.height);
@@ -21,6 +15,18 @@ class Canvas {
     this.context.fillStyle=`rgba(${r}, ${g}, ${b}, ${a})`;
     this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.data = this.context.getImageData(0, 0, this.canvas.width, this.canvas.height).data;
+  }
+
+  calculateSize() {
+    const rect = this.canvas.getBoundingClientRect();
+
+    this.canvas.width = rect.width;
+    this.canvas.height = rect.height;
+
+    if (window.devicePixelRatio !== 1) {
+      this.canvas.width = this.canvas.width * window.devicePixelRatio;
+      this.canvas.height = this.canvas.height * window.devicePixelRatio;
+    }
   }
 
   setViewport({ x1, x2, y1, y2 }) {
@@ -43,7 +49,6 @@ class Canvas {
   flush() {
     this.buffer.data.set(this.data);
     this.context.putImageData(this.buffer, 0, 0);
-    //this.data = new Uint8ClampedArray(this.canvas.width * this.canvas.height * 4).fill(255);
   }
 
 }
