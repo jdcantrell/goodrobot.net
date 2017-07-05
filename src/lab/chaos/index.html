@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chaos Game</title>
+    <link rel="stylesheet" type="text/css" href="/css/mono.css" />
+    <style>
+      /* theme overrides */
+      body {
+        background-color: #2e2a31;
+        color: #bcbabe;
+      }
+
+      input {
+        color: #bcbabe;
+      }
+
+      h1 { font-weight: normal; }
+
+      button {
+        border-color: #bcbabe;
+        color: #bcbabe;
+        background-color: #342f38;
+      }
+
+      button:hover {
+        color: #bcbabe;
+        background-color: #3c3641;
+      }
+
+      button.active, button:active {
+        background-color: #342f38;
+        color: #796af5;
+        border-color: #796af5;
+      }
+
+      .text-highlight {
+        color: #f5f4f7 !important;
+      }
+
+      .inverse {
+        color: #4a464d;
+        background-color: #149bda;
+      }
+
+      .inverse a, .inverse a:visited {
+        color: #4a464d;
+      }
+
+      .background-highlight {
+        background-color: #4a464d;
+      }
+
+      a {
+        color: #d8137f;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      a:visited {
+        color: #bb60ea;
+      }
+
+      /* custom */
+      canvas {
+        margin: auto;
+        display: block;
+        width: 700px;
+        height: 700px;
+      }
+
+      .matrix {
+        display: inline-block;
+        border-width: 2px ;
+        border-style: solid;
+      }
+
+
+
+    </style>
+
+  </head>
+  <body>
+    <div id="content" class="content">
+      <h1>Chaos Game</h1>
+      <p>
+        The Chaos Game is another way to generate fractals. In a lot of ways it is similar to IFS
+        fractals.
+      </p>
+        <div class="align-center">
+          <ul class="list-inline pbm align-center">
+            <li><button id="sierpinski">Sierpinski</button></li>
+          </ul>
+        </div>
+        <canvas id="canvas" width="700" height="700"></canvas>
+    </div>
+    <!-- <script src="//unpkg.com/vue"></script> -->
+    <!-- <script src="vue.min.js"></script> -->
+    <script src="./canvas.js"></script>
+    <script src="./chaos.js"></script>
+  </body>
+</html>
