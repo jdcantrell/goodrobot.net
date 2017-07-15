@@ -1,9 +1,8 @@
+import sys
 import os
 import codecs
 import re
 import shutil
-
-import args
 
 from jinja2 import Environment, FileSystemLoader
 from jinja2.exceptions import TemplateNotFound
@@ -33,7 +32,7 @@ def build_dirs():
 
     for dir in dir_list:
         try:
-            print "Creating %s" % dir
+            print("Creating %s" % dir)
             os.mkdir(dir)
         except OSError:
             pass
@@ -61,7 +60,7 @@ def tpls():
     env = Environment(loader=FileSystemLoader(os.path.abspath('src')))
     for src, dest in tpls:
 
-        print "Generating %s" % dest
+        print("Generating %s" % dest)
         template = env.get_template(src.replace('src/', ''))
         html = template.render()
 
@@ -120,11 +119,11 @@ def md():
     try:
         template = env.get_template('_tpls/post.tpl')
     except TemplateNotFound:
-        print "Could not find src/_tpls/post.tpl, has it been created?"
+        print("Could not find src/_tpls/post.tpl, has it been created?")
         return
 
     for src, dest in tpls:
-        print "Generating %s" % dest
+        print("Generating %s" % dest)
         with open(src, 'r') as content_file:
             content, template_vars = strip_yaml(content_file.read())
 
@@ -148,7 +147,7 @@ class Renderer(mistune.Renderer):
         return highlight(code, lexer, formatter)
 
 
-action = args.all[0]
+action = sys.argv[1]
 
 if action == 'dirs':
     build_dirs()

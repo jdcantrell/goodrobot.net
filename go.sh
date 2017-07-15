@@ -60,6 +60,19 @@ publish() {
   #rsync ./build/* /srv/http/goodrobot/
 }
 
+init() {
+  pip install pyyaml mistune pygments jinja2 libsass
+  pip install git+https://github.com/jdcantrell/ankh.git@master#egg=Ankh
+}
+
+activate() {
+  if [ ! -d "./env" ]; then
+    python3 -m venv ./env
+    yellow "Creating virtual env, you may want to run ./go.sh init"
+  fi
+  source ./env/bin/activate
+}
+
 case "$1" in
   publish)
     publish
@@ -75,6 +88,9 @@ case "$1" in
     ;;
   link)
     link
+    ;;
+  activate)
+    activate
     ;;
   *)
     red "Sorry, I don't know that command :-("
