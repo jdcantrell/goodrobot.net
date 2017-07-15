@@ -1,5 +1,6 @@
-/* globals Canvas */
+/* globals Canvas, Runner, getColor, getBackgroundColor */
 /* exported ifs, render */
+
 // multiply 2x2 matrix with a 2x1 matrix
 const mult = ([a, b, c, d], [x, y]) => [
   (a * x) + (b * y),
@@ -31,20 +32,6 @@ const ifs = transforms => {
   };
 };
 
-// some nice colors
-const ctable = [
-  [216, 19, 127],
-  [214, 84, 7],
-  [220, 138, 14],
-  [23, 173, 152],
-  [20, 155, 218],
-  [121, 106, 245],
-  [187, 96, 234],
-  [199, 32, 202],
-
-];
-const colors = idx => ctable[idx % ctable.length];
-
 // See if our new ifs system has points outside the current viewport, if
 // so then update the viewport and redraw.
 const checkViewport = (canvas, points) => {
@@ -69,34 +56,16 @@ const checkViewport = (canvas, points) => {
     || canvas.viewport.y1 !== y1
     || canvas.viewport.y2 !== y2) {
 
-    console.log('Updating viewport', { x1, x2, y1, y2 });
-
     canvas.clear();
     canvas.setViewport({ x1, x2, y1, y2 });
     points.forEach(({ xy, idx }) => {
-      canvas.setPoint(xy[0], xy[1], colors(idx));
+      canvas.setPoint(xy[0], xy[1], getColor(idx));
     });
     canvas.flush();
   }
 };
 
-// Simple requestAnimationFrame loop runner
-class Runner {
-  constructor() {
-    this.onTickFn = () => {};
-  }
-
-  run() {
-    this.onTickFn();
-    window.requestAnimationFrame(() => { this.run(); });
-  }
-
-  onTick(onTickFn) {
-    this.onTickFn = onTickFn;
-  }
-}
-
-const canvas = new Canvas('canvas', [46, 42, 49, 255]);
+const canvas = new Canvas('canvas', [...getBackgroundColor(), 255]);
 const runner = new Runner();
 runner.run();
 
@@ -118,7 +87,7 @@ const render = ({ viewport, ifs }) => {
         const r = ifs(x, y) || { xy: [0, 0], idx: 0 };
         [x, y] = r.xy;
         points.push(r);
-        canvas.setPoint(x, y, colors(r.idx));
+        canvas.setPoint(x, y, getColor(r.idx));
         iterations -= 1;
       }
 

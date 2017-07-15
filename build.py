@@ -3,8 +3,7 @@ import codecs
 import re
 import shutil
 
-from fabric.api import task, local, run, cd, lcd, put
-from fabric.colors import blue, green
+import args
 
 from jinja2 import Environment, FileSystemLoader
 from jinja2.exceptions import TemplateNotFound
@@ -16,97 +15,6 @@ from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
 
 
-@task
-def publish():
-    generate_all()
-    run('mkdir -p /srv/http/goodrobot')
-    put('./build/*', '/srv/http/goodrobot/')
-    #with cd('./goodrobot.net'):
-    #    run('git pull origin master')
-    #    run('fab generate_all')
-
-
-@task
-def watch():
-    print green('Watching ./src for changes')
-    local('watchmedo shell-command -p "./src/*" -R -c "fab generate"')
-
-@task
-def deploy():
-    generate_all()
-    link_site('/srv/http/goodrobot')
-
-@task
-def generate_all():
-    generate()
-    print blue('Generating stream')
-    stream()
-    print blue('Generating pic stream')
-    pic()
-
-
-@task
-def generate():
-    print blue('Building folder structure')
-    local('rm -rf ./build')
-    build_dirs()
-    print blue('Parsing templates')
-    tpls()
-    print blue('Parsing markdown')
-    md()
-    print blue('Generating css')
-    css()
-
-
-@task
-def css():
-    local('mkdir -p ./build/css')
-    local('sassc ./src/_sass/gxl/gxl.sass ./build/css/gxl.css')
-    local('sassc ./src/_sass/mono/mono.sass ./build/css/mono.css')
-
-
-@task
-def dev_build():
-    print blue('Building folder structure')
-    local('rm -rf ./build')
-    build_dirs()
-    print blue('Parsing templates')
-    tpls()
-    print blue('Parsing markdown')
-    md()
-    print blue('Generating stream')
-    stream_cache()
-    print blue('Generating pic stream')
-    pic()
-
-
-@task
-def stream_cache():
-    local('ankh src/stream/_stream.html build/stream/index.html --template-paths ./src --cache')
-
-
-@task
-def stream():
-    local('ankh src/stream/_stream.html build/stream/index.html --template-paths ./src')
-
-
-@task
-def pic():
-    local('ankh src/stream/_pic.html build/stream/pics.html --template-paths ./src')
-
-@task
-def link_site(destination='./test'):
-    local('mkdir -p %s' % destination)
-    local('rm -f %s/*' % destination)
-    local('ln -sr ./build/* %s' % destination)
-    with lcd(destination):
-        local('ln -s ~/apps/gogs/public ./git')
-        local('ln -s ~/apps/miu ./miu')
-        local('ln -s ~/apps/goodrobot-ghost ./log')
-        local('ln -s /srv/http/static ./static')
-
-
-@task
 def build_dirs():
     dir_list = ['build']
     file_list = []
@@ -137,7 +45,6 @@ def build_dirs():
             pass
 
 
-@task
 def tpls():
     tpls = []
     for subdir, dirs, files in os.walk('src'):
@@ -193,7 +100,6 @@ def strip_yaml(file_content):
     return file_content, template_vars
 
 
-@task
 def md():
     tpls = []
     for subdir, dirs, files in os.walk('src'):
@@ -240,3 +146,13 @@ class Renderer(mistune.Renderer):
         lexer = get_lexer_by_name(lang, stripall=True)
         formatter = HtmlFormatter()
         return highlight(code, lexer, formatter)
+
+
+action = args.all[0]
+
+if action == 'dirs':
+    build_dirs()
+elif action == 'tpls':
+    tpls()
+elif action == 'md':
+    md()

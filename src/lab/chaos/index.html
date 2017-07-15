@@ -37,6 +37,16 @@
         color: #f5f4f7 !important;
       }
 
+      ::selection {
+        color: #4a464d;
+        background-color: #149bda;
+      }
+      ::-moz-selection {
+        color: #4a464d;
+        background-color: #149bda;
+      }
+
+
       .inverse {
         color: #4a464d;
         background-color: #149bda;
@@ -64,21 +74,35 @@
       }
 
       /* custom */
-      canvas {
+      #canvas {
         margin: auto;
         display: block;
         width: 700px;
         height: 700px;
       }
 
-      .matrix {
-        display: inline-block;
-        border-width: 2px ;
-        border-style: solid;
+      input {
+        flex: 1;
+        max-width: 3em;
+        text-align: right;
+        margin: 5px;
+        border: none;
+        border-bottom: solid 2px rgba(188, 186, 190,.3);
+        background-color: transparent;
       }
 
+      select {
+        font-size: 16px;
+        font-family: Menlo, Consolas, monospace;
+        padding: 0px 4px;
+      }
 
-
+      .hover-hide .visible-on-hover {
+        visibility: hidden;
+      }
+      .hover-hide:hover .visible-on-hover {
+        visibility: visible;
+      }
     </style>
 
   </head>
@@ -88,6 +112,7 @@
       <p>
         The Chaos Game is another way to generate fractals. In a lot of ways it is similar to IFS
         fractals.
+
       </p>
         <div class="align-center">
           <ul class="list-inline pbm align-center">
@@ -95,10 +120,72 @@
           </ul>
         </div>
         <canvas id="canvas" width="700" height="700"></canvas>
+        <div class="flex-container row">
+          <canvas id="ruleCanvas" width="200" height="200"></canvas>
+          <div class="flex-1" id="ruleLegend"></div>
+        </div>
+        <div id="settings">
+          <div>
+            <label for="sides">Polygon Sides: </label>
+            <input id="sides" v-model.number="sides" type="text" value="4">
+          </div>
+          <div>
+            <label for="distance">Move Distance:</label>
+            <input id="distance" v-model.number="distance" type="text" value="0.5">
+          </div>
+          <div v-if="rules && rules.length">
+            The next point cannot be:
+            <table>
+              <tr class="hover-hide" v-for="(rule, index) in rules">
+                <td><input type="text" v-model.number="rule.points" value="0"></td>
+                <td>point(s) to the right of the</td>
+                <td>
+                  <select v-model="rule.previous">
+                    <option selected value="1">current</option>
+                    <option value="2">previous</option>
+                    <option value="3">2nd Previous</option>
+                    <option value="4">3rd Previous</option>
+                  </select>
+                </td>
+                <td>point</td>
+                <td class="visible-on-hover"><button v-on:click="removeRule(index)">Remove</button></td>
+              </tr>
+            </table>
+          </div>
+          <div class="align-center" v-else>The next point will be randomly choosen</div>
+          <div class="align-center">
+            <td colspan="4"><button v-on:click="addRule">Add new rule</button></td>
+          </div>
+        </div>
     </div>
-    <!-- <script src="//unpkg.com/vue"></script> -->
-    <!-- <script src="vue.min.js"></script> -->
-    <script src="./canvas.js"></script>
-    <script src="./chaos.js"></script>
+    <script src="../js/vendor/vue.min.js"></script>
+    <script src="../js/canvas.js"></script>
+    <script src="../js/runner.js"></script>
+    <script src="../js/unikitty.js"></script>
+    <script src="chaos.js"></script>
+    <script>
+
+      const ui = new Vue({
+        el: '#settings',
+        data: {
+          sides: 5,
+          distance: 0.5,
+          rules: [
+            { points: 0, previous: 1 },
+            { points: 1, previous: 2 }
+          ]
+        },
+        watch: {
+        },
+        methods: {
+          addRule: function () {
+            this.rules.push({ points: 0, previous: 1 });
+          },
+          removeRule: function (idx) {
+            this.rules.splice(idx, 1);
+          }
+        }
+      });
+    </script>
   </body>
 </html>
