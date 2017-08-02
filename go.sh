@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+PYTHON=python3
+PIP=pip3
+
 _red=$(     tput setaf 1 || tput AF 1 )
 _green=$(   tput setaf 2 || tput AF 2 )
 _yellow=$(  tput setaf 3 || tput AF 3 )
@@ -35,11 +38,11 @@ stream_pic() {
 generate() {
   rm -rf ./build
   blue 'Building folder structure'
-  python build.py dirs
+  $PYTHON build.py dirs
   blue 'Parsing templates'
-  python build.py tpls
+  $PYTHON build.py tpls
   blue 'Parsing markdown'
-  python build.py md
+  $PYTHON build.py md
   blue 'Generating css'
   css
   green 'Site build complete.'
@@ -54,20 +57,24 @@ generate_all() {
   green 'Full site build complete.'
 }
 
+sync() {
+  blue "Rsyncing to $1"
+  rsync -avh  ./build/* "$1:/srv/http/goodrobot/"
+}
+
 publish() {
   generate_all
-  yellow 'TODO: rsync'
-  #rsync ./build/* /srv/http/goodrobot/
+  sync "$1"
 }
 
 init() {
-  pip install pyyaml mistune pygments jinja2 libsass
-  pip install git+https://github.com/jdcantrell/ankh.git@master#egg=Ankh
+  $PIP install pyyaml mistune pygments jinja2 libsass
+  $PIP install git+https://github.com/jdcantrell/ankh.git@master#egg=Ankh
 }
 
 activate() {
   if [ ! -d "./env" ]; then
-    python3 -m venv ./env
+    $PYTHON -m venv ./env
     yellow "Creating virtual env, you may want to run ./go.sh init"
   fi
   source ./env/bin/activate
@@ -75,7 +82,13 @@ activate() {
 
 case "$1" in
   publish)
-    publish
+    publish "$2"
+    ;;
+  init)
+    init
+    ;;
+  sync)
+    sync "$2"
     ;;
   generate)
     generate_all
