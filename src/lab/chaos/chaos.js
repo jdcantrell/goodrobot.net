@@ -9,10 +9,11 @@ const passesRules = (rules, newIdx, ...indexes) => {
   return !rules.length || !rules.some(rule => !rule(newIdx, ...indexes));
 };
 
-const previousPoints = [];
+let previousPoints = [];
 const chaos = (xy, points, rules, motionRule, currentPointIndex = null) => {
   let idx = currentPointIndex;
   if (currentPointIndex === null) {
+    previousPoints = [];
     idx = Math.floor(Math.random() * points.length);
   }
 
@@ -93,7 +94,7 @@ const unit2pixel = (width, height, scale) => ({ x, y }) => [
 
 const drawValidPoints = (canvasCtx, rules, totalPoints, prevPoints) => {
 
-  canvasCtx.fillStyle = `rgba(${getBackgroundColor().join(',')}, 255)`;
+  canvasCtx.fillStyle = `rgba(${getBackgroundColor().join(',')}, 255)`; // eslint-disable-line
   canvasCtx.fillRect(0, 0, canvasCtx.canvas.width, canvasCtx.canvas.height);
 
   const polygonPoints = generatePoints(totalPoints);
@@ -103,23 +104,55 @@ const drawValidPoints = (canvasCtx, rules, totalPoints, prevPoints) => {
   canvasCtx.beginPath();
   canvasCtx.moveTo(...getCoords(polygonPoints[0]));
   polygonPoints.forEach(xy => canvasCtx.lineTo(...getCoords(xy)));
-  canvasCtx.lineTo(...getCoords(polygonPoints[0]))
-  canvasCtx.strokeStyle = 'rgb(216, 19, 127)';
+  canvasCtx.lineTo(...getCoords(polygonPoints[0]));
+  canvasCtx.strokeStyle = 'rgb(216, 19, 127)'; // eslint-disable-line
   canvasCtx.stroke();
 
   // draw previous points
-  const m = move(1.025);
-  const m2 = move(1.125);
-  prevPoints.forEach((idx, i) => {
-    const p = polygonPoints[idx];
-    const t = idx * 2 * (Math.PI / totalPoints);
+  let cPoint = { x: 0, y: 1 };
+  let cIdx = null;
+  let cPrev = []
+  prevPoints.reverse().forEach((i, idx) => {
+    const m = move(1.025 + (0.025 * i));
+    const m2 = move(1.125 + (0.025 * i));
+
+    // pick random next point
+    const c = chaos(cPoint, polygonPoints, rules, move(0.333), cIdx);
+    cPoint = c.xy;
+    cIdx = c.idx;
+    const p = polygonPoints[cIdx];
+
+    const t = cIdx * 2 * (Math.PI / totalPoints);
     canvasCtx.beginPath();
     canvasCtx.moveTo(...getCoords(m({ x: 0, y: 0 }, p)));
     canvasCtx.lineTo(...getCoords(m2({ x: 0, y: 0 }, { x: Math.cos(t + 0.05), y: Math.sin(t + 0.05) })));
     canvasCtx.lineTo(...getCoords(m2({ x: 0, y: 0 }, { x: Math.cos(t - 0.05), y: Math.sin(t - 0.05) })));
-    canvasCtx.fillStyle = `rgb(${getColor(i).join(',')})`;
-    canvasCtx.fill()
+    canvasCtx.fillStyle = `rgb(${getColor(i).join(',')})`; // eslint-disable-line
+    canvasCtx.fill();
   });
+
+  // handle current point
+  const m = move(1.025);
+  const m2 = move(1.125);
+
+  // pick random next point
+  console.log('prev', cIdx);
+  const c = chaos(cPoint, polygonPoints, rules, move(0.333), cIdx);
+  cPoint = c.xy;
+  cIdx = c.idx;
+  console.log('next', cIdx);
+  const p = polygonPoints[cIdx];
+
+  const t = cIdx * 2 * (Math.PI / totalPoints);
+  canvasCtx.beginPath();
+  canvasCtx.moveTo(...getCoords(m({ x: 0, y: 0 }, p)));
+  canvasCtx.lineTo(...getCoords(m2({ x: 0, y: 0 }, { x: Math.cos(t + 0.05), y: Math.sin(t + 0.05) })));
+  canvasCtx.lineTo(...getCoords(m2({ x: 0, y: 0 }, { x: Math.cos(t - 0.05), y: Math.sin(t - 0.05) })));
+  canvasCtx.fillStyle = `rgb(${getColor(0).join(',')})`; // eslint-disable-line
+  canvasCtx.fill();
+
+  // put points back in order
+  prevPoints.reverse();
 
   // fill in legend
   const legend = document.getElementById('ruleLegend');
@@ -132,13 +165,12 @@ const drawValidPoints = (canvasCtx, rules, totalPoints, prevPoints) => {
   lis.push('<li style="color:rgb(70, 255, 92)">Valid next point</li>');
   legend.innerHTML = `<ul>${lis.join('')}</ul>`;
 
-  // draw valid points
   for (let i = 0; i < totalPoints; i += 1) {
     if (passesRules(rules, i, ...prevPoints)) {
       const t = i * 2 * (Math.PI / totalPoints);
       canvasCtx.beginPath();
       canvasCtx.arc(...getCoords({ x: Math.cos(t), y: Math.sin(t) }), 5, 0, 2 * Math.PI);
-      canvasCtx.strokeStyle = 'rgb(70, 255, 92)';
+      canvasCtx.strokeStyle = 'rgb(70, 255, 92)'; // eslint-disable-line
       canvasCtx.stroke();
     }
   }
