@@ -1,16 +1,32 @@
 /* globals Canvas, Runner, getColor, getBackgroundColor */
 /* exported chaos */
 
-const passesRules = (rules, newIdx, ...indexes) => {
-  if (newIdx === null) {
+const passesRule = (totalPoints, rule, newIndex, ...indexes) => {
+  if (newIndex === null) {
     return false;
   }
 
-  return !rules.length || !rules.some(rule => !rule(newIdx, ...indexes));
+  if (indexes[0] === null) {
+    return true;
+  }
+
+  const fails = rule.some((invalidPoints, idx) => {
+    const baseIndex = indexes[idx];
+    if (typeof baseIndex === 'undefined') {
+      return false;
+    }
+    const currentInvalidPoints = invalidPoints.map((invalidPoint) => {
+      return (invalidPoint + baseIndex) % totalPoints;
+    });
+    return currentInvalidPoints.indexOf(newIndex) !== -1;
+  });
+
+
+  return !fails;
 };
 
 let previousPoints = [];
-const chaos = (xy, points, rules, motionRule, currentPointIndex = null) => {
+const chaos = (xy, points, rule, motionRule, currentPointIndex = null) => {
   let idx = currentPointIndex;
   if (currentPointIndex === null) {
     previousPoints = [];
@@ -20,7 +36,7 @@ const chaos = (xy, points, rules, motionRule, currentPointIndex = null) => {
   const newXY = motionRule(points[idx], xy);
   let newPointIndex = null;
   previousPoints.unshift(idx);
-  while (!passesRules(rules, newPointIndex, ...previousPoints)) {
+  while (!passesRule(points.length, rule, newPointIndex, ...previousPoints)) {
     newPointIndex = Math.floor(Math.random() * points.length);
   }
   if (previousPoints.length > 10) {
@@ -45,7 +61,6 @@ const generatePoints = numPoints => {
   return points;
 };
 
-const points = generatePoints(9);
 
 const canvas = new Canvas('canvas', [...getBackgroundColor(), 255]);
 canvas.setViewport({
@@ -61,29 +76,6 @@ const move = distance => (p1, p2) => ({
   x: ((p1.x + p2.x) * distance),
   y: ((p1.y + p2.y) * distance)
 });
-
-// rules
-const notAntiClockwise = (n, maxIdx) => (idx, previousIdx) => {
-  const dist = idx - previousIdx;
-  return (dist !== n) && (dist !== (n - (maxIdx)));
-};
-
-const previousPoint = (n, rule) => (...indexes) => rule(indexes[0], indexes[n]);
-
-const generateRules = (rulesDescriptions, totalPoints) => rulesDescriptions.map(
-  ({ points, previous }) => previousPoint(previous, notAntiClockwise(points, totalPoints - 1))
-);
-
-// rule solver
-const validPoints = (rules, totalPoints, prevPoints) => {
-  const passes = [];
-  for (let i = 0; i < totalPoints; i += 1) {
-    if (passesRules(rules, i, ...prevPoints)) {
-      passes.push(i);
-    }
-  }
-  return passes;
-};
 
 const ruleCtx = document.getElementById('ruleCanvas').getContext('2d');
 
@@ -166,7 +158,7 @@ const drawValidPoints = (canvasCtx, rules, totalPoints, prevPoints) => {
   legend.innerHTML = `<ul>${lis.join('')}</ul>`;
 
   for (let i = 0; i < totalPoints; i += 1) {
-    if (passesRules(rules, i, ...prevPoints)) {
+    if (passesRule(rules, i, ...prevPoints)) {
       const t = i * 2 * (Math.PI / totalPoints);
       canvasCtx.beginPath();
       canvasCtx.arc(...getCoords({ x: Math.cos(t), y: Math.sin(t) }), 5, 0, 2 * Math.PI);
@@ -178,21 +170,37 @@ const drawValidPoints = (canvasCtx, rules, totalPoints, prevPoints) => {
 
 
 canvas.flush();
-const rules = [
-  previousPoint(1, notAntiClockwise(1, points.length)),
-  previousPoint(1, notAntiClockwise(2, points.length)),
-  previousPoint(1, notAntiClockwise(4, points.length)),
-  previousPoint(1, notAntiClockwise(8, points.length)),
-  previousPoint(2, notAntiClockwise(1, points.length)),
-  previousPoint(2, notAntiClockwise(2, points.length)),
-  previousPoint(2, notAntiClockwise(4, points.length)),
-  previousPoint(2, notAntiClockwise(8, points.length)),
+
+const points = generatePoints(4);
+
+const rule = [
+  [0],
+  [3]
 ];
+
+
 const runner = new Runner();
 
 let iteration = 100000;
 let p = { x: 0, y: 1 };
 let idx = null;
+
+const vRules = (totalPoints, rule, prevPoints = []) => {
+  if (prevPoints.length !== rule.length + 1) {
+    let pass = false;
+    for (let i = 0; i < totalPoints; i += 1) {
+      if (passesRule(totalPoints, rule, i, ...prevPoints)) {
+        pass = pass || vRules(totalPoints, rule, [i, ...prevPoints]);
+      }
+    }
+    return pass;
+  }
+  return passesRule(totalPoints, rule, ...prevPoints);
+};
+
+
+if (vRules(points.length, rule)) {
+
 
 runner.onTick(() => {
   if (iteration === 100000) {
@@ -201,7 +209,7 @@ runner.onTick(() => {
   if (iteration > 0) {
     for (let i = 0; i < 1000; i += 1) {
       iteration -= 1;
-      const c = chaos(p, points, rules, move(0.333), idx);
+      const c = chaos(p, points, rule, move(0.5), idx);
       p = c.xy;
       canvas.setPoint(p.x, p.y, getColor(idx));
       idx = c.idx;
@@ -211,4 +219,6 @@ runner.onTick(() => {
 });
 
 runner.run();
-
+} else {
+  console.log('Rules are too restrictive.')
+}
