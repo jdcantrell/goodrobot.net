@@ -15,10 +15,13 @@ const passesRule = (totalPoints, rule, newIndex, ...indexes) => {
     if (typeof baseIndex === 'undefined') {
       return false;
     }
-    const currentInvalidPoints = invalidPoints.map((invalidPoint) => {
-      return (invalidPoint + baseIndex) % totalPoints;
-    });
-    return currentInvalidPoints.indexOf(newIndex) !== -1;
+
+    return (
+      invalidPoints
+        .map(invalidPoint => (invalidPoint + baseIndex) % totalPoints)
+        .indexOf(newIndex) !== -1
+    );
+
   });
 
 
@@ -103,8 +106,7 @@ const drawValidPoints = (canvasCtx, rules, totalPoints, prevPoints) => {
   // draw previous points
   let cPoint = { x: 0, y: 1 };
   let cIdx = null;
-  let cPrev = []
-  prevPoints.reverse().forEach((i, idx) => {
+  prevPoints.reverse().forEach(i => {
     const m = move(1.025 + (0.025 * i));
     const m2 = move(1.125 + (0.025 * i));
 
@@ -128,11 +130,9 @@ const drawValidPoints = (canvasCtx, rules, totalPoints, prevPoints) => {
   const m2 = move(1.125);
 
   // pick random next point
-  console.log('prev', cIdx);
   const c = chaos(cPoint, polygonPoints, rules, move(0.333), cIdx);
   cPoint = c.xy;
   cIdx = c.idx;
-  console.log('next', cIdx);
   const p = polygonPoints[cIdx];
 
   const t = cIdx * 2 * (Math.PI / totalPoints);
@@ -171,20 +171,6 @@ const drawValidPoints = (canvasCtx, rules, totalPoints, prevPoints) => {
 
 canvas.flush();
 
-const points = generatePoints(4);
-
-const rule = [
-  [0],
-  [3]
-];
-
-
-const runner = new Runner();
-
-let iteration = 100000;
-let p = { x: 0, y: 1 };
-let idx = null;
-
 const vRules = (totalPoints, rule, prevPoints = []) => {
   if (prevPoints.length !== rule.length + 1) {
     let pass = false;
@@ -199,26 +185,45 @@ const vRules = (totalPoints, rule, prevPoints = []) => {
 };
 
 
-if (vRules(points.length, rule)) {
-
-
-runner.onTick(() => {
-  if (iteration === 100000) {
-    canvas.clear();
-  }
-  if (iteration > 0) {
-    for (let i = 0; i < 1000; i += 1) {
-      iteration -= 1;
-      const c = chaos(p, points, rule, move(0.5), idx);
-      p = c.xy;
-      canvas.setPoint(p.x, p.y, getColor(idx));
-      idx = c.idx;
-    }
-  }
-  canvas.flush();
-});
-
+const runner = new Runner();
 runner.run();
-} else {
-  console.log('Rules are too restrictive.')
-}
+
+const render = (totalPoints, rule, motion) => {
+  const points = generatePoints(totalPoints);
+
+  let iteration = 100000;
+  let p = { x: 0, y: 1 };
+  let idx = null;
+
+  if (vRules(points.length, rule)) {
+    runner.onTick(() => {
+      if (iteration === 100000) {
+        canvas.clear();
+      }
+      if (iteration > 0) {
+        for (let i = 0; i < 1000; i += 1) {
+          iteration -= 1;
+          const c = chaos(p, points, rule, motion, idx);
+          p = c.xy;
+          canvas.setPoint(p.x, p.y, getColor(idx));
+          if (idx === null) {
+            console.log('int point', c.idx);
+          }
+          idx = c.idx;
+        }
+      }
+      canvas.flush();
+    });
+
+  } else {
+    console.log('Rules are too restrictive.');
+  }
+};
+
+render(10,
+ [
+   [0, 1, 2, 3, 5, 8],
+   [1, 3, 5, 7, 9]
+ ],
+ move(0.5)
+);

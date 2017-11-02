@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Chaos Game</title>
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/mono.css" />
     <style>
       /* theme overrides */
@@ -117,51 +118,46 @@
       <p>
         The Chaos Game is another way to generate fractals. In a lot of ways it is similar to IFS
         fractals.
-
       </p>
+      <div class="align-center">
+        <ul class="list-inline pbm align-center">
+          <li><button id="sierpinski">Sierpinski</button></li>
+        </ul>
+      </div>
+
+      <canvas id="canvas" width="700" height="700"></canvas>
+
+      <div class="flex-container row">
+        <canvas style="display:none" id="ruleCanvas" width="200" height="200"></canvas>
+        <div class="flex-1" id="ruleLegend"></div>
+      </div>
+
+      <div id="settings">
+        <div>
+          <label for="sides">Polygon Sides: </label>
+          <input id="sides" v-model.number="sides" type="text" value="4">
+        </div>
+        <div>
+          <label for="distance">Move Distance:</label>
+          <input id="distance" v-model.number="distance" type="text" value="0.5">
+        </div>
+        <div v-if="rules && rules.length">
+          The next point cannot be:
+          <table>
+            <tr class="hover-hide" v-for="(rule, index) in rules">
+              <td class="hover-hide" v-for="pIdx in sides">
+                <label><input type="checkbox" value="true" v-on:click="updateRule(index, pIdx - 1, $event)" v-model="rule[pIdx - 1]">{{ pIdx - 1 }}</label>
+              </td>
+              <td class="visible-on-hover"><button v-on:click="removeRule(index)">Remove</button></td>
+            </tr>
+          </table>
+        </div>
+        <div class="align-center" v-else>The next point will be randomly choosen</div>
         <div class="align-center">
-          <ul class="list-inline pbm align-center">
-            <li><button id="sierpinski">Sierpinski</button></li>
-          </ul>
+          <td colspan="4"><button v-on:click="addRule">Add new rule</button></td>
         </div>
-        <canvas id="canvas" width="700" height="700"></canvas>
-        <div class="flex-container row">
-          <canvas id="ruleCanvas" width="200" height="200"></canvas>
-          <div class="flex-1" id="ruleLegend"></div>
-        </div>
-        <div id="settings">
-          <div>
-            <label for="sides">Polygon Sides: </label>
-            <input id="sides" v-model.number="sides" type="text" value="4">
-          </div>
-          <div>
-            <label for="distance">Move Distance:</label>
-            <input id="distance" v-model.number="distance" type="text" value="0.5">
-          </div>
-          <div v-if="rules && rules.length">
-            The next point cannot be:
-            <table>
-              <tr class="hover-hide" v-for="(rule, index) in rules">
-                <td><input type="text" v-model.number="rule.points" value="0"></td>
-                <td>point(s) to the right of the</td>
-                <td>
-                  <select v-model="rule.previous">
-                    <option selected value="0">current</option>
-                    <option value="1">previous</option>
-                    <option value="2">2nd Previous</option>
-                    <option value="3">3rd Previous</option>
-                  </select>
-                </td>
-                <td>point</td>
-                <td class="visible-on-hover"><button v-on:click="removeRule(index)">Remove</button></td>
-              </tr>
-            </table>
-          </div>
-          <div class="align-center" v-else>The next point will be randomly choosen</div>
-          <div class="align-center">
-            <td colspan="4"><button v-on:click="addRule">Add new rule</button></td>
-          </div>
-        </div>
+      </div>
+
     </div>
     <script src="../js/vendor/vue.min.js"></script>
     <script src="../js/canvas.js"></script>
@@ -176,22 +172,42 @@
           sides: 5,
           distance: 0.5,
           rules: [
-            { points: 0, previous: 0 },
-            { points: 1, previous: 1 }
+            {0: false, 1: true, 2: false, 3: false, 4: true},
+            {0: false, 1: true, 2: false, 3: false, 4: true},
           ]
         },
         watch: {
+          sides: function () {
+            this.rules = this.rules.map(rule => {
+              const r = {};
+              for (var i = 0; i < this.sides; i += 1) {
+                r[i] = !!rule[i];
+              }
+              return r;
+            });
+          },
           rules: {
             handler: function ruleHandler() {
-              const rules = generateRules(this.rules);
-              const prevPoints = Object.values(this.rules.map(({ previous }) => previous).reduce((acc, v) => { acc[v] = v; return acc; }, {}));
-              console.log('prev', prevPoints);
-              drawValidPoints(ruleCtx, rules, this.sides, prevPoints)
+              const rule = this.rules.map(r => {
+                return Object.keys(r).reduce(
+                  ((invalids, key) => {
+                    if (r[key]) { invalids.push(parseInt(key, 10)); }
+                   return invalids;
+                  }),
+                  []
+                );
+              });
+              console.log('render', parseInt(this.sides, 10), rule, move(parseFloat(this.distance)));
+              render(parseInt(this.sides, 10), rule, move(parseFloat(this.distance)));
             },
             deep: true
           }
         },
         methods: {
+          updateRule: function (ruleIndex, point, event) {
+            console.log(event.target.checked, this.rules[ruleIndex]);
+            this.rules[ruleIndex][point] = event.target.checked;
+          },
           addRule: function () {
             this.rules.push({ points: 0, previous: 1 });
           },

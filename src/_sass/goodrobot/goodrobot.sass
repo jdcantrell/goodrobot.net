@@ -1,0 +1,49 @@
+$font-family: "Calibri", "Helvetica", sans-serif
+$body-color: #6e6b5e
+$body-background-color: #fafafa
+
+$anchor-color: #6486C2
+$anchor-color-hover: #6486C2
+$caption-color: #6486C2
+$font-size: 16px
+$border-color: #ccc
+$border: 1px solid $border-color
+
+$background-color-active: #dff3ff
+$background-color-highlight: #a6dcfe
+
+$button-background-color: #f9f9f9
+$button-background-color-highlight: darken(#f9f9f9, 10%)
+$button-background-color-active: darken(#f9f9f9, 15%)
+
+$primary-background-color: #0087dd
+$primary-text-color: #fff
+
+
+$border-radius: 3px
+
+$paddings: ( l: 20px, m: 10px, s: 5px, n: 0 )
+
+
+@import '../reboot';
+
+@import './_box';
+@import './_buttons';
+@import './_layout';
+@import './_list';
+@import './_padding';
+@import './_table';
+@import './_toolbar';
+@import './_typography';
+
+
+a, a:link, a:active
+  font-weight: 400
+
+a:hover
+  text-decoration: underline
+
+h1, h2, h3, h4, h5, h6
+  color: #0bab04
+  font-family: "Menlo", "Consolas", monospace
+  font-weight: 400

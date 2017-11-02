@@ -1,0 +1,20 @@
+table
+  width: 100%
+  border-spacing: 0
+  border-collapse: separate
+
+  .collapsing
+    width: 1px
+    white-space: nowrap
+
+table.hover tbody>tr:hover
+  background-color: $background-color-active
+
+tr.row-highlight
+  background-color: $background-color-highlight
+
+td, th
+  padding: map-get($paddings, s)
+
+thead
+  text-align: left
