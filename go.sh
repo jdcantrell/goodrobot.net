@@ -1,9 +1,6 @@
 #!/bin/bash
 set -e
 
-PYTHON=python3
-PIP=pip3
-
 _red=$(     tput setaf 1 || tput AF 1 )
 _green=$(   tput setaf 2 || tput AF 2 )
 _yellow=$(  tput setaf 3 || tput AF 3 )
@@ -19,6 +16,7 @@ css() {
   mkdir -p ./build/css
   sassc ./src/_sass/gxl/gxl.sass ./build/css/gxl.css
   sassc ./src/_sass/mono/mono.sass ./build/css/mono.css
+  sassc ./src/_sass/goodrobot/goodrobot.sass ./build/css/goodrobot.css
 }
 
 link() {
@@ -38,11 +36,11 @@ stream_pic() {
 generate() {
   rm -rf ./build
   blue 'Building folder structure'
-  $PYTHON build.py dirs
+  python build.py dirs
   blue 'Parsing templates'
-  $PYTHON build.py tpls
+  python build.py tpls
   blue 'Parsing markdown'
-  $PYTHON build.py md
+  python build.py md
   blue 'Generating css'
   css
   green 'Site build complete.'
@@ -67,25 +65,10 @@ publish() {
   sync "$1"
 }
 
-init() {
-  $PIP install pyyaml mistune pygments jinja2 libsass
-  $PIP install git+https://github.com/jdcantrell/ankh.git@master#egg=Ankh
-}
-
-activate() {
-  if [ ! -d "./env" ]; then
-    $PYTHON -m venv ./env
-    yellow "Creating virtual env, you may want to run ./go.sh init"
-  fi
-  source ./env/bin/activate
-}
 
 case "$1" in
   publish)
     publish "$2"
-    ;;
-  init)
-    init
     ;;
   sync)
     sync "$2"
@@ -101,9 +84,6 @@ case "$1" in
     ;;
   link)
     link
-    ;;
-  activate)
-    activate
     ;;
   *)
     red "Sorry, I don't know that command :-("

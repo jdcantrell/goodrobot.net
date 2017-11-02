@@ -1,8 +1,9 @@
 To get started:
 
-pip install fabric, jinja2, mistune, pygments pyyaml, libsass
-pip install git+https://github.com/jdcantrell/ankh.git@master#egg=Ankh
+pip install pipenv
+pipenv install
+pipenv shell
 
 Then you should be able to successfully:
 
-fab generate
+./go.sh generate

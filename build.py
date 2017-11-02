@@ -5,7 +5,7 @@ import re
 import shutil
 
 from jinja2 import Environment, FileSystemLoader
-from jinja2.exceptions import TemplateNotFound
+from jinja2.exceptions import TemplateNotFound, TemplateError
 
 import yaml
 import mistune
@@ -62,11 +62,14 @@ def tpls():
 
         print("Generating %s" % dest)
         template = env.get_template(src.replace('src/', ''))
-        html = template.render()
+        try:
+            html = template.render()
 
-        destfile = codecs.open(dest, "w", "utf-8")
-        destfile.write(html)
-        destfile.close()
+            destfile = codecs.open(dest, "w", "utf-8")
+            destfile.write(html)
+            destfile.close()
+        except TemplateError as err:
+            print(" !!~ could not parse template: %s" % err)
 
 
 def strip_yaml(file_content):

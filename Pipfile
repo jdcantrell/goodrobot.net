@@ -1,0 +1,25 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+"Jinja2" = "*"
+mistune = "*"
+Pygments = "*"
+PyYAML = "*"
+libsass = "*"
+requests = "*"
+ankh = {git = "https://github.com/jdcantrell/ankh.git", ref = "master"}
+
+
+[dev-packages]
+
+
+
+[requires]
+
+python_version = "3.6"
