@@ -1,0 +1,48 @@
+
+.align-center
+  text-align: center
+  justify-content: center
+
+.align-right
+  text-align: right
+  justify-content: right
+
+.align-left
+  text-align: left
+  justify-content: left
+
+//flex
+.flex-container
+  align-items: center
+  justify-content: center
+  display: flex
+  &.column
+    flex-direction: column
+  &.row
+    flex-direction: row
+
+
+  >.start
+    align-items: center
+    justify-content: flex-start
+    display: flex
+
+  >.end
+    align-items: center
+    justify-content: flex-end
+    display: flex
+
+  >.flex-1
+    flex-basis: auto
+    flex-shrink: 0
+    flex-grow: 1
+
+  >.flex-2
+    flex-basis: auto
+    flex-shrink: 0
+    flex-grow: 2
+
+  >.flex-3
+    flex-basis: auto
+    flex-shrink: 0
+    flex-grow: 3

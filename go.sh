@@ -15,7 +15,7 @@ green() { echo "$_green$1$reset"; }
 css() {
   mkdir -p ./build/css
   sassc ./src/_sass/gxl/gxl.sass ./build/css/gxl.css
-  sassc ./src/_sass/mono/mono.sass ./build/css/mono.css
+  sassc ./src/_sass/mono/mono-light.sass ./build/css/mono-light.css
   sassc ./src/_sass/goodrobot/goodrobot.sass ./build/css/goodrobot.css
 }
 

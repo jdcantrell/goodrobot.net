@@ -1,0 +1,48 @@
+
+button, .button
+  background-color: $button-background-color
+  border-radius: $border-radius
+  border: $border
+  font-family: $font-family
+  font-size: $font-size
+  padding: map-get($paddings, m)
+  cursor: pointer
+
+  &:hover
+    background-color: $button-background-color-highlight
+
+  &:active, &.active
+    background-color: $button-background-color-active
+
+  &.primary
+    background-color: $button-primary-background-color
+    border-radius: $border-radius
+    padding: map-get($paddings, m)
+    color: $button-primary-color
+    border: $border
+    border-color: darken($button-primary-background-color, 20%)
+
+    &:hover
+      background-color: $button-primary-background-color-highlight
+
+    &:active, &.active
+      background-color: $button-primary-background-color-active
+.button-group
+  font-size: 0
+  display: inline-block
+
+  button, .button
+    border-radius: 0
+    border-left-width: 0
+    border-right-width: 0
+
+    &:first-child
+      border-top-left-radius: $border-radius
+      border-bottom-left-radius: $border-radius
+      border-left-width: 1px !important
+
+    &:last-child
+      border-top-right-radius: $border-radius
+      border-bottom-right-radius: $border-radius
+      border-right-width: 1px !important
+
