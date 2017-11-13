@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'vga';
+  src: url('fonts/pxplus_ibm_vga8-webfont.woff2') format('woff2'),
+  url('fonts/pxplus_ibm_vga8-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html, body {
+  font-family: 'vga' !important;
+}

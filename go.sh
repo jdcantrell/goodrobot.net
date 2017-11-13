@@ -16,6 +16,7 @@ css() {
   mkdir -p ./build/css
   sassc ./src/_sass/gxl/gxl.sass ./build/css/gxl.css
   sassc ./src/_sass/mono/mono-light.sass ./build/css/mono-light.css
+  sassc ./src/_sass/mono/mono-dark.sass ./build/css/mono-dark.css
   sassc ./src/_sass/goodrobot/goodrobot.sass ./build/css/goodrobot.css
 }
 
