@@ -1,40 +1,16 @@
-$font-color: $c07
-$body-color: $font-color
-$body-background-color: $c00
-$font-size: 16px
-
-$anchor-color-hover: $c08
-$anchor-color: $c08
-
-$background-color-active: $c12
-$background-color-highlight: $c01
-
-$border-color: $c07
-$border-radius: 3px
-$border: 1px solid $border-color
-
-$button-background-color: $c02
-$button-background-color-active: lighten($c02, 15%)
-$button-background-color-highlight: lighten($c02, 10%)
-$button-primary-background-color: $c12
-$button-primary-color: $c00
-$button-primary-background-color-active: lighten($c12, 15%)
-$button-primary-background-color-highlight: lighten($c12, 10%)
-
-$caption-color: $c08
-
-$paddings: ( l: 20px, m: 10px, s: 5px, n: 0 )
 
 @import '../reboot';
 
 @import './_box';
 @import './_buttons';
+@import './_forms';
 @import './_layout';
 @import './_list';
 @import './_padding';
 @import './_table';
 @import './_toolbar';
 @import './_typography';
+@import './_selection';
 
 
 html,
@@ -45,7 +21,7 @@ body
   padding: 0
   margin: 0
 
-input
+input, select
   font-size: $font-size
   font-family: $font-family
   color: $font-color
@@ -69,6 +45,25 @@ input
   background-color: $page-header-title-background-color
   display: inline-block
   font-weight: bold
+
+  a
+    color: $page-header-title-color
+
+.page-footer
+  background-color: $page-footer-background-color
+  color: $page-footer-color
+  width: 100%
+  margin-top: 2em
+
+.page-footer-title
+  padding: 0 1em
+  color: $page-footer-title-color
+  background-color: $page-footer-title-background-color
+  display: inline-block
+  font-weight: bold
+
+  a
+    color: $page-footer-title-color
 
 .post-content img
   max-width: 700px

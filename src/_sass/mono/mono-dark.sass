@@ -18,11 +18,32 @@ $c13: #796af5
 $c14: #bb60ea
 $c15: #c720ca
 
+
+
 $font-family: Menlo, Consolas, monospace
 
-$page-header-background-color: $c02
+$page-header-background-color: $c01
 $page-header-color: $c06
 $page-header-title-background-color: $c12
 $page-header-title-color: $c07
+
+$page-footer-background-color: $c01
+$page-footer-color: $c06
+$page-footer-title-color: $c01
+$page-footer-title-background-color: $c13
+
+@import './_variables';
+
+body
+  font-size: $font-size
+
+$button-background-color: #342f38
+$button-background-color-active: lighten($button-background-color, 15%)
+$button-background-color-highlight: lighten($button-background-color, 10%)
+
+$button-primary-color: $c00
+$button-primary-background-color-active: lighten($button-primary-background-color, 15%)
+$button-primary-background-color-highlight: lighten($button-primary-background-color, 10%)
+
 
 @import './_mono';

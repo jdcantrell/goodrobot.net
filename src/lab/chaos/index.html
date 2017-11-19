@@ -3,76 +3,8 @@
   <head>
     <title>Chaos Game</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/mono.css" />
+    <link rel="stylesheet" type="text/css" href="/css/mono-dark.css" />
     <style>
-      /* theme overrides */
-      body {
-        background-color: #2e2a31;
-        color: #bcbabe;
-      }
-
-      input {
-        color: #bcbabe;
-      }
-
-      h1 { font-weight: normal; }
-
-      button {
-        border-color: #bcbabe;
-        color: #bcbabe;
-        background-color: #342f38;
-      }
-
-      button:hover {
-        color: #bcbabe;
-        background-color: #3c3641;
-      }
-
-      button.active, button:active {
-        background-color: #342f38;
-        color: #796af5;
-        border-color: #796af5;
-      }
-
-      .text-highlight {
-        color: #f5f4f7 !important;
-      }
-
-      ::selection {
-        color: #4a464d;
-        background-color: #149bda;
-      }
-      ::-moz-selection {
-        color: #4a464d;
-        background-color: #149bda;
-      }
-
-
-      .inverse {
-        color: #4a464d;
-        background-color: #149bda;
-      }
-
-      .inverse a, .inverse a:visited {
-        color: #4a464d;
-      }
-
-      .background-highlight {
-        background-color: #4a464d;
-      }
-
-      a {
-        color: #d8137f;
-        text-decoration: none;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      a:visited {
-        color: #bb60ea;
-      }
 
       /* custom */
       #canvas {
@@ -83,48 +15,23 @@
       }
 
       input {
-        flex: 1;
         max-width: 3em;
-        text-align: right;
-        margin: 5px;
-        border: none;
-        border-bottom: solid 2px rgba(188, 186, 190,.3);
-        background-color: transparent;
       }
 
-      select {
-        font-size: 16px;
-        font-family: Menlo, Consolas, monospace;
-        padding: 0px 4px;
-      }
-
-      .hover-hide .visible-on-hover {
-        visibility: hidden;
-      }
-      .hover-hide:hover .visible-on-hover {
-        visibility: visible;
-      }
     </style>
 
   </head>
   <body>
-    <div class="align-right pam">
-      <a href="/">
-        goodrobot.net
-      </a>
-    </div>
+    <header class="page-header">
+      <span class="page-header-title"><a href="/">goodrobot.net</a></span>
+      Chaos fractal playground
+    </header>
     <div id="content" class="content">
       <h1>Chaos Game</h1>
       <p>
         The Chaos Game is another way to generate fractals. In a lot of ways it is similar to IFS
         fractals.
       </p>
-      <div class="align-center">
-        <ul class="list-inline pbm align-center">
-          <li><button id="sierpinski">Sierpinski</button></li>
-        </ul>
-      </div>
-
       <canvas id="canvas" width="700" height="700"></canvas>
 
       <div class="flex-container row">
@@ -132,9 +39,9 @@
         <div class="flex-1" id="ruleLegend"></div>
       </div>
 
-      <div id="settings">
+      <div class="" id="settings">
         <div>
-          <label for="sides">Polygon Sides: </label>
+          <label for="sides">Points: </label>
           <input id="sides" v-model.number="sides" type="text" value="4">
         </div>
         <div>
@@ -142,11 +49,11 @@
           <input id="distance" v-model.number="distance" type="text" value="0.5">
         </div>
         <div v-if="rules && rules.length">
-          The next point cannot be:
+          The next point cannot be n vertices away:
           <table>
-            <tr class="hover-hide" v-for="(rule, index) in rules">
-              <td class="hover-hide" v-for="pIdx in sides">
-                <label><input type="checkbox" value="true" v-on:click="updateRule(index, pIdx - 1, $event)" v-model="rule[pIdx - 1]">{{ pIdx - 1 }}</label>
+            <tr class="hover-hide" v-for="(rule, index) in rules" :key="index">
+              <td class="hover-hide" v-for="pIdx in sides" :key="pIdx">
+                <label><input type="checkbox" value="true" v-model="rule[pIdx - 1]">{{ pIdx - 1 }}</label>
               </td>
               <td class="visible-on-hover"><button v-on:click="removeRule(index)">Remove</button></td>
             </tr>
@@ -154,26 +61,29 @@
         </div>
         <div class="align-center" v-else>The next point will be randomly choosen</div>
         <div class="align-center">
-          <td colspan="4"><button v-on:click="addRule">Add new rule</button></td>
+          <td colspan="4"><button v-on:click="addRule">Add rules for next previous point</button></td>
         </div>
       </div>
 
     </div>
+    <footer class="page-footer">
+      <span class="page-footer-title">lab</span>
+      <a href="/lab/ifs/">ifs</a> - <a href="/lab/mandelbrot/">mandelbrot</a>
+    </footer>
+
     <script src="../js/vendor/vue.min.js"></script>
     <script src="../js/canvas.js"></script>
     <script src="../js/runner.js"></script>
     <script src="../js/unikitty.js"></script>
     <script src="chaos.js"></script>
     <script>
-
       const ui = new Vue({
         el: '#settings',
         data: {
-          sides: 5,
+          sides: 10,
           distance: 0.5,
           rules: [
-            {0: false, 1: true, 2: false, 3: false, 4: true},
-            {0: false, 1: true, 2: false, 3: false, 4: true},
+            {0: true, 1: true, 2: true, 3: true, 5: true, 8: true }
           ]
         },
         watch: {
@@ -197,7 +107,6 @@
                   []
                 );
               });
-              console.log('render', parseInt(this.sides, 10), rule, move(parseFloat(this.distance)));
               render(parseInt(this.sides, 10), rule, move(parseFloat(this.distance)));
             },
             deep: true
@@ -209,7 +118,7 @@
             this.rules[ruleIndex][point] = event.target.checked;
           },
           addRule: function () {
-            this.rules.push({ points: 0, previous: 1 });
+            this.rules.push({ });
           },
           removeRule: function (idx) {
             this.rules.splice(idx, 1);
