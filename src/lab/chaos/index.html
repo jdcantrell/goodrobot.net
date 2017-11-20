@@ -68,7 +68,7 @@
     </div>
     <footer class="page-footer">
       <span class="page-footer-title">lab</span>
-      <a href="/lab/ifs/">ifs</a> - <a href="/lab/mandelbrot/">mandelbrot</a>
+      <a href="/lab/ifs/">ifs</a> - <a href="/lab/mandelbrot.html">mandelbrot</a>
     </footer>
 
     <script src="../js/vendor/vue.min.js"></script>
@@ -77,6 +77,24 @@
     <script src="../js/unikitty.js"></script>
     <script src="chaos.js"></script>
     <script>
+
+      const renderChaos = (rawRules, distanceStr, sidesStr) => {
+        const rules = rawRules.map(r => {
+          return Object.keys(r).reduce(
+            ((invalids, key) => {
+            if (r[key]) { invalids.push(parseInt(key, 10)); }
+            return invalids;
+          }),
+          []
+          );
+        });
+        const distance = parseFloat(distanceStr);
+        const sides = parseInt(sidesStr, 10)
+        if (!isNaN(distance) && distance > 0 && !isNaN(sides) && sides > 0) {
+          render(sides, rules, move(distance));
+        }
+      }
+
       const ui = new Vue({
         el: '#settings',
         data: {
@@ -96,18 +114,12 @@
               return r;
             });
           },
+          distance: function () {
+            renderChaos(this.rules, this.distance, this.sides);
+          },
           rules: {
             handler: function ruleHandler() {
-              const rule = this.rules.map(r => {
-                return Object.keys(r).reduce(
-                  ((invalids, key) => {
-                    if (r[key]) { invalids.push(parseInt(key, 10)); }
-                   return invalids;
-                  }),
-                  []
-                );
-              });
-              render(parseInt(this.sides, 10), rule, move(parseFloat(this.distance)));
+              renderChaos(this.rules, this.distance, this.sides);
             },
             deep: true
           }
