@@ -44,11 +44,23 @@ def build_dirs():
             pass
 
 
+def should_process_dir(subdir):
+    ignore_dirs = [
+        '{}_'.format(os.path.sep),  # ignore dirs that start with _
+        '.git',
+        'node_modules',
+    ]
+
+    if any(ignore_dir in subdir for ignore_dir in ignore_dirs):
+        return False
+    return True
+
+
 def tpls():
     tpls = []
     for subdir, dirs, files in os.walk('src'):
         build_dir = subdir.replace('src', 'build', 1)
-        if subdir.find(os.path.join('', '_')) == -1:
+        if should_process_dir(subdir):
             for file in files:
                 if (file.find('_') != 0
                    and os.path.splitext(file)[1] == '.html'):
