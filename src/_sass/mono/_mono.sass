@@ -39,16 +39,25 @@ input, select
   color: $page-header-color
   width: 100%
   margin-bottom: 1em
+  text-align: center
 
 .page-header-title
   padding: 0 1em
   color: $page-header-title-color
+  display: block
   background-color: $page-header-title-background-color
-  display: inline-block
   font-weight: bold
 
   a
     color: $page-header-title-color
+
+@media (min-width: 500px)
+  .page-header
+    text-align: left
+
+  .page-header-title
+    display: inline-block
+
 
 .page-footer
   background-color: $page-footer-background-color
