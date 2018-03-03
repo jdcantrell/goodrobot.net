@@ -4,7 +4,10 @@
     "browser": true,
     "node": false
   },
-  "extends": "airbnb-base",
+  "extends": [
+    "airbnb-base",
+    "prettier"
+  ],
   "rules": {
     "arrow-body-style": [2, "as-needed"],
     "arrow-parens": [2, "as-needed"],

@@ -6,6 +6,6 @@
   font-style: normal;
 }
 
-html, body {
+html, body, pre {
   font-family: 'vga' !important;
 }
