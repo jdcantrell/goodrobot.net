@@ -12,13 +12,14 @@ tags:
 
 Here is my preferred setup for recoding music through a microphone on Fedora.
 I've been playing guitar for about a year now and have slowly been learning the
-way to setup my system so that it works more often than not.
+way to setup my system so that it works more often than not. At the time of this
+writing this should be fairly up-to-date for Fedora 28.
 
 ##Decisions
 
 When getting started there are so many decisions to make even before you get
 into the actual act of creating music. Many of my decisions where made based
-off the best information I could find, recommendations from friends and my
+off the best information I could find and recommendations from friends and my
 guitar teacher. Once you start researching audio equipment and software it is
 as if everything starts speaking a new language. Here's things I've either
 decided on based on the best research I could do (with the realization that I
@@ -32,7 +33,7 @@ First up hardware:
   and a curse.
 - A hefty PC mostly built for playing games - I haven't bought any specific
   hardware for audio recording aside for the USB microphone. I've looked into
-  getting a more studio-minded soundcard but since my microphone works over USB
+  getting a more studio-minded soundcard but since my microphone works over USB,
   Linux is going to see it as its own soundcard and at that point unless you're
   going to switch to a microphone that connects over XT (or w/e) it doesn't
   seem to make sense to upgrade anything else.
@@ -42,15 +43,14 @@ First up hardware:
   headphones while the microphone records just your instrument. The Blue Yeti
   microphone has a headphone jack that once you plug-in it automatically
   monitors what's coming in to the headphone.
-- Actual instruments - I have a couple guitars, one is electric and instead of
+- Actual instruments - I have a few guitars, one is electric and instead of
   plugging directly into my computer I use the microphone to record my amp.
-  This seems to work really well for me. I've not ran into limitations of
-  adding effects to the guitar audio afterwards.
+  This seems to work really well for me.
 - Additionally I have a midi controller, I don't fully use it to the all of its
   capabilities but it works well for when I want to use a keyboard to make
-  music. (Also I the controller I bought came with a lite version of Bitwig,
+  music. (Also the controller I bought came with a lite version of Bitwig,
   which I then was able to upgrade to the full version for a cheaper total
-  price compared to buying a midi controller and a DAW).
+  price compared to buying a separate midi controller and a DAW).
 
 So that covers the bare essentials needed, the midi controller is definitely
 optional but as you play more with DAWs it's probably worth it to pick up a
@@ -78,8 +78,8 @@ Next up is software, since we're using Fedora we're limited on a few things.
   allows for an simple way to determine your systemic audio latency. This is a
   good DAW to get started with. It also has good documentation for many
   questions you will definitely run into.
-- jack-audio-plugin-examples - One of the challenges with jackd/DAWs is that
-  they only work with a single soundcard. This is problematic if you want sound
+- jack-audio-plugin-examples - One of the challenges with jackd is that
+  it only works with a single soundcard. This is problematic if you want sound
   from your sound card but want to use a USB microphone since the microphone
   will appear as a separate soundcard. The solution here is to alsa_out to add
   your system soundcard as another audio sink in jackd. This way you can have
@@ -113,7 +113,7 @@ alsa_out -j "speakers" -d "hw:$CARD_NUMBER,$DEVICE_NUMBER"
 ```
 
 You will want to change `Audioengine` to the correct name for your soundcard. On
-my system it's named `Audioengine D2` your will probably be different. You can
+my system it's named `Audioengine D2` yours will probably be different. You can
 inspect the output of `aplay -l` to determine this. If you prefer you can adjust
 the last `"speakers"` name in the last line to whatever makes sense for your
 setup. This is just a name so that you know where audio will go when routed to
@@ -141,7 +141,8 @@ even cheaper than buying the full version out-right.
 
 I mentioned LinVST, I use this so that I can run EZDrummer within Bitwig.
 Getting that setup is probably a whole other article, but it can be done and
-once you get it working things seem to work surprisingly well.
+once you get it working things seem to work surprisingly well. (Though you have
+to go through the process again when wine gets updated)
 
 Things I wish for:
 
