@@ -5,14 +5,14 @@
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
-            "implementation_version": "3.6.4",
+            "implementation_version": "3.6.5",
             "os_name": "posix",
             "platform_machine": "x86_64",
             "platform_python_implementation": "CPython",
-            "platform_release": "16.7.0",
+            "platform_release": "17.5.0",
             "platform_system": "Darwin",
-            "platform_version": "Darwin Kernel Version 16.7.0: Mon Nov 13 21:56:25 PST 2017; root:xnu-3789.72.11~1/RELEASE_X86_64",
-            "python_full_version": "3.6.4",
+            "platform_version": "Darwin Kernel Version 17.5.0: Fri Apr 13 19:32:32 PDT 2018; root:xnu-4570.51.2~1/RELEASE_X86_64",
+            "python_full_version": "3.6.5",
             "python_version": "3.6",
             "sys_platform": "darwin"
         },
@@ -35,10 +35,10 @@
         },
         "certifi": {
             "hashes": [
-                "sha256:14131608ad2fd56836d33a71ee60fa1c82bc9d2c8d98b7bdbc631fe1b3cd1296",
-                "sha256:edbc3f203427eef571f79a7692bb160a2b0f7ccaa31953e99bd17e307cf63f7d"
+                "sha256:9fa520c1bacfb634fa7af20a76bcbd3d5fb390481724c597da32c719a7dca4b0",
+                "sha256:13e698f54293db9f89122b0581843a782ad0934a4fe0172d2a980ba77fc61bb7"
             ],
-            "version": "==2018.1.18"
+            "version": "==2018.4.16"
         },
         "chardet": {
             "hashes": [
@@ -63,21 +63,23 @@
         },
         "libsass": {
             "hashes": [
-                "sha256:cf0d65c34442aa0c9b8ed83a20564cedec99f2d09a0da4744b21740d44492d07",
-                "sha256:94b11ddd402a994b43d4ca5d19e30a2bfb01ed7e91499aa10e499cb3c8306f93",
-                "sha256:e06d362e64144e979746331df26098978366e8650d50998f9e216961cc224c97",
-                "sha256:fa146a0d549cd8fb9631b60d62a7cb263270188d2ffac429d13560f66b6afb37",
-                "sha256:bdba58d917a928d49a573974933838883687c86f12296175abc0d426cf46921a",
-                "sha256:ac186b4311b76649f19d3130486e911b8bf01c4dacf6e8c1e8060c8645437d10",
-                "sha256:9842cddcecff2fabafa4b017fe87908d28fc12024424add949c1585077047b38",
-                "sha256:1923e70dba59607a4774dbc60c0f5d9c2976d4db914c24164d18efe9f6056e9e",
-                "sha256:b8149ed1032d892e38276f2b39e5620d00f43221bc90400eb8e9957dd413732d",
-                "sha256:86112b5f6f8e7f22a2a9182546574fdc196f7f8b668507d7d01410b45ab649b4",
-                "sha256:f6e16f7f0d3d7fd4f002376ac7eb73595c928495dce6be55d72ad8fac78efac1",
-                "sha256:207225a3d7c1f098d1b385834b09961a4ce7fc16e7dc953b7f0777cda07445eb",
-                "sha256:e988a34ae331802bae74990bd4acf428a2eedd6a3853f4a6057c1f5329fe60d2"
+                "sha256:1cf80c04a77d36fd77f00b1ae0a269eee780d971fabd9d493b15d30de9857ae5",
+                "sha256:1d55dfe8e91a15a7d72d7f8aca16e74da36899e70d911af66d7184f1c82e2b39",
+                "sha256:a0ffca466b35fb57f2afe1f1c5fd39b4c51a4107596d28ef8c0d3bb0962244b5",
+                "sha256:62771c8ead9227579891814dd714be645243741aa23e5cb232ac0c245cf29a37",
+                "sha256:cbd5ee83d3603a2b2c2937d8f06acc07b30fd22642ea2460c966d4fd6217f1d0",
+                "sha256:7b9e7179b5f4fc32bc716f86e9ccaeb48ab90e7eb6648b339440346733af8828",
+                "sha256:0f2e421d3e5a53833243e0a5f2cf7ebe9812725a7f27a797c38f3c7190ce2a82",
+                "sha256:4dcd5b546bed977276f97eb7a2a13cb7cbf0a38d672e7b5525b7587c8cabcf27",
+                "sha256:e00b6c6d75a6e912990cbc23d48ddfdbfefc3e400c20be6593988839292248c5",
+                "sha256:23755425149fe0f576fd0ab7bcd151fe09400b2d980fe176c28f6c19e053c830",
+                "sha256:1b74aff85f1560d629a070552ec67f9f0ff9a47446ffafddafad9944f7589ae1",
+                "sha256:4a434d5b713b97c4141fb71c59341d4ebff8669114b14c626af51e145a48710e",
+                "sha256:de1eae502764b3dde294d6652a0046489cf31008de190c4dd8d05e7f4b5e0d71",
+                "sha256:ed8beef197efc6e6ab0ad03cea0885b31cc11f226290783649b4dafe1fb2ea27",
+                "sha256:727fb84326ffa930bc09fad8b706e77ada4d13b3adf35cce134962a434d7eccb"
             ],
-            "version": "==0.13.6"
+            "version": "==0.14.5"
         },
         "markupsafe": {
             "hashes": [

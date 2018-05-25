@@ -143,6 +143,25 @@
 
       <div class="box background-basic">
         <h2 class="js-link-toggle box-header box-header-technical type-inverse background-highlight">
+          Lwn.net
+          <div class="box-header-actions">
+            <i class="icon-link" title="Switch to comment links"></i>
+          </div>
+        </h2>
+        <ul class="box-body list-links list-no-bullets touch touch-table">
+          {% for entry in get_entries('https://lwn.net/headlines/newrss') %}
+          <li>
+            <a href="{{entry.link}}" comment-link="{{entry.comments}}">{{entry.title}}</a>
+            <a class="comment" href="{{entry.comments}}">
+              <i class="icon-comment"></i>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="box background-basic">
+        <h2 class="js-link-toggle box-header box-header-technical type-inverse background-highlight">
           Lobste.rs
           <div class="box-header-actions">
             <i class="icon-link" title="Switch to comment links"></i>
@@ -220,6 +239,10 @@
               'https://kate.io/feed.xml',
               'https://heredragonsabound.blogspot.com/feeds/posts/default',
               'https://research.swtch.com/feed.atom',
+              'http://rachelbythebay.com/w/atom.xml',
+              'http://seenaburns.com/feed.xml',
+              'http://www.charlesetc.com/index.xml',
+              'https://venam.nixers.net/blog/feed.xml',
             ]) %}
             {{ time_entry(entry) }}
           {% endfor %}
@@ -264,6 +287,7 @@
             'http://faitherinhicks.tumblr.com/rss',
             'http://fabiensanglard.net/rss.xml',
             'https://brandonsanderson.com/feed/',
+            'https://www.schneier.com/blog/atom.xml'
           ]) %}
             {{ time_entry(entry) }}
           {% endfor %}
