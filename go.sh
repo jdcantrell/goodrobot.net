@@ -88,5 +88,11 @@ case "$1" in
     ;;
   *)
     red "Sorry, I don't know that command :-("
+    echo '  publish server - build and sync to server'
+    echo '  sync server - sync to server'
+    echo '  generate - generate everything'
+    echo '  generate - only the site (not stream pages)'
+    echo '  css - generate css'
+    echo '  link - symlink the labs folder'
     ;;
 esac

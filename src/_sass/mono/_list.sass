@@ -6,9 +6,10 @@ ul
   list-style: disc
 
 .list-inline
+
   padding: 0
   margin: 0
-  display: flex
+  display: inline-flex
 
   li
     display: inline-block
@@ -17,4 +18,25 @@ ul
 .list-separate
   list-style-type: ' | '
 
+.list-nav
+  padding: 0
+  margin: 0
+  display: inline-flex
 
+  li
+    display: inline-block
+    margin-right: 3ch
+
+    &.current
+      background-color: $c05
+      padding-left: .5ch
+      padding-right: .5ch
+      margin-right: 2.5ch
+      margin-left: -.5ch
+
+    &:hover
+      background-color: $c05
+      padding-left: .5ch
+      padding-right: .5ch
+      margin-right: 2.5ch
+      margin-left: -.5ch
