@@ -80,6 +80,9 @@ case "$1" in
   generate_site)
     generate
     ;;
+  stream)
+    stream
+    ;;
   css)
     css
     ;;
@@ -91,7 +94,7 @@ case "$1" in
     echo '  publish server - build and sync to server'
     echo '  sync server - sync to server'
     echo '  generate - generate everything'
-    echo '  generate - only the site (not stream pages)'
+    echo '  generate_site - only the site (not stream pages)'
     echo '  css - generate css'
     echo '  link - symlink the labs folder'
     ;;

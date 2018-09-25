@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}hello, goodrobot.net{% endblock %}</title>
+    <link href='/css/mono-dark.css' rel='stylesheet' type='text/css'>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="content-language" content="en" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#c42d1a">
+    <meta name="theme-color" content="#00389D">
+
+
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <header class="page-header" role="navigation">
+       <a title="goodrobot.net" href="/">
+        <img style="position:absolute;right:0px;top:3px" alt="goodrobot" src='/images/goodrobot.png'>
+      </a>
+      <span class="page-header-title">goodrobot</span>
+
+      <span class="page-sub-title">labs</span>
+
+      <div class="bg-c02" style="padding-left:1ch" >
+      <ul class="list-nav" >
+        <li><a class="c00" href="/lab/chaos">Chaos</a></li>
+        <li><a class="c00" href="/lab/ifs">IFS</a></li>
+        <li><a class="c00" href="/lab/gxl">Styles</a></li>
+        <li><a class="c00" href="/lab/mandelbrot">Mandelbrot</a></li>
+        <li><a class="c00" href="/lab/rogue">Rogue</a></li>
+        <li><a class="c00" href="/lab/sera">Sera</a></li>
+      </ul>
+      </div>
+    </header>
+    <div class="content" >
+    {% block content %}{% endblock %}
+    </div>
+
+    <footer id="footer">
+      <ul class='list-inline'>
+        <li><a href="/">home</a>
+        <li><a href="/log">log</a>
+        <li><a href="/stream">links</a>
+      </ul>
+    </footer>
+    {% block javascript %}{% endblock %}
+  </body>
+</html>

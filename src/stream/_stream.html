@@ -1,4 +1,4 @@
-{% extends "_tpls/page.html" %}
+{% extends "_tpls/page-mono.html" %}
 {% block title %}Links and Things{% endblock %}
 
 {% block head %}
@@ -12,31 +12,6 @@
   }
   .comment .icon-comment {
     display: none;
-  }
-
-  /* because it is fun */
-  .box:nth-of-type(5n + 1) .background-highlight {
-    background-color: rgb(203, 77, 40);
-  }
-
-  .box:nth-of-type(5n + 2) .background-highlight {
-    background-color: rgb(227, 183, 34);
-  }
-
-  .box:nth-of-type(5n + 3) .background-highlight {
-    background-color: #2a9e22;
-  }
-
-  .box:nth-of-type(5n + 4) .background-highlight {
-    background-color: #389dff;
-  }
-
-  .box:nth-of-type(5n + 5) .background-highlight {
-    background-color: #5c50ad;
-  }
-
-  .box {
-    margin-bottom: 30px;
   }
 
   .js-link-toggle {
@@ -107,6 +82,15 @@
 
   }
 
+  article a {
+    color: rgb(108, 105, 110);
+  }
+
+  a .link-alt {
+    display: block;
+    font-size: 12px;
+  }
+
 </style>
 {% endblock %}
 
@@ -127,28 +111,17 @@
 </li>
 {% endmacro %}
 
-{% macro weather_icon(text) -%}
-  {% if text == 'NA' %}no-icon{% endif %}
-  {% if text == 'Fair' %}icon-sun{% endif %}
-  {% if text == 'A Few Clouds' %}icon-cloud-sun{% endif %}
-  {% if text == 'Overcast' %}icon-cloud-sun{% endif %}
-  {% if text == 'Mostly Cloudy' %}icon-cloud-sun{% endif %}
-  {% if text == 'Partly Cloudy' %}icon-cloud-sun{% endif %}
-  {% if text == 'Lt Rain' %}icon-rain{% endif %}
-{% endmacro %}
-
-
 {% block content %}
     <div class="readable-content content">
 
-      <div class="box background-basic">
-        <h2 class="js-link-toggle box-header box-header-technical type-inverse background-highlight">
+      <article>
+        <h2 class="js-link-toggle c11">
           Lwn.net
           <div class="box-header-actions">
             <i class="icon-link" title="Switch to comment links"></i>
           </div>
         </h2>
-        <ul class="box-body list-links list-no-bullets touch touch-table">
+        <ul class="list-bullets touch touch-table">
           {% for entry in get_entries('https://lwn.net/headlines/newrss') %}
           <li>
             <a href="{{entry.link}}" comment-link="{{entry.comments}}">{{entry.title}}</a>
@@ -158,10 +131,10 @@
           </li>
           {% endfor %}
         </ul>
-      </div>
+      </article>
 
-      <div class="box background-basic">
-        <h2 class="js-link-toggle box-header box-header-technical type-inverse background-highlight">
+      <article>
+        <h2 class="js-link-toggle c08">
           Lobste.rs
           <div class="box-header-actions">
             <i class="icon-link" title="Switch to comment links"></i>
@@ -177,10 +150,10 @@
           </li>
           {% endfor %}
         </ul>
-      </div>
+      </article>
 
-      <div class="box background-basic">
-        <h2 class="js-link-toggle box-header box-header-technical type-inverse background-highlight">
+      <article>
+        <h2 class="js-link-toggle c10">
           Hacker News
           <div class="box-header-actions">
             <i class="icon-link" title="Switch to comment links"></i>
@@ -196,10 +169,10 @@
           </li>
           {% endfor %}
         </ul>
-      </div>
+      </article>
 
-      <div class="box background-basic">
-        <h2 class="js-link-toggle box-header box-header-technical type-inverse background-highlight">
+      <article>
+        <h2 class="js-link-toggle c12">
           r/Programming
           <div class="box-header-actions">
             <i class="icon-link" title="Switch to comment links"></i>
@@ -215,10 +188,10 @@
             </li>
           {% endfor %}
         </ul>
-      </div>
+      </article>
 
-      <div class="box background-basic">
-        <h2 class="box-header box-header-technical type-inverse background-highlight">
+      <article>
+        <h2 class="c14">
           Coding
         </h2>
         <ul class="box-body list-links list-no-bullets touch touch-table">
@@ -244,10 +217,10 @@
             {{ time_entry(entry) }}
           {% endfor %}
         </ul>
-      </div>
+      </article>
 
-      <div class="box background-basic">
-        <h2 class="box-header box-header-technical type-inverse background-highlight">
+      <article>
+        <h2 class="c13">
           Gaming
         </h2>
         <ul class="box-body list-links list-no-bullets touch touch-table">
@@ -266,10 +239,10 @@
             {{ time_entry(entry) }}
           {% endfor %}
         </ul>
-      </div>
+      </article>
 
-      <div class="box background-basic">
-        <h2 class="box-header box-header-technical type-inverse background-highlight">
+      <article>
+        <h2 class="c12">
           Interesting Things
         </h2>
         <ul class="box-body list-links list-no-bullets touch touch-table">
@@ -278,7 +251,6 @@
             'http://feeds2.feedburner.com/PatrickRothfuss',
             'http://feeds.feedburner.com/wwdn',
             'http://blog.iso50.com/feed/',
-            'http://oktotally.tumblr.com/rss',
             'http://chiptuneswin.com/blog/feed/',
             'http://scienceblogs.com/startswithabang/feed/',
             'http://faitherinhicks.tumblr.com/rss',
@@ -289,10 +261,10 @@
             {{ time_entry(entry) }}
           {% endfor %}
         </ul>
-      </div>
+      </article>
 
-      <div class="box background-basic">
-        <h2 class="box-header box-header-technical type-inverse background-highlight">
+      <article>
+        <h2 class="c11">
           Pinboard
         </h2>
         <ul class="box-body list-links list-no-bullets touch touch-table">
@@ -307,7 +279,7 @@
           </li>
           {% endfor %}
         </ul>
-      </div>
+      </article>
 
     </div>
 
