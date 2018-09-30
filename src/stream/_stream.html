@@ -1,4 +1,6 @@
 {% extends "_tpls/page-mono.html" %}
+{% set current_page = "stream" %}
+{% set current_page_sub_title = "stream" %}
 {% block title %}Links and Things{% endblock %}
 
 {% block head %}
@@ -6,21 +8,10 @@
 <style type="text/css">
 
   /* custom stuff */
-  .comment {
-    color: #6e6b5e !important;
-    font-size: .6em;
-  }
-  .comment .icon-comment {
-    display: none;
-  }
-
   .js-link-toggle {
     cursor: pointer;
   }
 
-  #footer {
-    margin-top: 0px;
-  }
 
   .friend-link {
     font-size: 12px;
@@ -29,64 +20,34 @@
   }
 
   .content {
-    width: 600px;
-  }
-
-  @media(max-width: 600px) {
-    .hide-narrow {
-      display: none;
-    }
-  }
-
-  @media(-moz-touch-enabled), (pointer:coarse) {
-    .js-link-toggle i {
-      display: none;
-    }
-    a.comment {
-      width: 70px;
-      text-align: center;
-      font-size: 30px;
-      vertical-align: middle;
-    }
-    .comment .icon-comment {
-      display: inline-block;
-    }
-
-    /* overrides and tweaks */
-    .touch {
-      margin-bottom: 35px;
-    }
-    .touch-list li a:first-child, .touch-table li a:first-child {
-      padding-left: .5em;
-    }
-
-    .touch::last-child {
-      margin-bottom: 0
-    }
-
-    .time-ago {
-      padding: .5em 0;
-      width: 64px;
-      display: table-cell;
-      text-align: center;
-    }
-    .time-ago i{
-      font-size: 35px;
-      display: block;
-    }
-
-    .content {
-      width: 100%;
-      padding: 10px 5px 10px 5px;
-    }
-
+    width: 100%;
+    max-width: 600px;
   }
 
   article a {
-    color: rgb(108, 105, 110);
+    color: #bcbabe;
   }
 
-  a .link-alt {
+  a:hover {
+    text-decoration: none;
+  }
+
+  .list-bullets {
+    list-style: none;
+    margin-left: 5px;
+  }
+
+  .list-bullets li {
+    margin: 4px 0;
+  }
+
+  .list-bullets li:before {
+    content:'>';
+    margin-left: -2ch;
+    color: #666369;
+  }
+
+  .link-alt {
     display: block;
     font-size: 12px;
   }
@@ -98,7 +59,7 @@
 <li>
   <a href="{{entry.link}}">
     {{entry.title}}
-    <span class="link-alt">{{entry.feed_title}}
+    <span class="link-alt c03">{{entry.feed_title}}
       &ndash;
         {% if entry.time_unit == "New!" %}
         <i class="icon-star"></i> New
@@ -115,13 +76,10 @@
     <div class="readable-content content">
 
       <article>
-        <h2 class="js-link-toggle c11">
+        <h2 class="c11">
           Lwn.net
-          <div class="box-header-actions">
-            <i class="icon-link" title="Switch to comment links"></i>
-          </div>
         </h2>
-        <ul class="list-bullets touch touch-table">
+        <ul class="list-bullets">
           {% for entry in get_entries('https://lwn.net/headlines/newrss') %}
           <li>
             <a href="{{entry.link}}" comment-link="{{entry.comments}}">{{entry.title}}</a>
@@ -135,12 +93,9 @@
 
       <article>
         <h2 class="js-link-toggle c08">
-          Lobste.rs
-          <div class="box-header-actions">
-            <i class="icon-link" title="Switch to comment links"></i>
-          </div>
+          Lobste.rs<span class="comment-status"></span>
         </h2>
-        <ul class="box-body list-links list-no-bullets touch touch-table">
+        <ul class="list-bullets">
           {% for entry in get_entries('https://lobste.rs/rss') %}
           <li>
             <a href="{{entry.link}}" comment-link="{{entry.comments}}">{{entry.title}}</a>
@@ -154,12 +109,9 @@
 
       <article>
         <h2 class="js-link-toggle c10">
-          Hacker News
-          <div class="box-header-actions">
-            <i class="icon-link" title="Switch to comment links"></i>
-          </div>
+          Hacker News<span class="comment-status"></span>
         </h2>
-        <ul class="box-body list-links list-no-bullets touch touch-table">
+        <ul class="list-bullets">
           {% for entry in get_entries('http://news.ycombinator.com/rss') %}
           <li>
             <a href="{{entry.link}}" comment-link="{{entry.comments}}">{{entry.title}}</a>
@@ -173,12 +125,9 @@
 
       <article>
         <h2 class="js-link-toggle c12">
-          r/Programming
-          <div class="box-header-actions">
-            <i class="icon-link" title="Switch to comment links"></i>
-          </div>
+          r/Programming<span class="comment-status"></span>
         </h2>
-        <ul class="box-body list-links list-no-bullets touch touch-table">
+        <ul class="list-bullets">
           {% for entry in get_entries('http://www.reddit.com/r/programming/.rss') %}
             <li>
               <a href="{{entry.description|find_link(1)}}" comment-link="{{entry.link}}">{{entry.title}}</a>
@@ -194,7 +143,7 @@
         <h2 class="c14">
           Coding
         </h2>
-        <ul class="box-body list-links list-no-bullets touch touch-table">
+        <ul class="list-bullets">
           {% for entry in time_sort([
               'http://feeds.feedburner.com/theendeavour',
               'http://eli.thegreenplace.net/feed/',
@@ -223,7 +172,7 @@
         <h2 class="c13">
           Gaming
         </h2>
-        <ul class="box-body list-links list-no-bullets touch touch-table">
+        <ul class="list-bullets">
           {% for entry in time_sort([
             'http://feeds.feedburner.com/RockPaperShotgun',
             'http://www.filfre.net/feed/',
@@ -245,7 +194,7 @@
         <h2 class="c12">
           Interesting Things
         </h2>
-        <ul class="box-body list-links list-no-bullets touch touch-table">
+        <ul class="list-bullets">
           {% for entry in time_sort([
             'http://www.goodmath.org/blog/feed/',
             'http://feeds2.feedburner.com/PatrickRothfuss',
@@ -267,13 +216,13 @@
         <h2 class="c11">
           Pinboard
         </h2>
-        <ul class="box-body list-links list-no-bullets touch touch-table">
+        <ul class="list-bullets">
           {% for entry in get_entries('http://feeds.pinboard.in/rss/u:jdcantrell', 10) %}
           <li>
           <a href="{{entry.link}}">
             {{entry.title}}
             {% if entry.description %}
-              <span class="link-alt">{{entry.description}}</span>
+            <span class="link-alt c03">{{entry.description}}</span>
             {% endif %}
           </a>
           </li>
@@ -295,10 +244,6 @@
           {{ weather.temp() }}&deg; in {{ weather.forecast_location() }}
         {% endfor %}
       </ul>
-
-      <div class="hide-narrow" style="float:right">
-         Try <a href="https://cronitor.io/">Cronitor.io</a>
-      </div>
 
       {% set logs = log() %}
       {% if logs %}
@@ -327,6 +272,7 @@
     //swap links
     var links = this.nextElementSibling.querySelectorAll('[comment-link]');
     var el, href, comment, original, idx;
+    var showingComments = false;
     for (idx = 0; idx < links.length; ++idx) {
       el = links[idx];
 
@@ -344,13 +290,18 @@
       }
       else {
         el.setAttribute('href', comment);
+        showingComments = true;
       }
     }
 
     //swap icons
-    var $i = this.querySelectorAll('i')[0];
-    $i.classList.toggle('icon-link');
-    $i.classList.toggle('icon-comment');
+    var $i = this.querySelectorAll('.comment-status')[0];
+    if (showingComments) {
+      $i.innerHTML = '[comments]';
+    }
+    else {
+      $i.innerHTML = '';
+    }
   }
 
   document.addEventListener('DOMContentLoaded', function (event) {

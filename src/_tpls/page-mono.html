@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html>
+{% set nav_items = nav_items|default([
+  ('/about/', 'about', 'about'),
+  ('/git/', 'git', 'git'),
+  ('/lab/', 'lab', 'lab'),
+  ('/log/', 'log', 'log'),
+  ('/', 'projects', 'projects'),
+  ('/stream/', 'stream', 'stream'),
+]) -%}
   <head>
     <title>{% block title %}hello, goodrobot.net{% endblock %}</title>
     <link href='/css/mono-dark.css' rel='stylesheet' type='text/css'>
@@ -25,16 +33,19 @@
       </a>
       <span class="page-header-title">goodrobot</span>
 
-      <span class="page-sub-title">labs</span>
+      {% if current_page_sub_title %}
+      <span class="page-sub-title">{{ current_page_sub_title }}</span>
+      {% endif %}
 
-      <div class="bg-c02" style="padding-left:1ch" >
+      <div class="page-nav">
       <ul class="list-nav" >
-        <li><a class="c00" href="/lab/chaos">Chaos</a></li>
-        <li><a class="c00" href="/lab/ifs">IFS</a></li>
-        <li><a class="c00" href="/lab/gxl">Styles</a></li>
-        <li><a class="c00" href="/lab/mandelbrot">Mandelbrot</a></li>
-        <li><a class="c00" href="/lab/rogue">Rogue</a></li>
-        <li><a class="c00" href="/lab/sera">Sera</a></li>
+        {% for href, id, name in nav_items %}
+        {% if current_page != id %}
+        <li {% if current_page == id %}class="active"{% endif %} >
+          <a href="{{ href|e }}">{{ name|e }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
       </ul>
       </div>
     </header>
@@ -42,11 +53,13 @@
     {% block content %}{% endblock %}
     </div>
 
-    <footer id="footer">
-      <ul class='list-inline'>
-        <li><a href="/">home</a>
-        <li><a href="/log">log</a>
-        <li><a href="/stream">links</a>
+    <footer class="page-footer">
+      <ul class='list-nav'>
+        {% for href, id, name in nav_items %}
+        <li {% if current_page == id %}class="active"{% endif %} >
+          <a href="{{ href|e }}">{{ name|e }}</a>
+        </li>
+        {% endfor %}
       </ul>
     </footer>
     {% block javascript %}{% endblock %}
