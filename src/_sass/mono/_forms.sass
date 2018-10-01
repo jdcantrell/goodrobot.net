@@ -7,3 +7,44 @@ input
 select
   padding: 0px 4px
 
+
+.checkbox
+  display: inline-block
+
+  input[type=checkbox]
+    cursor: pointer
+    opacity: 0
+
+    & + label::after
+      content: none
+
+    &:checked + label::after
+      content: "x"
+
+    &:focus + label::before
+      background-color: $input-background-color
+
+  label
+    cursor: pointer
+    position: relative
+    left: -36px
+    display: inline-block
+    padding-left: 32px
+
+    &::before
+      cursor: pointer
+      font-weight: bold
+      position: absolute
+      display: inline-block
+      left: 0
+      top: 0
+      content: "[ ]"
+
+    &::after
+      cursor: pointer
+      font-weight: bold
+      position: absolute
+      display: inline-block
+      content: "x"
+      left: 1ch;
+      top: 0px;

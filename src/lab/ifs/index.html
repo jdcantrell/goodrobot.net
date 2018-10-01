@@ -170,7 +170,10 @@
             <button v-on:click="addTransform">Add Transformation</button>
             <button v-on:click="removeTransform">Remove Last Transformation</button>
 
-            <label><input v-model="playground" type="checkbox">Playground Mode</label>
+            <div class="checkbox">
+              <input id="playground" v-model="playground" value="playground" type="checkbox">
+              <label for="playground">Playground Mode</label>
+            </div>
           </div>
         </div>
       </div>

@@ -42,7 +42,7 @@ input, select
   text-align: center
 
 .page-header-title
-  padding: 0 1em
+  padding: 0 1ch
   color: $page-header-title-color
   display: block
   background-color: $page-header-title-background-color
@@ -51,11 +51,26 @@ input, select
   a
     color: $page-header-title-color
 
+.page-sub-title
+  padding: 0 1ch
+  margin-left: -1ch
+  color: $page-sub-header-title-color
+  display: block
+  background-color: $page-sub-header-title-background-color
+  font-weight: bold
+
+.page-nav
+  background-color: $page-nav-background
+  padding-left: 1ch
+
+  a:hover
+    text-decoration: none
+
 @media (min-width: 500px)
-  .page-header
+  .page-header, .page-sub-header
     text-align: left
 
-  .page-header-title
+  .page-header-title, .page-sub-title
     display: inline-block
 
 
@@ -64,6 +79,7 @@ input, select
   color: $page-footer-color
   width: 100%
   margin-top: 2em
+  padding-left: 1ch
 
 .page-footer-title
   padding: 0 1em
