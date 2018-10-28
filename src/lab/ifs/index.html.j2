@@ -1,0 +1,183 @@
+{% extends "_tpls/page-lab.html" %}
+{% set current_page = "ifs" %}
+{% block title %}Iterated Function Systems{% endblock %}
+
+{% block head %}
+  <style>
+
+    /* custom */
+    canvas {
+      margin: auto;
+      display: block;
+      width: 700px;
+      height: 700px;
+    }
+
+    .matrix {
+      display: inline-block;
+      border-width: 2px ;
+      border-style: solid;
+    }
+
+    /* an attempt to make multi-line square brackets */
+    .m2x2 {
+      border-image: linear-gradient(
+      to right,
+      #bcbabe 5%,
+      #2e2a31 5%,
+      #2e2a31 95%,
+      #bcbabe 95%
+      ) 10;
+    }
+
+    .m2x1 {
+      border-image: linear-gradient(
+      to right,
+      #bcbabe 10%,
+      #2e2a31 10%,
+      #2e2a31 90%,
+      #bcbabe 90%
+      ) 10;
+    }
+
+    .row {
+      display: flex;
+    }
+
+    input {
+      max-width: 3em;
+    }
+
+    .matrix input {
+      max-width: 9em;
+    }
+
+
+    /* side by side mode */
+    .playground {
+      display: flex;
+      width: 100% !important;
+      max-width: 100%;
+      height: calc(100vh - 19px);
+      box-sizing: border-box;
+      padding-top: 10px;
+
+      font-size: 12px !important;
+    }
+
+    .playground button, .playground input {
+      font-size:12px;
+    }
+
+    .playground h1, .playground p {
+      display: none;
+    }
+
+    .playground canvas {
+      width: 100%;
+      flex: 1;
+      height: auto;
+      overflow: hidden;
+      padding-bottom: 10px;
+      padding-left: 10px;
+    }
+
+    .playground .left-column {
+      flex-direction: column;
+      display: flex;
+      flex: 1;
+    }
+
+    .playground .right-column {
+      flex: 1;
+    }
+  </style>
+{% endblock %}
+{% block content %}
+  <p>
+    Iterated function systems are a set of affine transformations
+    that are then called repeatedly and at random. These systems
+    often result in self-similar fractals. You can see a few
+    examples below, and also play with the transformations to see
+    what effect it has.
+    Check out <a
+      href="https://en.wikipedia.org/wiki/Iterated_function_system">Iterated
+      function systems</a> and <a
+      href="https://en.wikipedia.org/wiki/Barnsley_fern">Barnsley
+      fern</a> on Wikipedia for more details.
+  </p>
+  <div class="left-column">
+    <div class="align-center">
+      <ul class="list-inline pbm align-center">
+        <li><button class="active" id="barnsley">Barnsley</button></li>
+        <li><button id="sierpinski">Sierpinski</button></li>
+        <li><button id="pentigre">Pentigre</button></li>
+        <li><button id="pine">Pine</button></li>
+        <li><button id="dragon">Dragon</button></li>
+        <li><button id="crystal">Crystal</button></li>
+        <li><button id="tree">Tree</button></li>
+      </ul>
+    </div>
+    <canvas id="canvas" width="700" height="700"></canvas>
+  </div>
+  <div class="right-column">
+    <div class="ifs-form" id="functions">
+      <table>
+        <thead>
+          <tr>
+            <th>Probability</th>
+            <th class="align-center">Transform</th>
+            <th class="align-center">Translate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="f in fractal.ifs">
+            <td class="collapsing">
+              <input type="text" v-model.number="f.p" />%
+            </td>
+            <td class="align-center">
+              <div class="matrix m2x2">
+                <div class="row">
+                  <input type="text" v-model.number="f.transform[0]" />
+                  <input type="text" v-model.number="f.transform[1]" />
+                </div>
+                <div class="row">
+                  <input type="text" v-model.number="f.transform[2]" />
+                  <input type="text" v-model.number="f.transform[3]" />
+                </div>
+              </div>
+            </td>
+            <td class="align-center">
+              <div class="matrix m2x1">
+                <div class="row">
+                  <input type="text" v-model.number="f.translate[0]" />
+                </div>
+                <div class="row">
+                  <input type="text" v-model.number="f.translate[1]" />
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="align-center pvl">
+        <button v-on:click="addTransform">Add Transformation</button>
+        <button v-on:click="removeTransform">Remove Last Transformation</button>
+
+        <div class="checkbox">
+          <input id="playground" v-model="playground" value="playground" type="checkbox">
+          <label for="playground">Playground Mode</label>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  <script src="../js/vendor/vue.min.js"></script>
+  <script src="../js/canvas.js"></script>
+  <script src="../js/runner.js"></script>
+  <script src="../js/unikitty.js"></script>
+  <script src="ifs.js"></script>
+  <script src="main.js"></script>
+{% endblock %}
