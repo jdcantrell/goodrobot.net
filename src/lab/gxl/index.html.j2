@@ -1,33 +1,26 @@
-<!DOCTYPE html>
-<html lang="en" role="main">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>Styles</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/css/mono-light.css" />
-  </head>
-  <body class="readable-content">
-    <header class="page-header" role="navigation">
-      <span class="page-header-title">goodrobot</span>
+{% extends "_tpls/page-lab.html" %}
+{% set current_page = "gxl" %}
+{% block title %}Good Robot Experience Language{% endblock %}
 
-      <span class="page-sub-title">labs</span>
+{% block head %}
+  <style>
+    #rendering {
+      color:#fff;
+      text-shadow: 1px 1px 2px #000;
+      position: absolute;
+      margin-left: 5px;
+      z-index: 1;
+      display: none;
+    }
+  </style>
+{% endblock %}
 
-      <ul class="list-nav" >
-        <li><a href="/lab/chaos">Chaos</a></li>
-        <li><a href="/lab/ifs">IFS</a></li>
-        <li class="current"><a href="/lab/gxl">Styles</a></li>
-        <li><a href="/lab/mandelbrot">Mandelbrot</a></li>
-        <li><a href="/lab/rogue">Rogue</a></li>
-        <li><a href="/lab/sera">Sera</a></li>
-      </ul>
-
-    </header>
-    <div class="content" >
+{% block content %}
       <div>
         <label for="themeSelect">Theme:</label>
         <select id="themeSelect">
-          <option value="/css/mono-light.css">Mono</option>
           <option value="/css/mono-dark.css">Mono (dark)</option>
+          <option value="/css/mono-light.css">Mono</option>
           <option value="/css/gxl.css">Classic</option>
           <option value="/css/goodrobot.css">Goodrobot</option>
         </select>
@@ -315,7 +308,6 @@
 
       <h2>Colors</h2>
 
-    </div>
     <table style="margin:0 auto 32px; width: 900px">
       <thead>
         <tr>
@@ -645,12 +637,13 @@
         </tr>
       </tbody>
     </table>
+{% endblock %}
 
 
+{% block javascript %}
     <script type="text/javascript">
       document.getElementById('themeSelect').addEventListener('change', function (event) {
         document.querySelector('link[rel="stylesheet"]').setAttribute('href', this.value);
       });
     </script>
-  </body>
-</html>
+{% endblock %}

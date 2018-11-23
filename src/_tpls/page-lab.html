@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 {% set nav_items = nav_items|default([
-  ('/about/', 'about', 'about'),
-  ('/git/', 'git', 'git'),
-  ('/lab/', 'lab', 'lab'),
-  ('/log/', 'log', 'log'),
-  ('/', 'projects', 'projects'),
-  ('/stream/', 'stream', 'stream'),
+  ('/lab/chaos/', 'chaos', 'chaos'),
+  ('/lab/ifs/', 'ifs', 'ifs'),
+  ('/lab/mandelbrot/', 'mandelbrot', 'mandelbrot'),
+  ('/lab/gxl/', 'gxl', 'gxl'),
+  ('/lab/rogue/', 'rogue', 'rogue'),
 ]) -%}
   <head>
     <title>{% block title %}hello, goodrobot.net{% endblock %}</title>
@@ -14,6 +13,7 @@
 
     <meta charset="utf-8" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-language" content="en" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -37,9 +37,7 @@
        </a>
       </span>
 
-      {% if current_page_sub_title %}
-      <span class="page-sub-title">{{ current_page_sub_title }}</span>
-      {% endif %}
+      <span class="page-sub-title">lab</span>
 
       <div class="page-nav">
       <ul class="list-nav" >

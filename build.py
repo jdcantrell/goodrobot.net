@@ -63,10 +63,10 @@ def tpls():
         if should_process_dir(subdir):
             for file in files:
                 if (file.find('_') != 0
-                   and os.path.splitext(file)[1] == '.html'):
+                   and os.path.splitext(file)[1] == '.j2'):
                     tpls.append((
                         os.path.join(subdir, file),
-                        os.path.join(build_dir, file)
+                        os.path.join(build_dir, os.path.splitext(file)[0])
                     ))
 
     env = Environment(loader=FileSystemLoader(os.path.abspath('src')))

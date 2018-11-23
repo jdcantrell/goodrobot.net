@@ -500,7 +500,7 @@
 	      if (this.worker) {
 	        this.worker.terminate();
 	      }
-	      this.worker = new Worker('mandelbrot/build/mandelbrot_worker.js');
+	      this.worker = new Worker('build/mandelbrot_worker.js');
 	      this.worker.postMessage(['init', this.width, this.height]);
 	      var promise = new Promise(function (resolve, reject) {
 	        _this.worker.addEventListener('message', function (e) {
