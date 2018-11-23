@@ -66,12 +66,25 @@ input, select
   a:hover
     text-decoration: none
 
+.page-logo
+  display: flex
+  align-items: center
+  justify-content: center
+  position: absolute
+  height: 48px
+  width: 48px
+  left: 0
+
 @media (min-width: 500px)
   .page-header, .page-sub-header
     text-align: left
 
   .page-header-title, .page-sub-title
     display: inline-block
+
+  .page-logo
+    left: auto
+    right: 0
 
 
 .page-footer

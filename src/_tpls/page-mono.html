@@ -28,10 +28,14 @@
   </head>
   <body>
     <header class="page-header" role="navigation">
-       <a title="goodrobot.net" href="/">
-        <img style="position:absolute;right:0px;top:3px" alt="goodrobot" src='/images/goodrobot.png'>
+       <a class="page-logo" title="goodrobot.net" href="/">
+        <img alt="goodrobot" height="24px" src='/android-chrome-192x192.png'>
       </a>
-      <span class="page-header-title">goodrobot</span>
+      <span class="page-header-title">
+       <a  title="goodrobot.net" href="/">
+        goodrobot
+       </a>
+      </span>
 
       {% if current_page_sub_title %}
       <span class="page-sub-title">{{ current_page_sub_title }}</span>
