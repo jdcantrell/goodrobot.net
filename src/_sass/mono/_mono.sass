@@ -22,6 +22,11 @@ body
   padding: 0
   margin: 0
 
+body
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+
 input, select
   font-size: $font-size
   font-family: $font-family
@@ -31,7 +36,7 @@ input, select
 // site/blog post things
 .content
   max-width: 730px
-  margin: auto
+  margin: 32px auto auto auto
   padding: 0 15px
 
 .page-header
@@ -40,6 +45,9 @@ input, select
   width: 100%
   margin-bottom: 1em
   text-align: center
+
+  a:hover
+    text-decoration: none
 
 .page-header-title
   padding: 0 1ch
@@ -63,8 +71,6 @@ input, select
   background-color: $page-nav-background
   padding-left: 1ch
 
-  a:hover
-    text-decoration: none
 
 .page-logo
   display: flex
@@ -94,6 +100,9 @@ input, select
   margin-top: 2em
   padding-left: 1ch
 
+  a:hover
+    text-decoration: none
+
 .page-footer-title
   padding: 0 1em
   color: $page-footer-title-color
@@ -103,6 +112,7 @@ input, select
 
   a
     color: $page-footer-title-color
+
 
 .post-content img
   max-width: 700px

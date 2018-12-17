@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 {% set nav_items = nav_items|default([
   ('/about/', 'about', 'about'),
   ('/git/', 'git', 'git'),
@@ -27,7 +27,7 @@
     {% block head %}{% endblock %}
   </head>
   <body>
-    <header class="page-header" role="navigation">
+    <header class="page-header">
        <a class="page-logo" title="goodrobot.net" href="/">
         <img alt="goodrobot" height="24px" src='/android-chrome-192x192.png'>
       </a>
@@ -41,30 +41,32 @@
       <span class="page-sub-title">{{ current_page_sub_title }}</span>
       {% endif %}
 
-      <div class="page-nav">
-      <ul class="list-nav" >
-        {% for href, id, name in nav_items %}
-        {% if current_page != id %}
-        <li {% if current_page == id %}class="active"{% endif %} >
-          <a href="{{ href|e }}">{{ name|e }}</a>
-        </li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-      </div>
+      <nav class="page-nav">
+        <ul class="list-nav">
+          {% for href, id, name in nav_items %}
+          {% if current_page != id %}
+          <li {% if current_page == id %}class="active"{% endif %} >
+            <a href="{{ href|e }}">{{ name|e }}</a>
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </nav>
     </header>
-    <div class="content" >
+    <div class="content" role="main">
     {% block content %}{% endblock %}
     </div>
 
     <footer class="page-footer">
-      <ul class='list-nav'>
-        {% for href, id, name in nav_items %}
-        <li {% if current_page == id %}class="active"{% endif %} >
-          <a href="{{ href|e }}">{{ name|e }}</a>
-        </li>
-        {% endfor %}
-      </ul>
+      <nav>
+        <ul class='list-nav' >
+          {% for href, id, name in nav_items %}
+          <li {% if current_page == id %}class="active"{% endif %} >
+            <a href="{{ href|e }}">{{ name|e }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
     </footer>
     {% block javascript %}{% endblock %}
   </body>

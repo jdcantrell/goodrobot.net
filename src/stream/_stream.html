@@ -12,6 +12,9 @@
     cursor: pointer;
   }
 
+  h1 {
+    font-size: 24px;
+  }
 
   .friend-link {
     font-size: 12px;
@@ -30,6 +33,11 @@
 
   a:hover {
     text-decoration: none;
+  }
+
+  a:active, a:focus {
+    outline: 0;
+    background-color: #4a464d;
   }
 
   .list-bullets {
@@ -76,73 +84,61 @@
     <div class="readable-content content">
 
       <article>
-        <h2 class="c11">
+        <h1 class="c11">
           Lwn.net
-        </h2>
+        </h1>
         <ul class="list-bullets">
           {% for entry in get_entries('https://lwn.net/headlines/newrss') %}
           <li>
             <a href="{{entry.link}}" comment-link="{{entry.comments}}">{{entry.title}}</a>
-            <a class="comment" href="{{entry.comments}}">
-              <i class="icon-comment"></i>
-            </a>
           </li>
           {% endfor %}
         </ul>
       </article>
 
       <article>
-        <h2 class="js-link-toggle c08">
+        <h1 class="js-link-toggle c08">
           Lobste.rs<span class="comment-status"></span>
-        </h2>
+        </h1>
         <ul class="list-bullets">
           {% for entry in get_entries('https://lobste.rs/rss') %}
           <li>
             <a href="{{entry.link}}" comment-link="{{entry.comments}}">{{entry.title}}</a>
-            <a class="comment" href="{{entry.comments}}">
-              <i class="icon-comment"></i>
-            </a>
           </li>
           {% endfor %}
         </ul>
       </article>
 
       <article>
-        <h2 class="js-link-toggle c10">
+        <h1 class="js-link-toggle c10">
           Hacker News<span class="comment-status"></span>
-        </h2>
+        </h1>
         <ul class="list-bullets">
           {% for entry in get_entries('http://news.ycombinator.com/rss') %}
           <li>
             <a href="{{entry.link}}" comment-link="{{entry.comments}}">{{entry.title}}</a>
-            <a class="comment" href="{{entry.comments}}">
-              <i class="icon-comment"></i>
-            </a>
           </li>
           {% endfor %}
         </ul>
       </article>
 
       <article>
-        <h2 class="js-link-toggle c12">
+        <h1 class="js-link-toggle c12">
           r/Programming<span class="comment-status"></span>
-        </h2>
+        </h1>
         <ul class="list-bullets">
           {% for entry in get_entries('http://www.reddit.com/r/programming/.rss') %}
             <li>
               <a href="{{entry.description|find_link(1)}}" comment-link="{{entry.link}}">{{entry.title}}</a>
-              <a class="comment" href="{{entry.link}}">
-                <i class="icon-comment"></i>
-              </a>
             </li>
           {% endfor %}
         </ul>
       </article>
 
       <article>
-        <h2 class="c14">
+        <h1 class="c14">
           Coding
-        </h2>
+        </h1>
         <ul class="list-bullets">
           {% for entry in time_sort([
               'http://feeds.feedburner.com/theendeavour',
@@ -169,9 +165,9 @@
       </article>
 
       <article>
-        <h2 class="c13">
+        <h1 class="c13">
           Gaming
-        </h2>
+        </h1>
         <ul class="list-bullets">
           {% for entry in time_sort([
             'http://feeds.feedburner.com/RockPaperShotgun',
@@ -191,9 +187,9 @@
       </article>
 
       <article>
-        <h2 class="c12">
+        <h1 class="c12">
           Interesting Things
-        </h2>
+        </h1>
         <ul class="list-bullets">
           {% for entry in time_sort([
             'http://www.goodmath.org/blog/feed/',
@@ -213,9 +209,9 @@
       </article>
 
       <article>
-        <h2 class="c11">
+        <h1 class="c11">
           Pinboard
-        </h2>
+        </h1>
         <ul class="list-bullets">
           {% for entry in get_entries('http://feeds.pinboard.in/rss/u:jdcantrell', 10) %}
           <li>
