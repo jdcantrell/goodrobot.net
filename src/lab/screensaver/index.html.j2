@@ -62,11 +62,11 @@
         </p>
         <p>
           If you would like to have this on your own page download <a
-          href="src/screensaver.js">screensaver.js</a> and then add the
+          href="js/screensaver.js">screensaver.js</a> and then add the
           following:
           <pre>
             &lt;script src="screensaver.js"&gt;&lt;/script&gt;
-            &lt;script&gt;screensaver().initialize();&lt;/script&gt;
+            &lt;script&gt;screensaver().initialize({ delay: 5000 });&lt;/script&gt;
           </pre>
         </p>
 
@@ -77,10 +77,11 @@
 
 
 {% block javascript %}
-    <script src='js/bsplines.js'></script>
+    <script src='js/screensaver.js'></script>
     <script>
-       const splines = bsplines();
-       const saver = splines('demo');
-       saver.start();
+      const handlers = screensaver().initialize({
+        canvas: document.getElementById('demo')
+      })
+      handlers.start();
     </script>
 {% endblock %}
