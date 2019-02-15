@@ -1,4 +1,4 @@
-{% extends '_tpls/page.html' %}
+{% extends '_tpls/page-mono.html' %}
 
 {% block title %}{{ title }}{% endblock %}
 {% block head %}

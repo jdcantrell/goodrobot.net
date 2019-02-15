@@ -17,6 +17,7 @@ css() {
   pysassc ./src/_sass/gxl/gxl.sass ./build/css/gxl.css
   pysassc ./src/_sass/mono/mono-light.sass ./build/css/mono-light.css
   pysassc ./src/_sass/mono/mono-dark.sass ./build/css/mono-dark.css
+  pysassc ./src/_sass/mono/mono-gruvbox.sass ./build/css/mono-gruvbox.css
   pysassc ./src/_sass/goodrobot/goodrobot.sass ./build/css/goodrobot.css
 }
 
