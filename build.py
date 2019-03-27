@@ -104,7 +104,7 @@ def strip_yaml(file_content):
 
     if yaml_start != -1 and yaml_end != -1:
         yaml_src = file_content[yaml_start:yaml_end]
-        yamls = yaml.load_all(yaml_src)
+        yamls = yaml.safe_load_all(yaml_src)
         template_vars = next(yamls)
 
         file_content = file_content.replace(yaml_src, '')
