@@ -35,14 +35,18 @@ input, select
 
 // site/blog post things
 .content
-  max-width: 730px
+  max-width: 100%;
+  width: 730px;
   margin: 0 auto auto auto
   padding: 0 15px
 
   figure,
   figure img
-    max-width: 730px
-    width: 100%
+    max-width: 700px
+
+
+    @media (max-width: 730px)
+      max-width: 100%
 
 .page-header
   background-color: $page-header-background-color
@@ -118,6 +122,16 @@ input, select
   a
     color: $page-footer-title-color
 
+.post-heading
+  font-size: 24px
+  line-height: 32px
+  margin-bottom: 16px
+
+  time
+    display: block
+    font-size: 16px
+    line-height: 16px
+    color: $c03
 
 .post-content img
   max-width: 700px
