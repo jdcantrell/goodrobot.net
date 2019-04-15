@@ -7,11 +7,17 @@ import shutil
 from jinja2 import Environment, FileSystemLoader
 from jinja2.exceptions import TemplateNotFound, TemplateError
 
+from PIL import Image
+
 import yaml
 import mistune
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
+
+
+def print_error(msg):
+    print(' \033[91m !!~\033[00m {}'.format(msg))
 
 
 def build_dirs():
@@ -40,8 +46,10 @@ def build_dirs():
     for src, dest in file_list:
         try:
             shutil.copyfile(src, dest)
-        except:
-            pass
+        except OSError:
+            print("Could not copy %s to %s, do we have write permissions?" % (src, dest))
+        except shutil.SameFileError:
+            print("Could not copy %s to %s, another file exists!" % (src, dest))
 
 
 def should_process_dir(subdir):
@@ -54,6 +62,37 @@ def should_process_dir(subdir):
     if any(ignore_dir in subdir for ignore_dir in ignore_dirs):
         return False
     return True
+
+
+def template_generate_preview(value, size=None):
+    thumb_dir = os.path.join('build', 'images', 'thumbs')
+    try:
+        os.mkdir(thumb_dir)
+    except OSError:
+        pass
+
+    image_path = os.path.join('src', value)
+    if os.path.isfile(image_path):
+        im = Image.open(image_path)
+
+        im.thumbnail((730, 730), Image.ANTIALIAS)
+        thumb_filename = '{}.jpg'.format(
+            os.path.splitext(os.path.basename(image_path))[0]
+        )
+        thumb_path = os.path.join(
+            'build', 'images', 'thumbs', thumb_filename
+        )
+        thumb_web_path = '/'.join([
+            '/images', 'thumbs', thumb_filename
+        ])
+        rgb_im = im.convert('RGB')
+        rgb_im.save(thumb_path, 'jpeg', quality=85)
+        print("Exported %s" % thumb_path)
+
+        return thumb_web_path
+    else:
+        print_error("Could not find %s to create preview" % image_path)
+        return 'missing.png'
 
 
 def tpls():
@@ -70,6 +109,7 @@ def tpls():
                     ))
 
     env = Environment(loader=FileSystemLoader(os.path.abspath('src')))
+    env.filters['preview'] = template_generate_preview
     for src, dest in tpls:
 
         print("Generating %s" % dest)
@@ -81,7 +121,7 @@ def tpls():
             destfile.write(html)
             destfile.close()
         except TemplateError as err:
-            print(" !!~ could not parse template: %s" % err)
+            print_error("could not parse template: %s" % err)
 
 
 def strip_yaml(file_content):
