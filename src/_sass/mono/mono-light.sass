@@ -1,42 +1,66 @@
-//theme colors
-// unikitty light
-$c00: #fff
-$c01: #e1e1e2
-$c02: #c3c4c5
-$c03: #a7a5a8
-$c04: #89878b
-$c05: #6c696e
-$c06: #4f4b51
-$c07: #322d34
+//theme colors unikitty light
+$c00: #f9f4f2
+$c01: #fbf1c7
+$c02: #ebdbb2
+$c03: #d5c4a1
+$c04: #bdae93
+$c05: #a89984
+$c06: #3c3836
+$c07: #282828
 
-$c08: #d8137f
-$c09: #d65407
-$c10: #dc8a0e
-$c11: #17ad98
-$c12: #149bda
-$c13: #775dff
-$c14: #aa17e6
-$c15: #e013d0
+$c08: #cc241d
+$c09: #d65d0e
+$c10: #d79921
+$c11: #689d6a
+$c12: #65c6c4
+$c13: #408ab4
+$c14: #34699a
+$c15: #113f67
 
-@import './_variables';
+// TODO
+// - find accent colors (warm and bright)
+// - find background colors (warm and cozy)
+// - make sure link color is pleasant
+// - mock up photo card
+// - make sure forms and buttons still look good
+// - think about alternative fonts
+
+
 $font-family: Menlo, Consolas, monospace
 
-$page-header-background-color: $c06
-$page-header-color: $c02
-
-$page-header-title-background-color: $c12
-$page-sub-header-title-background-color: #2e65ab
-$page-nav-background: $c05
-
+$page-header-background-color: $c13
+$page-header-color: $c07
+$page-header-title-background-color: $c15
 $page-header-title-color: $c00
+$page-sub-header-title-background-color: $c14
 $page-sub-header-title-color: $c00
+$page-nav-background: $c12
 
-$page-footer-background-color: $c12
-$page-footer-color: $c00
-$page-footer-title-color: $c07
-$page-footer-title-background-color: $c14
+$page-footer-background-color: $c02
+$page-footer-color: $c06
+$page-footer-title-color: $c01
+$page-footer-title-background-color: $c13
 
 $nav-hover-background-color: $c08
-$nav-text-color: $c00
+$nav-text-color: $c07
+
+@import './_variables';
+
+$anchor-color-hover: $c12
+$anchor-color: $c12
+
+$font-color: $c07
+
+body
+  font-size: $font-size
+
+$button-background-color: #342f38
+$button-background-color-active: lighten($button-background-color, 15%)
+$button-background-color-highlight: lighten($button-background-color, 10%)
+
+$button-primary-color: $c00
+$button-primary-background-color-active: lighten($button-primary-background-color, 15%)
+$button-primary-background-color-highlight: lighten($button-primary-background-color, 10%)
+
 
 @import './_mono';
