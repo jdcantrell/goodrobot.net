@@ -1,17 +1,17 @@
 //theme colors unikitty light
 $c00: #f9f4f2
-$c01: #fbf1c7
+$c01: #fffcfc
 $c02: #ebdbb2
 $c03: #d5c4a1
 $c04: #bdae93
 $c05: #a89984
-$c06: #3c3836
+$c06: #fff
 $c07: #282828
 
 $c08: #cc241d
-$c09: #d65d0e
-$c10: #d79921
-$c11: #689d6a
+$c09: #10a269
+$c10: #134b4b
+$c11: #57d450
 $c12: #65c6c4
 $c13: #408ab4
 $c14: #34699a
@@ -25,8 +25,15 @@ $c15: #113f67
 // - make sure forms and buttons still look good
 // - think about alternative fonts
 
+@font-face
+  font-family: 'FantasqueSansMonoRegular'
+  src: url('/images/fonts/FantasqueSansMono-Regular.woff2')
+  font-weight: normal
+  font-style: normal
 
-$font-family: Menlo, Consolas, monospace
+$font-family: "FantasqueSansMonoRegular" , monospace
+
+@import './_variables';
 
 $page-header-background-color: $c13
 $page-header-color: $c07
@@ -41,24 +48,24 @@ $page-footer-color: $c06
 $page-footer-title-color: $c01
 $page-footer-title-background-color: $c13
 
-$nav-hover-background-color: $c08
-$nav-text-color: $c07
 
-@import './_variables';
+$nav-hover-background-color: $c14
+$nav-text-color: $c10
+$nav-hover-text-color: $c00
 
-$anchor-color-hover: $c12
-$anchor-color: $c12
+
+$anchor-color-hover: $c09
+$anchor-color: $c09
 
 $font-color: $c07
 
-body
-  font-size: $font-size
+$button-background-color: $c01
+$button-lowlight: darken($button-primary-background-color, 15%)
+$button-highlight: lighten($button-primary-background-color, 10%)
+$button-border-color: $button-highlight $button-lowlight $button-lowlight $button-highlight
+$button-border-color-active: $button-lowlight $button-highlight $button-highlight $button-lowlight
 
-$button-background-color: #342f38
-$button-background-color-active: lighten($button-background-color, 15%)
-$button-background-color-highlight: lighten($button-background-color, 10%)
-
-$button-primary-color: $c00
+$button-primary-color: $c10
 $button-primary-background-color-active: lighten($button-primary-background-color, 15%)
 $button-primary-background-color-highlight: lighten($button-primary-background-color, 10%)
 
