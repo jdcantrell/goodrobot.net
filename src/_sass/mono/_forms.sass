@@ -20,9 +20,15 @@ select
 
     &:checked + label::after
       content: "x"
+      @if(global-variable-exists(input-checkbox-color))
+        color: $input-checkbox-color
 
     &:focus + label::before
       background-color: $input-background-color
+    &:active + label::after
+      content: "x"
+      @if(global-variable-exists(input-checkbox-color))
+        color: $input-checkbox-color
 
   label
     cursor: pointer
@@ -39,6 +45,7 @@ select
       left: 0
       top: 0
       content: "[ ]"
+      color: $font-color
 
     &::after
       cursor: pointer
