@@ -1,10 +1,10 @@
 //theme colors unikitty light
 $c00: #f9f4f2
 $c01: #fffcfc
-$c02: #ebdbb2
+$c02: #f2eeec
 $c03: #d5c4a1
 $c04: #bdae93
-$c05: #a89984
+$c05: #9f9f9f
 $c06: #fff
 $c07: #282828
 
@@ -46,9 +46,9 @@ $page-header-title-background-color: $c15
 $page-header-title-color: $c00
 $page-sub-header-title-background-color: $c14
 $page-sub-header-title-color: $c00
-$page-nav-background: $c12
+$page-nav-background: $c00
 
-$page-footer-background-color: $c12
+$page-footer-background-color: darken($c00, 2%)
 $page-footer-color: $c06
 $page-footer-title-color: $c01
 $page-footer-title-background-color: $c13
@@ -71,11 +71,23 @@ $button-border-color: $button-highlight $button-lowlight $button-lowlight $butto
 $button-border-color-active: $button-lowlight $button-highlight $button-highlight $button-lowlight
 $button-background-color-highlight: lighten($button-primary-background-color, 10%)
 $button-background-color-active: $button-primary-background-color
-$input-checkbox-color: $c09
 
 $button-primary-color: $c10
 $button-primary-background-color-active: lighten($button-primary-background-color, 15%)
 $button-primary-background-color-highlight: lighten($button-primary-background-color, 10%)
+
+$border-color: $c05
+$border-radius: 2px
+$border: 2px solid $border-color
+
+$input-checkbox-color: $c09
+$input-border-lowlight: darken($c05, 20%)
+$input-border-highlight: $c05
+
+$box-border-lowlight: darken($c05, 20%)
+$box-border-highlight: $c05
+
+$background-color-active: lighten($c09, 55%)
 
 
 @import './_mono';

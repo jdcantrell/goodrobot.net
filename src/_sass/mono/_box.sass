@@ -1,7 +1,8 @@
-
 .box
   border-radius: $border-radius
   border: $border
+  @if variable-exists(box-border-highlight)
+    border-color: $box-border-highlight $box-border-lowlight $box-border-lowlight $box-border-highlight
 
   header
     border-bottom: $border

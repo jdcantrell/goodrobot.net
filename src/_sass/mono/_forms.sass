@@ -1,8 +1,15 @@
 input
   flex: 1
   margin: 5px
-  border: none
   background-color: $input-background-color
+  padding: 2px 4px
+
+  border: none
+  @if variable-exists(input-border-lowlight)
+    border-color: $input-border-lowlight $input-border-highlight $input-border-highlight $input-border-lowlight
+    border-radius: 2px
+    border-width: 2px
+    border-style: solid
 
 select
   padding: 0px 4px
