@@ -1,0 +1,74 @@
+input
+  flex: 1
+  margin: 5px
+  background-color: $input-background-color
+  padding: 2px 4px
+
+  border: none
+  @if variable-exists(input-border-lowlight)
+    border-color: $input-border-lowlight $input-border-highlight $input-border-highlight $input-border-lowlight
+    border-radius: 2px
+    border-width: 2px
+    border-style: solid
+
+  &:focus
+    @if variable-exists(input-focus-border-lowlight)
+      border-color: $input-focus-border-lowlight $input-focus-border-highlight $input-focus-border-highlight $input-focus-border-lowlight
+      border-radius: 2px
+      border-width: 2px
+      border-style: solid
+
+select
+  padding: 0px 4px
+
+label[for]
+  cursor: pointer
+
+
+.checkbox
+  display: inline-block
+
+  input[type=checkbox]
+    cursor: pointer
+    opacity: 0
+
+    & + label::after
+      content: none
+
+    &:checked + label::after
+      content: "x"
+      @if(global-variable-exists(input-checkbox-color))
+        color: $input-checkbox-color
+
+    &:focus + label::before
+      background-color: $input-background-color
+    &:active + label::after
+      content: "x"
+      @if(global-variable-exists(input-checkbox-color))
+        color: $input-checkbox-color
+
+  label
+    cursor: pointer
+    position: relative
+    left: -36px
+    display: inline-block
+    padding-left: 32px
+
+    &::before
+      cursor: pointer
+      font-weight: bold
+      position: absolute
+      display: inline-block
+      left: 0
+      top: 0
+      content: "[ ]"
+      color: $font-color
+
+    &::after
+      cursor: pointer
+      font-weight: bold
+      position: absolute
+      display: inline-block
+      content: "x"
+      left: 1ch;
+      top: 0px;

@@ -1,4 +1,4 @@
-{% extends "_tpls/page-mono.html" %}
+{% extends "_tpls/page-nostyle.html" %}
 {% set current_page = "stream" %}
 {% set current_page_sub_title = "stream" %}
 {% block title %}Links and Things{% endblock %}
@@ -7,64 +7,6 @@
 <meta name="viewport" content="width=device-width">
 <style type="text/css">
 
-  /* custom stuff */
-  .js-link-toggle {
-    cursor: pointer;
-  }
-
-  h1 {
-    font-size: 24px;
-  }
-
-  .friend-link {
-    font-size: 12px;
-    text-align: right;
-    margin: 25px 25px 0 25px;
-  }
-
-  .content {
-    width: 100%;
-    max-width: 600px;
-  }
-
-  article a {
-    color: #fbf1c7;
-  }
-
-  a:hover {
-    text-decoration: none;
-  }
-
-  .content a:active, .content a:focus {
-    outline: 0;
-    background-color: #3c3836;
-  }
-
-  .list-bullets {
-    list-style: none;
-    margin-left: 5px;
-  }
-
-  .list-bullets li {
-    margin: 4px 0;
-  }
-
-  .list-bullets li:before {
-    content:'>';
-    margin-left: -2ch;
-    color: #fbf1c7;
-  }
-
-  .list-bullets li:hover:before {
-    content:'>';
-    margin-left: -2ch;
-    color: #83a598;
-  }
-
-  .link-alt {
-    display: block;
-    font-size: 12px;
-  }
 
 </style>
 {% endblock %}

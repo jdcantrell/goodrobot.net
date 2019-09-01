@@ -1,19 +1,6 @@
-{% extends "_tpls/page-lab.html" %}
+{% extends "_tpls/page-clean.html" %}
 {% set current_page = "gxl" %}
 {% block title %}Good Robot Experience Language{% endblock %}
-
-{% block head %}
-  <style>
-    #rendering {
-      color:#fff;
-      text-shadow: 1px 1px 2px #000;
-      position: absolute;
-      margin-left: 5px;
-      z-index: 1;
-      display: none;
-    }
-  </style>
-{% endblock %}
 
 {% block content %}
       <div>
@@ -23,6 +10,7 @@
           <option value="/css/mono-gruvbox.css">Mono (gruvbox)</option>
           <option value="/css/mono-gruvbox-light.css">Mono (gruvbox light)</option>
           <option value="/css/mono-light.css">Mono</option>
+          <option value="/css/clean.css">Mono</option>
           <option value="/css/gxl.css">Classic</option>
           <option value="/css/goodrobot.css">Goodrobot</option>
         </select>
@@ -45,7 +33,7 @@
       </p>
 
       <h2>Here are some headings that seem important</h2>
-      <h1>&lt;h1&gt; Heading</h1>
+      <h1><a id="h1">&lt;h1&gt; Heading</a></h1>
       <h2>&lt;h2&gt; Heading</h2>
       <h3>&lt;h3&gt; Heading</h3>
 
@@ -193,7 +181,9 @@
             <h3 class="flex-1">
               <a href="#">Image Title</a>
             </h3>
-            <div>Remove</div>
+            <div>
+              <button class="btn">Remove</button>
+            </div>
           </header>
           <figure class="flex-container">
             <img src="/images/thumbs/mandelbrot_4k_lightning.jpg">
@@ -209,7 +199,11 @@
       <article class="post tag-getting-started post-latest">
         <header class="post-heading">
           <a href="/welcome/">Welcome to Ghost</a>
-          <time class="post-date" datetime="2017-09-10">09.10.17</time>
+          <div class="post-metadata">
+            <time class="post-date" datetime="2017-09-10">09.10.17</time>
+            <a href="#" class="post-tag">text</a>
+            <a href="#" class="post-tag">new</a>
+          </div>
         </header>
         <section class="post-content">
           <div class="kg-card-markdown">

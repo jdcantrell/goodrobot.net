@@ -1,0 +1,52 @@
+button, .button
+  color: $button-font-color
+  background-color: $button-background-color
+  border-radius: 2px
+  border-width: 2px
+  border-style: solid
+  border-color: $button-border-color
+  font-family: $font-family
+  font-size: $font-size
+  padding: 3px 6px
+  cursor: pointer
+
+  &:hover
+    background-color: $button-background-color-highlight
+
+  &:active, &.active
+    background-color: $button-background-color-active
+    border-color: $button-border-color-active
+
+  &.primary
+    background-color: $button-primary-background-color
+    border-radius: 2px
+    padding: 3px 6px
+    color: $button-primary-color
+    border-color: $button-border-color-primary
+
+    &:hover
+      background-color: $button-primary-background-color-highlight
+
+    &:active, &.active
+      background-color: $button-primary-background-color-active
+      border-color: $button-border-color-primary-active
+
+.button-group
+  font-size: 0
+  display: inline-block
+
+  button, .button
+    border-radius: 0
+    border-left-width: 1px
+    border-right-width: 1px
+
+    &:first-child
+      border-top-left-radius: 2px
+      border-bottom-left-radius: 2px
+      border-left-width: 2px !important
+
+    &:last-child
+      border-top-right-radius: 2px
+      border-bottom-right-radius: 2px
+      border-right-width: 2px !important
+

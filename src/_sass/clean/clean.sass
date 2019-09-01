@@ -1,0 +1,155 @@
+//theme colors unikitty light
+
+$c00: #fefefa
+$c01: #fff
+
+
+$c01: #fffcfc
+$c02: #f2eeec
+$c03: #d5c4a1
+$c04: #bdae93
+$c05: #9f9f9f
+$c06: #fff
+$c07: #444
+
+$c08: #0a7f53
+$c09: #d9f4ea
+$c10: #113f67
+$c11: #bce0ff
+$c12: #34699a
+$c13: #1e8a99
+
+$c13: #408ab4
+$c14: #34699a
+$c15: #113f67
+
+@font-face
+  font-family: 'FantasqueSansMonoRegular'
+  src: url('/images/fonts/FantasqueSansMono-Regular.woff2')
+  font-weight: normal
+  font-style: normal
+
+$font-family: "FantasqueSansMonoRegular" , monospace
+$font-color: $c07
+$font-size: 16px
+
+$body-color: $font-color
+$caption-color: $font-color
+$body-background-color: $c00
+$paddings: ( l: 20px, m: 10px, s: 5px, n: 0 )
+
+@import '../reboot';
+
+$anchor-color-background-hover: $c09
+$anchor-color: $c08
+
+a
+  color: $anchor-color
+  text-decoration: none
+  background-color: transparent
+  -webkit-text-decoration-skip: objects
+  padding: 0px 4px
+  margin: 0 -4px
+  display: inline-block
+
+a:hover
+  color: $anchor-color
+  background-color: $anchor-color-background-hover
+  text-decoration: none
+
+$border-color: $c05
+$border-radius: 3px
+$border: 2px solid $border-color
+
+.box
+  border-radius: $border-radius
+  border: $border
+  box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.1)
+  @if variable-exists(box-border-highlight)
+    border-color: $border-color
+
+  header
+    border-bottom: $border
+    padding: map-get($paddings, l)
+
+  .box-content
+    padding: map-get($paddings, l)
+
+  footer
+    padding: map-get($paddings, l)
+    border-top: $border
+    text-align: right
+
+
+$button-background-color: transparent
+$button-font-color: $anchor-color
+
+$button-border-color: #0a7f5375
+$button-border-color-active: $anchor-color
+$button-background-color-highlight: $anchor-color-background-hover
+$button-background-color-active: $anchor-color-background-hover
+
+$button-primary-color: $c01
+$button-primary-background-color: $anchor-color
+$button-primary-background-color-active: lighten($button-primary-background-color, 15%)
+$button-primary-background-color-highlight: lighten($button-primary-background-color, 10%)
+
+$button-border-color-primary-active: #09935b
+$button-border-color-primary: #075e3e
+@import './_buttons';
+
+$photo-card-background: $c06
+@import './_photo_card';
+
+
+$page-header-background-color: $c13
+$page-header-color: $c07
+$page-header-title-background-color: $c15
+$page-header-title-color: $c00
+$page-sub-header-title-background-color: $c14
+$page-sub-header-title-color: $c00
+$page-nav-background: $c00
+
+$page-footer-background-color: transparent
+$page-footer-color: $c06
+$page-footer-title-color: $c01
+$page-footer-title-background-color: $c13
+$time-color: $c12
+$time-background-color: #dff3fc
+@import './_mono';
+
+
+$nav-hover-background-color: #d9f4ea
+$nav-text-color: $c10
+$nav-hover-text-color: transparent
+
+@import './_list';
+
+
+
+
+$border-radius: 2px
+$border: 2px solid $border-color
+
+$input-checkbox-color: $c08
+$input-border-lowlight: $c05
+$input-border-highlight: $c05
+$input-focus-border-lowlight: #91bdd7
+$input-focus-border-highlight: #91bdd7
+$input-background-color: $c01
+
+@import './_forms';
+
+
+$background-color-active: $anchor-color-background-hover
+$background-color-highlight: #dff3fc
+@import './_table';
+
+@import './_layout';
+@import './_padding';
+@import './_toolbar';
+@import './_typography';
+@import './_selection';
+
+@import './_colors';
+

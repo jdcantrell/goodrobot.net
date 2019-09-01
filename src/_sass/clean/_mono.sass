@@ -1,0 +1,150 @@
+
+
+
+html,
+body
+  font-size: $font-size
+  font-family: $font-family
+  color: $font-color
+  padding: 0
+  margin: 0
+
+body
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+
+input, select
+  font-size: $font-size
+  font-family: $font-family
+  color: $font-color
+
+select
+  color: #000
+
+
+// site/blog post things
+.content
+  max-width: 100%;
+  width: 730px;
+  margin: 0 auto auto auto
+  padding: 0 16px
+
+  figure,
+  figure img
+    max-width: 700px
+
+    @media (max-width: 730px)
+      max-width: 100%
+
+.content-full
+  width: 100%;
+
+  figure,
+  figure img
+    max-width: 700px
+
+.page-header
+  color: $page-header-color
+  min-width: 714px
+  width: calc(80% - 16px)
+  margin: 0 auto
+
+  @media (max-width: 730px)
+    min-width: 100%
+    width: 100%
+    padding: 0 16px
+
+  a:hover
+    text-decoration: none
+
+.page-site-header
+  display: flex
+  align-items: center
+  border-bottom: 2px solid $c10
+  padding: 6px
+
+.page-header-title
+  padding: 0 1ch
+  color: $page-header-title-color
+  background-color:
+  font-weight: bold
+
+  a
+    color: $page-header-title-background-color
+    padding: 2px 4px
+
+  a:hover
+    background-color: #bce0ff
+
+
+
+.page-sub-title
+  padding: 0 1ch
+  margin-left: -1ch
+  display: block
+  color: $page-sub-header-title-background-color
+  font-weight: bold
+
+.page-nav
+  margin-bottom: 1em
+  padding: 2px 6px
+
+
+.page-logo
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  padding: 0
+  min-height: 24px
+  min-width: 24px
+
+@media (min-width: 500px)
+  .page-header, .page-sub-header
+    text-align: left
+
+  .page-header-title, .page-sub-title
+    display: inline-block
+
+  .page-logo
+    left: auto
+    right: 0
+
+
+.page-footer
+  background-color: $page-footer-background-color
+  color: $page-footer-color
+  margin: 2em auto
+  padding-left: 1ch
+
+  a:hover
+    text-decoration: none
+
+.page-footer .list-nav
+  padding: 6px
+  border-bottom: 2px solid $c10
+
+.page-footer-title
+  margin: auto
+  width: auto
+
+
+.post-heading
+  font-size: 24px
+  line-height: 32px
+  margin-bottom: 16px
+
+  time
+    display: inline-block
+    padding: 2px 4px
+    font-size: 16px
+    line-height: 16px
+    color: $time-color
+    background-color: $time-background-color
+
+.post-content img
+  max-width: 700px
+
+@media (max-width: 730px)
+  .post-content img
+    max-width: 100%

@@ -20,6 +20,7 @@ css() {
   pysassc ./src/_sass/mono/mono-gruvbox.sass ./build/css/mono-gruvbox.css
   pysassc ./src/_sass/mono/mono-gruvbox-light.sass ./build/css/mono-gruvbox-light.css
   pysassc ./src/_sass/goodrobot/goodrobot.sass ./build/css/goodrobot.css
+  pysassc ./src/_sass/clean/clean.sass ./build/css/clean.css
 }
 
 link() {
@@ -29,11 +30,11 @@ link() {
 }
 
 stream() {
-  ankh src/stream/_stream.html build/stream/index.html --template-paths ./src
+  ankh src/stream/_stream.html.j2 build/stream/index.html --template-paths ./src
 }
 
 stream_pic() {
-  ankh src/stream/_pic.html build/stream/pics.html --template-paths ./src
+  ankh src/stream/_pic.html.j2 build/stream/pics.html --template-paths ./src
 }
 
 generate() {

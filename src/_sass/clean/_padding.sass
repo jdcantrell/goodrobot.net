@@ -1,0 +1,21 @@
+
+
+// padding helpers
+@each $rule, $abbr in (padding: a, padding-bottom: b, padding-top: t, padding-left: l, padding-right: r)
+  @each $padding, $size in $paddings
+    .p#{$abbr}#{$padding}
+      #{$rule}: $size !important
+
+
+@each $padding, $size in $paddings
+  .pv#{$padding}
+    padding-top: $size !important
+    padding-bottom: $size !important
+
+  .ph#{$padding}
+    padding-left: $size !important
+    padding-right: $size !important
+
+.padding-char-horizontal
+  padding-left: 1em
+  padding-right: 1em
