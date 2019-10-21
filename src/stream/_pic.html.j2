@@ -1,4 +1,4 @@
-{% extends "_tpls/page-mono.html" %}
+{% extends "_tpls/page-clean.html" %}
 {% set current_page = "stream_pics" %}
 {% set current_page_sub_title = "pics" %}
 {% block title %}Things from tumblr{% endblock %}
@@ -86,6 +86,22 @@
           'https://metropoworld.tumblr.com/rss',
           'https://forgottentomorrows.tumblr.com/rss',
           'https://retrowavecollector.tumblr.com/rss',
+          'http://feeds.feedburner.com/behance/vorr',
+          'https://retroscifiart.tumblr.com/',
+          'https://viivus.tumblr.com/rss',
+          'https://neomechanica.tumblr.com/rss',
+          'https://lennsan.tumblr.com/rss',
+          'https://forgottentomorrows.tumblr.com/rss',
+          'https://yaspes.tumblr.com/rss',
+          'https://goquest.tumblr.com/rss',
+          'https://aestheticvalley.tumblr.com/rss',
+          'https://retrowavecollector.tumblr.com/rss',
+          'https://ofsparrows.tumblr.com/rss',
+          'https://sciencefictioninterfaces.tumblr.com/rss',
+          'https://electronicitems.tumblr.com/rss',
+          'https://floppydiskartwork.tumblr.com/rss',
+          'https://anasabdin.tumblr.com/rss',
+          'https://welcometomvrs.tumblr.com/rss',
           ], 10) %}
         {{ pic(entry) }}
       {% endfor %}

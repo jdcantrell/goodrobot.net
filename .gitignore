@@ -5,6 +5,7 @@ stylesheets
 *.pyc
 output
 ankh_cache
+ankh_cache.sqlite
 /build
 node_modules
 npm-debug.log

@@ -30,11 +30,13 @@ link() {
 }
 
 stream() {
-  ankh src/stream/_stream.html.j2 build/stream/index.html --template-paths ./src
+  CACHE=${1}
+  ankh src/stream/_stream.html.j2 build/stream/index.html --template-paths ./src $CACHE
 }
 
 stream_pic() {
-  ankh src/stream/_pic.html.j2 build/stream/pics.html --template-paths ./src
+  CACHE=${1}
+  ankh src/stream/_pic.html.j2 build/stream/pics.html --template-paths ./src $CACHE
 }
 
 generate() {
@@ -53,9 +55,9 @@ generate() {
 generate_all() {
   generate
   blue 'Generating stream'
-  stream
+  stream $1
   blue 'Generating pic stream'
-  stream_pic
+  stream_pic $1
   green 'Full site build complete.'
 }
 
@@ -78,10 +80,11 @@ case "$1" in
     sync "$2"
     ;;
   generate)
+    rm -f ankh_cache.sqlite
     generate_all
     ;;
   generate_site)
-    generate
+    generate_all "--cache"
     ;;
   stream)
     stream

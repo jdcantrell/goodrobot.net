@@ -1,4 +1,4 @@
-{% extends "_tpls/page-nostyle.html" %}
+{% extends "_tpls/page-clean.html" %}
 {% set current_page = "stream" %}
 {% set current_page_sub_title = "stream" %}
 {% block title %}Links and Things{% endblock %}
@@ -6,6 +6,13 @@
 {% block head %}
 <meta name="viewport" content="width=device-width">
 <style type="text/css">
+    .lwn {
+    }
+    .lobsters {
+      color: #c6231d;
+    }
+    .hn {
+    }
 
 
 </style>
@@ -32,7 +39,7 @@
     <div class="readable-content content">
 
       <article>
-        <h1 class="c11">
+        <h1 class="lwn">
           Lwn.net
         </h1>
         <ul class="list-bullets">
@@ -45,7 +52,7 @@
       </article>
 
       <article>
-        <h1 class="js-link-toggle c08">
+        <h1 class="js-link-toggle lobsters">
           Lobste.rs<span class="comment-status"></span>
         </h1>
         <ul class="list-bullets">
@@ -58,7 +65,7 @@
       </article>
 
       <article>
-        <h1 class="js-link-toggle c10">
+        <h1 class="js-link-toggle hn">
           Hacker News<span class="comment-status"></span>
         </h1>
         <ul class="list-bullets">
@@ -71,7 +78,7 @@
       </article>
 
       <article>
-        <h1 class="js-link-toggle c12">
+        <h1 class="js-link-toggle reddit">
           r/Programming<span class="comment-status"></span>
         </h1>
         <ul class="list-bullets">
@@ -84,7 +91,7 @@
       </article>
 
       <article>
-        <h1 class="c14">
+        <h1 class="coding">
           Coding
         </h1>
         <ul class="list-bullets">
@@ -99,7 +106,6 @@
               'http://www.xanthir.com/blog/atom/',
               'https://jvns.ca/atom.xml',
               'https://blog.acolyer.org/feed/',
-              'https://kate.io/feed.xml',
               'https://heredragonsabound.blogspot.com/feeds/posts/default',
               'https://research.swtch.com/feed.atom',
               'http://rachelbythebay.com/w/atom.xml',
@@ -113,7 +119,7 @@
       </article>
 
       <article>
-        <h1 class="c13">
+        <h1 class="gaming">
           Gaming
         </h1>
         <ul class="list-bullets">
@@ -128,6 +134,7 @@
             'http://freegamer.blogspot.com/feeds/posts/default?',
             'http://rodneylives.blogspot.com/feeds/posts/default?alt=rss',
             'http://www.doshaven.eu/feed/',
+            'https://www.gridsagegames.com/blog/feed/',
           ]) %}
             {{ time_entry(entry) }}
           {% endfor %}
@@ -135,7 +142,7 @@
       </article>
 
       <article>
-        <h1 class="c12">
+        <h1 class="interests">
           Interesting Things
         </h1>
         <ul class="list-bullets">
@@ -157,7 +164,7 @@
       </article>
 
       <article>
-        <h1 class="c11">
+        <h1 class="pinboard">
           Pinboard
         </h1>
         <ul class="list-bullets">
