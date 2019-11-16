@@ -6,15 +6,33 @@
 {% block head %}
 <meta name="viewport" content="width=device-width">
 <style type="text/css">
-    .lwn {
-    }
-    .lobsters {
-      color: #c6231d;
-    }
-    .hn {
-    }
+  h1 > span:first-child {
+    padding: 3px 1ch;
+  }
 
+  .js-link-toggle span {
+    cursor: pointer;
+  }
 
+  .list-bullets {
+    list-style: none;
+  }
+  .list-bullets li {
+    margin: 4px 0;
+  }
+  .list-bullets li:before {
+    vertical-align: top;
+    content: '>';
+    margin-left: -2ch;
+    color: #f0f;
+  }
+  .list-bullets li:hover:before {
+    color: #f00;
+  }
+  .link-alt {
+    display: block;
+    font-size: 12px;
+  }
 </style>
 {% endblock %}
 
@@ -22,7 +40,7 @@
 <li>
   <a href="{{entry.link}}">
     {{entry.title}}
-    <span class="link-alt c03">{{entry.feed_title}}
+    <span class="link-alt c07">{{entry.feed_title}}
       &ndash;
         {% if entry.time_unit == "New!" %}
         <i class="icon-star"></i> New
@@ -39,8 +57,8 @@
     <div class="readable-content content">
 
       <article>
-        <h1 class="lwn">
-          Lwn.net
+        <h1 >
+          <span class="bg-c09 c08">Lwn.net</span>
         </h1>
         <ul class="list-bullets">
           {% for entry in get_entries('https://lwn.net/headlines/newrss') %}
@@ -52,8 +70,8 @@
       </article>
 
       <article>
-        <h1 class="js-link-toggle lobsters">
-          Lobste.rs<span class="comment-status"></span>
+        <h1 class="js-link-toggle">
+          <span class="bg-c02 c01">Lobste.rs<span class="comment-status"></span></span>
         </h1>
         <ul class="list-bullets">
           {% for entry in get_entries('https://lobste.rs/rss') %}
@@ -65,8 +83,8 @@
       </article>
 
       <article>
-        <h1 class="js-link-toggle hn">
-          Hacker News<span class="comment-status"></span>
+        <h1 class="js-link-toggle">
+          <span class=" bg-c04 c03">Hacker News<span class="comment-status"></span></span>
         </h1>
         <ul class="list-bullets">
           {% for entry in get_entries('http://news.ycombinator.com/rss') %}
@@ -78,8 +96,10 @@
       </article>
 
       <article>
-        <h1 class="js-link-toggle reddit">
-          r/Programming<span class="comment-status"></span>
+        <h1 class="js-link-toggle">
+          <span class="bg-c11 c10">
+            r/Programming<span class="comment-status"></span>
+          </span>
         </h1>
         <ul class="list-bullets">
           {% for entry in get_entries('http://www.reddit.com/r/programming/.rss') %}
@@ -91,8 +111,8 @@
       </article>
 
       <article>
-        <h1 class="coding">
-          Coding
+        <h1>
+          <span  class="bg-c15 c14">Coding</span>
         </h1>
         <ul class="list-bullets">
           {% for entry in time_sort([
@@ -119,8 +139,10 @@
       </article>
 
       <article>
-        <h1 class="gaming">
-          Gaming
+        <h1>
+          <span class="bg-c17 c16">
+            Gaming
+          </span>
         </h1>
         <ul class="list-bullets">
           {% for entry in time_sort([
@@ -142,8 +164,10 @@
       </article>
 
       <article>
-        <h1 class="interests">
-          Interesting Things
+        <h1>
+          <span class="bg-c09 c08">
+            Interesting Things
+          <span>
         </h1>
         <ul class="list-bullets">
           {% for entry in time_sort([
@@ -164,8 +188,10 @@
       </article>
 
       <article>
-        <h1 class="pinboard">
-          Pinboard
+        <h1>
+          <span class="bg-c11 c10">
+            Pinboard
+          </span>
         </h1>
         <ul class="list-bullets">
           {% for entry in get_entries('http://feeds.pinboard.in/rss/u:jdcantrell', 10) %}
@@ -173,7 +199,7 @@
           <a href="{{entry.link}}">
             {{entry.title}}
             {% if entry.description %}
-            <span class="link-alt c03">{{entry.description}}</span>
+            <span class="link-alt c07">{{entry.description}}</span>
             {% endif %}
           </a>
           </li>

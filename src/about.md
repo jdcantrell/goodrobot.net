@@ -6,26 +6,26 @@ me.
 
 <img src="http://static.goodrobot.net/cdn/jd.png" style="margin: auto; height: 250px; border: none; display: block">
 
-* I work at [Trulia](http://trulia.com). If you do anything on the site
+- I work at [Trulia](http://trulia.com). If you do anything on the site
   related to looking for a house/apartment, then I most likely had a hand
   in it.
-* I live in the San Francisco Bay area. It still feels weird
+- I live in the San Francisco Bay area. It still feels weird
   to me after living most my life in Kansas, and I miss thunderstorms.
-* I am still looking for that one project that I can really put some
+- I am still looking for that one project that I can really put some
   soul and heart into.
-* I've been a professional developer for 10 years, or rather I've been
+- I've been a professional developer for 10 years, or rather I've been
   getting paid to write code for that long. I've learned a thing or two
   about writing good code, but still have a long road to go.
-* HTML, CSS, JS, PHP, MySQL, Python, Ruby, C, QBasic (these
+- HTML, CSS, JS, PHP, MySQL, Python, Ruby, C, QBasic (these
   keywords are for recruiters, fingers crossed for a QBasic gig).
-* I like to build stuff more than I like to fix bugs.
-* I like to make useful stuff more than I like to build stuff.
-* I believe life's not fair, but you should be fair to everyone as much
+- I like to build stuff more than I like to fix bugs.
+- I like to make useful stuff more than I like to build stuff.
+- I believe life's not fair, but you should be fair to everyone as much
   as you can.
-* You don't deserve any of this, good or bad. So be thankful when things
+- You don't deserve any of this, good or bad. So be thankful when things
   are good, and fight hard when things are bad.
-* I &hearts; vim, chocolate, open source and linux.
-* I am a geek and/or nerd.
+- I &hearts; vim, chocolate, open source and linux.
+- I am a geek and/or nerd.
 
 If a random and unordered list of points about me does not satisfy your
 curiosity, please feel free to shoot me a message on

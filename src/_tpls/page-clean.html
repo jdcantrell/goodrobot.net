@@ -1,80 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 {% set nav_items = nav_items|default([
-  ('/lab/chaos/', 'chaos', 'chaos'),
-  ('/lab/ifs/', 'ifs', 'ifs'),
-  ('/lab/mandelbrot/', 'mandelbrot', 'mandelbrot'),
-  ('/lab/gxl/', 'gxl', 'gxl'),
-  ('/lab/rogue/', 'rogue', 'rogue'),
-  ('/lab/screensaver/', 'screensaver', 'screensaver.js'),
-  ('/lab/downloads.html', 'downloads', 'downloads'),
+  ('/about/', 'about', 'about'),
+  ('/git/', 'git', 'git'),
+  ('/lab/', 'lab', 'lab'),
+  ('/log/', 'log', 'log'),
+  ('/', 'projects', 'projects'),
+  ('/stream/', 'stream', 'stream'),
 ]) -%}
-  <head>
-    <title>{% block title %}hello, goodrobot.net{% endblock %}</title>
-    <link href='/css/clean.css' rel='stylesheet' type='text/css'>
 
-    <meta charset="utf-8" />
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="content-language" content="en" />
+<head>
+  <title>{% block title %}hello, goodrobot.net{% endblock %}</title>
+  <link href='/css/clean.css' rel='stylesheet' type='text/css'>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#c42d1a">
-    <meta name="theme-color" content="#458588">
+  <meta charset="utf-8" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="content-language" content="en" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#c42d1a">
+  <meta name="theme-color" content="#458588">
 
 
-    {% block head %}{% endblock %}
-  </head>
-  <body>
-    <header class="page-header" role="navigation">
-      <div class="page-site-header">
-         <a class="page-logo" title="goodrobot.net" href="/">
-          <img alt="goodrobot" height="24px" src='/android-chrome-192x192.png'>
-        </a>
-        <span class="page-header-title">
-         <a  title="goodrobot.net" href="/">
+  {% block head %}{% endblock %}
+</head>
+
+<body>
+  <header class="page-header" role="navigation">
+    <div class="page-site-header">
+      <a class="page-logo" title="goodrobot.net" href="/">
+        <img alt="goodrobot" height="24px"
+          src='{{ ['/android-chrome-192x192.png', '/images/icons/ghost_jd.gif', '/images/icons/mermaid_run.gif']|random }}'>
+      </a>
+      <span class="page-header-title">
+        <a title="goodrobot.net" href="/">
           goodrobot
-         </a>
-        </span>
-        <span class="page-sub-title">lab</span>
-      </div>
-
-
-      <div class="page-nav">
-        <ul class="list-nav" >
-          {% for href, id, name in nav_items %}
-          {% if current_page != id %}
-          <li {% if current_page == id %}class="active"{% endif %} >
-            <a href="{{ href|e }}">{{ name|e }}</a>
-          </li>
-          {% endif %}
-          {% endfor %}
-        </ul>
-      </div>
-
-    </header>
-    <div class="content" >
-    {% block content %}{% endblock %}
+        </a>
+      </span>
+      <span class="page-sub-title">lab</span>
     </div>
 
-    <footer class="page-footer">
-      <ul class='list-nav'>
+
+    <div class="page-nav">
+      <ul class="list-nav">
         {% for href, id, name in nav_items %}
-        <li {% if current_page == id %}class="active"{% endif %} >
+        {% if current_page != id %}
+        <li {% if current_page == id %}class="active" {% endif %}>
           <a href="{{ href|e }}">{{ name|e }}</a>
         </li>
+        {% endif %}
         {% endfor %}
       </ul>
-      <div class="page-footer-title">
-         <a class="page-logo" title="goodrobot.net" href="/">
-          <img alt="goodrobot" height="24px" src='/android-chrome-192x192.png'>
-          goodrobot
-        </a>
-      </div>
-    </footer>
-    {% block javascript %}{% endblock %}
-  </body>
+    </div>
+
+  </header>
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+
+  <footer class="page-footer">
+    <ul class='list-nav'>
+      {% for href, id, name in nav_items %}
+      <li {% if current_page == id %}class="active" {% endif %}>
+        <a href="{{ href|e }}">{{ name|e }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="page-footer-title">
+      <a class="page-logo" title="goodrobot.net" href="/">
+        <img alt="goodrobot" height="24px" src='/android-chrome-192x192.png'>
+        goodrobot
+      </a>
+    </div>
+  </footer>
+  {% block javascript %}{% endblock %}
+</body>
+
 </html>

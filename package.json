@@ -1,10 +1,13 @@
 {
+  "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "babel-eslint": "8",
-    "eslint": "4.x",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-import": "^2.9.0",
-    "prettier": "^1.11.1"
+    "babel-eslint": "x",
+    "eslint": "x",
+    "eslint-config-airbnb-base": "x",
+    "eslint-config-prettier": "x",
+    "eslint-plugin-import": "x",
+    "prettier": "x",
+    "stylelint": "x",
+    "stylelint-config-recommended": "x"
   }
 }

@@ -10,3 +10,4 @@ ankh_cache.sqlite
 node_modules
 npm-debug.log
 /env
+.vscode
