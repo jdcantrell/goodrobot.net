@@ -3,11 +3,8 @@ $c00: #fefefa;
 $c01: #d90000;
 $c02: #d9000027;
 
-$c03: #ff6c00;
+$c03: #e36000;
 $c04: #ff6c0027;
-
-
-// <li style="color:#0786c4; background-color: #0786c427">r/programming</li>
 
 $c05: #9f9f9f;
 $c06: #fff;
@@ -26,26 +23,31 @@ $c13: #408ab4;
 $c14: #6210b5;
 $c15: #e4cefb;
 
-$c16:#dd009b;
-$c17:#fdd5f1;
+$c16: #dd009b;
+$c17: #fdd5f1;
 
 @font-face {
-  font-family: 'FantasqueSansMonoRegular';
-  src: url('/images/fonts/FantasqueSansMono-Regular.woff2');
+  font-family: "FantasqueSansMonoRegular";
+  src: url("/images/fonts/FantasqueSansMono-Regular.woff2");
   font-weight: normal;
   font-style: normal;
 }
 
-$font-family: "FantasqueSansMonoRegular" , monospace;
+$font-family: "FantasqueSansMonoRegular", monospace;
 $font-color: $c07;
 $font-size: 16px;
 
 $body-color: $font-color;
 $caption-color: $font-color;
 $body-background-color: $c00;
-$paddings: ( l: 20px, m: 10px, s: 5px, n: 0 );
+$paddings: (
+  l: 20px,
+  m: 10px,
+  s: 5px,
+  n: 0
+);
 
-@import '../reboot';
+@import "../reboot";
 
 $anchor-color-background-hover: $c09;
 $anchor-color: $c08;
@@ -87,7 +89,7 @@ $border: 2px solid $border-color;
     padding: map-get($paddings, l);
   }
 
-  footer{
+  footer {
     padding: map-get($paddings, l);
     border-top: $border;
     text-align: right;
@@ -104,15 +106,21 @@ $button-background-color-active: $anchor-color-background-hover;
 
 $button-primary-color: $c06;
 $button-primary-background-color: $anchor-color;
-$button-primary-background-color-active: lighten($button-primary-background-color, 15%);
-$button-primary-background-color-highlight: lighten($button-primary-background-color, 10%);
+$button-primary-background-color-active: lighten(
+  $button-primary-background-color,
+  15%
+);
+$button-primary-background-color-highlight: lighten(
+  $button-primary-background-color,
+  10%
+);
 
 $button-border-color-primary-active: #09935b;
 $button-border-color-primary: #075e3e;
-@import './_buttons';
+@import "./_buttons";
 
 $photo-card-background: $c06;
-@import './_photo_card';
+@import "./_photo_card";
 
 $page-header-color: $c07;
 $page-header-title-background-color: $c10;
@@ -125,13 +133,13 @@ $page-footer-background-color: transparent;
 $page-footer-color: $c06;
 $time-color: $c12;
 $time-background-color: #dff3fc;
-@import './_mono';
+@import "./_mono";
 
 $nav-hover-background-color: #d9f4ea;
 $nav-text-color: $c10;
 $nav-hover-text-color: transparent;
 
-@import './_list';
+@import "./_list";
 
 $border-radius: 2px;
 $border: 2px solid $border-color;
@@ -143,16 +151,16 @@ $input-focus-border-lowlight: #91bdd7;
 $input-focus-border-highlight: #91bdd7;
 $input-background-color: $c06;
 
-@import './_forms';
+@import "./_forms";
 
 $background-color-active: $anchor-color-background-hover;
 $background-color-highlight: #dff3fc;
-@import './_table';
+@import "./_table";
 
-@import './_layout';
-@import './_padding';
-@import './_toolbar';
-@import './_typography';
-@import './_selection';
+@import "./_layout";
+@import "./_padding";
+@import "./_toolbar";
+@import "./_typography";
+@import "./_selection";
 
-@import './_colors';
+@import "./_colors";

@@ -24,10 +24,10 @@
     vertical-align: top;
     content: '>';
     margin-left: -2ch;
-    color: #f0f;
+    color: #b8d7cb;
   }
   .list-bullets li:hover:before {
-    color: #f00;
+    color: #0a7f53;
   }
   .link-alt {
     display: block;
@@ -207,20 +207,27 @@
         </ul>
       </article>
 
+      <article>
+        <h1>
+          <span class="bg-c15 c14">
+            Weather
+          </span>
+        </h1>
+        <ul class="list-bullets">
+          {% for weather in get_weather([
+            (37.99167, -122.05194),
+            (37.7126,-122.2131),
+            (43.6167, -116.2),
+            (38.7453, -94.8292),
+            (44.05782,-121.31537),
+            (45.52, -122.6819),
+          ]) %}
+          <li title="{{ weather.condition() }}">
+            {{ weather.temp() }}&deg; and {{ weather.condition() }} in {{ weather.forecast_location() }}
+          {% endfor %}
+        </ul>
+      </article>
     </div>
-
-
-    <div class="friend-link">
-      <ul class="list-inline" style="float:left">
-        {% for weather in get_weather([
-          (45.52, -122.6819),
-          (43.6167, -116.2),
-          (38.7453, -94.8292)
-        ]) %}
-        <li title="{{ weather.condition() }}">
-          {{ weather.temp() }}&deg; in {{ weather.forecast_location() }}
-        {% endfor %}
-      </ul>
 
       {% set logs = log() %}
       {% if logs %}
@@ -233,10 +240,7 @@
         {% endfor %}
           console.groupEnd();
         </script>
-      {% else %}
-         <br>
       {% endif %}
-    </div>
 
 
 {% endblock %}

@@ -14,6 +14,7 @@ class RecursiveWatcher(watcher.Watcher):
 
 server = Server(watcher=RecursiveWatcher())
 server.watch("./src/**/*.j2", shell("./go.sh generate_site", cwd="./"))
+server.watch("./src/stream/*.j2", shell("./go.sh stream_cache", cwd="./"))
 server.watch("./src/**/*.sass", shell("./go.sh css", cwd="./"))
 server.watch("./src/**/*.scss", shell("./go.sh css", cwd="./"))
 server.serve(root="./build/")

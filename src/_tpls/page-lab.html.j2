@@ -1,0 +1,10 @@
+{% extends "_tpls/page-clean.html" %}
+{% set nav_items = nav_items|default([
+  ('/lab/chaos/', 'chaos', 'chaos'),
+  ('/lab/ifs/', 'ifs', 'ifs'),
+  ('/lab/mandelbrot/', 'mandelbrot', 'mandelbrot'),
+  ('/lab/gxl/', 'gxl', 'gxl'),
+  ('/lab/rogue/', 'rogue', 'rogue'),
+  ('/lab/screensaver/', 'screensaver', 'screensaver.js'),
+   ('/lab/downloads.html', 'downloads', 'downloads'),
+]) -%}

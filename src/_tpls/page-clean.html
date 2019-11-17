@@ -9,6 +9,15 @@
   ('/stream/', 'stream', 'stream'),
 ]) -%}
 
+{% set footer_nav_items = footer_nav_items|default([
+  ('/about/', 'about', 'about'),
+  ('/git/', 'git', 'git'),
+  ('/lab/', 'lab', 'lab'),
+  ('/log/', 'log', 'log'),
+  ('/', 'projects', 'projects'),
+  ('/stream/', 'stream', 'stream'),
+]) -%}
+
 <head>
   <title>{% block title %}hello, goodrobot.net{% endblock %}</title>
   <link href='/css/clean.css' rel='stylesheet' type='text/css'>
@@ -64,7 +73,7 @@
 
   <footer class="page-footer">
     <ul class='list-nav'>
-      {% for href, id, name in nav_items %}
+      {% for href, id, name in footer_nav_items %}
       <li {% if current_page == id %}class="active" {% endif %}>
         <a href="{{ href|e }}">{{ name|e }}</a>
       </li>

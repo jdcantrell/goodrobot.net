@@ -16,10 +16,17 @@
   list-style: none;
 }
 
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 16px;
+  grid-auto-flow: dense;
+  list-style: none;
+}
+
 .tiles li {
-  display: inline-block;
-  width: 24%;
-  max-width:500px;
+  display: block;
+  width: 100%;
   margin-top: 5px;
 }
 
@@ -29,20 +36,19 @@
   vertical-align: middle;
 }
 
-.offscreen {
-  visibility: hidden;
-}
-
-
 </style>
 {% endblock %}
 
-{% macro pic(entry) -%}
+{% macro pic(idx, entry) -%}
   {% set entry_image = images(entry.description)|first -%}
   {% if entry_image -%}
     <li class="offscreen">
       <a href="{{entry.link}}">
-        <img data-src="{{entry_image}}">
+        {% if idx < 16 %}
+          <img src="{{entry_image}}">
+        {% else %}
+          <img data-src="{{entry_image}}">
+        {% endif %}
       </a>
     </li>
   {%- endif %}
@@ -55,55 +61,50 @@
   <div class="readable-content content">
     <ul class="tiles">
       {% for entry in time_sort([
-          'https://1041uuu.tumblr.com/rss',
+          'https://lvl374.tumblr.com/rss',
+          'https://simzart.tumblr.com/',
           'http://30000fps.com/rss',
+          'http://pixelartus.com/rss',
+          'http://www.89a.co.uk/rss',
+          'http://www.suppermariobroth.com/rss',
+          'https://1041uuu.tumblr.com/rss',
+          'https://aestheticvalley.tumblr.com/rss',
+          'https://anasabdin.tumblr.com/rss',
+          'https://animesignage.tumblr.com/rss',
           'https://awfulland.tumblr.com/rss',
           'https://beesandbombs.tumblr.com/rss',
           'https://carlburton.tumblr.com/rss',
           'https://deathherald.tumblr.com/rss',
           'https://dom2d.tumblr.com/rss',
           'https://dvdp.tumblr.com/rss',
+          'https://electronicitems.tumblr.com/rss',
+          'https://floppydiskartwork.tumblr.com/rss',
+          'https://forgottentomorrows.tumblr.com/rss',
           'https://fornaxvoid.tumblr.com/rss',
           'https://k141.tumblr.com/rss',
           'https://kidmograph.tumblr.com/rss',
           'https://kvebox.tumblr.com/rss',
+          'https://lennsan.tumblr.com/rss',
+          'https://metropoworld.tumblr.com/rss',
           'https://michaelshillingburg.tumblr.com/rss',
+          'https://neomechanica.tumblr.com/rss',
           'https://obscurevideogames.tumblr.com/rss',
-          'https://oktotally.tumblr.com/rss',
-          'http://pixelartus.com/rss',
+          'https://ofsparrows.tumblr.com/rss',
           'https://pixosprout.tumblr.com/rss',
           'https://probertson.tumblr.com/rss',
+          'https://retroscifiart.tumblr.com/',
+          'https://retrowavecollector.tumblr.com/rss',
+          'https://sciencefictioninterfaces.tumblr.com/rss',
           'https://solardrifter.tumblr.com/rss',
           'https://text-mode.tumblr.com/rss',
           'https://those-visions-have-no-end.tumblr.com/rss',
           'https://valenberg.tumblr.com/rss',
+          'https://viivus.tumblr.com/rss',
           'https://welcometomvrs.tumblr.com/rss',
-          'http://www.89a.co.uk/rss',
-          'http://www.suppermariobroth.com/rss',
-          'https://animesignage.tumblr.com/rss',
           'https://www.artstation.com/artist/zomtech.rss',
           'https://yaspes.tumblr.com/rss',
-          'https://metropoworld.tumblr.com/rss',
-          'https://forgottentomorrows.tumblr.com/rss',
-          'https://retrowavecollector.tumblr.com/rss',
-          'http://feeds.feedburner.com/behance/vorr',
-          'https://retroscifiart.tumblr.com/',
-          'https://viivus.tumblr.com/rss',
-          'https://neomechanica.tumblr.com/rss',
-          'https://lennsan.tumblr.com/rss',
-          'https://forgottentomorrows.tumblr.com/rss',
-          'https://yaspes.tumblr.com/rss',
-          'https://goquest.tumblr.com/rss',
-          'https://aestheticvalley.tumblr.com/rss',
-          'https://retrowavecollector.tumblr.com/rss',
-          'https://ofsparrows.tumblr.com/rss',
-          'https://sciencefictioninterfaces.tumblr.com/rss',
-          'https://electronicitems.tumblr.com/rss',
-          'https://floppydiskartwork.tumblr.com/rss',
-          'https://anasabdin.tumblr.com/rss',
-          'https://welcometomvrs.tumblr.com/rss',
           ], 10) %}
-        {{ pic(entry) }}
+        {{ pic(loop.index, entry) }}
       {% endfor %}
     </ul>
   </div>
@@ -112,5 +113,30 @@
 
 
 {% block javascript %}
-<script src="/static/gifwindow/gifwindow.js" type="text/javascript"></script>
+<script>
+  const loadImage = (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.intersectionRatio > .1 && entry.target.dataset.src) {
+      entry.target.setAttribute('src', entry.target.dataset.src)
+      }
+    })
+  }
+
+  const setupLazyLoader = () => {
+    observer = new IntersectionObserver(
+      loadImage,
+      {
+        root: null,
+        rootMargin: '100px 100px 100px 100px',
+        threshold: [0.1],
+      }
+    );
+
+    document.querySelectorAll('.content img').forEach(
+      img => observer.observe(img)
+    );
+  }
+
+  window.addEventListener('load', setupLazyLoader);
+</script>
 {% endblock %}

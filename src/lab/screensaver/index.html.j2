@@ -1,78 +1,44 @@
-{% extends "_tpls/page-lab.html" %}
+{% extends "_tpls/page-lab.html.j2" %}
 {% set current_page = "screensaver" %}
 {% block title %}Screensaver{% endblock %}
 
 {% block head %}
   <style>
-    .content {
-      width: 100%;
-      padding: 0
-    }
 
-    .page-header {
-      margin-bottom: 0;
-    }
-    .page-footer {
-      margin-top: 0;
-    }
     #demo {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      background-color: #111;
       width: 100%;
-      height: 100%;
-    }
-    .text {
-      color: #fff;
-      position: absolute;
-      padding: 15px;
-      top: 0;
-      width: 100%;
-      text-shadow: 1px 1px 4px rgb(0,0,0);
+      height: 600px;
     }
 
-    .text > div {
-      max-width: 730px;
-      margin: auto;
-    }
-
-    .container {
-      height: calc(100vh - 72px);
-      width: 100vw;
-      position: relative;
-    }
   </style>
 {% endblock %}
 
 {% block content %}
   <div class="container">
-    <canvas id="demo"></canvas>
-    <div class="text">
-      <div>
-        <h1>screensaver.js</h1>
-        <p>
-          A long time ago when I started to get into computers I was in love
-          with screensavers. Even to this day one of the first things I do on a
-          new system is make sure I have xscreensaver installed. When I went
-          through school and started to learn how to do some graphics
-          programming I created a screensaver of my own. And then many years
-          later I decided to port it over to webgl and make it act as a
-          screensaver for a webpage. Pretty pointless, but fun.
-        </p>
-        <p>
-          If you would like to have this on your own page download <a
-          href="js/screensaver.js">screensaver.js</a> and then add the
-          following:
-          <pre>
-            &lt;script src="screensaver.js"&gt;&lt;/script&gt;
-            &lt;script&gt;screensaver().initialize({ delay: 5000 });&lt;/script&gt;
-          </pre>
-        </p>
+    <div>
+      <h1>screensaver.js</h1>
+      <p>
+        A long time ago when I started to get into computers I was in love
+        with screensavers. Even to this day one of the first things I do on a
+        new system is make sure I have xscreensaver installed. When I went
+        through school and started to learn how to do some graphics
+        programming I created a screensaver of my own. And then many years
+        later I decided to port it over to webgl and make it act as a
+        screensaver for a webpage. Pretty pointless, but fun.
+      </p>
+      <p>
+        If you would like to have this on your own page download <a
+        href="js/screensaver.js">screensaver.js</a> and then add the
+        following:
+        <pre>
+          &lt;script src="screensaver.js"&gt;&lt;/script&gt;
+          &lt;script&gt;screensaver().initialize({ delay: 5000 });&lt;/script&gt;
+        </pre>
+      </p>
 
-      </div>
     </div>
+    <canvas id="demo"></canvas>
   </div>
 {% endblock %}
 

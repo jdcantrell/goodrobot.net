@@ -84,10 +84,14 @@ case "$1" in
     generate_all
     ;;
   generate_site)
-    generate_all "--cache"
+    generate
     ;;
   stream)
     stream
+    ;;
+  stream_cache)
+    stream "--cache"
+    stream_pic "--cache"
     ;;
   css)
     css

@@ -172,9 +172,9 @@ def md():
     env = Environment(loader=FileSystemLoader(os.path.abspath('src')))
 
     try:
-        template = env.get_template('_tpls/post.tpl')
+        template = env.get_template('_tpls/post.html.j2')
     except TemplateNotFound:
-        print("Could not find src/_tpls/post.tpl, has it been created?")
+        print("Could not find src/_tpls/post.html.j2, has it been created?")
         return
 
     for src, dest in tpls:
