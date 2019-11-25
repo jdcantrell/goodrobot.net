@@ -40,7 +40,7 @@ stream_pic() {
 }
 
 generate() {
-  rm -rf ./build
+  rm -rf ./build # todo - make this optional
   blue 'Building folder structure'
   python build.py dirs
   blue 'Parsing templates'
