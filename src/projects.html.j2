@@ -1,0 +1,57 @@
+{% extends "_tpls/page-clean.html" %}
+{% set current_page = "projects" %}
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+        <div class="flex-container row" style="align-items: flex-start">
+          <div class="photo-card">
+            <div>
+              <img height="120" src="/images/thumbs/mandelbrot_4k_lightning.jpg">
+            </div>
+          </div>
+          <div class="flex-1" style="margin-left: 8px">
+          <h2>Mandelbrot generator</h2>
+          <p>
+            This is a small program that generates mandelbrots. It's written
+            on python. Does this just keep going on a single line forever and ever?
+          </p>
+        </div>
+      </div>
+
+        <div class="flex-container row align-start">
+          <div class="photo-card">
+            <div>
+              <img height="120" src="/images/ankh.png">
+            </div>
+          </div>
+          <div class="flex-1" style="margin-left: 16px">
+          <h2>Ankh</h2>
+          <p>
+            Ankh is a python script that generates html from RSS feeds. You
+            feed it a jinja2 template and use some of the built in template
+            tags and it creates your very own custom feed reader. I use this
+            for my <a href="https://goodrobot.net/stream">links page</a>.
+            The source code can be found at <a
+            href="https://github.com/jdcantrell/ankh">github</a>.
+          </p>
+        </div>
+      </div>
+
+        <div class="flex-container row align-start">
+          <div class="photo-card">
+            <div>
+              <img height="120" src="/images/spice.png">
+            </div>
+          </div>
+          <div class="flex-1" style="margin-left: 16px">
+          <h2>Spice</h2>
+          <p>
+            Spice is a self-hosted file sharing site. It lets you upload
+            files easily by drag and drop. I primarily use this to share
+            screenshots of my works in progress.
+            The source code can be found at <a
+            href="https://github.com/jdcantrell/spice">github</a>.
+          </p>
+        </div>
+      </div>
+{% endblock %}
