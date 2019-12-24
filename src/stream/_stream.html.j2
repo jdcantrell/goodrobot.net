@@ -1,4 +1,4 @@
-{% extends "_tpls/page-clean.html" %}
+{% extends "_tpls/page-clean.html.j2" %}
 {% set current_page = "stream" %}
 {% set current_page_sub_title = "stream" %}
 {% block title %}Links and Things{% endblock %}
@@ -216,14 +216,14 @@
         <ul class="list-bullets">
           {% for weather in get_weather([
             (37.99167, -122.05194),
-            (37.7126,-122.2131),
+            (37.61961, -122.36558),
             (43.6167, -116.2),
             (38.7453, -94.8292),
             (44.05782,-121.31537),
             (45.52, -122.6819),
           ]) %}
           <li title="{{ weather.condition() }}">
-            {{ weather.temp() }}&deg; and {{ weather.condition() }} in {{ weather.forecast_location() }}
+            {{ weather.temp() }}&deg; and {{ weather.condition() }} at {{ weather.forecast_location() }}
           {% endfor %}
         </ul>
       </article>

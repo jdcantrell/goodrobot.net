@@ -1,0 +1,63 @@
+{% extends "_tpls/page-clean.html.j2" %}
+{% set current_page = "about" %}
+
+{% block title %}About{% endblock %}
+
+{% block head %}
+<style>
+  .work {
+    display: grid;
+    grid-gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    list-style: disc;
+    margin-left: 16px;
+    margin-bottom: 32px;
+  }
+
+  p {
+    margin: 32px 0;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>My name is JD. I currently work as a software engineer at <a href="https://arceo.ai">arceo.ai</a>.</h1>
+
+<p>This site is mostly my digital playground and collecting place for me to
+share random things with people. Here are some random bullet points about
+me:</p>
+
+<h2>Life</h2>
+<ul class="work">
+  <li>🐕 owned by a shiba inu</li>
+  <li>🏃 trail runner</li>
+  <li>⌨️ programmer</li>
+  <li>🎸 guitarist</li>
+  <li>📖 books</li>
+  <li>🛸 sci fi</li>
+  <li>🧙‍♂️ fantasy</li>
+  <li>📸 photographer</li>
+  <li>👨‍🍳 cook</li>
+  <li>🍕 food</li>
+  <li>🏞️ hike/camp</li>
+  <li>🎮 games</li>
+  <li>🍿 movies</li>
+  <li>🍵 tea</li>
+  <li>🍫🔥 hot chocolate</ul>
+</ul>
+
+<h2>Work</h2>
+<ul class="work">
+  <li>⚙️ Design systems</li>
+  <li>🦊 Frontend</li>
+  <li>✨ Sql</li>
+  <li>Code janitor</li>
+  <li>🐘 PHP</li>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JavaScript</li>
+  <li>🐍 Python</li>
+</ul>
+
+
+{% endblock %}

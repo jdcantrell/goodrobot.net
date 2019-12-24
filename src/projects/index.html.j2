@@ -1,0 +1,115 @@
+{% extends "_tpls/page-clean.html.j2" %}
+{% set current_page = "projects" %}
+{% block title %}Projects{% endblock %}
+
+{% block head %}
+<style>
+  .project-image {
+    height: 130px;
+    width: 200px;
+  }
+
+  .project-description {
+    margin-left: 16px;
+  }
+
+  .project {
+    margin-bottom:24px;
+  }
+
+  .project h2 {
+    margin-bottom: 8px;
+  }
+
+  .project .photo-card {
+    margin-top: 2px;
+  }
+</style>
+
+{% endblock %}
+
+{% block content %}
+<div class="project">
+  <h2>Ankh</h2>
+  <div class="flex-container row align-start">
+    <div class="photo-card">
+      <div>
+        <img class="project-image image-fill" src="/images/ankh.png">
+      </div>
+    </div>
+    <div class="flex-1 project-description">
+      <p>
+        Ankh is a python script that generates html from RSS feeds. You
+        feed it a jinja2 template and use some of the built in template
+        tags and it creates your very own custom feed reader. I use this
+        for my <a href="https://goodrobot.net/stream">links page</a>.
+      </p>
+      <ul class="list-inline">
+        <li><a href="https://github.com/jdcantrell/ankh">Source</a></li>
+        <li><a href="/stream">Demo</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="project">
+  <h2>Spice</h2>
+  <div class="project flex-container row align-start">
+    <div class="photo-card">
+      <div>
+        <img  class="project-image image-fill" src="/images/spice.png">
+      </div>
+    </div>
+    <div class="flex-1 project-description">
+      <p>
+        Spice is a self-hosted file sharing site. It lets you upload
+        files easily by drag and drop. I primarily use this to share
+        screenshots of my works in progress.
+      </p>
+      <ul class="list-inline">
+        <li><a href="https://github.com/jdcantrell/spice">Source</a></li>
+        <li><a href="/share">Demo</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="project">
+  <h2>Sparkbot</h2>
+  <div class="flex-container row align-start">
+    <div class="photo-card">
+      <div>
+        <img class="project-image image-fill" src="/images/sparkbot.png">
+      </div>
+    </div>
+    <div class="flex-1 project-description">
+      <p>
+        I use this as my new tab page in firefox. It is meant to be a
+        simple todo/scratch pad page. It stores all data in localstorage
+        and lets you set up as many columns and blocks as needed.
+      </p>
+      <ul class="list-inline">
+        <li><a href="/git/sparkbot">Source</a></li>
+        <li><a href="/sparkbot">Demo</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="project">
+  <h2>Others</h2>
+  <div class="flex-container row align-start">
+    <div class="photo-card">
+      <div>
+        <img class="project-image image-fill" src="/images/thumbs/mandelbrot_4k_lightning.jpg">
+      </div>
+    </div>
+    <div class="flex-1 project-description">
+      <p>
+        You can also find smaller toy projects in the <a href="/lab">lab section</a>. And, I have a few random things at <a href="https://glitch.com/@jdc">glitch</a>.
+      </p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
