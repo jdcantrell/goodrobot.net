@@ -5,8 +5,7 @@ tags:
   - linux
 ---
 
-
-#Local .dev domains
+# Local .dev domains
 One of my favorite apps on OSX is Anvil. It easily creates local .dev
 domains for you to serve static content/sites. It also can serve up Rack
 apps if you happen to be developing with ruby and Rack. This comes in
@@ -23,7 +22,7 @@ working, but I've had enough fiddling around dnsmasq every time my linux
 distribution upgrades that I have now settled on the much simpler
 solution relying on a wildcard domain pointing back to 127.0.0.1.
 
-##Install and enable nginx
+## Install and enable nginx
 Install `nginx` and start it up on boot. If you have a systemd system,
 you enable it on boot like so:
 
@@ -31,7 +30,7 @@ you enable it on boot like so:
 sudo systemctl enable nginx
 ```
 
-##Setup nginx
+## Setup nginx
 Now let's setup nginx to figure out what project to serve by our
 incoming url. You have a few choices on domains to use: `lvh.me`,
 `127.0.0.1.xip.io`, `vcap.me`, `sim.bz`
@@ -51,11 +50,7 @@ Our nginx config will need to do a few things:
    reminding us to check a few things before we start cursing all the
    duct tape involved in this process.
 
-<div class="box code-header">
-  local_dev.conf <a href="https://gist.github.com/jdcantrell/8028709">gist</a>
-</div>
-
-```nginx
+```nginx::local_dev.conf::gist;;https://gist.github.com/jdcantrell/8028709
 upstream app_server {
   server localhost:8080 fail_timeout=0;
 }
@@ -103,7 +98,7 @@ able to use what folders exist in `/etc/nginx` as a guide.
 **Be sure to update `$username` in the config file!** Finally, restart
 nginx and then you're nearly done.
 
-##SELinux settings
+## SELinux settings
 SELinux will prevent nginx from accessing user directories by
 default. On Fedora the easiest way to fix this is to check the selinux
 notifications and follow the instructions it gives for allowing access.
@@ -124,7 +119,7 @@ nginx to read from it.
 chmod 755 ~
 ```
 
-##Setup your ~/.sites folder
+## Setup your ~/.sites folder
 
 The nginx config above reads out the defined user's home directory
 in the .sites directory.
@@ -138,11 +133,7 @@ You can use different directories if you'd like, just be sure to update
 the nginx local_dev config to match. In the `~/.sites/errors/` directory
 add a simple `502.html` page:
 
-<div class="box code-header">
-  ~/.sites/errors/502.html <a href="https://gist.github.com/jdcantrell/9320869">gist</a>
-</div>
-
-```html
+```html::~/.sites/errors/502.html::gist;;https://gist.github.com/jdcantrell/9320869
 <!DOCTYPE html>
 <html>
   <head>
@@ -193,7 +184,7 @@ This is the page that lets you know your local server is working, but
 for whatever reason the particular project domain you visited is not.
 
 
-##Sym link your project folders
+## Symlink your project folders
 If you visit [http://pancakes.sim.bz](http://pancakes.sim.bz) or any other
 .dev domain you should see the error page. Here's the final step to
 using this with a project:
@@ -212,7 +203,7 @@ your project. In the above case the sym link is the same as the actual
 directory, you could sym link the directory to ~/.sites/waffles and then
 the sub-domain `waffles.sim.bz` would work.
 
-##Sharing with xip.io
+## Sharing with xip.io
 It is handy to be able to share your local .dev from time to time. An
 easy way to do this is to use a xip.io domain. This domain will echo
 whatever IP address is prepended to it:
@@ -226,11 +217,8 @@ share only on your local network or with people external to your network
 depending on which IP you use in the xip.io domain. You will need to
 setup an additional nginx config:
 
-<div class="box code-header">
-  xipio.conf <a href="https://gist.github.com/jdcantrell/8028720">gist</a>
-</div>
 
-```nginx
+```nginx::xipio.conf::gist;;https://gist.github.com/jdcantrell/8028720
 upstream xip_app_server {
   server localhost:8080 fail_timeout=0;
 }
@@ -263,14 +251,10 @@ You will likely need to modify your firewall rules and/or router
 settings to allow outside connections to your machine. Typically, I
 will only enable them when needed.
 
-##Bash aliases
+## Bash aliases
 Additionally, I use a few bash functions make setting up and using dev domains easier:
 
-<div class="box code-header">
-  .bashrc <a href="https://gist.github.com/jdcantrell/8036482">gist</a>
-</div>
-
-```bash
+```bash::.bashrc::gist;;https://gist.github.com/jdcantrell/8036482
 #Local dev site functions
 
   #find current directory in our list of sites

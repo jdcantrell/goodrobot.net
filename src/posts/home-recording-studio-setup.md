@@ -8,27 +8,27 @@ tags:
   - studio
 ---
 
-#Home Studio Setup on Fedora
+# Home Studio Setup on Fedora
 
 Here is my preferred setup for recoding music through a microphone on Fedora.
 I've been playing guitar for about a year now and have slowly been learning the
 way to setup my system so that it works more often than not. At the time of this
 writing this should be fairly up-to-date for Fedora 28.
 
-##Quick Start
+## Quick Start
 
 dnf install jackd qjackctrl jack-audio-plugin-examples ardour
 adduser to jackd
 fix rtprio
 
-##Windows VSTs via wine
+## Windows VSTs via wine
 dnf install wine wine-dev
 download VST sdk
 clone linvst
 make
 make install
 
-##Decisions
+## Decisions
 
 When getting started there are so many decisions to make even before you get
 into the actual act of creating music. Many of my decisions where made based
@@ -100,7 +100,7 @@ Next up is software, since we're using Fedora we're limited on a few things.
   listen to your recording you'll have the option to go through your headphones
   (via the microphone) or play it through your desktop speakers.
 
-#Software setup
+# Software setup
 
 On Fedora there are a few things you will need to do before you can use the
 above. First you need to add your user to the jack users group. Next you need to
@@ -114,7 +114,7 @@ Next set up an alsa_out sink so that you can use your system sound card as an
 output. This requires writing a bash script:
 
 
-```
+```bash
 #!/bin/bash
 set -uex
 
@@ -175,15 +175,15 @@ Things I wish for:
   couple of paragraphs (generals internet gripe)
 - A more gentle introduction to all of the above.
 
-#DAWs
-DAWs are complicated softwares. It can be overwhelming when trying to learn a
+# DAWs
+DAWs are complicated software. It can be overwhelming when trying to learn a
 new instrument and all you want to do is record a few tracks and then make
 everything sound nice. My experience so far has been that is worth investing in
 learning how to use your particular DAW. There are a few concepts that are
 general across all music recording but if you do not know about it's hard to
 find with random google searches. For me one of the first things I wanted to do
 was re-record parts of a song (hopefully playing some parts better). The thing
-you're looking for is called punch-in (and possible punch-out).
+you're looking for is called punch-in (and possibly punch-out).
 
 Punch-in lets you play a track normally and then at a marked time begin
 recording. Punch-out allows you to stop recording. This is incredibly useful for
@@ -207,7 +207,7 @@ things like clips and launchers. It's still worth learning to use these tools
 because you can split your audio track in to samples and then quickly set up a
 series of chords as a simple backing track.
 
-#Making noise and music
+# Making noise and music
 The most important thing about any of the above and the only thing will help you
 be a better musician is practicing and making music.
 

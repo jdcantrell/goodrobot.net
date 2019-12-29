@@ -167,7 +167,7 @@ def md():
                         )
                     )
 
-    md = mistune.Markdown(renderer=Renderer())
+    md = mistune.create_markdown(renderer=Renderer())
     env = Environment(loader=FileSystemLoader(os.path.abspath("src")))
 
     try:
@@ -195,9 +195,27 @@ class Renderer(mistune.HTMLRenderer):
     def block_code(self, code, lang=None):
         if not lang:
             return "\n<pre><code>%s</code></pre>\n" % mistune.escape(code)
-        lexer = get_lexer_by_name(lang, stripall=True)
-        formatter = HtmlFormatter()
-        return highlight(code, lexer, formatter)
+        else:
+            lang, *parts = lang.split("::")
+
+            lexer = get_lexer_by_name(lang, stripall=True)
+            formatter = HtmlFormatter()
+            highlighted_code = highlight(code, lexer, formatter)
+
+            if len(parts):
+                name, *links = parts
+                link_tags = []
+                for link in links:
+                    print(link)
+                    title, href = link.split(";;")
+                    link_tags.append('<a href="{}">{}</a>'.format(href, title))
+
+                header = '<div class="code-header">{} {}</div>'.format(
+                    name, " ".join(link_tags)
+                )
+                return header + highlighted_code
+
+            return highlighted_code
 
 
 action = sys.argv[1]

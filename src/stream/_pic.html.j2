@@ -18,22 +18,28 @@
 
 .tiles {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 16px;
   grid-auto-flow: dense;
   list-style: none;
 }
 
 .tiles li {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   margin-top: 5px;
+}
+
+.tiles a:hover {
+  background: none
 }
 
 .tiles img {
   width: 100%;
   max-width:500px;
-  vertical-align: middle;
+  box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.2), 0 1px 2px 0px rgba(0, 0, 0, 0.1);
 }
 
 </style>
@@ -61,8 +67,6 @@
   <div class="readable-content content">
     <ul class="tiles">
       {% for entry in time_sort([
-          'https://lvl374.tumblr.com/rss',
-          'https://simzart.tumblr.com/',
           'http://30000fps.com/rss',
           'http://pixelartus.com/rss',
           'http://www.89a.co.uk/rss',
@@ -81,20 +85,26 @@
           'https://floppydiskartwork.tumblr.com/rss',
           'https://forgottentomorrows.tumblr.com/rss',
           'https://fornaxvoid.tumblr.com/rss',
+          'https://jazzisthebestformofmusic.tumblr.com/rss',
           'https://k141.tumblr.com/rss',
           'https://kidmograph.tumblr.com/rss',
           'https://kvebox.tumblr.com/rss',
           'https://lennsan.tumblr.com/rss',
+          'https://lvl374.tumblr.com/rss',
           'https://metropoworld.tumblr.com/rss',
           'https://michaelshillingburg.tumblr.com/rss',
+          'https://mini-moss.tumblr.com/rss',
           'https://neomechanica.tumblr.com/rss',
           'https://obscurevideogames.tumblr.com/rss',
           'https://ofsparrows.tumblr.com/rss',
           'https://pixosprout.tumblr.com/rss',
+          'https://prinsomnia.tumblr.com/rss'
           'https://probertson.tumblr.com/rss',
           'https://retroscifiart.tumblr.com/',
           'https://retrowavecollector.tumblr.com/rss',
           'https://sciencefictioninterfaces.tumblr.com/rss',
+          'https://setamo-arts.tumblr.com/rss',
+          'https://simzart.tumblr.com/',
           'https://solardrifter.tumblr.com/rss',
           'https://text-mode.tumblr.com/rss',
           'https://those-visions-have-no-end.tumblr.com/rss',

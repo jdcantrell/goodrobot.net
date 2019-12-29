@@ -6,7 +6,7 @@ tags:
   - vm
 ---
 
-#Gnome Boxes and Modern.ie
+# Gnome Boxes and Modern.ie
 
 If you need to test Internet Explorer and all you have is a linux
 machine you might be disappointed when you see that

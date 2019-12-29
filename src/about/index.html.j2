@@ -1,14 +1,15 @@
 {% extends "_tpls/page-clean.html.j2" %}
 {% set current_page = "about" %}
+{% set current_page_sub_title = "about" %}
 
 {% block title %}About{% endblock %}
 
 {% block head %}
 <style>
-  .work {
+  .things {
     display: grid;
     grid-gap: 8px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     list-style: disc;
     margin-left: 16px;
     margin-bottom: 32px;
@@ -28,7 +29,7 @@ share random things with people. Here are some random bullet points about
 me:</p>
 
 <h2>Life</h2>
-<ul class="work">
+<ul class="things">
   <li>🐕 owned by a shiba inu</li>
   <li>🏃 trail runner</li>
   <li>⌨️ programmer</li>
@@ -47,7 +48,7 @@ me:</p>
 </ul>
 
 <h2>Work</h2>
-<ul class="work">
+<ul class="things">
   <li>⚙️ Design systems</li>
   <li>🦊 Frontend</li>
   <li>✨ Sql</li>

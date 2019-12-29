@@ -8,7 +8,7 @@ tags:
   - games
 ---
 
-#RetoArch and EmulationStation on Fedora
+# RetoArch and EmulationStation on Fedora
 
 If you like playing emulated games on your machine and you also like
 Fedora you might be a little disappointed to see that RetroArch and
@@ -17,7 +17,7 @@ Fortunately, it can be easily fixed by compiling from source. However
 there are a few extra steps needed beyond `make` and `make install`.
 
 
-##Build RetroArch
+## Build RetroArch
 
 First install RetroArch. You can essentially follow the directions on
 the [compilation guide][1]. Here's an abriged version:
@@ -44,7 +44,7 @@ make
 make install DESTDIR=~/Games/retroarch/
 ```
 
-##Build EmulationStation
+## Build EmulationStation
 
 EmulationStation is slightly more work since you currently need to patch
 the source. Anyhow, first install the dependencies:
@@ -91,7 +91,7 @@ EmulationStation/es-core/src/resources/Font.cpp:536: void Font::renderTextCache(
 It's likely because your themes directory is not set up correctly (not
 found or nested incorrectly).
 
-###Additional Resources
+### Additional Resources
 The EmulationStation steps were greatly aided by looking at this
 [retroarch-fedora repo](https://github.com/thias/retroarch-fedora). It's
 worth a shot to see if http://dl.marmotte.net/rpms/fedora/ has updated
