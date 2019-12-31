@@ -32,3 +32,47 @@
 
 .image-fill
   object-fit: cover
+
+.photo-card-irix
+  border-image-source: url("/images/Irix-Window.png")
+  border-image-slice: 16
+  border-image-width: 8px
+  border-image-outset: 8px
+  border-image-repeat: round
+
+  background-color: $photo-card-background
+  padding: 0px
+  box-shadow: 0 2px 8px 8px rgba(0, 0, 0, 0.2), 0 1px 2px 8px rgba(0, 0, 0, 0.3)
+  display: inline-block
+  max-width: 730px
+  margin-bottom: 48px
+
+  header
+    background-color: $c15
+    color: $c14
+    border-top: 1px solid lighten($c15, 5%)
+    border-left: 1px solid lighten($c15, 5%)
+    border-bottom: 1px solid #000
+    padding-left: 8px
+    padding-right: 8px
+
+    h3
+      font-style: italic
+      margin-bottom: 0
+
+    a
+      color: $c14
+
+  figure
+    margin-bottom: 0
+    padding: 16px;
+    background-color: #f6edff
+    border-bottom: 1px solid #000
+
+  footer
+    background-color: $c15
+    color: $c14
+    border-top: 1px solid lighten($c15, 5%)
+    border-left: 1px solid lighten($c15, 5%)
+    padding-left: 8px
+    padding-right: 8px

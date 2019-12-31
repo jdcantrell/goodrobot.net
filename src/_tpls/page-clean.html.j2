@@ -18,6 +18,20 @@
   ('/stream/', 'stream', 'stream'),
 ]) -%}
 
+{% set header_icon = header_icon|default([
+  '/android-chrome-192x192.png',
+  '/images/icons/ghost_jd.gif',
+  '/images/icons/goodrobot-orange.png',
+  '/images/icons/kodiakday.svg',
+  '/images/icons/kodiakmorning.svg',
+  '/images/icons/kodiaknight.svg',
+  '/images/icons/kodiaksunset.svg',
+  '/images/icons/mermaid_run.gif',
+  '/images/icons/shiba.png',
+  '/images/icons/tea-green.png',
+  ]|random)
+-%}
+
 <head>
   <title>{% block title %}hello, goodrobot.net{% endblock %}</title>
   <link href='/css/clean.css' rel='stylesheet' type='text/css'>
@@ -43,18 +57,7 @@
     <div class="page-site-header">
       <a class="page-logo" title="goodrobot.net" href="/">
         <img alt="goodrobot" height="24px"
-          src='{{ [
-            '/android-chrome-192x192.png',
-            '/images/icons/ghost_jd.gif',
-            '/images/icons/goodrobot-orange.png',
-            '/images/icons/kodiakday.svg',
-            '/images/icons/kodiakmorning.svg',
-            '/images/icons/kodiaknight.svg',
-            '/images/icons/kodiaksunset.svg',
-            '/images/icons/mermaid_run.gif',
-            '/images/icons/shiba.png',
-            '/images/icons/tea-green.png',
-          ]|random }}'>
+          src='{{ header_icon }}'>
       </a>
       <span class="page-header-title">
         <a title="goodrobot.net" href="/">
