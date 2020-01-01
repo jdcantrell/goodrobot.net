@@ -13,6 +13,7 @@ requests = ">=2.20"
 ankh = {git = "https://github.com/jdcantrell/ankh.git",ref = "master"}
 pillow = "*"
 livereload = "*"
+click = "*"
 
 [dev-packages]
 flake8 = "*"

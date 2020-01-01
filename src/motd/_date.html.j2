@@ -1,0 +1,27 @@
+{% extends "_tpls/page-clean.html.j2" %}
+{% set current_page = "motd" %}
+{% set current_page_sub_title = "motd" %}
+{% set header_icon = "/images/icons/shiba.png" %}
+{% block title %}motd - mango of the day{% endblock %}
+
+
+{% block head %}
+  <meta property="og:image" content="/images/motd/{{ image }}">
+  <meta property="og:title" content="{{ title }}">
+{% endblock %}
+
+{% block content %}
+  <article class="photo-card-irix">
+    <header class="flex-container row">
+      <h3 class="flex-1">
+        ~ {{ title }} ~
+      </h3>
+    </header>
+    <figure class="flex-container">
+      <img src="/images/motd/{{ image }}">
+    </figure>
+    <footer class="flex-container row">
+      <time datetime="{{ date}}" class="flex-1">{{ date }}</time>
+    </footer>
+  </article>
+{% endblock %}
