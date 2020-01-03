@@ -6,8 +6,13 @@
 
 
 {% block head %}
-  <meta property="og:image" content="/images/motd/{{ image }}">
-  <meta property="og:title" content="{{ title }}">
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:creator" content="@goodrobot_jd" />
+  <meta name=”twitter:image” content="https://goodrobot.net/images/motd/{{ image }}" />
+  <meta property="og:site_name" content="motd on goodrobot.net">
+  <meta property="og:url" content="/motd/{{ date }}.html">
+  <meta property="og:image" content="https://goodrobot.net/images/motd/{{ image }}">
+  <meta property="og:title" content="mango of the day - {{ title }}">
 {% endblock %}
 
 {% block content %}

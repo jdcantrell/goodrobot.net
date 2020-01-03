@@ -1,1 +1,12 @@
-[{"date": "2020-1-1", "image": "2020-1-1.jpg", "title": "oh hi!"}]
+[
+  {
+    "date": "2020-01-01",
+    "image": "2020-01-01.jpg",
+    "title": "oh hi!"
+  },
+  {
+    "date": "2020-01-02",
+    "image": "2020-01-02.jpg",
+    "title": "Majestic Blink"
+  }
+]
