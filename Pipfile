@@ -14,6 +14,7 @@ ankh = {git = "https://github.com/jdcantrell/ankh.git",ref = "master"}
 pillow = "*"
 livereload = "*"
 click = "*"
+werkzeug = "*"
 
 [dev-packages]
 flake8 = "*"

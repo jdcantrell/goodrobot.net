@@ -7,6 +7,7 @@ import click
 from PIL import Image
 from jinja2 import Environment, FileSystemLoader
 from jinja2.exceptions import TemplateNotFound, TemplateError
+from werkzeug.contrib.atom import AtomFeed
 
 
 def get_rows():
@@ -86,6 +87,16 @@ def render_day(row, is_today=False):
         print("done.")
 
 
+def get_rss_html(row):
+    env = Environment(loader=FileSystemLoader(os.path.abspath("src/")))
+    tpl = env.get_template("motd/{}".format("_rss_entry.html.j2"))
+    try:
+        return tpl.render(row)
+    except TemplateError as err:
+        print("Could not parse template: %s" % err)
+    return None
+
+
 @click.group()
 def motd():
     pass
@@ -124,7 +135,7 @@ def add(image, day, title):
 
     im = Image.open(image)
 
-    im.thumbnail((730, 730), Image.ANTIALIAS)
+    im.thumbnail((1460, 1460), Image.ANTIALIAS)
 
     thumb_filename = "{}.jpg".format(day)
     thumb_path = os.path.join("src", "images", "motd", thumb_filename)
@@ -164,6 +175,30 @@ def build(all):
         print("Rendering previous days:")
         for row in earlier_rows[:-1]:
             render_day(row)
+
+    print("Rendering atom feed:")
+    feed = AtomFeed(
+        "motd",
+        feed_url="https://goodrobot.net/motd/atom.xml",
+        url="https://goodrobot.net/motd/",
+        subtitle="Mango of the day",
+    )
+    for row in earlier_rows[-10:]:
+        row_datetime = datetime.strptime(row["date"], "%Y-%m-%d")
+        feed.add(
+            row["title"],
+            get_rss_html(row),
+            url="https://goodrobot.net/motd/{}.html".format(row["date"]),
+            content_type="html",
+            updated=row_datetime,
+            published=row_datetime,
+            author="jd",
+            title_type="text",
+        )
+
+    with open("build/motd/atom.xml", "wb") as atom_file:
+        atom_file.write(feed.get_response().data)
+        print("Done!")
 
 
 if __name__ == "__main__":
