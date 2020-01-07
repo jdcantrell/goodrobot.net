@@ -34,29 +34,28 @@
 
 <head>
   <title>{% block title %}hello, goodrobot.net{% endblock %}</title>
-  <link href='/css/clean.css' rel='stylesheet' type='text/css'>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  {% block meta %}{% endblock %}
+  <meta charset="utf-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="content-language" content="en" />
 
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#c42d1a">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#c42d1a">
   <meta name="theme-color" content="#458588">
 
+  <link href='/css/clean.css' rel='stylesheet' type='text/css'>
 
   {% block head %}{% endblock %}
 </head>
 
 <body>
-  <header class="page-header" role="navigation">
+  <header class="page-header">
     <div class="page-site-header">
       <a class="page-logo" title="goodrobot.net" href="/">
-        <img alt="goodrobot" height="24px"
+        <img alt="goodrobot" height="24"
           src='{{ header_icon }}'>
       </a>
       <span class="page-header-title">
@@ -95,7 +94,7 @@
     </ul>
     <div class="page-footer-title">
       <a class="page-logo" title="goodrobot.net" href="/">
-        <img alt="goodrobot" height="24px" src='/android-chrome-192x192.png'>
+        <img alt="goodrobot" height="24" src='/android-chrome-192x192.png'>
         goodrobot
       </a>
     </div>

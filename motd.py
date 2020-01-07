@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from datetime import date, datetime, timedelta
 import json
 import os
@@ -7,7 +8,14 @@ import click
 from PIL import Image
 from jinja2 import Environment, FileSystemLoader
 from jinja2.exceptions import TemplateNotFound, TemplateError
+
+# Todo - find a replacement for this
 from werkzeug.contrib.atom import AtomFeed
+
+# Todo - add queue command - this will copy the raw image and data to a queue
+# folder for later processing
+# Todo - add dequeue - updat motd.json with any new things from the queue, copy
+# images, and rebuild (maybe this should be build --queue?)
 
 
 def get_rows():

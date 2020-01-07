@@ -5,15 +5,15 @@
 {% block title %}motd - mango of the day{% endblock %}
 
 
-{% block head %}
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:creator" content="@goodrobot_jd" />
-  <meta name=”twitter:image” content="https://goodrobot.net/images/motd/{{ image }}" />
+{% block meta %}
   <meta property="og:site_name" content="motd on goodrobot.net">
-  <meta property="og:url" content="/motd/{{ date }}.html">
+  <meta property="og:url" content="https://goodrobot.net/motd/">
   <meta property="og:image" content="https://goodrobot.net/images/motd/{{ image }}">
   <meta property="og:title" content="mango of the day - {{ title }}">
-  <link type="application/atom+xml" rel="alternate" href="atom.xml"/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:creator" content="@goodrobot_jd">
+  <meta name="twitter:image" content="https://goodrobot.net/images/motd/{{ image }}">
+  <link type="application/atom+xml" rel="alternate" href="atom.xml">
 {% endblock %}
 
 {% block content %}
@@ -24,7 +24,7 @@
       </h3>
     </header>
     <figure class="flex-container">
-      <img src="/images/motd/{{ image }}">
+      <img alt="A shiba inu - {{ title }}" src="/images/motd/{{ image }}">
     </figure>
     <footer class="flex-container row">
       <time datetime="{{ date}}" class="flex-1">{{ date }}</time>
