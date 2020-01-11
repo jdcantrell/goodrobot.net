@@ -6,13 +6,17 @@
 
 
 {% block meta %}
-  <meta property="og:site_name" content="motd on goodrobot.net">
-  <meta property="og:url" content="https://goodrobot.net/motd/">
-  <meta property="og:image" content="https://goodrobot.net/images/motd/{{ rows[0].image }}">
-  <meta property="og:title" content="mango of the day - {{ rows[0].title }}">
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://goodrobot.net/motd/" />
+  <meta property="og:title" content="mango of the day - {{ rows[0].title }}" />
+  <meta property="og:description" content="Daily pictures of a dog named Mango" />
+  <meta property="og:image" content="https://goodrobot.net/images/motd/{{ rows[0].image }}" />
   <meta name="twitter:card" content="summary">
   <meta name="twitter:creator" content="@goodrobot_jd">
+  <meta name="twitter:title" content="mango of the day - {{ rows[0].title }}">
+  <meta name="twitter:description" content="Daily pictures of a dog named Mango">
   <meta name="twitter:image" content="https://goodrobot.net/images/motd/{{ rows[0].image }}">
+
   <link type="application/atom+xml" rel="alternate" href="atom.xml">
 {% endblock %}
 

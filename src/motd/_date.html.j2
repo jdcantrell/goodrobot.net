@@ -3,6 +3,16 @@
 {% set current_page_sub_title = "motd" %}
 {% set header_icon = "/images/icons/shiba.png" %}
 {% block title %}motd - mango of the day{% endblock %}
+{% block head %}
+  <style>
+    pre {
+      border: none;
+      background-color: transparent;
+      color: #6210b5;
+      line-height: 1;
+    }
+  </style>
+{% endblock %}
 
 
 {% block meta %}
@@ -17,7 +27,26 @@
 {% endblock %}
 
 {% block content %}
-  <article class="photo-card-irix">
+<pre id="message">
+Welcome to goodrobot.net/motd - mango of the day!
+
+███╗   ███╗ █████╗ ███╗   ██╗ ██████╗  ██████╗
+████╗ ████║██╔══██╗████╗  ██║██╔════╝ ██╔═══██╗
+██╔████╔██║███████║██╔██╗ ██║██║  ███╗██║   ██║
+██║╚██╔╝██║██╔══██║██║╚██╗██║██║   ██║██║   ██║
+██║ ╚═╝ ██║██║  ██║██║ ╚████║╚██████╔╝╚██████╔╝
+╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝
+Mango of the day -~**~- Photos of a Shiba Inu!!
+
+Today:.............: {{ motd_date }}
+Puptime............: {{ motd_uptime }}
+Bark Averages......: 0.00, 0.00, 0.01 (1, 5, 15 min)
+Free Toy Space.....: 964689k (92% used)
+Fluff..............: 100% Fluffy
+
+Loading latest image, please wait...
+</pre>
+  <article id="photo" class="photo-card-irix">
     <header class="flex-container row">
       <h3 class="flex-1">
         ~ {{ title }} ~
@@ -27,7 +56,49 @@
       <img alt="A shiba inu - {{ title }}" src="/images/motd/{{ image }}">
     </figure>
     <footer class="flex-container row">
-      <time datetime="{{ date}}" class="flex-1">{{ date }}</time>
+      <time datetime="{{ date }}" class="flex-1">{{ date }}</time>
     </footer>
   </article>
+  <ul class="list-inline">
+    <li><a title="see motd animation again" id="reconnect" href="#">Reconnect ^^</a></li>
+    <li><a href="/motd/all.html">See more doge >></a></li>
+    {% if motd_previous is defined %}
+    <li><a href="/motd/{{ motd_previous }}">Yesterday >></a></li>
+    {% endif %}
+    <li><a href="/motd/atom.xml">RSS</a></li>
+  </ul>
+  <script>
+    const characterRate = 120 / 1000
+    const displayMessage = (m) => {
+      document.querySelector('#message').innerHTML = m;
+    }
+
+    window.onload = () => {
+      document.querySelector('#reconnect').addEventListener('click', () => {
+        localStorage.removeItem('motd_seen');
+        location.reload();
+      })
+
+      const seenMotd = localStorage.getItem('motd_seen');
+      if (!seenMotd) {
+
+        document.querySelector('#photo').setAttribute('style', 'opacity: 0');
+        message = document.querySelector('#message').textContent;
+        let lastTick = null;
+        const step = (timestamp) => {
+          if (!lastTick) lastTick = timestamp;
+          const delta = timestamp - lastTick;
+          const offset = Math.ceil(characterRate * delta)
+          displayMessage(message.substr(0, offset))
+          if ( offset < message.length) {
+            window.requestAnimationFrame(step);
+          } else {
+            document.querySelector('#photo').setAttribute('style', 'opacity: 1; transition: opacity 800ms');
+            window.localStorage.setItem('motd_seen', true);
+          }
+        }
+        window.requestAnimationFrame(step);
+      }
+    }
+  </script>
 {% endblock %}

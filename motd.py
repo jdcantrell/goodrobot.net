@@ -80,18 +80,36 @@ def render(tplfile, data, outfile):
 
 
 def render_list(rows):
-    print("  - Rendering index.html...", end="")
-    render("_list.html.j2", {"rows": rows[::-1]}, "build/motd/index.html")
+    print("  - Rendering all.html...", end="")
+    render("_list.html.j2", {"rows": rows[::-1]}, "build/motd/all.html")
     print("done.")
 
 
 def render_day(row, is_today=False):
     print("  - Rendering {}.html...".format(row["date"]), end="")
-    render("_date.html.j2", row, "build/motd/{}.html".format(row["date"]))
+
+    row_date = datetime.strptime(row["date"], "%Y-%m-%d")
+    delta = row_date - datetime(2018, 1, 14)
+    prev_date = row_date - timedelta(days=1)
+
+    motd_data = {
+        "motd_date": row_date.strftime("%Y, %B %d"),
+        "motd_uptime": f"{delta.days} days",
+    }
+
+    if prev_date.year >= 2020:
+        motd_data[
+            "motd_previous"
+        ] = f"{prev_date.year}-{prev_date.month:02}-{prev_date.day:02}.html"
+
+    render(
+        "_date.html.j2", {**motd_data, **row}, "build/motd/{}.html".format(row["date"])
+    )
     print("done.")
     if is_today:
         print("  - Rendering today.html...", end="")
-        render("_date.html.j2", row, "build/motd/today.html")
+        render("_date.html.j2", {**motd_data, **row}, "build/motd/today.html")
+        render("_date.html.j2", {**motd_data, **row}, "build/motd/index.html")
         print("done.")
 
 
@@ -191,7 +209,8 @@ def build(all):
         url="https://goodrobot.net/motd/",
         subtitle="Mango of the day",
     )
-    for row in earlier_rows[-10:]:
+    feed_rows = earlier_rows[-10:]
+    for row in feed_rows[::-1]:
         row_datetime = datetime.strptime(row["date"], "%Y-%m-%d")
         feed.add(
             row["title"],
