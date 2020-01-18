@@ -31,8 +31,11 @@
     <figure class="flex-container">
       <img alt="A shiba inu - {{ title }}" src="/images/motd/{{ row.image }}">
     </figure>
-    <footer class="flex-container row">
-      <time datetime="{{ row.date }}" class="flex-1">{{ row.date }}</time>
+    <footer class="flex-container row" style="justify-content: space-between">
+      <a href="./{{ row.date }}.html"><time datetime="{{ row.date }}" class="flex-1">{{ row.date }}</time></a>
+      <button class="irix-button puff">
+        <img src="/images/heart.png" width="20" height="20">
+      </button>
     </footer>
   </article>
   {% endfor %}

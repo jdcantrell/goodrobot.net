@@ -55,8 +55,11 @@ Loading latest image, please wait...
     <figure class="flex-container">
       <img alt="A shiba inu - {{ title }}" src="/images/motd/{{ image }}">
     </figure>
-    <footer class="flex-container row">
-      <time datetime="{{ date }}" class="flex-1">{{ date }}</time>
+    <footer class="flex-container row" style="justify-content: space-between">
+      <a href="./{{ date }}.html"><time datetime="{{ date }}" class="flex-1">{{ date }}</time></a>
+      <button class="irix-button puff">
+        <img src="/images/heart.png" width="20" height="20">
+      </button>
     </footer>
   </article>
   <ul class="list-inline">
