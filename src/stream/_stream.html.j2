@@ -231,15 +231,46 @@
 
       {% set logs = log() %}
       {% if logs %}
-        <div style="margin:auto;color:rgb(203,77,40);width:100px">&nbsp;Check console :-(</div>
-        <script>
-          console.log('Begin ankh log');
-          console.group();
-        {% for log in logs.split("\n") %}
-          console.log('{{ log|replace("'", "\\'")|safe }}')
-        {% endfor %}
-          console.groupEnd();
-        </script>
+        <style>
+          details {
+            border: 2px solid transparent;
+            transition: all .3s ease-in;
+          }
+          details ul {
+            padding: 8px;
+          }
+          details[open] {
+            border: 2px solid #9f9f9f;
+            box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+
+          }
+          details > summary {
+            list-style: none;
+            text-align: center;
+            outline: none;
+            cursor: pointer;
+          }
+          details > summary::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            position: relative;
+            background-image: url(/images/icons/errorbot.png);
+            background-size: cover;
+            display: inline-block;
+            margin-right: 4px;
+            top: 5px;
+          }
+        </style>
+        <details>
+          <summary>errorbot reports some errors :-(</summary>
+            <ul>
+              {% for log in logs.split("\n") %}
+              <li>{{ log|safe }}</li>
+              {% endfor %}
+            </ul>
+        </details>
       {% endif %}
 
 
