@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Practice this today!</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Permanent Marker", serif;
+      }
+      img {
+        width: 100%;
+      }
+
+      .exercises {
+        margin: 64px auto;
+        width: 60%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 48px;
+      }
+
+      #scale_exercise1,
+      #scale_exercise2 {
+        grid-column-end: span 2;
+      }
+
+      h1 {
+        grid-column-end: span 2;
+        text-align: center;
+        font-size: 48px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="exercises">
+      <h1>Use the key of <span id="key"></span> major</h1>
+      <img id="scale_shape_1" />
+      <img id="scale_shape_2" />
+      <img id="scale_exercise1" />
+      <img id="scale_exercise2" />
+    </div>
+    <script>
+      const key = [
+        "A",
+        "A flat",
+        "B",
+        "B flat",
+        "C",
+        "D",
+        "D flat",
+        "E",
+        "E flat",
+        "F",
+        "G",
+        "G flat"
+      ];
+      const shape1 = Math.ceil(Math.random() * 6);
+      let shape2;
+      while (!shape2 || shape2 == shape1) {
+        shape2 = Math.ceil(Math.random() * 6);
+      }
+
+      const scale_exercises = ["3rds", "4ths", "5ths", "6ths", "7ths", "8ths"];
+      const scale_exercise =
+        scale_exercises[Math.floor(Math.random() * scale_exercises.length)];
+
+      const triads = ["ascending", "alternating"];
+      const triads_exercise = triads[Math.floor(Math.random() * triads.length)];
+
+      document.getElementById("key").innerHTML =
+        key[Math.floor(Math.random() * key.length)];
+      document
+        .getElementById("scale_shape_1")
+        .setAttribute("src", `./major/position_${shape1}.png`);
+      document
+        .getElementById("scale_shape_2")
+        .setAttribute("src", `./major/position_${shape2}.png`);
+      document
+        .getElementById("scale_exercise1")
+        .setAttribute("src", `./major/${scale_exercise}.png`);
+      document
+        .getElementById("scale_exercise2")
+        .setAttribute("src", `./major/triads_${triads_exercise}.png`);
+    </script>
+  </body>
+</html>
