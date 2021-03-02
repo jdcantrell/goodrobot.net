@@ -167,7 +167,7 @@ def md():
                         )
                     )
 
-    md = mistune.create_markdown(renderer=Renderer())
+    md = mistune.Markdown(renderer=Renderer())
     env = Environment(loader=FileSystemLoader(os.path.abspath("src")))
 
     try:
@@ -191,7 +191,7 @@ def md():
             destfile.close()
 
 
-class Renderer(mistune.HTMLRenderer):
+class Renderer(mistune.Renderer):
     def block_code(self, code, lang=None):
         if not lang:
             return "\n<pre><code>%s</code></pre>\n" % mistune.escape(code)
