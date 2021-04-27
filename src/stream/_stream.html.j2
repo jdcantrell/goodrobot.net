@@ -132,6 +132,7 @@
               'http://seenaburns.com/feed.xml',
               'http://www.charlesetc.com/index.xml',
               'https://venam.nixers.net/blog/feed.xml',
+              'https://drewdevault.com/blog/index.xml',
             ]) %}
             {{ time_entry(entry) }}
           {% endfor %}
@@ -181,7 +182,8 @@
             'http://fabiensanglard.net/rss.xml',
             'https://brandonsanderson.com/feed/',
             'https://www.schneier.com/blog/atom.xml',
-            'https://tylerxhobbs.com/essays?format=rss'
+            'https://tylerxhobbs.com/essays?format=rss',
+            'https://www.teamten.com/lawrence/writings/rss.xml'
           ]) %}
             {{ time_entry(entry) }}
           {% endfor %}
@@ -228,6 +230,7 @@
           {% endfor %}
         </ul>
       </article>
+      <div style="text-align:center">Last Updated on {{date.strftime("%b %d at %I:%M:%S %p") }}</div>
     </div>
 
       {% set logs = log() %}

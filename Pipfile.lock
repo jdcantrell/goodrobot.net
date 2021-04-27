@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3049e7031e1870da1458a26c3637ebfa51d0e1b2dcc492de8614635b3ebf2594"
+            "sha256": "980dece158c70e2e61bdefe974ed6b746936e4c3b82a9ab501bfac36558394e5"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -17,8 +17,9 @@
     },
     "default": {
         "ankh": {
-            "git": "https://github.com/jdcantrell/ankh.git",
-            "ref": "e32fcba7318edf37a9a31f7a51a7abb43fb11552"
+            "editable": true,
+            "git": "https://github.com/jdcantrell/ankh",
+            "ref": "3950723ffcd23928b121cf2335caee918f151987"
         },
         "beautifulsoup4": {
             "hashes": [
@@ -66,6 +67,14 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==2.10"
+        },
+        "itsdangerous": {
+            "hashes": [
+                "sha256:321b033d07f2a4136d3ec762eac9f16a10ccd60f53c0c91af90217ace7ba1f19",
+                "sha256:b12271b2047cb23eeb98c8b5622e2e5c5e9abd9784a153e9d8ef9cb4dd09d749"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==1.1.0"
         },
         "jinja2": {
             "hashes": [
@@ -214,6 +223,13 @@
             "index": "pypi",
             "version": "==2.8.1"
         },
+        "pytz": {
+            "hashes": [
+                "sha256:83a4a90894bf38e243cf052c8b58f381bfe9a7a483f6a9cab140bc7f702ac4da",
+                "sha256:eb10ce3e7736052ed3623d49975ce333bcd712c7bb19a58b9e2089d4057d0798"
+            ],
+            "version": "==2021.1"
+        },
         "pyyaml": {
             "hashes": [
                 "sha256:08682f6b72c722394747bddaf0aa62277e02557c0fd1c42cb853016a38f8dedf",
@@ -256,6 +272,14 @@
             ],
             "index": "pypi",
             "version": "==2.25.1"
+        },
+        "requests-cache": {
+            "hashes": [
+                "sha256:0b9b5555b3b2ecda74a9aa5abd98174bc7332de2e1d32f9f8f056583b01d6e99",
+                "sha256:6e28e461873415036ea383c2414691cf1164cb01391ad4c45b84b3ebf0fb9287"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==0.6.3"
         },
         "sgmllib3k": {
             "hashes": [
@@ -325,6 +349,14 @@
             ],
             "markers": "python_version >= '3.5'",
             "version": "==6.1"
+        },
+        "url-normalize": {
+            "hashes": [
+                "sha256:d23d3a070ac52a67b83a1c59a0e68f8608d1cd538783b401bc9de2c0fac999b2",
+                "sha256:ec3c301f04e5bb676d333a7fa162fa977ad2ca04b7e652bfc9fac4e405728eed"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5'",
+            "version": "==1.4.3"
         },
         "urllib3": {
             "hashes": [
