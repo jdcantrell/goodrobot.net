@@ -1,7 +1,7 @@
 {
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "babel-eslint": "x",
+    "@babel/eslint-parser": "x",
     "eslint": "x",
     "eslint-config-airbnb-base": "x",
     "eslint-config-prettier": "x",
