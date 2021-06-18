@@ -46,17 +46,19 @@
 {% endblock %}
 
 {% macro pic(idx, entry) -%}
-  {% set entry_image = images(entry.description)|first -%}
-  {% if entry_image -%}
-    <li class="offscreen">
-      <a href="{{entry.link}}">
-        {% if idx < 16 %}
-          <img src="{{entry_image}}">
-        {% else %}
-          <img data-src="{{entry_image}}">
-        {% endif %}
-      </a>
-    </li>
+  {% if entry.description -%}
+    {% set entry_image = images(entry.description)|first -%}
+    {% if entry_image -%}
+      <li class="offscreen">
+        <a href="{{entry.link}}">
+          {% if idx < 16 %}
+            <img src="{{entry_image}}">
+          {% else %}
+            <img data-src="{{entry_image}}">
+          {% endif %}
+        </a>
+      </li>
+    {%- endif %}
   {%- endif %}
 {%- endmacro %}
 
@@ -98,7 +100,7 @@
           'https://obscurevideogames.tumblr.com/rss',
           'https://ofsparrows.tumblr.com/rss',
           'https://pixosprout.tumblr.com/rss',
-          'https://prinsomnia.tumblr.com/rss'
+          'https://prinsomnia.tumblr.com/rss',
           'https://probertson.tumblr.com/rss',
           'https://retroscifiart.tumblr.com/',
           'https://retrowavecollector.tumblr.com/rss',
