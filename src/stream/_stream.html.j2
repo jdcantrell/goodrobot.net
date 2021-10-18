@@ -230,7 +230,7 @@
           {% endfor %}
         </ul>
       </article>
-      <div style="text-align:center">Last Updated on {{date.strftime("%b %d at %I:%M:%S %p") }}</div>
+      <div style="text-align:center">Last Updated on {{get_date().strftime("%b %d at %I:%M:%S %p") }}</div>
     </div>
 
       {% set logs = log() %}
