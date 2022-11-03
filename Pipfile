@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 "Jinja2" = "*"
-mistune = "*"
+mistune = "3.0.0rc1"
 Pygments = "*"
 PyYAML = ">=4.2"
 libsass = "*"

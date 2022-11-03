@@ -191,12 +191,12 @@ def md():
             destfile.close()
 
 
-class Renderer(mistune.Renderer):
-    def block_code(self, code, lang=None):
-        if not lang:
+class Renderer(mistune.HTMLRenderer):
+    def block_code(self, code, info=None):
+        if not info:
             return "\n<pre><code>%s</code></pre>\n" % mistune.escape(code)
         else:
-            lang, *parts = lang.split("::")
+            lang, *parts = info.split("::")
 
             lexer = get_lexer_by_name(lang, stripall=True)
             formatter = HtmlFormatter()
