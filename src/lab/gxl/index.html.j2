@@ -1,11 +1,13 @@
-{% extends "_tpls/page-clean.html.j2" %}
+{% extends "_tpls/base.html.j2" %}
 {% set current_page = "gxl" %}
+{% set current_page_sub_title = "gxl" %}
 {% block title %}Good Robot Experience Language{% endblock %}
 
 {% block content %}
       <div>
         <label for="themeSelect">Theme:</label>
         <select id="themeSelect">
+          <option value="/css/highlight.css">Highlight</option>
           <option value="/css/clean.css">Clean</option>
           <option value="/css/mono-dark.css">Mono (dark)</option>
           <option value="/css/mono-gruvbox.css">Mono (gruvbox)</option>

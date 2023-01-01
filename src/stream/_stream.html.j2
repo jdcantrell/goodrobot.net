@@ -1,4 +1,4 @@
-{% extends "_tpls/page-clean.html.j2" %}
+{% extends "_tpls/base.html.j2" %}
 {% set current_page = "stream" %}
 {% set current_page_sub_title = "stream" %}
 {% block title %}Links and Things{% endblock %}
@@ -6,32 +6,8 @@
 {% block head %}
 <meta name="viewport" content="width=device-width">
 <style type="text/css">
-  h1 > span:first-child {
-    padding: 3px 1.4ch;
-  }
-
-  .js-link-toggle span {
+  .js-link-toggle {
     cursor: pointer;
-  }
-
-  .list-bullets {
-    list-style: none;
-  }
-  .list-bullets li {
-    margin: 4px 0;
-  }
-  .list-bullets li:before {
-    vertical-align: top;
-    content: '>';
-    margin-left: -2ch;
-    color: #b8d7cb;
-  }
-  .list-bullets li:hover:before {
-    color: #0a7f53;
-  }
-  .link-alt {
-    display: block;
-    font-size: 12px;
   }
 </style>
 {% endblock %}
@@ -39,8 +15,8 @@
 {% macro time_entry(entry) -%}
 <li>
   <a href="{{entry.link}}">
-    {{entry.title}}
-    <span class="link-alt c07">{{entry.feed_title}}
+    <span>{{entry.title}}</span>
+    <span>{{entry.feed_title}}
       &ndash;
         {% if entry.time_unit == "New!" %}
         <i class="icon-star"></i> New
@@ -58,9 +34,10 @@
 
       <article>
         <h1 >
-          <span class="bg-c09 c08">Lwn.net</span>
+          Lwn.net
         </h1>
-        <ul class="list-bullets">
+        <hr />
+        <ul class="list-links">
           {% for entry in get_entries('https://lwn.net/headlines/newrss') %}
           <li>
             <a href="{{entry.link}}" comment-link="{{entry.comments}}">{{entry.title}}</a>
@@ -71,9 +48,10 @@
 
       <article>
         <h1 class="js-link-toggle">
-          <span class="bg-c02 c01">Lobste.rs<span class="comment-status"></span></span>
+          Lobste.rs<span class="comment-status"></span>
         </h1>
-        <ul class="list-bullets">
+        <hr />
+        <ul class="list-links">
           {% for entry in get_entries('https://lobste.rs/rss') %}
           <li>
             <a href="{{entry.link}}" comment-link="{{entry.comments}}">{{entry.title}}</a>
@@ -84,9 +62,10 @@
 
       <article>
         <h1 class="js-link-toggle">
-          <span class=" bg-c04 c03">Hacker News<span class="comment-status"></span></span>
+          Hacker News<span class="comment-status"></span>
         </h1>
-        <ul class="list-bullets">
+        <hr />
+        <ul class="list-links">
           {% for entry in get_entries('http://news.ycombinator.com/rss') %}
           <li>
             <a href="{{entry.link}}" comment-link="{{entry.comments}}">{{entry.title}}</a>
@@ -97,11 +76,10 @@
 
       <article>
         <h1 class="js-link-toggle">
-          <span class="bg-c11 c10">
             r/Programming<span class="comment-status"></span>
-          </span>
         </h1>
-        <ul class="list-bullets">
+        <hr />
+        <ul class="list-links">
           {% for entry in get_entries('http://www.reddit.com/r/programming/.rss') %}
             <li>
               <a href="{{entry.description|find_link(1)}}" comment-link="{{entry.link}}">{{entry.title}}</a>
@@ -112,9 +90,10 @@
 
       <article>
         <h1>
-          <span  class="bg-c15 c14">Coding</span>
+          Coding
         </h1>
-        <ul class="list-bullets">
+        <hr />
+        <ul class="list-links with-note">
           {% for entry in time_sort([
               'http://feeds.feedburner.com/theendeavour',
               'http://eli.thegreenplace.net/feed/',
@@ -145,11 +124,10 @@
 
       <article>
         <h1>
-          <span class="bg-c17 c16">
             Gaming
-          </span>
         </h1>
-        <ul class="list-bullets">
+        <hr />
+        <ul class="list-links with-note">
           {% for entry in time_sort([
             'http://feeds.feedburner.com/RockPaperShotgun',
             'http://www.filfre.net/feed/',
@@ -171,11 +149,10 @@
 
       <article>
         <h1>
-          <span class="bg-c09 c08">
             Interesting Things
-          <span>
         </h1>
-        <ul class="list-bullets">
+        <hr />
+        <ul class="list-links with-note">
           {% for entry in time_sort([
             'http://www.goodmath.org/blog/feed/',
             'http://feeds2.feedburner.com/PatrickRothfuss',
@@ -209,17 +186,16 @@
 
       <article>
         <h1>
-          <span class="bg-c11 c10">
             Pinboard
-          </span>
-        </h1>
-        <ul class="list-bullets">
+          </h1>
+          <hr />
+        <ul class="list-links with-note">
           {% for entry in get_entries('http://feeds.pinboard.in/rss/u:jdcantrell', 10) %}
           <li>
           <a href="{{entry.link}}">
-            {{entry.title}}
+            <span>{{entry.title}}</span>
             {% if entry.description %}
-            <span class="link-alt c07">{{entry.description}}</span>
+            <span>{{entry.description}}</span>
             {% endif %}
           </a>
           </li>
@@ -229,11 +205,10 @@
 
       <article>
         <h1>
-          <span class="bg-c15 c14">
             Weather
-          </span>
         </h1>
-        <ul class="list-bullets">
+        <hr />
+        <ul class="list-links">
           {% for weather in get_weather([
             (37.99167, -122.05194),
             (37.61961, -122.36558),
@@ -303,7 +278,7 @@
   var toggleLinks = function (event)
   {
     //swap links
-    var links = this.nextElementSibling.querySelectorAll('[comment-link]');
+    var links = this.nextElementSibling.nextElementSibling.querySelectorAll('[comment-link]');
     var el, href, comment, original, idx;
     var showingComments = false;
     for (idx = 0; idx < links.length; ++idx) {
@@ -328,12 +303,12 @@
     }
 
     //swap icons
-    var $i = this.querySelectorAll('.comment-status')[0];
+    var el = this.querySelectorAll('.comment-status')[0];
     if (showingComments) {
-      $i.innerHTML = '[comments]';
+      el.innerHTML = ' (comments)';
     }
     else {
-      $i.innerHTML = '';
+      el.innerHTML = '';
     }
   }
 
