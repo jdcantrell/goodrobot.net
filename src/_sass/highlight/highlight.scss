@@ -299,20 +299,20 @@ button {
   padding: 0 32px;
   color: var(--text-color);
   background-color: var(--button-background-color);
+  border: 1.5px solid #1d578aa6;
   border-radius: 6px;
   cursor: pointer;
 
   box-shadow: var(--shadow-elevation-low);
-  border: 1px solid #0000002f;
 }
 
 textarea,
 select,
 input {
-  border: 1px solid #0000002f;
+  background-color: var(--input-background-color);
+  border: 1.5px solid #1d578aa6;
   border-radius: 6px;
 
-  background-color: var(--input-background-color);
   color: var(--text-color);
 }
 
@@ -334,13 +334,32 @@ button:active {
 form {
   display: flex;
   flex-direction: column;
-
-  & input {
-    margin-bottom: 16px;
+  footer {
+    flex-direction: column;
+    display: flex;
+  }
+  button {
+    align-self: flex-end;
   }
 
-  & button {
-    align-self: flex-end;
+  > input,
+  > .checkbox {
+    margin-bottom: 16px;
+  }
+}
+
+label {
+  cursor: pointer;
+}
+
+label.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -394,6 +413,22 @@ form {
 
 .content {
   max-width: 720px;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin-bottom: 8px;
+  }
+
+  h1:not(:first-child),
+  h2:not(:first-child),
+  h3:not(:first-child),
+  h4:not(:first-child),
+  h5:not(:first-child) {
+    margin-top: 32px;
+  }
 }
 
 /* utility classes */
@@ -406,6 +441,25 @@ form {
   display: inline-block;
 }
 
+.list-inline li:not(:first-child) {
+  margin-left: 16px;
+}
+
 .list-separate li:not(:first-child):before {
   content: "• ";
+}
+.list-separate li:not(:first-child) {
+  margin-left: 0px;
+}
+
+.page-footer nav {
+  width: 100%;
+  gap: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a:visited {
+    text-decoration-color: var(--link-color);
+  }
 }

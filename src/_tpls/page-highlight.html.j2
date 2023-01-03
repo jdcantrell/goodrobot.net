@@ -91,19 +91,17 @@
   </div>
 
   <footer class="page-footer">
-    <ul class='list-nav'>
-      {% for href, id, name in footer_nav_items %}
-      <li {% if current_page == id %}class="active" {% endif %}>
-        <a href="{{ href|e }}">{{ name|e }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-    <div class="page-footer-title">
+    <nav>
+        <img alt="goodrobot" height="24" width="24" style="height:24px;width:24px" src='/android-chrome-192x192.png'>
       <a class="page-logo" title="goodrobot.net" href="/">
-        <img alt="goodrobot" height="24" src='/android-chrome-192x192.png'>
         goodrobot
       </a>
-    </div>
+    </nav>
+      <nav>
+      {% for href, id, name in footer_nav_items %}
+        <a href="{{ href|e }}">{{ name|e }}</a>
+      {% endfor %}
+    </nav>
   </footer>
   {% block javascript %}{% endblock %}
 </body>

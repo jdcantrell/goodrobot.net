@@ -109,30 +109,28 @@
         </header>
 
         <form action="get">
-          <section class="box-content">
-            <label for="blammo">Username: </label>
-            <input type="text" placeholder="Type here!" id="blammo" name="blammo">
+            <label for="blammo"> Username: </label>
+            <input id="blammo" type="text" placeholder="Type here!" name="blammo">
 
-            <label for="pw">Login: </label>
-            <input type="password" placeholder="Type here!" id="pw" name="pw">
+            <label for="pw"> Login: </label>
+            <input id="pw"type="password" placeholder="Type here!" name="pw">
 
-            <div class="checkbox">
+            <label class="checkbox"> 
               <input checked id="news" value="news" type="checkbox">
-              <label for="news" class="checkbox"> Newsletter!</label>
-            </div>
+              Newsletter!
             </label>
-            <div class="checkbox">
+
+            <label class="checkbox">
               <input id="follow" value="follow" type="checkbox">
-              <label for="follow" class="checkbox">Follow!</label>
-            </div>
-          </section>
+              Follow!
+            </label>
           <footer>
-            <input class="button primary" type="submit" value="Submit">
+            <button type="submit">Submit</button>
           </footer>
         </form>
       </section>
 
-      <h2>Basics</h2>
+      <h2>Table</h2>
       <table class="hover">
         <thead>
           <tr><th colspan="3">
@@ -218,161 +216,6 @@
           </footer>
         </article>
 
-      <h2>Blog Post</h2>
-
-        <header class="post-heading">
-          <a href="/welcome/">Welcome to Ghost</a>
-          <div class="post-metadata">
-            <time class="post-date" datetime="2017-09-10">09.10.17</time>
-            <a href="#" class="post-tag">text</a>
-            <a href="#" class="post-tag">new</a>
-          </div>
-        </header>
-        <section class="post-content">
- <h2 id="just-start-writing">Just start writing</h2>
- <p>Ghost has a powerful visual editor with familiar formatting options, as well as the ability to add dynamic content.</p>
- <p>Select your text to add formatting such as headers or to create links. Or use Markdown shortcuts to do the work for you - if that's your thing. </p>
- <figure class="kg-card kg-image-card">
-  <img src="https://static.ghost.org/v2.0.0/images/formatting-editor-demo.gif" class="kg-image">
- </figure>
- <h2 id="rich-editing-at-your-fingertips">Rich editing at your fingertips</h2>
- <p>The editor can also handle rich media objects, called <strong>cards</strong>, which can be organised and re-ordered using drag and drop. </p>
- <p>You can insert a card either by clicking the  <code>+</code>  button, or typing  <code>/</code>  on a new line to search for a particular card. This allows you to efficiently insert<strong> images</strong>, <strong>markdown</strong>, <strong>html, embeds </strong>and more.</p>
- <p><strong>For example</strong>:</p>
- <ul>
- <li>Insert a video from YouTube directly by pasting the URL</li>
- <li>Create unique content like buttons or forms using the HTML card</li>
- <li>Need to share some code? Embed code blocks directly </li>
- </ul>
- <pre><code>&lt;header class="site-header outer"&gt;
-        <header class="post-heading">
-          <a href="/welcome/">Welcome to Ghost</a>
-          <div class="post-metadata">
-            <time class="post-date" datetime="2017-09-10">09.10.17</time>
-            <a href="#" class="post-tag">text</a>
-            <a href="#" class="post-tag">new</a>
-          </div>
-        </header>
-        <section class="post-content">
-    &lt;div class="inner"&gt;
-        something codey
-    &lt;/div&gt;
-&lt;/header&gt;</code></pre>
-<p>It's also possible to share links from across the web in a visual way using bookmark cards that automatically render information from a websites meta data. Paste any URL to try it out: </p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://ghost.org"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Ghost: The #1 open source headless Node.js CMS</div><div class="kg-bookmark-description">The world’s most popular modern open source publishing platform. A headless Node.js CMS used by Apple, Sky News, Tinder and thousands more. MIT licensed, with 30k+ stars on Github.</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="https://ghost.org/icons/icon-512x512.png?v=188b8b6d743c6338ba2eab2e35bab4f5"><span class="kg-bookmark-publisher">Ghost</span></div></div><div class="kg-bookmark-thumbnail"><img src="https://ghost.org/images/meta/Ghost.png"></div></a></figure><h2 id="working-with-images-in-posts">Working with images in posts</h2><p>You can add images to your posts in many ways:</p><ul><li>Upload from your computer</li><li>Click and drag an image into the browser</li><li>Paste directly into the editor from your clipboard</li><li>Insert using a URL</li></ul><h3 id="image-sizes">Image sizes</h3><p>Once inserted you can blend images beautifully into your content at different sizes and add captions and alt tags wherever needed.</p><figure class="kg-card kg-image-card"><img src="https://static.ghost.org/v3.0.0/images/image-sizes-ghost-editor.png" class="kg-image"></figure><h3 id="image-galleries">Image galleries</h3><p>Tell visual stories using the gallery card to add up to 9 images that will display as a responsive image gallery: </p><figure class="kg-card kg-gallery-card kg-width-wide"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="https://static.ghost.org/v3.0.0/images/gallery-sample-1.jpg" width="6000" height="4000"></div><div class="kg-gallery-image"><img src="https://static.ghost.org/v3.0.0/images/gallery-sample-2.jpg" width="5746" height="3831"></div><div class="kg-gallery-image"><img src="https://static.ghost.org/v3.0.0/images/gallery-sample-3.jpg" width="5872" height="3915"></div></div></div></figure><h3 id="image-optimisation">Image optimisation</h3><p>Ghost will automatically resize and optimise your images with lossless compression. Your posts will be fully optimised for the web without any extra effort on your part.</p><h2 id="next-publishing-options">Next: Publishing Options</h2><p>Once your post is looking good, you'll want to use the <a href="http://localhost:2368/publishing-options/">publishing options</a> to ensure it gets distributed in the right places, with custom meta data, feature images and more.</p>
-              
-      <article class="post tag-getting-started post-latest">
-          <div class="kg-card-markdown">
-            <p>
-              Hey! Welcome to Ghost, it's great to have you :)
-            </p>
-            <p>
-              We know that first impressions are important, so we've populated your new site with
-              some initial <strong>Getting Started</strong> posts that will help you get familiar
-              with everything in no time. This is the first one!
-            </p>
-            <h3 id="thereareafewthingsthatyoushouldknowupfront">
-              There are a few things that you should know up-front:
-            </h3>
-            <ol>
-              <li>
-                <p>
-                  Ghost is designed for ambitious, professional publishers who want to actively
-                  build a business around their content. That's who it works best for. If you're
-                  using Ghost for some other purpose, that's fine too - but it might not be the best
-                  choice for you.
-                </p>
-              </li>
-              <li>
-                <p>
-                  The entire platform can be modified and customized to suit your needs, which is
-                  very powerful, but doing so <strong>does</strong> require some knowledge of code.
-                  Ghost is not necessarily a good platform for beginners or people who just want a
-                  simple personal blog.
-                </p>
-              </li>
-              <li>
-                <p>
-                  For the best experience we recommend downloading the <a
-                    href="https://ghost.org/downloads/">Ghost Desktop App</a> for your computer,
-                  which is the best way to access your Ghost site on a desktop device.
-                </p>
-              </li>
-            </ol>
-            <p>
-              Ghost is made by an independent non-profit organisation called the Ghost Foundation.
-              We are 100% self funded by revenue from our <a
-                href="https://ghost.org/pricing">Ghost(Pro)</a> service, and every penny we make is
-              re-invested into funding further development of free, open source technology for
-              modern journalism.
-            </p>
-            <p>
-              The main thing you'll want to read about next is probably: <a href="/the-editor/">the
-                Ghost editor</a>.
-            </p>
-            <p>
-              Once you're done reading, you can simply delete the default <strong>Ghost</strong>
-              user from your team to remove all of these introductory posts!
-            </p>
-          </div>
-        </section>
-      </article>
-
-      <h2>Flex Layout</h2>
-
-        <h3>.flex-container .row</h3>
-        <div class="flex-container row">
-          <div class="flex-1" style="background-color: #a6dcfe">.flex-1</div>
-          <div class="flex-1" style="background-color: #dff3ff">.flex-1</div>
-        </div>
-        <br>
-
-        <div class="flex-container row">
-          <div style="background-color: #a6dcfe">start</div>
-          <div class="flex-1" style="background-color: #dff3ff">.flex-1</div>
-          <div style="background-color: #a6dcfe">end</div>
-        </div>
-        <br>
-
-        <div class="flex-container row">
-          <div class="flex-2" style="background-color: #a6dcfe">.flex-2</div>
-          <div class="flex-1" style="background-color: #dff3ff">.flex-1</div>
-        </div>
-
-        <h3>.flex-container .column</h3>
-
-        <div class="flex-container row">
-          <div class="flex-1">
-
-            <div class="flex-container column" style="height: 200px">
-              <div class="flex-1" style="background-color: #a6dcfe">.flex-1</div>
-              <div class="flex-1" style="background-color: #dff3ff">.flex-1</div>
-            </div>
-
-          </div>
-          <div class="flex-1">
-
-            <div class="flex-container column" style="height: 200px">
-              <div style="background-color: #a6dcfe">start</div>
-              <div class="flex-1" style="background-color: #dff3ff">.flex-1</div>
-              <div style="background-color: #a6dcfe">end</div>
-            </div>
-
-          </div>
-          <div class="flex-1">
-
-            <div class="flex-container column" style="height: 200px">
-              <div class="flex-2" style="background-color: #a6dcfe">.flex-2</div>
-              <div class="flex-1" style="background-color: #dff3ff">.flex-1</div>
-            </div>
-
-          </div>
-        </div>
-
-        <h3>Vertically center</h3>
-        <div class="flex-container column" style="background-color: #a6dcfe; height: 200px">
-          <div style="background-color: #dff2ff">vertically centered</div>
-        </div>
-        <br>
 
       <h2>Colors</h2>
 
