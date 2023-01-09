@@ -14,29 +14,36 @@
     }
 
     .matrix {
-      display: inline-block;
+      display: grid;
+      gap: 4px;
+      padding: 4px;
       border-width: 2px ;
       border-style: solid;
+      margin-bottom: 8px;
     }
 
     /* an attempt to make multi-line square brackets */
     .m2x2 {
+
+      grid-template-columns: 1fr 1fr;
+
       border-image: linear-gradient(
       to right,
-      #bcbabe 5%,
+      #3c8cd2 5%,
       transparent 5%,
       transparent 95%,
-      #bcbabe 95%
+      #3c8cd2 95%
       ) 10;
     }
 
     .m2x1 {
+      grid-template-columns: 1fr;
       border-image: linear-gradient(
       to right,
-      #bcbabe 10%,
+      #3c8cd2 10%,
       transparent 10%,
       transparent 90%,
-      #bcbabe 90%
+      #3c8cd2 90%
       ) 10;
     }
 
@@ -45,28 +52,29 @@
     }
 
     input {
-      max-width: 3em;
+      max-width: 3ch;
     }
 
     .matrix input {
-      max-width: 9em;
+      max-width: 9ch;
     }
 
 
     /* side by side mode */
     .playground {
       display: flex;
+      flex-direction: row;
       width: 100% !important;
       max-width: 100%;
       height: calc(100vh - 19px);
       box-sizing: border-box;
       padding-top: 10px;
 
-      font-size: 12px !important;
+      font-size: 14px !important;
     }
 
     .playground button, .playground input {
-      font-size:12px;
+      font-size:14px;
     }
 
     .playground h1, .playground p {
@@ -89,7 +97,23 @@
     }
 
     .playground .right-column {
-      flex: 1;
+      padding: 0 8px;
+    }
+
+    .playground .presets {
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    }
+
+    .left-column {
+      margin-bottom: 16px;
+    }
+
+
+    .presets {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      margin: 16px 0;
     }
   </style>
 {% endblock %}
@@ -107,17 +131,15 @@
       fern</a> on Wikipedia for more details.
   </p>
   <div class="left-column">
-    <div class="align-center">
-      <ul class="list-inline pbm align-center">
-        <li><button class="active" id="barnsley">Barnsley</button></li>
-        <li><button id="sierpinski">Sierpinski</button></li>
-        <li><button id="pentigre">Pentigre</button></li>
-        <li><button id="pine">Pine</button></li>
-        <li><button id="dragon">Dragon</button></li>
-        <li><button id="crystal">Crystal</button></li>
-        <li><button id="tree">Tree</button></li>
-      </ul>
-    </div>
+      <div class="presets">
+        <button class="active" id="barnsley">Barnsley</button>
+        <button id="sierpinski">Sierpinski</button>
+        <button id="pentigre">Pentigre</button>
+        <button id="pine">Pine</button>
+        <button id="dragon">Dragon</button>
+        <button id="crystal">Crystal</button>
+        <button id="tree">Tree</button>
+      </div>
     <canvas id="canvas" width="700" height="700"></canvas>
   </div>
   <div class="right-column">
@@ -127,34 +149,28 @@
           <tr>
             <th>Probability</th>
             <th class="align-center">Transform</th>
+            <th class="align-center"></th>
             <th class="align-center">Translate</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="f in fractal.ifs">
-            <td class="collapsing">
+            <td>
               <input type="text" v-model.number="f.p" />%
             </td>
             <td class="align-center">
               <div class="matrix m2x2">
-                <div class="row">
                   <input type="text" v-model.number="f.transform[0]" />
                   <input type="text" v-model.number="f.transform[1]" />
-                </div>
-                <div class="row">
                   <input type="text" v-model.number="f.transform[2]" />
                   <input type="text" v-model.number="f.transform[3]" />
-                </div>
               </div>
             </td>
+            <td class="align-center">&times;</td>
             <td class="align-center">
               <div class="matrix m2x1">
-                <div class="row">
                   <input type="text" v-model.number="f.translate[0]" />
-                </div>
-                <div class="row">
                   <input type="text" v-model.number="f.translate[1]" />
-                </div>
               </div>
             </td>
           </tr>

@@ -45,9 +45,14 @@ h6 {
 
 ul,
 ol {
-  list-style-position: inside;
+  list-style-position: outside;
   padding: 0;
   list-style-type: none;
+}
+
+ol {
+  list-style-type: number;
+  padding-left: 22px;
 }
 
 /* styles */
@@ -226,12 +231,28 @@ article.note footer {
 }
 figure {
   margin: 0;
+  margin-bottom: 8px;
 }
 img {
   display: block;
   width: 100%;
 }
-article img {
+
+pre {
+  font-size: 14px;
+  box-shadow: var(--shadow-elevation-medium);
+  border: 1.5px solid #1d578aa6;
+  margin: 8px 0;
+  border-radius: 6px;
+}
+
+.image {
+  max-width: 100%;
+  box-shadow: var(--shadow-elevation-medium);
+}
+
+article img,
+figure img {
   max-width: 100%;
   box-shadow: var(--shadow-elevation-medium);
   margin-bottom: 24px;
@@ -240,8 +261,6 @@ article img {
 .list-links {
   margin: 16px 0;
   padding-left: 16px;
-}
-.list-links li {
 }
 .list-links li::marker {
   content: "» ";
@@ -414,12 +433,17 @@ label.checkbox {
 .content {
   max-width: 720px;
 
+  display: flex;
+
+  flex-direction: column;
+  gap: 8px;
+
   h1,
   h2,
   h3,
   h4,
   h5 {
-    margin-bottom: 8px;
+    margin-bottom: 0px;
   }
 
   h1:not(:first-child),
@@ -427,7 +451,7 @@ label.checkbox {
   h3:not(:first-child),
   h4:not(:first-child),
   h5:not(:first-child) {
-    margin-top: 32px;
+    margin-top: 16px;
   }
 }
 
@@ -435,6 +459,7 @@ label.checkbox {
 
 .list-bullets {
   list-style-type: disc;
+  padding-left: 22px;
 }
 
 .list-inline li {
@@ -452,14 +477,18 @@ label.checkbox {
   margin-left: 0px;
 }
 
-.page-footer nav {
-  width: 100%;
-  gap: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.page-footer {
+  margin-top: 32px;
 
-  a:visited {
-    text-decoration-color: var(--link-color);
+  nav {
+    width: 100%;
+    gap: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a:visited {
+      text-decoration-color: var(--link-color);
+    }
   }
 }

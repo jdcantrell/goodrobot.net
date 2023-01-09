@@ -67,7 +67,10 @@
           goodrobot
         </a>
       </span>
-      ~ <span class="page-sub-title">{{ current_page_sub_title|default(current_page) }}</span> ~
+      {% if current_page_sub_title or current_page %}
+      ~ <span class="page-sub-title">{{ current_page_sub_title|default(current_page) }}</span> 
+      {% endif %}
+      ~
     </div>
 
 

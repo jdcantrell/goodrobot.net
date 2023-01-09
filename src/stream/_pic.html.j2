@@ -1,4 +1,4 @@
-{% extends "_tpls/page-clean.html.j2" %}
+{% extends "_tpls/base.html.j2" %}
 {% set current_page = "stream_pics" %}
 {% set current_page_sub_title = "pics" %}
 {% block title %}Things from tumblr{% endblock %}
@@ -37,9 +37,7 @@
 }
 
 .tiles img {
-  width: 100%;
   max-width:500px;
-  box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.2), 0 1px 2px 0px rgba(0, 0, 0, 0.1);
 }
 
 </style>
@@ -52,9 +50,9 @@
       <li class="offscreen">
         <a href="{{entry.link}}">
           {% if idx < 16 %}
-            <img src="{{entry_image}}">
+            <img class="image" src="{{entry_image}}">
           {% else %}
-            <img data-src="{{entry_image}}">
+            <img class="image" data-src="{{entry_image}}">
           {% endif %}
         </a>
       </li>
