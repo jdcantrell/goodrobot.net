@@ -1,233 +1,213 @@
 {% extends "_tpls/base.html.j2" %}
 {% set current_page = "stream" %}
 {% set current_page_sub_title = "stream" %}
-{% block title %}Links and Things{% endblock %}
-
+{% block title %}
+  Links and Things
+{% endblock title %}
 {% block head %}
-<meta name="viewport" content="width=device-width">
-<style type="text/css">
+  <meta name="viewport" content="width=device-width">
+  <style type="text/css">
   .js-link-toggle {
     cursor: pointer;
   }
-</style>
-{% endblock %}
-
+  .icon {
+    height: 24px;
+    display: inline-block;
+    margin-left: 8px;
+    fill: currentColor;
+  }
+  </style>
+{% endblock head %}
 {% macro time_entry(entry) -%}
-<li>
-  <a href="{{entry.link}}">
-    <span>{{entry.title}}</span>
-    <span>{{entry.feed_title}}
-      &ndash;
+  <li>
+    <a href="{{ entry.link }}">
+      <span>{{ entry.title }}</span>
+      <span>{{ entry.feed_title }}
+        &ndash;
         {% if entry.time_unit == "New!" %}
-        <i class="icon-star"></i> New
+          <i class="icon-star"></i> New
         {% else %}
-        <i>{{entry.time_length}}</i>
-        {{entry.time_unit}}
+          <i>{{ entry.time_length }}</i>
+          {{ entry.time_unit }}
         {% endif %}
-    </span>
-</a>
-</li>
+      </span>
+    </a>
+  </li>
 {% endmacro %}
-
 {% block content %}
-    <div class="readable-content content">
-
-      <article>
-        <h1 >
-          Lwn.net
-        </h1>
-        <hr />
-        <ul class="list-links">
-          {% for entry in get_entries('https://lwn.net/headlines/newrss') %}
+    <article>
+      <h1 >Lwn.net</h1>
+      <hr />
+      <ul class="list-links">
+        {% for entry in get_entries('https://lwn.net/headlines/newrss') %}
           <li>
-            <a href="{{entry.link}}" comment-link="{{entry.comments}}">{{entry.title}}</a>
+            <a href="{{ entry.link }}" comment-link="{{ entry.comments }}">{{ entry.title }}</a>
           </li>
-          {% endfor %}
-        </ul>
-      </article>
-
-      <article>
-        <h1 class="js-link-toggle">
-          Lobste.rs<span class="comment-status"></span>
-        </h1>
-        <hr />
-        <ul class="list-links">
-          {% for entry in get_entries('https://lobste.rs/rss') %}
+        {% endfor %}
+      </ul>
+    </article>
+    <article>
+      <h1 class="js-link-toggle">
+        Lobste.rs<span class="comment-status"></span>
+      </h1>
+      <hr />
+      <ul class="list-links">
+        {% for entry in get_entries('https://lobste.rs/rss') %}
           <li>
-            <a href="{{entry.link}}" comment-link="{{entry.comments}}">{{entry.title}}</a>
+            <a href="{{ entry.link }}" comment-link="{{ entry.comments }}">{{ entry.title }}</a>
           </li>
-          {% endfor %}
-        </ul>
-      </article>
-
-      <article>
-        <h1 class="js-link-toggle">
-          Hacker News<span class="comment-status"></span>
-        </h1>
-        <hr />
-        <ul class="list-links">
-          {% for entry in get_entries('http://news.ycombinator.com/rss') %}
+        {% endfor %}
+      </ul>
+    </article>
+    <article>
+      <h1 class="js-link-toggle">
+        Hacker News<span class="comment-status"></span>
+      </h1>
+      <hr />
+      <ul class="list-links">
+        {% for entry in get_entries('http://news.ycombinator.com/rss') %}
           <li>
-            <a href="{{entry.link}}" comment-link="{{entry.comments}}">{{entry.title}}</a>
+            <a href="{{ entry.link }}" comment-link="{{ entry.comments }}">{{ entry.title }}</a>
           </li>
-          {% endfor %}
-        </ul>
-      </article>
-
-      <article>
-        <h1 class="js-link-toggle">
-            r/Programming<span class="comment-status"></span>
-        </h1>
-        <hr />
-        <ul class="list-links">
-          {% for entry in get_entries('http://www.reddit.com/r/programming/.rss') %}
-            <li>
-              <a href="{{entry.description|find_link(1)}}" comment-link="{{entry.link}}">{{entry.title}}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </article>
-
-      <article>
-        <h1>
-          Coding
-        </h1>
-        <hr />
-        <ul class="list-links with-note">
-          {% for entry in time_sort([
-              'http://feeds.feedburner.com/theendeavour',
-              'http://eli.thegreenplace.net/feed/',
-              'http://nedbatchelder.com/blog/rss.xml',
-              'http://meyerweb.com/index.php?feed=rss2&scope=summary',
-              'http://martinfowler.com/feed.atom',
-              'http://blog.cleancoder.com/atom.xml',
-              'http://feeds2.feedburner.com/stevelosh',
-              'http://www.xanthir.com/blog/atom/',
-              'https://jvns.ca/atom.xml',
-              'https://blog.acolyer.org/feed/',
-              'https://heredragonsabound.blogspot.com/feeds/posts/default',
-              'https://research.swtch.com/feed.atom',
-              'http://rachelbythebay.com/w/atom.xml',
-              'http://seenaburns.com/feed.xml',
-              'https://venam.nixers.net/blog/feed.xml',
-              'https://drewdevault.com/blog/index.xml',
-              'http://feeds.feedburner.com/leaverou',
-              'https://ryanmulligan.dev/blog/feed.xml',
-              'https://zignar.net/index.xml',
-              'https://ianthehenry.com/feed.xml',
-              'https://www.joshwcomeau.com/rss.xml',
-            ])[0:10] %}
-            {{ time_entry(entry) }}
-          {% endfor %}
-        </ul>
-      </article>
-
-      <article>
-        <h1>
-            Gaming
-        </h1>
-        <hr />
-        <ul class="list-links with-note">
-          {% for entry in time_sort([
-            'http://feeds.feedburner.com/RockPaperShotgun',
-            'http://www.filfre.net/feed/',
-            'http://feeds.wolfire.com/WolfireGames',
-            'http://feeds.feedburner.com/ARandomGnomesRandomLair',
-            'http://blog.metagames.co.uk/feed/',
-            'http://grumpygamer.com/rss2.0',
-            'http://midnightresistance.co.uk/rss.xml',
-            'http://freegamer.blogspot.com/feeds/posts/default?',
-            'http://rodneylives.blogspot.com/feeds/posts/default?alt=rss',
-            'http://www.doshaven.eu/feed/',
-            'https://www.gridsagegames.com/blog/feed/',
-            'https://obscuritory.com/feed/',
+        {% endfor %}
+      </ul>
+    </article>
+    <article>
+      <h1 class="js-link-toggle">
+        r/Programming<span class="comment-status"></span>
+      </h1>
+      <hr />
+      <ul class="list-links">
+        {% for entry in get_entries('http://www.reddit.com/r/programming/.rss') %}
+          <li>
+            <a href="{{ entry.description|find_link(1)}}"
+               comment-link="{{ entry.link }}">{{ entry.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </article>
+    <article>
+      <h1>Coding</h1>
+      <hr />
+      <ul class="list-links with-note">
+        {% for entry in time_sort([
+          'http://feeds.feedburner.com/theendeavour',
+          'http://eli.thegreenplace.net/feed/',
+          'http://nedbatchelder.com/blog/rss.xml',
+          'http://meyerweb.com/index.php?feed=rss2&scope=summary',
+          'http://martinfowler.com/feed.atom',
+          'http://blog.cleancoder.com/atom.xml',
+          'http://feeds2.feedburner.com/stevelosh',
+          'http://www.xanthir.com/blog/atom/',
+          'https://jvns.ca/atom.xml',
+          'https://blog.acolyer.org/feed/',
+          'https://heredragonsabound.blogspot.com/feeds/posts/default',
+          'https://research.swtch.com/feed.atom',
+          'http://rachelbythebay.com/w/atom.xml',
+          'http://seenaburns.com/feed.xml',
+          'https://venam.nixers.net/blog/feed.xml',
+          'https://drewdevault.com/blog/index.xml',
+          'http://feeds.feedburner.com/leaverou',
+          'https://ryanmulligan.dev/blog/feed.xml',
+          'https://zignar.net/index.xml',
+          'https://ianthehenry.com/feed.xml',
+          'https://www.joshwcomeau.com/rss.xml',
           ])[0:10] %}
-            {{ time_entry(entry) }}
-          {% endfor %}
-        </ul>
-      </article>
-
-      <article>
-        <h1>
-            Interesting Things
-        </h1>
-        <hr />
-        <ul class="list-links with-note">
-          {% for entry in time_sort([
-            'http://www.goodmath.org/blog/feed/',
-            'http://feeds2.feedburner.com/PatrickRothfuss',
-            'http://feeds.feedburner.com/wwdn',
-            'http://blog.iso50.com/feed/',
-            'http://scienceblogs.com/startswithabang/feed/',
-            'http://faitherinhicks.tumblr.com/rss',
-            'http://fabiensanglard.net/rss.xml',
-            'https://brandonsanderson.com/feed/',
-            'https://www.schneier.com/blog/atom.xml',
-            'https://tylerxhobbs.com/essays?format=rss',
-            'https://www.teamten.com/lawrence/writings/rss.xml',
-            'https://winnielim.org/feed/',
-            'https://www.aiweirdness.com/rss/',
-            'https://neil.computer/rss/',
-            'https://interconnected.org/home/feed',
-            'https://cadence.moe/blog/atom.xml?limit=30',
-            'https://billhunt.dev/posts.xml',
-            'http://bastian.rieck.me/blog/index.xml',
-            'https://news.gregjeanneau.com/rss/',
-            'https://blinry.org/feed/',
-            'https://blog.djy.io/atom.xml',
-            'https://maggieappleton.com/rss.xml',
-            'https://alinpanaitiu.com/index.xml',
-            
+          {{ time_entry(entry) }}
+        {% endfor %}
+      </ul>
+    </article>
+    <article>
+      <h1>Gaming</h1>
+      <hr />
+      <ul class="list-links with-note">
+        {% for entry in time_sort([
+          'http://feeds.feedburner.com/RockPaperShotgun',
+          'http://www.filfre.net/feed/',
+          'http://feeds.wolfire.com/WolfireGames',
+          'http://feeds.feedburner.com/ARandomGnomesRandomLair',
+          'http://blog.metagames.co.uk/feed/',
+          'http://grumpygamer.com/rss2.0',
+          'http://midnightresistance.co.uk/rss.xml',
+          'http://freegamer.blogspot.com/feeds/posts/default?',
+          'http://rodneylives.blogspot.com/feeds/posts/default?alt=rss',
+          'http://www.doshaven.eu/feed/',
+          'https://www.gridsagegames.com/blog/feed/',
+          'https://obscuritory.com/feed/',
           ])[0:10] %}
-            {{ time_entry(entry) }}
-          {% endfor %}
-        </ul>
-      </article>
-
-      <article>
-        <h1>
-            Pinboard
-          </h1>
-          <hr />
-        <ul class="list-links with-note">
-          {% for entry in get_entries('http://feeds.pinboard.in/rss/u:jdcantrell', 10) %}
+          {{ time_entry(entry) }}
+        {% endfor %}
+      </ul>
+    </article>
+    <article>
+      <h1>Interesting Things</h1>
+      <hr />
+      <ul class="list-links with-note">
+        {% for entry in time_sort([
+          'http://www.goodmath.org/blog/feed/',
+          'http://feeds2.feedburner.com/PatrickRothfuss',
+          'http://feeds.feedburner.com/wwdn',
+          'http://blog.iso50.com/feed/',
+          'http://scienceblogs.com/startswithabang/feed/',
+          'http://faitherinhicks.tumblr.com/rss',
+          'http://fabiensanglard.net/rss.xml',
+          'https://brandonsanderson.com/feed/',
+          'https://www.schneier.com/blog/atom.xml',
+          'https://tylerxhobbs.com/essays?format=rss',
+          'https://www.teamten.com/lawrence/writings/rss.xml',
+          'https://winnielim.org/feed/',
+          'https://www.aiweirdness.com/rss/',
+          'https://neil.computer/rss/',
+          'https://interconnected.org/home/feed',
+          'https://cadence.moe/blog/atom.xml?limit=30',
+          'https://billhunt.dev/posts.xml',
+          'http://bastian.rieck.me/blog/index.xml',
+          'https://news.gregjeanneau.com/rss/',
+          'https://blinry.org/feed/',
+          'https://blog.djy.io/atom.xml',
+          'https://maggieappleton.com/rss.xml',
+          'https://alinpanaitiu.com/index.xml',
+          ])[0:10] %}
+          {{ time_entry(entry) }}
+        {% endfor %}
+      </ul>
+    </article>
+    <article>
+      <h1>Pinboard</h1>
+      <hr />
+      <ul class="list-links with-note">
+        {% for entry in get_entries('http://feeds.pinboard.in/rss/u:jdcantrell', 10) %}
           <li>
-          <a href="{{entry.link}}">
-            <span>{{entry.title}}</span>
-            {% if entry.description %}
-            <span>{{entry.description}}</span>
-            {% endif %}
-          </a>
+            <a href="{{ entry.link }}">
+              <span>{{ entry.title }}</span>
+              {% if entry.description %}<span>{{ entry.description }}</span>{% endif %}
+            </a>
           </li>
-          {% endfor %}
-        </ul>
-      </article>
-
-      <article>
-        <h1>
-            Weather
-        </h1>
-        <hr />
-        <ul class="list-links">
-          {% for weather in get_weather([
-            (37.99167, -122.05194),
-            (37.61961, -122.36558),
-            (43.6167, -116.2),
-            (38.7453, -94.8292),
-            (44.05782,-121.31537),
-            (45.52, -122.6819),
+        {% endfor %}
+      </ul>
+    </article>
+    <article>
+      <h1>Weather</h1>
+      <hr />
+      <ul class="list-links">
+        {% for weather in get_weather([
+          (37.99167, -122.05194),
+          (37.61961, -122.36558),
+          (43.6167, -116.2),
+          (38.7453, -94.8292),
+          (44.05782,-121.31537),
+          (45.52, -122.6819),
           ]) %}
           <li title="{{ weather.condition() }}">
             {{ weather.temp() }}&deg; and {{ weather.condition() }} at {{ weather.forecast_location() }}
-          {% endfor %}
-        </ul>
-      </article>
-      <div style="text-align:center">Last Updated on {{get_date().strftime("%b %d at %I:%M:%S %p") }}</div>
-    </div>
-
-      {% set logs = log() %}
-      {% if logs %}
-        <style>
+          </li>
+        {% endfor %}
+      </ul>
+    </article>
+    <div style="text-align:center">Last Updated on {{ get_date().strftime("%b %d at %I:%M:%S %p") }}</div>
+  {% set logs = log() %}
+  {% if logs %}
+    <style>
           details {
             border: 2px solid transparent;
             transition: all .3s ease-in;
@@ -258,23 +238,21 @@
             margin-right: 4px;
             top: 5px;
           }
-        </style>
-        <details>
-          <summary>errorbot reports some errors :-(</summary>
-            <ul>
-              {% for log in logs.split("\n") %}
-              <li>{{ log|safe }}</li>
-              {% endfor %}
-            </ul>
-        </details>
-      {% endif %}
-
-
-{% endblock %}
-
+    </style>
+    <details>
+      <summary>
+        errorbot reports some errors :-(
+      </summary>
+      <ul>
+        {% for log in logs.split("\n") %}
+          <li>{{ log|safe }}</li>
+        {% endfor %}
+      </ul>
+    </details>
+  {% endif %}
+{% endblock content %}
 {% block javascript %}
-<script>
-
+  <script>
   var toggleLinks = function (event)
   {
     //swap links
@@ -305,7 +283,7 @@
     //swap icons
     var el = this.querySelectorAll('.comment-status')[0];
     if (showingComments) {
-      el.innerHTML = ' (comments)';
+      el.innerHTML = '<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M123.6 391.3c12.9-9.4 29.6-11.8 44.6-6.4c26.5 9.6 56.2 15.1 87.8 15.1c124.7 0 208-80.5 208-160s-83.3-160-208-160S48 160.5 48 240c0 32 12.4 62.8 35.7 89.2c8.6 9.7 12.8 22.5 11.8 35.5c-1.4 18.1-5.7 34.7-11.3 49.4c17-7.9 31.1-16.7 39.4-22.7zM21.2 431.9c1.8-2.7 3.5-5.4 5.1-8.1c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208s-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6c-15.1 6.6-32.3 12.6-50.1 16.1c-.8 .2-1.6 .3-2.4 .5c-4.4 .8-8.7 1.5-13.2 1.9c-.2 0-.5 .1-.7 .1c-5.1 .5-10.2 .8-15.3 .8c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4c4.1-4.2 7.8-8.7 11.3-13.5c1.7-2.3 3.3-4.6 4.8-6.9c.1-.2 .2-.3 .3-.5z"/></svg>';
     }
     else {
       el.innerHTML = '';
@@ -318,5 +296,5 @@
       toggles[i].addEventListener('click', toggleLinks);
     }
   });
-</script>
-{% endblock %}
+  </script>
+{% endblock javascript %}

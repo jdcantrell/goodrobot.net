@@ -2,11 +2,27 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block head %}
-  <link href='/css/code.css' rel='stylesheet' type='text/css'>
+  <link media="(prefers-color-scheme:light)" href='/css/code.css' rel='stylesheet' type='text/css'>
+  <link media="(prefers-color-scheme:dark)" href='/css/code-dark.css' rel='stylesheet' type='text/css'>
 {% endblock %}
 
 {% block content %}
-<div class="content">
   {{ markdown }}
-</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+  document.querySelectorAll('.highlight').forEach(el => el.addEventListener('click', (ev) => {
+    if (el.classList.contains('feature')) {
+      el.classList.add('full')
+      el.classList.remove('feature')
+    }
+    else if (el.classList.contains('full')) {
+      el.classList.remove('full')
+    }
+    else {
+      el.classList.add('feature')
+    }
+  }))
+</script>
 {% endblock %}
