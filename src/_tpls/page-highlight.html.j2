@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% set nav_items = nav_items|default([
+    ('/about/', 'about', 'about'),
+    ('/git/', 'git', 'git'),
+    ('/lab/', 'lab', 'lab'),
+    ('/log/', 'log', 'log'),
+    ('/projects/', 'projects', 'projects'),
+    ('/stream/', 'stream', 'stream'),
+    ('/motd/', 'motd', 'motd'),
+  ]) -%}
+  {% set footer_nav_items = footer_nav_items|default([
+    ('/about/', 'about', 'about'),
+    ('/git/', 'git', 'git'),
+    ('/lab/', 'lab', 'lab'),
+    ('/log/', 'log', 'log'),
+    ('/projects/', 'projects', 'projects'),
+    ('/stream/', 'stream', 'stream'),
+    ('/motd/', 'motd', 'motd'),
+  ]) -%}
+  {% set header_icon = header_icon|default([
+    '/android-chrome-192x192.png',
+    '/images/icons/ghost_jd.gif',
+    '/images/icons/goodrobot-orange.png',
+    '/images/icons/kodiakday.svg',
+    '/images/icons/kodiakmorning.svg',
+    '/images/icons/kodiaknight.svg',
+    '/images/icons/kodiaksunset.svg',
+    '/images/icons/mermaid_run.gif',
+    '/images/icons/shiba.png',
+    '/images/icons/tea-green.png',
+    '/images/icons/tea-brown.png',
+  ]|random)
+  -%}
+  <head>
+    <title>
+      {% block title %}
+        hello, goodrobot.net
+      {% endblock title %}
+    </title>
+    {% block meta %}
+    {% endblock meta %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#c42d1a">
+    <meta name="theme-color" content="#458588">
+    <link href='/css/highlight.css' rel='stylesheet' type='text/css'>
+    {% block head %}
+    {% endblock head %}
+  </head>
+  <body>
+    {% block nav %}
+    <header class="page-header">
+      <div class="page-site-header">
+        <a class="page-logo" title="goodrobot.net" href="/">
+          <img alt="goodrobot" height="24" src="{{ header_icon }}">
+        </a>
+        <span class="page-header-title">
+          <a title="goodrobot.net" href="/">goodrobot</a>
+        </span>
+        {% if current_page_sub_title or current_page %}
+          // <span class="page-sub-title">{{ current_page_sub_title|default(current_page) }}</span>
+        {% endif %}
+      </div>
+      <div class="page-nav">
+        <ul>
+          <li>//</li>
+          {% for href, id, name in nav_items %}
+            {% if current_page != id %}
+              <li>
+                <a href="{{ href|e }}">{{ name|e }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </header>
+    {% endblock nav %}
+    <div class="content-container">
+      {% block content %}
+      {% endblock content %}
+    </div>
+    {% block footer %}
+      <footer class="page-footer">
+        <nav>
+          <img alt="goodrobot"
+               height="24" width="24"
+               style="height:24px; width:24px"
+               src="/android-chrome-192x192.png">
+          <a class="page-logo" title="goodrobot.net" href="/">goodrobot</a>
+        </nav>
+        <nav>
+          {% for href, id, name in footer_nav_items %}
+            <a href="{{ href|e }}">{{ name|e }}</a>
+          {% endfor %}
+        </nav>
+      </footer>
+    {% endblock footer %}
+    {% block javascript %}
+    {% endblock javascript %}
+  </body>
+</html>

@@ -76,7 +76,7 @@ def template_generate_preview(value, size=None):
     if os.path.isfile(image_path):
         im = Image.open(image_path)
 
-        im.thumbnail((730, 730), Image.ANTIALIAS)
+        im.thumbnail((730, 730), Image.Resampling.LANCZOS)
         thumb_filename = "{}.jpg".format(
             os.path.splitext(os.path.basename(image_path))[0]
         )
@@ -199,7 +199,7 @@ class Renderer(mistune.HTMLRenderer):
             lang, *parts = info.split("::")
 
             lexer = get_lexer_by_name(lang, stripall=True)
-            formatter = HtmlFormatter()
+            formatter = HtmlFormatter(linenos=True)
             highlighted_code = highlight(code, lexer, formatter)
 
             if len(parts):

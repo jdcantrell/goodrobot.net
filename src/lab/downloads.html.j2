@@ -1,90 +1,84 @@
 {% extends "_tpls/page-lab.html.j2" %}
 {% set current_page = "downloads" %}
-{% block title %}downloads{% endblock %}
-
-{% block head %}{% endblock %}
-
 {% block content %}
-<h1>Downloads</h1>
-<p>Here are some wallpapers I've generated over the years. All of them are 4k in 16:9.</p>
-
-<h2>Generative Art</h2>
-<p>These were made while following along with <a href="https://frontendmasters.com/courses/canvas-webgl/">Creative Coding with Canvas &amp; WebGL</a>
-
-<div class="photo-card">
-  <figure>
-    <a href="/images/art/sketch-28463.png">
-      <img src="{{ "images/art/sketch-28463.png"|preview }}" >
-    </a>
-      <figcaption>&blk12; - 28463</figcaption>
-  </figure>
-</div>
-
-<div class="photo-card">
-  <figure>
-    <a href="/images/art/sketch-269741.png">
-      <img src="{{ "images/art/sketch-269741.png"|preview }}" >
-    </a>
-    <figcaption>+--+ - 269741</figcaption>
-  </figure>
-</div>
-
-<div class="photo-card">
-  <figure>
-    <a href="/images/art/sketch-632465.png">
-      <img src="{{ "images/art/sketch-632465.png"|preview }}" >
-    </a>
-    <figcaption> &boxHD;&boxHU; - 632465</figcaption>
-  </figure>
-</div>
-
-<div class="photo-card">
-  <figure>
-    <a href="/images/art/sketch-659876.png">
-      <img src="{{ "images/art/sketch-659876.png"|preview }}" >
-    </a>
-    <figcaption>(( - 659876</figcaption>
-  </figure>
-</div>
-
-<h2>Mandelbrots</h2>
-<p>These were created with a simple mandelbrot script written in python.</p>
-<div class="photo-card">
-  <figure>
-    <a href="/images/art/mandelbrot_4k_lightning.png">
-      <img src="{{ "images/art/mandelbrot_4k_lightning.png"|preview }}" >
-    </a>
-    <figcaption>Lightning</figcaption>
-  </figure>
-</div>
-
-<div class="photo-card">
-  <figure>
-    <a href="/images/art/mandelbrot_4k_night.png">
-      <img src="{{ "images/art/mandelbrot_4k_night.png"|preview }}" >
-    </a>
-    <figcaption>Night</figcaption>
-  </figure>
-</div>
-
-<div class="photo-card">
-  <figure>
-    <a href="/images/art/mandelbrot_4k_mandelspin.png">
-      <img src="{{ "images/art/mandelbrot_4k_mandelspin.png"|preview }}" >
-    </a>
-    <figcaption>Mandelspin</figcaption>
-  </figure>
-</div>
-
-<div class="photo-card">
-  <figure>
-    <a href="/images/art/mandelbrot_4k_midnight.png">
-      <img src="{{ "images/art/mandelbrot_4k_midnight.png"|preview }}" >
-    </a>
-    <figcaption>Midnight</figcaption>
-  </figure>
-</div>
-{% endblock %}
-
-
-{% block javascript %} {% endblock %}
+  <h1>Downloads</h1>
+  <p>Here are some wallpapers I've generated over the years. All of them are 4k in 16:9.</p>
+  <h2>Generative Art</h2>
+  <p>
+    These were made while following along with <a href="https://frontendmasters.com/courses/canvas-webgl/">Creative Coding with Canvas &amp; WebGL</a>
+    <figure>
+      <figcaption>
+        &blk12; - 28463
+      </figcaption>
+      <a href="/images/art/sketch-28463.png">
+        <img alt="abstract art using typographic characters"
+             src="{{ "images/art/sketch-28463.png"|preview }}"/>
+      </a>
+    </figure>
+    <figure>
+      <figcaption>
+        +--+ - 269741
+      </figcaption>
+      <a href="/images/art/sketch-269741.png">
+        <img alt="abstract art using + and -"
+             src="{{ "images/art/sketch-269741.png"|preview }}"/>
+      </a>
+    </figure>
+    <figure>
+      <figcaption>
+        &boxHD;&boxHU; - 632465
+      </figcaption>
+      <a href="/images/art/sketch-632465.png">
+        <img alt="abstract art using box drawing ascii characters"
+             src="{{ "images/art/sketch-632465.png"|preview }}"/>
+      </a>
+    </figure>
+    <figure>
+      <figcaption>
+        (( - 659876
+      </figcaption>
+      <a href="/images/art/sketch-659876.png">
+        <img alt="abstract art using ( to mimic grass"
+             src="{{ "images/art/sketch-659876.png"|preview }}"/>
+      </a>
+    </figure>
+    <h2>Mandelbrots</h2>
+    <p>These were created with a simple mandelbrot script written in python.</p>
+    <figure>
+      <figcaption>
+        Lightning
+      </figcaption>
+      <a href="/images/art/mandelbrot_4k_lightning.png">
+        <img alt="a zoomed in view of a mandelbrot fractal using teal and blue shades"
+             src="{{ "images/art/mandelbrot_4k_lightning.png"|preview }}"/>
+      </a>
+    </figure>
+    <figure>
+      <figcaption>
+        Night
+      </figcaption>
+      <a href="/images/art/mandelbrot_4k_night.png">
+        <img alt="a zoomed in view of a mandelbrot fractal using purple and teal"
+             src="{{ "images/art/mandelbrot_4k_night.png"|preview }}"/>
+      </a>
+    </figure>
+    <figure>
+      <figcaption>
+        Mandelspin
+      </figcaption>
+      <a href="/images/art/mandelbrot_4k_mandelspin.png">
+        <img alt="a zoomed in view of a mandelbrot fractal using teal and blue shades"
+             src="{{ "images/art/mandelbrot_4k_mandelspin.png"|preview }}"/>
+      </a>
+    </figure>
+    <figure>
+      <figcaption>
+        Midnight
+      </figcaption>
+      <a href="/images/art/mandelbrot_4k_midnight.png">
+        <img alt="a classic view of a mandelbrot fractal using purple and teal"
+             src="{{ "images/art/mandelbrot_4k_midnight.png"|preview }}"/>
+      </a>
+    </figure>
+  </p>
+{% endblock content %}

@@ -1,23 +1,39 @@
 {% extends "_tpls/page-lab.html.j2" %}
 {% set current_page = "lab" %}
-{% block title %}Lab{% endblock %}
-
-{% block head %}{% endblock %}
-
+{% block title %}
+  Lab
+{% endblock title %}
+{% block head %}
+{% endblock head %}
 {% block content %}
-<h1>labs - random fun</h1>
-<p>Here you can find some randome experiments. Some things are only partially
-working. Use the nav links above to explore.</p>
-<ul>
-  <li><a href="/lab/chaos/">Chaos Fractals</a> - a simple chaos fractal explorer</li>
-  <li><a href="/lab/ifs/">IFS Fractals</a> - an iterated function systems explorer</li>
-  <li><a href="/lab/mandelbrot/">Mandelbrot</a> - a Mandelbrot explorer</li>
-  <li><a href="/lab/gxl/">GXL</a> - The goodrobot experience language, or the bootstrap.css for this site</li>
-  <li><a href="/lab/screensaver/">screensaver.js</a> - A simple screensaver for your webpage</li>
-  <li><a href="/lab/rogue/">Rogue</a> - What this site might look like if it were a roguelike (wip)</li>
-  <li><a href="/lab/downloads.html">Downloads</a> - Currently, this is just some wallpapers.</li>
-</ul>
-{% endblock %}
-
-
-{% block javascript %} {% endblock %}
+  <h1>labs - random fun</h1>
+  <p>
+    Here you can find some randome experiments. Some things are only partially
+    working. Use the nav links above to explore.
+  </p>
+  <ul>
+    <li>
+      <a href="/lab/chaos/">Chaos Fractals</a> - a simple chaos fractal explorer
+    </li>
+    <li>
+      <a href="/lab/ifs/">IFS Fractals</a> - an iterated function systems explorer
+    </li>
+    <li>
+      <a href="/lab/mandelbrot/">Mandelbrot</a> - a Mandelbrot explorer
+    </li>
+    <li>
+      <a href="/lab/gxl/">GXL</a> - The goodrobot experience language, or the bootstrap.css for this site
+    </li>
+    <li>
+      <a href="/lab/screensaver/">screensaver.js</a> - A simple screensaver for your webpage
+    </li>
+    <li>
+      <a href="/lab/rogue/">Rogue</a> - What this site might look like if it were a roguelike (wip)
+    </li>
+    <li>
+      <a href="/lab/downloads.html">Downloads</a> - Currently, this is just some wallpapers.
+    </li>
+  </ul>
+{% endblock content %}
+{% block javascript %}
+{% endblock javascript %}

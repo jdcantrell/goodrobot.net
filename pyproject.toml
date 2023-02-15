@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "goodrobot.net"
+version = "0.1.0"
+description = "a website"
+authors = ["JD Cantrell <jd@goodrobot.net>"]
+license = "GPL-3.0-only"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+"Jinja2" = "*"
+mistune = "3.0.0rc1"
+Pygments = "*"
+PyYAML = ">=4.2"
+libsass = "*"
+requests = ">=2.20"
+pillow = "*"
+click = "*"
+werkzeug = "*"
+ankh = {git = "https://github.com/jdcantrell/ankh"}
+pytz = "^2022.7"
+requests-cache = "^0.9.7"
+
+[tool.poetry.dev-dependencies]
+livereload = "*"
+flake8 = "*"
+black = "*"
+
+[tool.poetry.group.dev.dependencies]
+djlint = "^1.19.11"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+dev = "sock:main"
+
+[tool.djlint]
+indent=2
+ignore="J018,H023,H006,H017,H021"

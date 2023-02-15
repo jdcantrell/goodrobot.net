@@ -1,6 +1,0 @@
-tricks:
-  #  - watchdog.tricks.LoggerTrick:
-  #      patterns: ["*.sass"]
-  - watchdog.tricks.ShellCommandTrick:
-      patterns: ["*.sass"]
-      shell_command: "./go.sh css"

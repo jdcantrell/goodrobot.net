@@ -45,14 +45,12 @@
   </div>
   <div v-if="rules && rules.length">
     The next point cannot be n vertices away:
-    <table>
-      <tr class="hover-hide" v-for="(rule, index) in rules" :key="index">
-        <td class="hover-hide" v-for="pIdx in sides" :key="pIdx">
-          <label><input type="checkbox" value="true" v-model="rule[pIdx - 1]">{{ pIdx - 1 }}</label>
-        </td>
+      <ul class="list-inline" v-for="(rule, index) in rules" :key="index">
+        <li class="hover-hide" v-for="pIdx in sides" :key="pIdx">
+          <label class="checkbox"><input type="checkbox" value="true" v-model="rule[pIdx - 1]">{{ pIdx - 1 }}</label>
+        </li>
         <td class="visible-on-hover"><button v-on:click="removeRule(index)">Remove</button></td>
-      </tr>
-    </table>
+    </ul>
   </div>
   <div class="align-center" v-else>The next point will be randomly choosen</div>
   <div class="align-center">

@@ -14,6 +14,7 @@ green() { echo "$_green$1$reset"; }
 
 css() {
   mkdir -p ./build/css
+  pysassc ./src/_sass/highlight/highlight.scss ./build/css/highlight.css
   pysassc ./src/_sass/gxl/gxl.sass ./build/css/gxl.css
   pysassc ./src/_sass/mono/mono-light.sass ./build/css/mono-light.css
   pysassc ./src/_sass/mono/mono-dark.sass ./build/css/mono-dark.css
