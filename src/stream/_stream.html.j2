@@ -16,12 +16,26 @@
     margin-left: 8px;
     fill: currentColor;
   }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 90px;
+    border: 5px solid;
+  }
+  .up {
+    border-color: var(--accent-2);
+  }
+  .down {
+    border-color: var(--accent-4);
+  }
   </style>
 {% endblock head %}
 {% macro time_entry(entry) -%}
   <li>
     <a href="{{ entry.link }}">
-      <span>{{ entry.title }}</span>
+      <span>{{ entry.title|ignore_entities }}</span>
       <span>{{ entry.feed_title }}
         &ndash;
         {% if entry.time_unit == "New!" %}
@@ -34,6 +48,15 @@
     </a>
   </li>
 {% endmacro %}
+
+{% macro status(url) -%}
+  {% if get_status(url) == 200 %}
+    <span class="dot up"></span>
+  {% else %}
+    <span class="dot down"></span>
+  {% endif %}
+{% endmacro %}
+
 {% block content %}
     <article>
       <h1 >Lwn.net</h1>
@@ -54,7 +77,7 @@
       <ul class="list-links">
         {% for entry in get_entries('https://lobste.rs/rss') %}
           <li>
-            <a href="{{ entry.link }}" comment-link="{{ entry.comments }}">{{ entry.title }}</a>
+            <a href="{{ entry.link }}" comment-link="{{ entry.comments }}">{{ entry.title|ignore_entities }}</a>
           </li>
         {% endfor %}
       </ul>
@@ -67,7 +90,7 @@
       <ul class="list-links">
         {% for entry in get_entries('http://news.ycombinator.com/rss') %}
           <li>
-            <a href="{{ entry.link }}" comment-link="{{ entry.comments }}">{{ entry.title }}</a>
+            <a href="{{ entry.link }}" comment-link="{{ entry.comments }}">{{ entry.title|ignore_entities }}</a>
           </li>
         {% endfor %}
       </ul>
@@ -81,7 +104,7 @@
         {% for entry in get_entries('http://www.reddit.com/r/programming/.rss') %}
           <li>
             <a href="{{ entry.description|find_link(1)}}"
-               comment-link="{{ entry.link }}">{{ entry.title }}</a>
+               comment-link="{{ entry.link }}">{{ entry.title|ignore_entities }}</a>
           </li>
         {% endfor %}
       </ul>
@@ -179,7 +202,7 @@
         {% for entry in get_entries('http://feeds.pinboard.in/rss/u:jdcantrell', 10) %}
           <li>
             <a href="{{ entry.link }}">
-              <span>{{ entry.title }}</span>
+              <span>{{ entry.title|ignore_entities }}</span>
               {% if entry.description %}<span>{{ entry.description }}</span>{% endif %}
             </a>
           </li>
@@ -204,7 +227,15 @@
         {% endfor %}
       </ul>
     </article>
-    <div style="text-align:center">Last Updated on {{ get_date().strftime("%b %d at %I:%M:%S %p") }}</div>
+    <div style="text-align:center">
+      <ul class="list-inline">
+        <li>{{ status('https://goodrobot.net/git')}} git</li>
+        <li>{{ status('https://goodrobot.net/share') }} share</li>
+        <li>{{ status('https://goodrobot.net/sock') }} sock</li>
+        <li>{{ status('https://goodrobot.net/log') }} log</li>
+      </ul>
+      Last Updated on {{ get_date().strftime("%b %d at %I:%M:%S %p") }}
+    </div>
   {% set logs = log() %}
   {% if logs %}
     <style>
