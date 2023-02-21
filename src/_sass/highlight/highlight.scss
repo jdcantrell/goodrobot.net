@@ -60,7 +60,14 @@ ol {
 @font-face {
   font-family: "Crimson Pro";
   font-display: swap;
-  src: url("/images/fonts/CrimsonPro-VariableFont_wght.ttf");
+  font-weight: 400;
+  src: url("/images/fonts/CrimsonPro-Regular.woff2");
+}
+@font-face {
+  font-family: "Crimson Pro";
+  font-display: swap;
+  font-weight: 700;
+  src: url("/images/fonts/CrimsonPro-Bold.woff2");
 }
 
 /* light theme */
@@ -258,46 +265,59 @@ figure img {
 .list-links {
   margin: 16px 0;
   padding-left: 16px;
-}
-.list-links li::marker {
-  content: "» ";
-  color: var(--link-color);
-}
-.list-links li a {
-  text-decoration-line: none;
-}
+  list-style-type: circle;
 
-.list-links li:hover::marker {
-  color: var(--link-hover-color);
-}
-.list-links li a:hover {
-  text-decoration-style: solid;
-  text-decoration-line: underline;
-}
+  li {
+    &::marker {
+      content: "» ";
+      color: var(--link-color);
+    }
 
-.list-links.with-note {
-  list-style-position: outside;
-}
-.list-links.with-note a span {
-  font-size: 16px;
-  display: block;
-}
-.list-links.with-note a span:first-child {
-  font-size: 24px;
-  text-decoration-line: none;
-  text-decoration-color: var(--link-color);
-  text-decoration-thickness: 2px;
-}
-.list-links.with-note a:hover span:first-child {
-  text-decoration-line: underline;
-  text-decoration-color: var(--link-hover-color);
-  text-decoration-style: solid;
-}
-.list-links.with-note li a,
-.list-links.with-note li a:hover {
-  margin-bottom: 4px;
-  display: block;
-  text-decoration: none;
+    a {
+      text-decoration-line: none;
+      &:hover {
+        text-decoration-style: solid;
+        text-decoration-line: underline;
+      }
+    }
+
+    &:hover {
+      list-style-type: disc;
+      &::marker {
+        color: var(--link-hover-color);
+      }
+    }
+  }
+
+  &.with-note {
+    list-style-position: outside;
+
+    li a {
+      span {
+        font-size: 16px;
+        display: block;
+
+        &:first-child {
+          font-size: 24px;
+          text-decoration-line: none;
+          text-decoration-color: var(--link-color);
+          text-decoration-thickness: 2px;
+        }
+      }
+      &:hover span:first-child {
+        text-decoration-line: underline;
+        text-decoration-color: var(--link-hover-color);
+        text-decoration-style: solid;
+      }
+    }
+
+    li a,
+    li a:hover {
+      margin-bottom: 4px;
+      display: block;
+      text-decoration: none;
+    }
+  }
 }
 
 button,
@@ -422,6 +442,12 @@ code {
   align-items: center;
 }
 
+.page-logo {
+  height: 24px;
+  width: 24px;
+  margin-top: 2px;
+}
+
 @media (max-width: 570px) {
   .separator {
     display: none;
@@ -476,7 +502,7 @@ code {
   gap: 16px 0;
 
   --gap: 8px; /*clamp(1rem, 6vw, 3rem);*/
-  --max-content-width: 70ch;
+  --max-content-width: 55ch;
   --full: minmax(var(--gap), 1fr);
   --content: min(var(--max-content-width), 100% - var(--gap) * 2);
   --popout: minmax(0, 2rem);
