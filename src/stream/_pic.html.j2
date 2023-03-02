@@ -41,11 +41,7 @@
     {% if entry_image -%}
       <li class="offscreen">
         <a href="{{ entry.link }}">
-          {% if idx < 16 %}
-            <img class="image" src="{{ entry_image }}" />
-          {% else %}
-            <img class="image" data-src="{{ entry_image }}" />
-          {% endif %}
+            <img class="image" loading="lazy" src="{{ entry_image }}" />
         </a>
       </li>
     {%- endif %}
@@ -105,31 +101,3 @@
       {% endfor %}
     </ul>
 {% endblock content %}
-{% block javascript %}
-  <script>
-  const loadImage = (entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.intersectionRatio > .1 && entry.target.dataset.src) {
-      entry.target.setAttribute('src', entry.target.dataset.src)
-      }
-    })
-  }
-
-  const setupLazyLoader = () => {
-    observer = new IntersectionObserver(
-      loadImage,
-      {
-        root: null,
-        rootMargin: '100px 100px 100px 100px',
-        threshold: [0.1],
-      }
-    );
-
-    document.querySelectorAll('.content img').forEach(
-      img => observer.observe(img)
-    );
-  }
-
-  window.addEventListener('load', setupLazyLoader);
-  </script>
-{% endblock javascript %}
