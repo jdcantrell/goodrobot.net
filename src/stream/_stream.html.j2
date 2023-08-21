@@ -114,6 +114,11 @@
       <hr />
       <ul class="list-links with-note">
         {% for entry in time_sort([
+          'https://ntietz.com/atom.xml',
+          'https://krebsonsecurity.com/feed/',
+          'https://localghost.dev/feed.xml',
+          'https://bytes.zone/index.xml',
+          'https://www.hillelwayne.com/post/index.xml',
           'http://feeds.feedburner.com/theendeavour',
           'http://eli.thegreenplace.net/feed/',
           'http://nedbatchelder.com/blog/rss.xml',
@@ -145,18 +150,19 @@
       <hr />
       <ul class="list-links with-note">
         {% for entry in time_sort([
-          'http://feeds.feedburner.com/RockPaperShotgun',
-          'http://www.filfre.net/feed/',
-          'http://feeds.wolfire.com/WolfireGames',
-          'http://feeds.feedburner.com/ARandomGnomesRandomLair',
           'http://blog.metagames.co.uk/feed/',
+          'http://feeds.feedburner.com/ARandomGnomesRandomLair',
+          'http://feeds.feedburner.com/RockPaperShotgun',
+          'http://feeds.wolfire.com/WolfireGames',
+          'http://freegamer.blogspot.com/feeds/posts/default?',
           'http://grumpygamer.com/rss2.0',
           'http://midnightresistance.co.uk/rss.xml',
-          'http://freegamer.blogspot.com/feeds/posts/default?',
           'http://rodneylives.blogspot.com/feeds/posts/default?alt=rss',
           'http://www.doshaven.eu/feed/',
-          'https://www.gridsagegames.com/blog/feed/',
+          'http://www.filfre.net/feed/',
           'https://obscuritory.com/feed/',
+          'https://setsideb.com/feed',
+          'https://www.gridsagegames.com/blog/feed/',
           ])[0:10] %}
           {{ time_entry(entry) }}
         {% endfor %}
@@ -167,6 +173,11 @@
       <hr />
       <ul class="list-links with-note">
         {% for entry in time_sort([
+          'https://www.allendowney.com/blog/feed/',
+          'http://www.julian.digital/feed',
+          'https://vitalik.ca/feed.xml',
+          'https://www.benkuhn.net/index.xml',
+          'https://gwern.substack.com/feed',
           'http://www.goodmath.org/blog/feed/',
           'http://feeds2.feedburner.com/PatrickRothfuss',
           'http://feeds.feedburner.com/wwdn',

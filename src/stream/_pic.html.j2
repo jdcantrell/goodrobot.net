@@ -35,11 +35,12 @@
 
   </style>
 {% endblock head %}
+
 {% macro pic(idx, entry) -%}
   {% if entry.description -%}
     {% set entry_image = images(entry.description)|first -%}
     {% if entry_image -%}
-      <li class="offscreen">
+      <li>
         <a href="{{ entry.link }}">
             <img class="image" loading="lazy" src="{{ entry_image }}" />
         </a>
@@ -47,6 +48,7 @@
     {%- endif %}
   {%- endif %}
 {%- endmacro %}
+
 {% block content %}
     <ul class="tiles full">
       {% for entry in time_sort([
@@ -96,6 +98,8 @@
         'https://welcometomvrs.tumblr.com/rss',
         'https://www.artstation.com/artist/zomtech.rss',
         'https://yaspes.tumblr.com/rss',
+        'https://incre-ment.tumblr.com/rss',
+
         ], 10) %}
         {{ pic(loop.index, entry) }}
       {% endfor %}
