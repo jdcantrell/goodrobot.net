@@ -1,4 +1,5 @@
 {% extends "_tpls/base.html.j2" %}
+{% import '_feeds.j2' as feeds %}
 {% set current_page = "stream" %}
 {% set current_page_sub_title = "stream" %}
 {% block title %}
@@ -113,35 +114,7 @@
       <h1>Coding</h1>
       <hr />
       <ul class="list-links with-note">
-        {% for entry in time_sort([
-          'http://blog.cleancoder.com/atom.xml',
-          'http://eli.thegreenplace.net/feed/',
-          'http://feeds.feedburner.com/leaverou',
-          'http://feeds.feedburner.com/theendeavour',
-          'http://feeds2.feedburner.com/stevelosh',
-          'http://martinfowler.com/feed.atom',
-          'http://meyerweb.com/index.php?feed=rss2&scope=summary',
-          'http://nedbatchelder.com/blog/rss.xml',
-          'http://rachelbythebay.com/w/atom.xml',
-          'http://seenaburns.com/feed.xml',
-          'http://www.xanthir.com/blog/atom/',
-          'https://blog.acolyer.org/feed/',
-          'https://bytes.zone/index.xml',
-          'https://drewdevault.com/blog/index.xml',
-          'https://heredragonsabound.blogspot.com/feeds/posts/default',
-          'https://ianthehenry.com/feed.xml',
-          'https://jvns.ca/atom.xml',
-          'https://krebsonsecurity.com/feed/',
-          'https://lethain.com/feeds.xml',
-          'https://localghost.dev/feed.xml',
-          'https://ntietz.com/atom.xml',
-          'https://research.swtch.com/feed.atom',
-          'https://ryanmulligan.dev/blog/feed.xml',
-          'https://venam.nixers.net/blog/feed.xml',
-          'https://www.hillelwayne.com/post/index.xml',
-          'https://www.joshwcomeau.com/rss.xml',
-          'https://zignar.net/index.xml',
-          ])[0:10] %}
+        {% for entry in time_sort(feeds.coding)[0:10] %}
           {{ time_entry(entry) }}
         {% endfor %}
       </ul>
@@ -150,22 +123,7 @@
       <h1>Gaming</h1>
       <hr />
       <ul class="list-links with-note">
-        {% for entry in time_sort([
-          'http://blog.metagames.co.uk/feed/',
-          'http://feeds.feedburner.com/ARandomGnomesRandomLair',
-          'http://feeds.feedburner.com/RockPaperShotgun',
-          'http://feeds.wolfire.com/WolfireGames',
-          'http://freegamer.blogspot.com/feeds/posts/default?',
-          'http://grumpygamer.com/rss2.0',
-          'http://midnightresistance.co.uk/rss.xml',
-          'http://rodneylives.blogspot.com/feeds/posts/default?alt=rss',
-          'http://www.doshaven.eu/feed/',
-          'http://www.filfre.net/feed/',
-          'https://distractionware.com/blog/feed/',
-          'https://obscuritory.com/feed/',
-          'https://setsideb.com/feed',
-          'https://www.gridsagegames.com/blog/feed/',
-          ])[0:10] %}
+        {% for entry in time_sort(feeds.gaming)[0:10] %}
           {{ time_entry(entry) }}
         {% endfor %}
       </ul>
@@ -174,42 +132,7 @@
       <h1>Interesting Things</h1>
       <hr />
       <ul class="list-links with-note">
-        {% for entry in time_sort([
-          'http://bastian.rieck.me/blog/index.xml',
-          'http://blog.iso50.com/feed/',
-          'http://fabiensanglard.net/rss.xml',
-          'http://faitherinhicks.tumblr.com/rss',
-          'http://feeds.feedburner.com/wwdn',
-          'http://feeds2.feedburner.com/PatrickRothfuss',
-          'http://scienceblogs.com/startswithabang/feed/',
-          'http://www.goodmath.org/blog/feed/',
-          'http://www.julian.digital/feed',
-          'https://alinpanaitiu.com/index.xml',
-          'https://andre.arko.net/atom.xml',
-          'https://apenwarr.ca/log/rss.php',
-          'https://arun.is/rss.xml',
-          'https://billhunt.dev/posts.xml',
-          'https://blinry.org/feed/',
-          'https://blog.djy.io/atom.xml',
-          'https://brandonsanderson.com/feed/',
-          'https://cadence.moe/blog/atom.xml?limit=1',
-          'https://gwern.substack.com/feed',
-          'https://interconnected.org/home/feed',
-          'https://maggieappleton.com/rss.xml',
-          'https://maggieappleton.com/rss.xml',
-          'https://neil.computer/rss/',
-          'https://news.gregjeanneau.com/rss/',
-          'https://pietrorea.com/rss.xml',
-          'https://popagandhi.com/index.xml',
-          'https://tylerxhobbs.com/essays?format=rss',
-          'https://vitalik.ca/feed.xml',
-          'https://winnielim.org/feed/',
-          'https://www.aiweirdness.com/rss/',
-          'https://www.allendowney.com/blog/feed/',
-          'https://www.benkuhn.net/index.xml',
-          'https://www.schneier.com/blog/atom.xml',
-          'https://www.teamten.com/lawrence/writings/rss.xml',
-          ])[0:10] %}
+        {% for entry in time_sort(feeds.interests)[0:10] %}
           {{ time_entry(entry) }}
         {% endfor %}
       </ul>

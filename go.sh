@@ -35,6 +35,11 @@ stream() {
   ankh src/stream/_stream.html.j2 build/stream/index.html --template-paths ./src $CACHE
 }
 
+stream_all() {
+  CACHE=${1}
+  ankh src/stream/_all.html.j2 build/stream/all.html --template-paths ./src $CACHE
+}
+
 stream_pic() {
   CACHE=${1}
   ankh src/stream/_pic.html.j2 build/stream/pics.html --template-paths ./src $CACHE
@@ -57,6 +62,8 @@ generate_all() {
   generate
   blue 'Generating stream'
   stream $1
+  blue 'Generating all stream'
+  stream_all $1
   blue 'Generating pic stream'
   stream_pic $1
   green 'Full site build complete.'
@@ -92,6 +99,7 @@ case "$1" in
     ;;
   stream_cache)
     stream "--cache"
+    stream_all "--cache"
     stream_pic "--cache"
     ;;
   css)

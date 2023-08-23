@@ -1,0 +1,137 @@
+{% extends "_tpls/base.html.j2" %}
+{% import '_feeds.j2' as feeds %}
+{% set current_page = "all" %}
+{% set current_page_sub_title = "all" %}
+{% block title %}
+  Links and Things
+{% endblock title %}
+{% block head %}
+  <meta name="viewport" content="width=device-width">
+  <style type="text/css">
+  .js-link-toggle {
+    cursor: pointer;
+  }
+  .icon {
+    height: 24px;
+    display: inline-block;
+    margin-left: 8px;
+    fill: currentColor;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 90px;
+    border: 5px solid;
+  }
+  .up {
+    border-color: var(--accent-2);
+  }
+  .down {
+    border-color: var(--accent-4);
+  }
+  </style>
+{% endblock head %}
+{% macro time_entry(entry) -%}
+  <li>
+    <a href="{{ entry.link }}">
+      <span>{{ entry.title|default("No Title")|ignore_entities }}</span>
+      <span>{{ entry.feed_title }}
+        &ndash;
+
+        {% if entry.time_unit == "New!" %}
+          <i class="icon-star"></i> New
+        {% else %}
+          <i>{{ entry.time_length }}</i>
+          {{ entry.time_unit }}
+        {% endif %}
+      </span>
+    </a>
+  </li>
+{% endmacro %}
+
+
+{% block content %}
+    <article>
+      <h1>Coding</h1>
+      <hr />
+      <ul class="list-links with-note">
+        {% for entry in time_sort(feeds.coding) %}
+          {{ time_entry(entry) }}
+        {% endfor %}
+      </ul>
+    </article>
+    <article>
+      <h1>Gaming</h1>
+      <hr />
+      <ul class="list-links with-note">
+        {% for entry in time_sort(feeds.gaming) %}
+          {{ time_entry(entry) }}
+        {% endfor %}
+      </ul>
+    </article>
+    <article>
+      <h1>Interesting Things</h1>
+      <hr />
+      <ul class="list-links with-note">
+        {% for entry in time_sort(feeds.interests) %}
+          {{ time_entry(entry) }}
+        {% endfor %}
+      </ul>
+    </article>
+    <article>
+      <h1>Art</h1>
+      <hr />
+      <ul class="list-links with-note">
+        {% for entry in time_sort(feeds.art) %}
+          {{ time_entry(entry) }}
+        {% endfor %}
+      </ul>
+    </article>
+  {% set logs = log() %}
+  {% if logs %}
+    <style>
+          details {
+            border: 2px solid transparent;
+            transition: all .3s ease-in;
+          }
+          details ul {
+            padding: 8px;
+          }
+          details[open] {
+            border: 2px solid #9f9f9f;
+            box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+
+          }
+          details > summary {
+            list-style: none;
+            text-align: center;
+            outline: none;
+            cursor: pointer;
+          }
+          details > summary::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            position: relative;
+            background-image: url(/images/icons/errorbot.png);
+            background-size: cover;
+            display: inline-block;
+            margin-right: 4px;
+            top: 5px;
+          }
+    </style>
+    <details>
+      <summary>
+        errorbot reports some errors :-(
+      </summary>
+      <ul>
+        {% for log in logs.split("\n") %}
+          <li>{{ log|safe }}</li>
+        {% endfor %}
+      </ul>
+    </details>
+  {% endif %}
+{% endblock content %}
