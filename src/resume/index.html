@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* reset */
+
+      /* Box sizing rules */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      /* Prevent font size inflation */
+      html {
+        -moz-text-size-adjust: none;
+        -webkit-text-size-adjust: none;
+        text-size-adjust: none;
+      }
+
+      /* Remove default margin in favour of better control in authored CSS */
+      body,
+      h1,
+      h2,
+      h3,
+      h4,
+      p,
+      figure,
+      blockquote,
+      dl,
+      dd {
+        margin-block-end: 0;
+      }
+
+      /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+      ul[role="list"],
+      ol[role="list"] {
+        list-style: none;
+      }
+
+      /* Set core body defaults */
+      body {
+        min-height: 100vh;
+        line-height: 1.5;
+        padding: 0;
+        font-family: "Rubik", system-ui, "Segoe UI", Roboto, Helvetica, Arial,
+          sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-weight: 300;
+        font-size: 16px;
+        color: rgb(51, 51, 51);
+      }
+
+      /* Set shorter line heights on headings and interactive elements */
+      h1,
+      h2,
+      h3,
+      h4,
+      button,
+      input,
+      label {
+        line-height: 1.1;
+      }
+
+      /* Balance text wrapping on headings */
+      h1,
+      h2,
+      h3,
+      h4 {
+        text-wrap: balance;
+      }
+
+      /* A elements that don't have a class get default styles */
+      a:not([class]) {
+        text-decoration-skip-ink: auto;
+        color: currentColor;
+      }
+
+      /* Make images easier to work with */
+      img,
+      picture {
+        max-width: 100%;
+        display: block;
+      }
+
+      /* Inherit fonts for inputs and buttons */
+      input,
+      button,
+      textarea,
+      select {
+        font: inherit;
+      }
+
+      /* Make sure textareas without a rows attribute are not tiny */
+      textarea:not([rows]) {
+        min-height: 10em;
+      }
+
+      /* Anything that has been anchored to should have extra scroll margin */
+      :target {
+        scroll-margin-block: 5ex;
+      }
+      /* end reset */
+
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+      h3 {
+        font-size: 1.25rem;
+      }
+      h4 {
+        font-size: 1.1rem;
+      }
+
+      .resume {
+        display: grid;
+        grid-template-columns: 650px;
+        width: 750px;
+        margin: auto;
+      }
+
+      .role {
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="resume">
+      <h1>JD Cantrell</h1>
+      <div>Staff Software Engineer</div>
+      <div>
+        SF/Bay Area &bull;
+        <a href="mailto:jd@goodrobot.net">jd@goodrobot.net</a> &bull;
+        <a href="goodrobot.net">goodrobot.net</a>
+      </div>
+      <p>
+        Hi, I'm JD! I am a full-stack engineer with a focus on front-end. I have
+        a passion for building systems that power amazing customer experiences.
+      </p>
+
+      <h2>Core competencies</h2>
+      <ul class="role">
+        <li>Front-end Technologies (HTML/CSS/JS, Typescript, React, etc)</li>
+        <li>Back-end (PHP, Python, golang, Postgres)</li>
+        <li>Domain Driven Design</li>
+        <li>Design Systems</li>
+        <li>DevOps/SRE</li>
+      </ul>
+
+      <h2>Education</h2>
+
+      <p class="role">B.S. in Computer Science from Kansas State University</p>
+
+      <h2>Job history</h2>
+
+      <h2 class="company">Opendoor</h2>
+      <h3 class="role">Staff Software Engineer - March 2022 - Present</h3>
+
+      <p>
+        At Opendoor I work on the Product Growth team developing experiments and
+        building out our customer onboarding platform. During my time here I
+        have re-architected and streamlined how we describe onboarding flows,
+        enabled easier experimentation, and led the implementation of our latest
+        brand look and feel.
+      </p>
+      <p>
+        Additionally, my responsibilities include site-reliability engineering
+        and DevOps as part of our on-call rotation.
+      </p>
+
+      <p>
+        <b>Tech Stack</b>: Typescript, GraphQL, Golang, Python, Ruby, Postgres,
+        CloudFlare Workers, React, redux-toolkit, Next.js, create-react-app,
+        Remix, AWS
+      </p>
+
+      <h2 class="company">Resilience Insurance</h2>
+      <h3 class="role">Staff Software Engineer - July 2019 - February 2022</h3>
+
+      <p>
+        Resilience gave me the opportunity to lead a small team responsible for
+        designing and developing various customer-facing portals and prototypes
+        for exploring market-fit for new products. We built up a foundational
+        toolset to quickly build new portals, worked with design to build out a
+        design system, and set up processes to ensure high quality.
+      </p>
+      <p>
+        <b>Tech Stack</b>: Typescript, React, Next.js, create-react-app,
+        GraphQL, Auth0, Hasura
+      </p>
+
+      <h2 class="company">Trulia</h2>
+      <h3 class="role">Principal Software Engineer - May 2011 - Jul 2019</h3>
+      <p>
+        At Trulia I started as a mid-level engineer and was promoted twice up to
+        principal engineer. My team owned the entire customer-facing search
+        experience. We put this experience through many design iterations,
+        extensive a/b testing of features, SEO improvements, and a lot more. All
+        of this took place while delivering the experience at scale.
+      </p>
+      <p>
+        In addition to the consumer-facing search experience, I took part in
+        developing Trulia's design system, iterating that system through several
+        major versions, multiple migrations to different front-end frameworks
+        and applying domain-driven design to our core search library.
+      </p>
+
+      <p>
+        <b>Tech Stack</b>: Javascript, CSS, SaSS, MySQL, PHP, Smarty, jQuery,
+        Backbone, React, GraphQL, JSON, Next.js
+      </p>
+
+      <h2 class="company">AllofE Solutions</h2>
+      <h3 class="role">Systems Analyst - June 2005 - May 2011</h3>
+
+      <p>
+        At AllofE I worked on a small team that took client needs and ideas and
+        turned them into full web applications. This gave me a lot of
+        opportunities to work closely with our users to develop intuitive
+        interfaces to solve their problems.
+      </p>
+
+      <p>
+        <b>Tech Stack</b>: PHP, Javascript, CSS, MySQL, Adobe Air, Linux, Apache
+      </p>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Radio Free Twoflower</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+    /* Box sizing rules */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    /* Prevent font size inflation */
+    html {
+      -moz-text-size-adjust: none;
+      -webkit-text-size-adjust: none;
+      text-size-adjust: none;
+    }
+
+    /* Remove default margin in favour of better control in authored CSS */
+    body, h1, h2, h3, h4, p,
+    figure, blockquote, dl, dd {
+      margin-block-end: 0;
+    }
+
+    /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+    ul[role='list'],
+    ol[role='list'] {
+      list-style: none;
+    }
+
+    /* Set core body defaults */
+    body {
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Set shorter line heights on headings and interactive elements */
+    h1, h2, h3, h4,
+    button, input, label {
+      line-height: 1.1;
+    }
+
+    /* Balance text wrapping on headings */
+    h1, h2,
+    h3, h4 {
+      text-wrap: balance;
+    }
+
+    /* A elements that don't have a class get default styles */
+    a:not([class]) {
+      text-decoration-skip-ink: auto;
+      color: currentColor;
+    }
+
+    /* Make images easier to work with */
+    img,
+    picture {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Inherit fonts for inputs and buttons */
+    input, button,
+    textarea, select {
+      font: inherit;
+    }
+
+    /* Make sure textareas without a rows attribute are not tiny */
+    textarea:not([rows]) {
+      min-height: 10em;
+    }
+
+    /* Anything that has been anchored to should have extra scroll margin */
+    :target {
+      scroll-margin-block: 5ex;
+    }
+    </style>
+
+    <style>
+      html,
+      body {
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      body {
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 255, 1) 0%,
+          rgba(0, 0, 0, 1) 100%
+        );
+        display: flex;
+        align-items: end;
+        padding: 32px;
+      }
+
+      .control, .title {
+        line-height: 1;
+        font-family: inherit;
+        background: transparent;
+        border: none;
+        font-size: max(2vw, 18px);
+        color: #ff0;
+        text-shadow: 3px 3px 1px #000;
+        padding: 0;
+        margin: 0;
+      }
+
+      .control {
+        cursor: pointer;
+      }
+
+      #song {
+        color: #fff;
+        font-size: max(3.5vw, 24px);
+      }
+
+      audio + .title {
+        display: block;
+      }
+      audio.playing + .title {
+        display: block;
+      }
+
+      #song:empty + span {
+        display: none;
+      }
+
+      
+    </style>
+
+    <script>
+      const src = new EventSource("https://goodrobot.net/radio-sse/sse");
+      src.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        if (data.stream === "Radio Free Twoflower (shout)") {
+          document.getElementById("song").innerHTML = data.title;
+          document.getElementById("artist").innerHTML = data.artist;
+        }
+      };
+
+      let isPlaying = false;
+      const play = (event) => {
+        isPlaying = !isPlaying;
+        if (isPlaying) {
+          document.getElementById('stream').play()
+          document.getElementById('stream').classList.add('playing')
+        } else {
+          document.getElementById('stream').pause()
+          document.getElementById('stream').classList.remove('playing')
+        }
+        event.target.innerHTML = isPlaying ? 'Playing...' :'Stopped (click to play)'
+      }
+    </script>
+  </head>
+  <body>
+    <audio id="stream" class="">
+      <source src="https://twoflower.goodrobot.net:8000/radio-free-twoflower.ogg"></source>
+    </audio>
+    <div class="title">
+      <div>
+        <button class="control" onclick="play(event)">Stopped (click to play)</button>
+      </div>
+      <div id="song"></div>
+      <span>by</span>
+      <span id="artist"></span>
+    </div>
+  </body>
+</html>
