@@ -6,7 +6,7 @@ authors = ["JD Cantrell <jd@goodrobot.net>"]
 license = "GPL-3.0-only"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 "Jinja2" = "*"
 mistune = "3.0.0rc1"
 Pygments = "*"
