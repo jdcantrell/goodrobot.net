@@ -1,0 +1,121 @@
+{% extends "_tpls/page-lab.html.j2" %}
+{% set current_page = "habits" %}
+{% block title %}It's april!{% endblock %}
+
+{% block head %}
+  <style>
+    .toc {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .toc > li:has(label > input:checked) {
+      order: 2;
+    }
+
+    input[type="checkbox"] {
+      appearance: none;
+      border: none;
+      background: transparent;
+    }
+    input[type="checkbox"]:checked:before {
+      content:"⭐";
+      display: inline-block;
+      width:24px;
+      height:24px;
+      font-size: 24px;
+      margin-right: 8px;
+    }
+
+    label {
+      cursor: pointer;
+    }
+
+    .section {
+      margin: 32px 0 0 0;
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    #progress {
+      border: 2px solid;
+      border-radius: 4px;
+      height: 30px;
+    }
+    #progress div {
+      width: 0%;
+      background-color: #7acc54;
+      height: 100%;
+      line-height: 1;
+      text-align: right;
+      color: #255c0b;
+    }
+  </style>
+{% endblock %}
+{% block content %}
+<h1 class="popout">The Algorithm Design Manual Progress</h1>
+<div id="progress">
+  <div id="completion">0%</div>
+</div>
+<ul class="toc">
+  <li><label><input type="checkbox" value="1">1. Introduction to Algorithm Design</label>
+  <li><label><input type="checkbox" value="2">2. Algorithm Analysis</label>
+  <li><label><input type="checkbox" value="3">3. Data Strutures</label>
+  <li><label><input type="checkbox" value="4">4. Sorting</label>
+  <li><label><input type="checkbox" value="5">5. Divide and Conquer</label>
+  <li><label><input type="checkbox" value="6">6. Hashing and Randomized Algorithms</label>
+  <li><label><input type="checkbox" value="7">7. Graph Traversal</label>
+  <li><label><input type="checkbox" value="8">8. Weighted Graph Algorithms</label>
+  <li><label><input type="checkbox" value="9">9. Combinatorial Search</label>
+  <li><label><input type="checkbox" value="10">10. Dynamic Programming</label>
+  <li><label><input type="checkbox" value="11">11. NP-Completeness</label>
+  <li><label><input type="checkbox" value="12">12. Dealing with Hard Problems</label>
+  <li><label><input type="checkbox" value="13">13. How to Design Algorithms</label>
+  <li><label><input type="checkbox" value="14">14. A Catalog for Algorithmic Problems</label>
+  <li><label><input type="checkbox" value="15">15. Data Structures</label>
+  <li><label><input type="checkbox" value="16">16. Numerical Problems</label>
+  <li><label><input type="checkbox" value="17">17. Combinatorial Problems</label>
+  <li><label><input type="checkbox" value="18">18. Graph Problems: Polynomial Time</label>
+  <li><label><input type="checkbox" value="19">19. Graph Problems: NP-Hard</label>
+  <li><label><input type="checkbox" value="20">20. Computational Geometry</label>
+  <li><label><input type="checkbox" value="21">21. Set and String Problems</label>
+  <li><label><input type="checkbox" value="22">22. Algorithmic Resources</label>
+  <li class="section">Completed
+
+</ul>
+
+<h1 class="popout">Resources</h1>
+<ul class="list-inline">
+  <li><a href="https://www3.cs.stonybrook.edu/~skiena/373/videos/">Lectures</a></li>
+  <li><a href="https://www.algorist.com/algowiki/index.php/Solution_Wiki,_The_Algorithm_Design_Manual,_3rd_Edition">Solution Wiki</a></li>
+  <li><a href="https://www.desmos.com/calculator">Desmos (graphing calculator)</a></li>
+</ul>
+{% endblock content %}
+{% block javascript %}
+<script>
+  const updateProgress = (percent) => {
+    document.getElementById('completion').innerHTML = `${Math.round(percent * 100)}%`
+    document.getElementById('completion').style = `width:${Math.round(percent * 100)}%`
+  }
+
+  const markProgress = () => {
+    const completed = document.querySelectorAll('input:checked')
+    updateProgress(completed.length / 22)
+    const chapters = Array.from(completed).map(el => el.value).join(',')
+    window.localStorage.setItem('completed', chapters)
+  }
+
+  document.querySelectorAll(".toc label").forEach(el => {
+    el.addEventListener('click', markProgress )
+  })
+
+  const completedChapters = window.localStorage.getItem('completed')
+  if (completedChapters) {
+    const chapters = completedChapters.split(',')
+    chapters.forEach(value => {
+      document.querySelector(`input[value="${value}"]`).setAttribute('checked', true)
+    })
+    updateProgress(chapters.length / 22)
+  }
+</script>
+{% endblock javascript %}
