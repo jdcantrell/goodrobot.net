@@ -1,0 +1,62 @@
+<tr>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>link-list-cycle</title>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap"
+        rel="stylesheet"
+      />
+      <link href="css/base.css" rel="stylesheet" />
+      <script src="vendor/p5.min.js"></script>
+      <script src="js/link-list-cycle.js"></script>
+      <style>
+        b {
+          color: #333;
+        }
+      </style>
+    </head>
+    <body>
+      <div>
+        <h1>link-list-cycle</h1>
+        <p>Controls:</p>
+        <table>
+          <tr>
+            <td><b>+</b></td>
+            <td>Add Node</td>
+          </tr>
+          <tr>
+            <td><b>-</b></td>
+            <td>Remove Node</td>
+          </tr>
+          <tr>
+            <td><b>Right</b></td>
+            <td>Move forward one iteration</td>
+          </tr>
+          <tr>
+            <td><b>Left</b></td>
+            <td>Move back one iteration</td>
+          </tr>
+          <tr>
+            <td><b>Up</b></td>
+            <td>Move cycle up one node</td>
+          </tr>
+          <tr>
+            <td><b>Down</b></td>
+            <td>Move cycle down one node</td>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <p>
+          This is a an illustration of how to detect a cycle in a linked list by
+          iterating through the list where one counter moves 1 node at a time
+          and a second vistor moves 2 nodes at a time. The cycle is detected
+          when both vistors have the same index.
+        </p>
+        <canvas id="sketch" />
+      </div>
+    </body>
+  </html>
+</tr>
