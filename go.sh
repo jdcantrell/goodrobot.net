@@ -32,17 +32,17 @@ link() {
 
 stream() {
   CACHE=${1}
-  ankh src/stream/_stream.html.j2 build/stream/index.html --template-paths ./src $CACHE
+  ankh src/stream/_stream.html.j2 --output build/stream/index.html --template-paths ./src/ $CACHE
 }
 
 stream_all() {
   CACHE=${1}
-  ankh src/stream/_all.html.j2 build/stream/all.html --template-paths ./src $CACHE
+  ankh src/stream/_all.html.j2 --output build/stream/all.html --template-paths ./src/ $CACHE
 }
 
 stream_pic() {
   CACHE=${1}
-  ankh src/stream/_pic.html.j2 build/stream/pics.html --template-paths ./src $CACHE
+  ankh src/stream/_pic.html.j2 --output build/stream/pics.html --template-paths ./src/ $CACHE
 }
 
 generate() {
@@ -75,7 +75,7 @@ sync() {
 }
 
 publish() {
-  generate_all
+  generate_all "--cache"
   sync "$1"
 }
 
