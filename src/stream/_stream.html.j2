@@ -84,28 +84,12 @@
       </ul>
     </article>
     <article>
-      <h1 class="js-link-toggle">
-        Hacker News<span class="comment-status"></span>
-      </h1>
+      <h1>Hacker News</h1>
       <hr />
       <ul class="list-links">
         {% for entry in get_entries('http://news.ycombinator.com/rss') %}
           <li>
             <a href="{{ entry.link }}" comment-link="{{ entry.comments }}">{{ entry.title|ignore_entities }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    </article>
-    <article>
-      <h1 class="js-link-toggle">
-        r/Programming<span class="comment-status"></span>
-      </h1>
-      <hr />
-      <ul class="list-links">
-        {% for entry in get_entries('http://www.reddit.com/r/programming/.rss') %}
-          <li>
-            <a href="{{ entry.description|find_link(1)}}"
-               comment-link="{{ entry.link }}">{{ entry.title|ignore_entities }}</a>
           </li>
         {% endfor %}
       </ul>

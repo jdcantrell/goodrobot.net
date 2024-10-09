@@ -52,12 +52,12 @@
       /* Set core body defaults */
       body {
         min-height: 100vh;
-        line-height: 1.5;
+        line-height: 1.3;
         padding: 0;
         font-family: "Rubik", system-ui, "Segoe UI", Roboto, Helvetica, Arial,
           sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         font-weight: 300;
-        font-size: 16px;
+        font-size: 15px;
         color: rgb(51, 51, 51);
       }
 
@@ -69,7 +69,7 @@
       button,
       input,
       label {
-        line-height: 1.1;
+        line-height: 1.05;
       }
 
       /* Balance text wrapping on headings */
@@ -113,16 +113,16 @@
       /* end reset */
 
       h1 {
-        font-size: 2rem;
-      }
-      h2 {
         font-size: 1.6rem;
       }
-      h3 {
+      h2 {
         font-size: 1.25rem;
       }
-      h4 {
+      h3 {
         font-size: 1.1rem;
+      }
+      h4 {
+        font-size: 1rem;
       }
 
       .resume {
@@ -134,110 +134,112 @@
 
       .role {
         margin-top: 0;
+        margin-bottom: 6px;
+      }
+
+      .two-column {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        align-items: center;
+      }
+
+      h3 {
+        margin-bottom: 0;
+      }
+      .role + p {
+        margin-top: 0;
       }
     </style>
   </head>
   <body>
     <main class="resume">
-      <h1>JD Cantrell</h1>
-      <div>Staff Software Engineer</div>
-      <div>
-        SF/Bay Area &bull;
-        <a href="mailto:jd@goodrobot.net">jd@goodrobot.net</a> &bull;
-        <a href="https://goodrobot.net">goodrobot.net</a>
+      <div class="two-column">
+        <h1 style="margin-top: 0">JD Cantrell</h1>
+        <div>
+          <div>Staff Software Engineer</div>
+          <div>
+            SF/Bay Area &bull;
+            <a href="mailto:jd@goodrobot.net">jd@goodrobot.net</a> &bull;
+            <a href="https://goodrobot.net">goodrobot.net</a>
+          </div>
+        </div>
       </div>
       <p>
-        Hi, I'm JD! I am a full-stack engineer with a focus on front-end. I have
-        a passion for building systems that power amazing customer experiences.
-        I like building software for humans.
+        I am a full-stack engineer with a focus on front-end. I have a passion
+        for building systems that power amazing customer experiences. I like
+        building software for humans.
       </p>
 
-      <h2>Core competencies</h2>
-      <ul class="role">
-        <li>Front-end Technologies (HTML/CSS/JS, Typescript, React, etc)</li>
-        <li>Back-end (PHP, Python, golang, Postgres)</li>
-        <li>Domain Driven Design</li>
-        <li>Design Systems</li>
-        <li>DevOps/SRE</li>
-      </ul>
+      <h4>Core competencies</h4>
+      <div class="two-column" style="grid-template-columns: 2fr 1fr">
+        <ul class="role">
+          <li>Front-end <br />HTML/CSS/JS, Typescript, React</li>
+          <li>Back-end <br />PHP, Python, golang, Postgres/SQL, protobufs</li>
+        </ul>
+        <ul class="role">
+          <li>Domain Driven Design</li>
+          <li>Design Systems</li>
+          <li>DevOps/SRE</li>
+        </ul>
+      </div>
 
-      <h2>Education</h2>
+      <p>
+        <b>Tech Stack</b>: AWS, Airflow, Auth0, CloudFlare Workers, GraphQL,
+        Hasura, Next.js, Postgres, Remix, Snowflake, create-react-app,
+        css-in-js, redux-toolkit
+      </p>
 
-      <p class="role">B.S. in Computer Science from Kansas State University</p>
+      <p>
+        <b>Education</b>: B.S. in Computer Science from Kansas State University
+      </p>
 
       <h2>Job history</h2>
 
       <h2 class="company">Opendoor</h2>
-      <h3 class="role">Staff Software Engineer - March 2022 - Present</h3>
+      <h4 class="role">Staff Software Engineer - March 2022 - Present</h4>
 
       <p>
-        At Opendoor I work on the Product Growth team developing experiments and
-        building out our customer onboarding platform. During my time here I
-        have re-architected and streamlined how we describe onboarding flows,
-        enabled easier experimentation, and led the implementation of our latest
-        brand look and feel.
-      </p>
-      <p>
-        Additionally, my responsibilities include site-reliability engineering
-        and DevOps as part of our on-call rotation.
-      </p>
-
-      <p>
-        <b>Tech Stack</b>: Typescript, GraphQL, Golang, Python, Ruby, Postgres,
-        CloudFlare Workers, React, redux-toolkit, Next.js, create-react-app,
-        Remix, AWS
+        Product Growth team work developing experiments and building out
+        customer onboarding platform. Re-architected and streamlined Opendoor's
+        onboarding flows, built new surface-areas to re-engage a new segment of
+        users, and led the implementation of the latest brand look and feel. SRE
+        and DevOps as part of on-call rotation.
       </p>
 
       <h2 class="company">Resilience Insurance</h2>
-      <h3 class="role">Staff Software Engineer - July 2019 - February 2022</h3>
+      <h4 class="role">Staff Software Engineer - July 2019 - February 2022</h4>
 
       <p>
-        Resilience gave me the opportunity to lead a small team responsible for
-        designing and developing various customer-facing portals and prototypes
-        for exploring market-fit for new products. We built up a foundational
-        toolset to quickly build new portals, worked with design to build out a
-        design system, and set up processes to ensure high quality code.
-      </p>
-      <p>
-        <b>Tech Stack</b>: Typescript, React, Next.js, create-react-app,
-        GraphQL, Auth0, Hasura
+        Lead a small team designing and developing various customer-facing
+        portals and prototypes for exploring market-fit for new products. Built
+        up a foundational toolset to quickly build new portals, worked with
+        design to build out a design system.
       </p>
 
       <h2 class="company">Trulia</h2>
-      <h3 class="role">Software Engineer - May 2011 - 2013</h3>
-      <h3 class="role">Senior Software Engineer - 2013 - 2017</h3>
-      <h3 class="role">Principal Software Engineer - 2017 - Jul 2019</h3>
+      <h4 class="role">Principal Software Engineer - May 2011 - July 2019</h4>
       <p>
-        At Trulia I started as a mid-level engineer and was promoted twice up to
-        Principal engineer. My team owned the entire customer-facing search
-        experience. We put this experience through many design iterations,
-        extensive a/b testing of features, SEO improvements, and a lot more. All
-        of this took place while delivering the experience at scale.
+        Started as Software engineer and promoted twice to Principal engineer.
+        Responsible for the entire customer-facing search experience. Carried
+        this experience through many design iterations, extensive a/b testing of
+        features, and a lot more. Delivered at scale to millions of users per
+        month.
       </p>
       <p>
-        In addition to the consumer-facing search experience, I took part in
-        developing Trulia's design system, iterating that system through several
-        major versions, multiple migrations to different front-end frameworks
-        and applying domain-driven design to our core back-end search library.
-      </p>
-
-      <p>
-        <b>Tech Stack</b>: Javascript, CSS, SaSS, MySQL, PHP, Smarty, jQuery,
-        Backbone, React, GraphQL, JSON, Next.js
+        Rebuilt core property search library using domain-driven design and
+        extensive test coverage. Enabled consistent search and url linking
+        across Trulia's web sites, apps, and teams. Maintained Trulia's design
+        system and iterated through several major look and feel versions.
       </p>
 
       <h2 class="company">AllofE Solutions</h2>
-      <h3 class="role">Systems Analyst - June 2005 - May 2011</h3>
+      <h4 class="role">Systems Analyst - June 2005 - May 2011</h4>
 
       <p>
-        At AllofE I worked on a small team that took client needs and ideas and
-        turned them into full web applications. This gave me a lot of
-        opportunities to work closely with our users to develop intuitive
-        interfaces to solve their problems.
-      </p>
-
-      <p>
-        <b>Tech Stack</b>: PHP, Javascript, CSS, MySQL, Adobe Air, Linux, Apache
+        Built applications according to client needs. Responsible for specific
+        client products such as an imaging system for collecting ad impressions
+        from live broadcasts. Designed and built systems both from scratch and
+        adapted from previous systems.
       </p>
     </main>
   </body>
