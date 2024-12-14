@@ -65,6 +65,14 @@
   </div>
   <h1 class="center">recent updates</h1>
   <ul class="center">
+
+    {% for post in posts[-5:]|reverse %}
+        <li>
+          <a href="{{ post.path|e }}">{{ post.title|e }}</a>
+        </li>
+    {% endfor %}
+
+
     <li>
       <a href="/lab/ifs/">Iterated function systems playground</a>
     </li>

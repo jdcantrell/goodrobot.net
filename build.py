@@ -106,6 +106,8 @@ def tpls():
                         )
                     )
 
+    post_vars = posts_details()
+    print(post_vars)
     env = Environment(loader=FileSystemLoader(os.path.abspath("src")))
     env.filters["preview"] = template_generate_preview
     for src, dest in tpls:
@@ -113,7 +115,7 @@ def tpls():
         print("Generating %s" % dest)
         template = env.get_template(src.replace("src/", ""))
         try:
-            html = template.render()
+            html = template.render({"posts": post_vars})
 
             destfile = codecs.open(dest, "w", "utf-8")
             destfile.write(html)
@@ -151,6 +153,38 @@ def strip_yaml(file_content):
 
     return file_content, template_vars
 
+def posts_details():
+    posts = []
+    for subdir, dirs, files in os.walk("src"):
+        build_dir = subdir.replace("src", "build", 1)
+        if subdir == os.path.join("src","posts"):
+            for file in files:
+                file_parts = os.path.splitext(file)
+                if file.find("_") != 0 and file_parts[1] == ".md":
+                    posts.append(
+                        (
+                            os.path.join(subdir, file),
+                            os.path.join(build_dir, "%s.html" % file_parts[0]),
+                        )
+                    )
+
+    post_vars = []
+    for src, dest in posts:
+        print("Generating %s" % dest)
+        with open(src, "r") as content_file:
+            content, template_vars = strip_yaml(content_file.read())
+            if template_vars.setdefault("published", True):
+                post_vars.append({
+                    "date": template_vars.setdefault("date", None),
+                    "title": template_vars.setdefault("title", "No title"),
+                    "tags": template_vars.setdefault("tags", "tags"),
+                    "orignal_values": template_vars,
+                    "path": dest.replace("build","")
+                    })
+
+    return post_vars
+
+
 
 def md():
     tpls = []
@@ -181,14 +215,17 @@ def md():
         with open(src, "r") as content_file:
             content, template_vars = strip_yaml(content_file.read())
 
-            markdown_html = md(content)
-            template_vars["markdown"] = markdown_html
+            if "published" in template_vars and template_vars["published"] == False:
+                print(f"Skipping {src}, not published")
+            else:
+                markdown_html = md(content)
+                template_vars["markdown"] = markdown_html
 
-            html = template.render(template_vars)
+                html = template.render(template_vars)
 
-            destfile = codecs.open(dest, "w", "utf-8")
-            destfile.write(html)
-            destfile.close()
+                destfile = codecs.open(dest, "w", "utf-8")
+                destfile.write(html)
+                destfile.close()
 
 
 class Renderer(mistune.HTMLRenderer):
