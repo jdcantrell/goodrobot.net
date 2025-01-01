@@ -1,6 +1,7 @@
 {% extends "_tpls/base.html.j2" %}
 {% block nav %}{% endblock %}
 {% block content %}
+
 <style>
 .grid {
   margin-top: 24px;
@@ -17,6 +18,7 @@
   line-height: 1;
   margin-bottom: 12px;
 }
+
 @media (max-width: 450px) {
   .headline {
     font-size: 15vw;
@@ -63,31 +65,15 @@
       {% endfor %}
     </ul>
   </div>
-  <h1 class="center">recent updates</h1>
+  <h1 class="center">writings</h1>
   <ul class="center">
 
-    {% for post in posts[-5:]|reverse %}
-        <li>
+    {% for post in posts[:5] %}
+        <li style="display:flex;justify-content: space-between; gap: 10px; font-variant-numeric: tabular-nums">
           <a href="{{ post.path|e }}">{{ post.title|e }}</a>
+          {{ post.date }}
         </li>
     {% endfor %}
-
-
-    <li>
-      <a href="/lab/ifs/">Iterated function systems playground</a>
-    </li>
-    <li>
-      <a href="/lab/mandelbrot/">Mandelbrot Explorer</a>
-    </li>
-    <li>
-      <a href="/miu">The MU-puzzle</a>
-    </li>
-    <li>
-      <a href="/posts/local-dev.html">How to setup up local .dev domains</a>
-    </li>
-    <li>
-      <a href="/posts/gnome-boxes-and-modern-ie.html">Gnome Boxes and Modern.ie</a>
-    </li>
   </ul>
 {% endblock content %}
 {% block footer %}{% endblock footer %}

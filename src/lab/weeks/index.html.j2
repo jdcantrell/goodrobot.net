@@ -1,0 +1,247 @@
+{% import './lab/weeks/_weeks.j2' as weeks %}
+{% import './_tpls/page-highlight.html.j2' as nav %}
+<!DOCTYPE >
+<html>
+  <head>
+    <title>make bad art</title>
+    {% block meta %} {% endblock meta %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#c42d1a" />
+    <meta name="theme-color" content="#458588" />
+
+    <style>
+      @font-face {
+        font-family: "FixedSys";
+        src:
+          local("FixedSys"),
+          url("assets/FixedSys Excelsior.woff") format("woff");
+          url("assets/FixedSys Excelsior.woff2") format("woff2");
+      }
+
+      .page-footer a, .page-header a {
+        color: #222;
+        text-decoration-color: #3800ff;
+        text-decoration-thickness: 2px;
+      }
+
+      .page-header {
+        width: 100%;
+        margin-bottom: 32px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 12px;
+        align-items: center;
+      }
+      .page-header ul, .page-site-header {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 0 12px;
+        align-items: center;
+        justify-content: center;
+        list-style: none;
+        flex-wrap: wrap;
+      }
+
+      :root {
+        --shadow-color: 105deg 40% 45%;
+        --shadow-elevation-low:
+          0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.45),
+          0.4px 0.9px 1.1px -1.2px hsl(var(--shadow-color) / 0.45),
+          1.2px 2.3px 2.9px -2.5px hsl(var(--shadow-color) / 0.45);
+        --shadow-elevation-medium:
+          0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.47),
+          0.9px 1.8px 2.3px -0.8px hsl(var(--shadow-color) / 0.47),
+          2.3px 4.7px 5.9px -1.7px hsl(var(--shadow-color) / 0.47),
+          5.8px 11.5px 14.5px -2.5px hsl(var(--shadow-color) / 0.47);
+        --shadow-elevation-high:
+          0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.44),
+          1.8px 3.6px 4.5px -0.4px hsl(var(--shadow-color) / 0.44),
+          3.5px 6.9px 8.7px -0.7px hsl(var(--shadow-color) / 0.44),
+          5.8px 11.5px 14.5px -1.1px hsl(var(--shadow-color) / 0.44),
+          9.2px 18.5px 23.2px -1.4px hsl(var(--shadow-color) / 0.44),
+          14.5px 28.9px 36.4px -1.8px hsl(var(--shadow-color) / 0.44),
+          22px 44.1px 55.4px -2.1px hsl(var(--shadow-color) / 0.44),
+          32.5px 65px 81.8px -2.5px hsl(var(--shadow-color) / 0.44);
+      }
+
+      body {
+        font-family: "FixedSys", san-serif;
+        background-color: #cffdbf;
+        color: #2e4b2a;
+      }
+
+      h1, p {
+        max-width: 1024px;
+        margin:32px auto;
+      }
+      section {
+        border: 1.5px solid #000;
+        background-color: #fff;
+        color: #222;
+        max-width: 1024px;
+        margin: auto;
+        box-shadow: var(--shadow-elevation-medium);
+        width: fit-content;
+      }
+      section header {
+        border-bottom: 1.5px solid #000;
+      }
+      img { max-width: 100%; display: block; }
+
+      section img {
+        max-height: 90vh;
+        object-fit: contain;
+        margin:auto;
+      }
+
+      .preview {
+
+        font-family: inherit;
+        font-size: inherit;
+        width:128px;
+        height:128px;
+        border: 1.5px solid #000;
+        position: relative;
+        box-shadow: var(--shadow-elevation-medium);
+        padding: 0;
+        background: transparent;
+      }
+      button.preview {
+        cursor: pointer;
+      }
+
+
+      .preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .preview .label {
+        transform: scale(1);
+        left: 12px;
+        top: 4px;
+        color: #fff;
+        position:absolute;
+        text-shadow:
+          1px 0px 0px #000,
+          1px 1px 0px #000,
+          0px 1px 0px #000,
+          -1px 1px 0px #000,
+          0px -1px 0px #000,
+          1px -1px 0px #000,
+          -1px -1px 0px #000,
+          -1px 0px 0px #000;
+        }
+      .previews-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fill, 128px);
+        max-width: 1200px;
+        width: 90%;
+        margin: auto;
+        justify-content: center;
+        margin-top: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="page-site-header">
+        <a class="page-logo" title="goodrobot.net" href="/">
+          <img alt="goodrobot" height="24" width="24" src="{{ nav.header_icon }}" />
+        </a>
+        <span class="page-header-title">
+          <a title="goodrobot.net" href="/">goodrobot</a>
+        </span>
+        {% if current_page_sub_title or current_page %} //
+        <span class="page-sub-title"
+          >{{ current_page_sub_title|default(current_page) }}</span
+        >
+        {% endif %}
+      </div>
+      <div class="page-nav">
+        <ul>
+          <li>//</li>
+          {% for href, id, name in nav.nav_items %} {% if current_page != id %}
+          <li>
+            <a href="{{ href|e }}">{{ name|e }}</a>
+          </li>
+          {% endif %} {% endfor %}
+        </ul>
+      </div>
+    </header>
+
+    <h1>2025 Art and Things</h1>
+    <p>
+      Here is my progress on my 2025 goal to make something every week or at least 52 times.
+      I set this is my block page for time wasting sites. Hopefully I'll get
+      tired of seeing the last thing I spent time on and make something new and
+      or better.
+
+    </p>
+    <section>
+      <header id="header">{{ weeks.data[0]["date"] }} - {{ weeks.data[0]["desc"] }}</header>
+      <img id="img" src="{{ weeks.data[0]["href"]|preview(size="full") }}" />
+    </section>
+
+    <div class="previews-grid">
+      {% for data in weeks.data %}
+      <button onclick="show({{loop.index0}})" class="preview">
+        <span class="label">{{ loop.revindex }}</span>
+        <img src="{{ data["href"]|preview }}" />
+      </button>
+      {% endfor %}
+
+      {% set empty_count = weeks.data | length + 1  %}
+      {% for n in range(empty_count, 53) %}
+      <div class="preview"><span class="label">??</span></div>
+      {% endfor %}
+
+    </div>
+    <footer class="page-footer">
+      <nav>
+        <img
+          class="page-logo"
+          alt="goodrobot"
+          height="24"
+          width="24"
+          style="height: 24px; width: 24px"
+          src="/android-chrome-192x192.png"
+        />
+        <a title="goodrobot.net" href="/">goodrobot</a>
+      </nav>
+      <nav>
+        {% for href, id, name in nav.footer_nav_items %}
+        <a href="{{ href|e }}">{{ name|e }}</a>
+        {% endfor %}
+      </nav>
+    </footer>
+    <script>
+      const data = [
+      {% for data in weeks.data %}
+        {
+          kind: "{{ data["kind"] }}",
+          href: "{{ data["href"]|preview(size="full") }}",
+          title: "{{ data["title"] }}",
+          desc: "{{ data["desc"] }}",
+          date: "{{ data["date"] }}",
+        },
+      {% endfor %}
+      ];
+
+      const show = (idx) => {
+        console.log(data[idx])
+        const art = data[idx]
+        document.getElementById("header").innerHTML=`${art.date} - ${art.desc}`;
+        document.getElementById("img").src = art.href;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/css/rss.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>goodrobot.net</title>
+  <link href="http://goodrobot.net/"/>
+  <link rel="self" href="/feed" />
+  <updated>{{ generated_date }}</updated>
+  <author>
+    <email>jd@goodrobot.net</email>
+  </author>
+  <id>http://goodrobot.net/</id>
+
+    {% for post in posts %}
+    <entry>
+      <title type="html">{{ post.title|e }}</title>
+      <link href="https://goodrobot.net{{ post.path|e }}"/>
+      <id>https://goodrobot.net{{ post.path|e }}</id>
+      <updated>{{ post.date }}T12:00:00Z</updated>
+      <content type="html">{{ post.content|e }}</content>
+    </entry>
+    {% endfor %}
+</feed>

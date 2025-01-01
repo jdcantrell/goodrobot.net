@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-  {{ markdown }}
+  {{ markdown|safe }}
 {% endblock %}
 
 {% block javascript %}
