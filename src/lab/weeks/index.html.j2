@@ -19,8 +19,8 @@
         font-family: "FixedSys";
         src:
           local("FixedSys"),
-          url("assets/FixedSys Excelsior.woff") format("woff");
-          url("assets/FixedSys Excelsior.woff2") format("woff2");
+          url("/images/fonts/Fixedsys Excelsior.woff") format("woff");
+          url("/images/fonts/Fixedsys Excelsior.woff2") format("woff2");
       }
 
       .page-footer a, .page-header a {
@@ -187,8 +187,15 @@
 
     </p>
     <section>
+      {% if weeks.data|length > 0 %}
       <header id="header">{{ weeks.data[0]["date"] }} - {{ weeks.data[0]["desc"] }}</header>
       <img id="img" src="{{ weeks.data[0]["href"]|preview(size="full") }}" />
+      {% else %}
+      <header>I am still getting started :-|</header>
+      <div style="display:flex; align-items: center; justify-content:center; width: 1024px; height: 400px">
+      ...nothing yet...
+      </div>
+      {% endif %}
     </section>
 
     <div class="previews-grid">
