@@ -6,7 +6,7 @@ class CanvasBuffer {
   }
 
   setPixel(x, y, { r, g, b }) {
-    var offset = (y * this.width + x) * 4;
+    const offset = (y * this.width + x) * 4;
     this.data[offset] = r;
     this.data[offset + 1] = g;
     this.data[offset + 2] = b;

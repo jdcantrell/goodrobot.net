@@ -12,18 +12,16 @@ const passesRule = (totalPoints, rule, newIndex, ...indexes) => {
 
   const fails = rule.some((invalidPoints, idx) => {
     const baseIndex = indexes[idx];
-    if (typeof baseIndex === 'undefined') {
+    if (typeof baseIndex === "undefined") {
       return false;
     }
 
     return (
       invalidPoints
-        .map(invalidPoint => (invalidPoint + baseIndex) % totalPoints)
+        .map((invalidPoint) => (invalidPoint + baseIndex) % totalPoints)
         .indexOf(newIndex) !== -1
     );
-
   });
-
 
   return !fails;
 };
@@ -49,11 +47,11 @@ const chaos = (xy, points, rule, motionRule, currentPointIndex = null) => {
   }
 
   if (i === 100) {
-    console.log('Could not get next point.');
+    console.log("Could not get next point.");
     return {
       ruleFailure: true,
       idx: currentPointIndex,
-      xy: xy
+      xy: xy,
     };
   }
   if (previousPoints.length > 10) {
@@ -62,23 +60,22 @@ const chaos = (xy, points, rule, motionRule, currentPointIndex = null) => {
 
   return {
     idx: newPointIndex,
-    xy: newXY
+    xy: newXY,
   };
-
 };
 
-const generatePoints = numPoints => {
+const generatePoints = (numPoints) => {
   const points = [];
   for (let i = 0; i < numPoints; i += 1) {
     points.push({
       x: Math.cos(i * ((Math.PI * 2) / numPoints)),
-      y: Math.sin(i * ((Math.PI * 2) / numPoints))
+      y: Math.sin(i * ((Math.PI * 2) / numPoints)),
     });
   }
   return points;
 };
 
-const canvas = new Canvas('canvas', [...getBackgroundColor(), 255]);
+const canvas = new Canvas("canvas", [...getBackgroundColor(), 255]);
 canvas.setViewport({
   x1: -1.1,
   x2: 1.1,
@@ -88,9 +85,9 @@ canvas.setViewport({
 canvas.clear();
 
 // motion rule
-const move = distance => (p1, p2) => ({
-  x: ((p1.x + p2.x) * distance),
-  y: ((p1.y + p2.y) * distance)
+const move = (distance) => (p1, p2) => ({
+  x: (p1.x + p2.x) * distance,
+  y: (p1.y + p2.y) * distance,
 });
 
 canvas.flush();
@@ -115,8 +112,8 @@ const render = (totalPoints, rule, motion) => {
         const c = chaos(p, points, rule, motion, idx);
         if (c.ruleFailure) {
           i = 1000;
-          iteration = 0
-          console.log('Cannot continue, rules are too restrictive');
+          iteration = 0;
+          console.log("Cannot continue, rules are too restrictive");
         }
         p = c.xy;
         canvas.setPoint(p.x, p.y, getColor(idx));

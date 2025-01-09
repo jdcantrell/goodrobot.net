@@ -7,5 +7,22 @@ New entries should have this format:
     "desc": "Some books from a blender tutorial",
     "date": "2024-12-26",
   },
+
+  Newest entries should be at the top (until we start doing some sorting..)
 #}
-{% set data = [] %}
+{% set data = [
+  {
+    "kind": "img",
+    "href": "images/weeks/2025-01-06 - Watercolor Day 2.jpg",
+    "title": "circles",
+    "desc": "Circles and wow.",
+    "date": "2025-01-06",
+  },
+  {
+    "kind": "img",
+    "href": "images/weeks/2025-01-02 - Watercolor Day 1.jpg",
+    "title": "splotches",
+    "desc": "Trying to learn how to adult water color",
+    "date": "2025-01-02",
+  },
+] %}

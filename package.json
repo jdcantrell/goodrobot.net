@@ -1,14 +1,8 @@
 {
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "@babel/eslint-parser": "x",
-    "eslint": "x",
-    "eslint-config-airbnb-base": "x",
-    "eslint-config-prettier": "x",
-    "eslint-plugin-import": "x",
-    "prettier": "x",
-    "stylelint": "x",
-    "stylelint-config-recommended": "x"
+    "@biomejs/biome": "x",
+    "prettier": "x"
   },
   "prettier": {
     "proseWrap": "always"

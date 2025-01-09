@@ -2,28 +2,25 @@
 /* exported ifs, render */
 
 // multiply 2x2 matrix with a 2x1 matrix
-const mult = ([a, b, c, d], [x, y]) => [
-  (a * x) + (b * y),
-  (c * x) + (d * y)
-];
+const mult = ([a, b, c, d], [x, y]) => [a * x + b * y, c * x + d * y];
 
 // add two 2x1 matrices
 const add = ([x, y], [tx, ty]) => [x + tx, y + ty];
 
-const ifs = transforms => {
+const ifs = (transforms) => {
   // allow probability to be greater than 100 because it's a pain to
   // housekeep it in the ux
   const total = transforms.reduce((t, { p }) => t + p, 0);
   return (x, y) => {
     // pick a number to choose which transform we will do
-    let prob = Math.floor(Math.random() * (total));
+    let prob = Math.floor(Math.random() * total);
     return transforms.reduce((xy, { p, transform, translate }, idx) => {
       // if we haven't already calculated our xy, and this is the
       // transform we've randomly choosen then calculate the new xy
       if (!xy && p > prob) {
         return {
           xy: add(mult(transform, [x, y]), translate),
-          idx: idx
+          idx: idx,
         };
       }
       prob -= p;
@@ -46,16 +43,17 @@ const checkViewport = (canvas, points) => {
     y2 = Math.max(xy[1], y2);
   });
 
-  x1 = (Math.floor(x1 * 10) / 10);
-  x2 = (Math.ceil(x2 * 10) / 10);
-  y1 = (Math.floor(y1 * 10) / 10);
-  y2 = (Math.ceil(y2 * 10) / 10);
+  x1 = Math.floor(x1 * 10) / 10;
+  x2 = Math.ceil(x2 * 10) / 10;
+  y1 = Math.floor(y1 * 10) / 10;
+  y2 = Math.ceil(y2 * 10) / 10;
 
-  if (canvas.viewport.x1 !== x1
-    || canvas.viewport.x2 !== x2
-    || canvas.viewport.y1 !== y1
-    || canvas.viewport.y2 !== y2) {
-
+  if (
+    canvas.viewport.x1 !== x1 ||
+    canvas.viewport.x2 !== x2 ||
+    canvas.viewport.y1 !== y1 ||
+    canvas.viewport.y2 !== y2
+  ) {
     canvas.clear();
     canvas.setViewport({ x1, x2, y1, y2 });
     points.forEach(({ xy, idx }) => {
@@ -65,7 +63,7 @@ const checkViewport = (canvas, points) => {
   }
 };
 
-const canvas = new Canvas('canvas', [...getBackgroundColor(), 255]);
+const canvas = new Canvas("canvas", [...getBackgroundColor(), 255]);
 const runner = new Runner();
 runner.run();
 
