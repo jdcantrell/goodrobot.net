@@ -1,5 +1,5 @@
-import RenderWorker from "./RenderWorker";
-import Canvas from "./Canvas";
+import RenderWorker from "./RenderWorker.js";
+import Canvas from "./Canvas.js";
 
 const roygbiv = [
   [51, 0, 68],
