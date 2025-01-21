@@ -94,10 +94,18 @@ def template_generate_preview(value, size=None):
             thumb_filename = "{}.jpg".format(
                 os.path.splitext(os.path.basename(image_path))[0]
             )
+            if im.has_transparency_data:
+                thumb_filename = "{}.png".format(
+                    os.path.splitext(os.path.basename(image_path))[0]
+                )
+
             thumb_path = os.path.join("build", "images", "thumbs", thumb_filename)
             thumb_web_path = "/".join(["/images", "thumbs", thumb_filename])
-            rgb_im = im.convert("RGB")
-            rgb_im.save(thumb_path, "jpeg", quality=85)
+            rgb_im = im.convert("RGBA" if im.has_transparency_data else "RGB")
+            if im.has_transparency_data:
+                rgb_im.save(thumb_path, "png")
+            else:
+                rgb_im.save(thumb_path, "jpeg", quality=85)
             print("Exported %s" % thumb_path)
 
             return thumb_web_path

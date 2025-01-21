@@ -1,5 +1,5 @@
 ---
-title: Gnome <a>Boxes</a> and Modern.ie
+title: Gnome Boxes and Modern.ie
 date: 2016-01-12
 tags:
   - linux

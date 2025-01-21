@@ -12,6 +12,10 @@
 html,
 body {
   height: 100%;
+  /* this makes the font look good in dark mode on osx, otherwise it gets
+     chubby */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 img,
@@ -74,6 +78,7 @@ ol {
 *:root {
   --background-color: #fffdeb;
   --highlight-background-color: #fffef1;
+  --lowlight-background-color: #cac7b4;
   --panel-background-color: #fffde4;
   --text-color: #3b3b3b;
 
@@ -120,6 +125,7 @@ ol {
   *:root {
     --background-color: #01203b;
     --highlight-background-color: #082646;
+    --lowlight-background-color: #044d8c;
     --panel-background-color: #00182d;
     --input-background-color: #00182d;
     --button-background-color: #002b51;
@@ -169,15 +175,31 @@ a:hover {
 }
 
 body {
-  font-family: "Crimson Pro", sans-serif;
-  font-size: 24px;
+  // https://modernfontstacks.com/ - Transitional
+  font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
+  font-weight: normal;
+  line-height: 1.77;
+  font-size: 20px;
+
+  //font-family: "Crimson Pro", sans-serif;
   color: var(--text-color);
   background-color: var(--background-color);
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 16px;
-  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+nav,
+.page-header,
+.page-nav {
+  font-family: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans",
+    source-sans-pro, sans-serif;
 }
 
 main {
@@ -325,9 +347,6 @@ textarea,
 select,
 input {
   accent-color: var(--accent-color);
-  line-height: 1.5;
-  font-family: "Crimson Pro", sans-serif;
-  font-size: 24px;
 }
 
 button {
@@ -399,12 +418,27 @@ label.checkbox {
   }
 }
 
-pre {
+pre,
+code {
   font-size: 18px;
-  font-family: Menlo, monospace;
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo,
+    Consolas, "DejaVu Sans Mono", monospace;
   background-color: var(--highlight-background-color);
   border-radius: 6px;
-  padding: 8px 4px;
+  border: 1px dashed var(--lowlight-background-color);
+}
+
+code {
+  padding: 4px 4px;
+}
+
+pre code {
+  border: none;
+  padding: 0;
+}
+
+pre {
+  padding: 4px 4px;
 }
 
 table.highlighttable {
@@ -427,11 +461,6 @@ table.highlighttable td.code {
 
 .highlight > pre {
   overflow: scroll;
-}
-
-code {
-  font-size: 18px;
-  font-family: Menlo, monospace;
 }
 
 .page-header,

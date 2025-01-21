@@ -14,6 +14,76 @@
   </style>
 {% endblock head %}
 {% block content %}
+  <h1>Projects</h1>
+  <p>All of these are free time projects. You'll find very little beautiful code, but perhaps you will find a few things that actually work. Most of these I am using in some capacity personally.</p>
+
+
+  <h2>Breeze</h2>
+  <div class="project">
+    <a href="/images/breeze.png">
+      <img alt="screenshot of breeze, an apple health export to html generator"
+           src="{{ "images/breeze.png"|preview }}"/>
+    </a>
+    <div>
+      <p>
+      Breeze parses Apple Health exports and then generates html pages based on that data. I use this to show the details and data I feel are missing from Strava.
+      </p>
+      <ul class="list-inline">
+        <li>
+          <a href="https://goodrobot.net/git/jdcantrell/breeze">Source</a>
+        </li>
+        <li>
+          <a href="/lab/breeze">Demo</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Woof</h2>
+  <div class="project">
+    <a href="/images/woof.png">
+      <img alt="screenshot of woof, a service and front-end for mpd streams"
+           src="{{ "images/woof.png"|preview }}"/>
+    </a>
+    <div>
+      <p>
+      Sometimes I want to share my current mpd stream with friends, and so I wrote this little
+      tool that checks in with my mpd server about what song is playing and then sends that off
+      as a server sent event. This is essentially a minimal personal radio stream you can share
+      via a web page.
+      </p>
+      <ul class="list-inline">
+        <li>
+          <a href="https://goodrobot.net/git/jdcantrell/woof">Source</a>
+        </li>
+        <li>
+          <a href="/lab/radio">Demo</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Sock</h2>
+  <div class="project">
+    <a href="/images/sock.png">
+      <img alt="screenshot of sock, a microblog"
+           src="{{ "images/sock.png"|preview }}"/>
+    </a>
+    <div>
+      <p>
+      Sock is a microblog written in python. I basically use this to post notes to my future self.
+      </p>
+      <ul class="list-inline">
+        <li>
+          <a href="https://goodrobot.net/git/jdcantrell/sock">Source</a>
+        </li>
+        <li>
+          <a href="/sock">Demo</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
   <h2>Ankh</h2>
   <div class="project">
     <img class="image"
@@ -57,27 +127,7 @@
       </ul>
     </div>
   </div>
-  <h2>Sparkbot</h2>
-  <div class="project">
-    <img class="image"
-         alt="screenshot of a webpage"
-         src="/images/sparkbot.png">
-    <div >
-      <p>
-        I use this as my new tab page in firefox. It is meant to be a
-        simple todo/scratch pad page. It stores all data in localstorage
-        and lets you set up as many columns and blocks as needed.
-      </p>
-      <ul class="list-inline">
-        <li>
-          <a href="/git/jdcantrell/sparkbot">Source</a>
-        </li>
-        <li>
-          <a href="/sparkbot">Demo</a>
-        </li>
-      </ul>
-    </div>
-  </div>
+
   <h2>Others</h2>
   <div class="project">
     <img class="image"
