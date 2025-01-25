@@ -130,7 +130,6 @@ def tpls():
                     )
 
     post_vars = posts_details()
-    print(post_vars)
     env = Environment(loader=FileSystemLoader(os.path.abspath("src")))
     env.filters["preview"] = template_generate_preview
     for src, dest in tpls:
@@ -260,6 +259,7 @@ def md():
             else:
                 markdown_html = md(content)
                 template_vars["markdown"] = markupsafe.Markup(markdown_html)
+                template_vars["generated_date"] = datetime.datetime.now(datetime.UTC).isoformat(),
 
                 html = template.render(template_vars)
 
