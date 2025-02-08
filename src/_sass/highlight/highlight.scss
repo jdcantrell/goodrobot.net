@@ -76,6 +76,7 @@ ol {
 
 /* light theme */
 *:root {
+  --background-image: none;
   --background-color: #fffdeb;
   --highlight-background-color: #fffef1;
   --lowlight-background-color: #cac7b4;
@@ -123,6 +124,11 @@ ol {
 /* dark theme */
 @media (prefers-color-scheme: dark) {
   *:root {
+    --background-image: linear-gradient(
+      180deg,
+      rgb(3, 3, 132) 0%,
+      rgb(1, 8, 34) 100%
+    );
     --background-color: #01203b;
     --highlight-background-color: #082646;
     --lowlight-background-color: #044d8c;
@@ -183,6 +189,8 @@ body {
 
   //font-family: "Crimson Pro", sans-serif;
   color: var(--text-color);
+  background-image: var(--background-image);
+  background-attachment: fixed;
   background-color: var(--background-color);
   display: flex;
   align-items: center;
@@ -316,11 +324,11 @@ figure img {
 
     li a {
       span {
-        font-size: 16px;
+        font-size: 14px;
         display: block;
 
         &:first-child {
-          font-size: 24px;
+          font-size: 20px;
           text-decoration-line: none;
           text-decoration-color: var(--link-color);
           text-decoration-thickness: 2px;
