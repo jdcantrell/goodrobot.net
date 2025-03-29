@@ -129,7 +129,7 @@ ol {
       rgb(3, 3, 132) 0%,
       rgb(1, 8, 34) 100%
     );
-    --background-color: #01203b;
+    --background-color: rgb(1, 8, 34);
     --highlight-background-color: #082646;
     --lowlight-background-color: #044d8c;
     --panel-background-color: #00182d;
@@ -192,6 +192,11 @@ body {
   background-image: var(--background-image);
   background-attachment: fixed;
   background-color: var(--background-color);
+
+  /* ios improvements since it does not support attachtment:fixed */
+  background-size: 100vh;
+  background-repeat: repeat-x;
+
   display: flex;
   align-items: center;
   flex-direction: column;
