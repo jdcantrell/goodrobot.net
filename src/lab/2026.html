@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      @font-face {
+        font-family: "Roboto Serif";
+        src: url("/images/fonts/Roboto_Serif-variable.woff2") format("woff2");
+        font-weight: 100 900;
+        font-style: normal;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+          U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+          U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+
+      :root {
+        --text-color: #c9def0;
+        --bg-color: #181828;
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg-color: #c5e3ff;
+          --text-color: #1c1c4a;
+        }
+      }
+
+      html,
+      body,
+      pre {
+        font-family: "Roboto Serif" !important;
+        font-optical-sizing: auto;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+      }
+
+      body {
+        width: 100%;
+        max-width: 800px;
+        margin-inline: auto;
+        font-size: 18px;
+        font-weight: 200;
+        line-height: 1.5rem;
+      }
+
+      ol img {
+        max-width: 100px;
+        margin-bottom: 9px;
+      }
+
+      ol {
+        display: grid;
+        grid-gap: 36px 12px;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        margin: 0;
+        padding: 0;
+      }
+
+      ol li {
+        display: grid;
+        grid-template-rows: 1fr;
+        align-items: center;
+        justify-items: center;
+      }
+
+      ol .placeholder {
+        width: 100px;
+        height: 150px;
+        border: 1px solid currentColor;
+        display: grid;
+        place-items: center;
+        margin-bottom: 9px;
+      }
+
+      .logo-text {
+        font-size: 5rem;
+        text-shadow:
+          rgba(62, 79, 117, 0.5) 0px 0px 33px,
+          rgba(62, 79, 117, 0.5) 0px 0px 16.5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="logo-text">2026</h1>
+    <p>
+      Instead of spending time reading dumb stuff on the internet, let's try to
+      fill out this page. You've got 4 areas where you'd like to spend some time
+      this year. A good goal for each of these would be to have at least 12
+      items in each section. But don't worry about that, our first goal is to do
+      a thing once. After that we'll adjust :-)
+    </p>
+    <h2>Reading</h2>
+    <ol class="books">
+      <!--
+      <li>
+        <img
+          src="https://images-us.bookshop.org/ingram/9780990582939.jpg?v=d4dc90a5469ac58cb9900c68f11702dc"
+        />
+        <i>Crafting Interpreters</i> by Robert Nystrom
+      </li>
+      -->
+
+      <li>
+        <div class="placeholder">??</div>
+        to be read
+      </li>
+    </ol>
+    <h2>Creating</h2>
+    <ol>
+      <li>
+        <div class="placeholder">??</div>
+        coming soon
+      </li>
+    </ol>
+    <h2>Writing</h2>
+    <ol>
+      <li>
+        <div class="placeholder">??</div>
+        coming soon
+      </li>
+    </ol>
+    <h2>Projects</h2>
+    <ol>
+      <li>
+        <div class="placeholder">??</div>
+        coming soon
+      </li>
+    </ol>
+  </body>
+</html>
