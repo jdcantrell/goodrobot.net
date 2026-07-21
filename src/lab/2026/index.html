@@ -89,11 +89,22 @@
         text-shadow: var(--text-shadow-elevation-medium);
       }
 
-      ol img {
+      ol img, ol .preview {
         max-width: 100px;
         margin-bottom: 9px;
         box-shadow: var(--shadow-elevation-medium);
         border-radius: 2px;
+      }
+
+      ol div.preview {
+        border: 1px solid currentColor;
+      }
+
+      ol iframe {
+        width: 1200px;
+        height: 2000px;
+        zoom: 0.083333;
+        border: none;
       }
 
       h2 + ol {
@@ -193,6 +204,12 @@
     </ol>
     <h2>Things I made</h2>
     <ol>
+      <li>
+        <div class="preview">
+          <iframe src="https://goodrobot.net/lab/2026/"></iframe>
+        </div>
+        This page, of course
+      </li>
       <li>
         <div class="placeholder">??</div>
         coming soon
