@@ -90,7 +90,7 @@
       }
 
       ol img, ol .preview {
-        max-width: 100px;
+        height: 100%;
         margin-bottom: 9px;
         box-shadow: var(--shadow-elevation-medium);
         border-radius: 2px;
@@ -121,7 +121,8 @@
 
       ol li {
         display: grid;
-        grid-template-rows: 1fr;
+        grid-template-rows: 200px minmax(1lh, 2lh) 1lh;
+        grid-gap: 4px;
         align-items: center;
         justify-items: center;
         text-align: center;
@@ -190,15 +191,14 @@
         <i>The Zen and Art of Motorcylce Maintenance</i> by Robert Pirsig
       </li>
 
+      <li>
+        <img src="/images/2026/books/08-the-trouble-with-peace.jpg" />
+        <i>The Trouble With Peace</i> by Joe Abercrombie
+      </li>
       <!--
       <li>
         <img src="/images/2026/books/software-estimation.jpg" />
         <i>Software Estimation: Demystifying the Black Art</i> by Steven McConnell
-      </li>
-
-      <li>
-        <img src="/images/2026/books/the-trouble-with-peace.jpg" />
-        <i>The Trouble With Peace</i> by Joe Abercrombie
       </li>
 
       <li>
